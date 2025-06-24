@@ -1,17 +1,40 @@
-.eunit
-*.o
-*.beam
-*.plt
-erl_crash.dump
-.concrete/DEV_MODE
+# Logs and temporary files
+*.log
+*.jsonl
+*.lock
+telemetry_spans.jsonl
+telemetry.log
 
-# rebar 2.x
-.rebar
-rel/example_project
-ebin/*.beam
-deps
+# Work coordination files
+work_claims.json
+work_claims.json.backup
+work_claims_backup_*.json
+work_claims_fast.jsonl.processed
+real_work_queue.json.lock
 
-# rebar 3
-.rebar3
-_build/
-_checkouts/
+# Analysis and iteration files
+*_analysis_*.json
+*_feedback_*.json
+*_validation_*.json
+*_iteration*_*.json
+reality_comparison_*.json
+actual_*_reality_*.json
+
+# Reports and cleanup
+*-report.json
+cleanup_report_*.json
+final-*.json
+
+# Archived data
+archived_claims/
+
+# Demonstration and test files
+*_demonstration.sh
+test_*.sh
+*-test.sh
+*-validation*.sh
+*_verification.sh
+
+# Backup and processed files
+*.backup
+work_claims_backup_*.json
