@@ -1314,3 +1314,259 @@ EOF < /dev/null{"trace_id":"cc4f5aba9208946d5d2db7a22cd9fb17","operation":"readm
 {"trace_id":"4dcacf98c1927f333da424eb959febea","span_id":"dfad834cad225574","operation":"mermaid_generator.metrics_extracted","status":"completed","timestamp":"2025-06-24T22:10:32Z","metrics":{"total_spans":     505,"recent_spans":     100,"avg_health":90,"timeframe":"24h"}}
 {"trace_id":"4dcacf98c1927f333da424eb959febea","span_id":"a2dbf4551f1c7410","operation":"mermaid_generator.dashboard_generated","status":"completed","timestamp":"2025-06-24T22:10:32Z","metrics":{"health_score":90,"total_spans":     505}}
 {"trace_id":"4dcacf98c1927f333da424eb959febea","span_id":"fb2d635a93800594","operation":"mermaid_generator.generation_complete","status":"completed","timestamp":"2025-06-24T22:10:32Z","metrics":{"files_generated":5,"diagram_type":"all"}}
+{
+  "trace_id": "9d8d736100a01d05f4748193dcee932b",
+  "span_id": "6d532484fb45ba6d",
+  "operation_name": "auto_doc.setup",
+  "status": "completed",
+  "duration_ms": 10,
+  "timestamp": "2025-06-24T22:23:40Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"output_dir": "docs/auto_generated", "index_created": true}
+}
+{
+  "trace_id": "9d8d736100a01d05f4748193dcee932b",
+  "span_id": "05b95437fc04b03e",
+  "operation_name": "auto_doc.changelog_generation",
+  "status": "completed",
+  "duration_ms": 215,
+  "timestamp": "2025-06-24T22:23:41Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"output_file": "docs/auto_generated/changelog.md", "commits_analyzed": 10}
+}
+{
+  "trace_id": "9d8d736100a01d05f4748193dcee932b",
+  "span_id": "3a1e548380b2ba98",
+  "operation_name": "auto_doc.cron_setup",
+  "status": "completed",
+  "duration_ms": 10,
+  "timestamp": "2025-06-24T22:23:41Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"cron_script": "docs/auto_generated/auto_doc_cron.sh", "setup_guide": "docs/auto_generated/cron_setup.md"}
+}
+{
+  "trace_id": "9d8d736100a01d05f4748193dcee932b",
+  "span_id": "4d026346ecf89ce3",
+  "operation_name": "auto_doc.index_update",
+  "status": "completed",
+  "duration_ms": 16,
+  "timestamp": "2025-06-24T22:23:41Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"files_count":        3}
+}
+{
+  "trace_id": "9d8d736100a01d05f4748193dcee932b",
+  "span_id": "ec49553569e3f4d1",
+  "operation_name": "auto_doc.generation_complete",
+  "status": "completed",
+  "duration_ms": 320,
+  "timestamp": "2025-06-24T22:23:41Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"doc_types": "changelog", "output_dir": "docs/auto_generated", "files_generated":        4}
+}
+{
+  "trace_id": "cec18802f1e09c9f7cb6049d9e14f0ed",
+  "span_id": "b9eae0e1561a69de",
+  "operation_name": "auto_doc.setup",
+  "status": "completed",
+  "duration_ms": 4,
+  "timestamp": "2025-06-24T22:24:12Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"output_dir": "docs/auto_generated", "index_created": true}
+}
+{
+  "trace_id": "cec18802f1e09c9f7cb6049d9e14f0ed",
+  "span_id": "79472521f72fc6a0",
+  "operation_name": "auto_doc.readme_generation",
+  "status": "completed",
+  "duration_ms": 218,
+  "timestamp": "2025-06-24T22:24:12Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"output_file": "docs/auto_generated/readme_updates.md", "word_count":      466}
+}
+{
+  "trace_id": "cec18802f1e09c9f7cb6049d9e14f0ed",
+  "span_id": "efd1a4dbc0fc8aa6",
+  "operation_name": "auto_doc.feature_generation",
+  "status": "completed",
+  "duration_ms": 203,
+  "timestamp": "2025-06-24T22:24:12Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"output_file": "docs/auto_generated/features.md", "makefile_targets": "      20"}
+}
+{
+  "trace_id": "cec18802f1e09c9f7cb6049d9e14f0ed",
+  "span_id": "68196fb61257efb1",
+  "operation_name": "auto_doc.cron_setup",
+  "status": "completed",
+  "duration_ms": 11,
+  "timestamp": "2025-06-24T22:24:12Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"cron_script": "docs/auto_generated/auto_doc_cron.sh", "setup_guide": "docs/auto_generated/cron_setup.md"}
+}
+{
+  "trace_id": "cec18802f1e09c9f7cb6049d9e14f0ed",
+  "span_id": "efa98dd70251f5cf",
+  "operation_name": "auto_doc.index_update",
+  "status": "completed",
+  "duration_ms": 17,
+  "timestamp": "2025-06-24T22:24:12Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"files_count":        5}
+}
+{
+  "trace_id": "cec18802f1e09c9f7cb6049d9e14f0ed",
+  "span_id": "bc050c2813ed61eb",
+  "operation_name": "auto_doc.generation_complete",
+  "status": "completed",
+  "duration_ms": 550,
+  "timestamp": "2025-06-24T22:24:12Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"doc_types": "readme,features", "output_dir": "docs/auto_generated", "files_generated":        6}
+}
+{
+  "trace_id": "9026ac43babef7e1fe1e79c9708e8391",
+  "span_id": "07c1c6587bb83f76",
+  "operation_name": "auto_doc.setup",
+  "status": "completed",
+  "duration_ms": 4,
+  "timestamp": "2025-06-24T22:25:11Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"output_dir": "docs/auto_generated", "index_created": true}
+}
+{
+  "trace_id": "9026ac43babef7e1fe1e79c9708e8391",
+  "span_id": "83bd86379ccb7447",
+  "operation_name": "auto_doc.changelog_generation",
+  "status": "completed",
+  "duration_ms": 201,
+  "timestamp": "2025-06-24T22:25:11Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"output_file": "docs/auto_generated/changelog.md", "commits_analyzed": 10}
+}
+{
+  "trace_id": "9026ac43babef7e1fe1e79c9708e8391",
+  "span_id": "6d1eb4b913f21614",
+  "operation_name": "auto_doc.cron_setup",
+  "status": "completed",
+  "duration_ms": 10,
+  "timestamp": "2025-06-24T22:25:11Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"cron_script": "docs/auto_generated/auto_doc_cron.sh", "setup_guide": "docs/auto_generated/cron_setup.md"}
+}
+{
+  "trace_id": "9026ac43babef7e1fe1e79c9708e8391",
+  "span_id": "0c4732a6268459b4",
+  "operation_name": "auto_doc.index_update",
+  "status": "completed",
+  "duration_ms": 17,
+  "timestamp": "2025-06-24T22:25:11Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"files_count":        5}
+}
+{
+  "trace_id": "9026ac43babef7e1fe1e79c9708e8391",
+  "span_id": "0c6f68830e9a2cd8",
+  "operation_name": "auto_doc.generation_complete",
+  "status": "completed",
+  "duration_ms": 301,
+  "timestamp": "2025-06-24T22:25:11Z",
+  "service": {
+    "name": "auto-doc-generator",
+    "version": "1.0.0"
+  },
+  "attributes": {"doc_types": "changelog", "output_dir": "docs/auto_generated", "files_generated":        6}
+}
+{
+  "trace_id": "fe756e7fcc9d8d3f7ed252d6066c78f3",
+  "span_id": "6d6c35aaa9c0b5cb",
+  "operation_name": "auto_doc_cron.test",
+  "status": "completed",
+  "duration_ms": 352,
+  "timestamp": "2025-06-24T22:25:11Z",
+  "service": {
+    "name": "auto-doc-cron",
+    "version": "1.0.0"
+  },
+  "attributes": {
+    "cron_operation": "test",
+    "script_path": "/Users/sac/dev/swarmsh/worktrees/auto-docs"
+  }
+}
+{
+  "trace_id": "22b36f033f20a7e91c8c24e26366f083",
+  "span_id": "78c56ed83690f0aa",
+  "operation_name": "auto_doc_cron.status",
+  "status": "completed",
+  "duration_ms": 14,
+  "timestamp": "2025-06-24T22:25:31Z",
+  "service": {
+    "name": "auto-doc-cron",
+    "version": "1.0.0"
+  },
+  "attributes": {
+    "cron_operation": "status",
+    "script_path": "/Users/sac/dev/swarmsh/worktrees/auto-docs"
+  }
+}
+{
+  "trace_id": "1b36972e6f55c03c40b8c1c5a168d7b2",
+  "span_id": "c103ed855ec402f6",
+  "operation_name": "auto_doc_cron.install",
+  "status": "completed",
+  "duration_ms": 2649,
+  "timestamp": "2025-06-24T22:25:34Z",
+  "service": {
+    "name": "auto-doc-cron",
+    "version": "1.0.0"
+  },
+  "attributes": {
+    "cron_operation": "install",
+    "script_path": "/Users/sac/dev/swarmsh/worktrees/auto-docs"
+  }
+}
