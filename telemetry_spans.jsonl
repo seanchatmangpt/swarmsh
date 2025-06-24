@@ -1214,3 +1214,31 @@ EOF < /dev/null{"trace_id":"cc4f5aba9208946d5d2db7a22cd9fb17","operation":"readm
 {"trace_id":"bc8c77970e9c12e301a708dd4f7d88c4","span_id":"69a41bf55d8e6ad3","operation":"mermaid_generator.metrics_extracted","status":"completed","timestamp":"2025-06-24T19:18:04Z","metrics":{"total_spans":     441,"recent_spans":     100,"avg_health":90,"timeframe":"24h"}}
 {"trace_id":"bc8c77970e9c12e301a708dd4f7d88c4","span_id":"1b6787c5570aea0c","operation":"mermaid_generator.dashboard_generated","status":"completed","timestamp":"2025-06-24T19:18:04Z","metrics":{"health_score":90,"total_spans":     441}}
 {"trace_id":"bc8c77970e9c12e301a708dd4f7d88c4","span_id":"da5e7d52bd434042","operation":"mermaid_generator.generation_complete","status":"completed","timestamp":"2025-06-24T19:18:04Z","metrics":{"files_generated":1,"diagram_type":"dashboard"}}
+{
+  "trace_id": "469e875c43f925330e34d4fb0f4b5d80",
+  "span_id": "23857c742e16884d",
+  "operation_name": "dashboard.dashboard_start",
+  "status": "started",
+  "duration_ms": 0,
+  "timestamp": "2025-06-24T22:09:17Z",
+  "service": {
+    "name": "telemetry-dashboard",
+    "version": "1.0.0"
+  },
+  "attributes": {"telemetry_file": "telemetry_spans.jsonl", "refresh_interval": 5}
+}
+{
+  "trace_id": "469e875c43f925330e34d4fb0f4b5d80",
+  "span_id": "16ca65f1bc88d89c",
+  "operation_name": "dashboard.stats_calculation",
+  "status": "completed",
+  "duration_ms": 34,
+  "timestamp": "2025-06-24T22:09:17Z",
+  "service": {
+    "name": "telemetry-dashboard",
+    "version": "1.0.0"
+  },
+  "attributes": {"total_spans":     1229, "error_spans": 0
+0, "avg_duration_ms": 133
+0}
+}
