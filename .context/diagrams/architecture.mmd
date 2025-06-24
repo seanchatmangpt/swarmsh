@@ -1,0 +1,58 @@
+graph TD
+    A[SwarmSH Coordination Kernel] --> B[Enterprise SAFe Layer]
+    A --> C[Real Agent Process Layer]
+    A --> D[Intelligence Layer]
+    A --> E[Observability Layer]
+
+    B --> B1[coordination_helper.sh]
+    B --> B2[Scrum@Scale Ceremonies]
+    B --> B3[Work Claims Management]
+    B --> B4[Agent Registration]
+
+    C --> C1[real_agent_coordinator.sh]
+    C --> C2[Distributed Work Queue]
+    C --> C3[Process Execution]
+    C --> C4[Performance Measurement]
+
+    D --> D1[Claude AI Integration]
+    D --> D2[Priority Analysis]
+    D --> D3[Team Formation]
+    D --> D4[Health Assessment]
+
+    E --> E1[OpenTelemetry Spans]
+    E --> E2[Metrics Collection]
+    E --> E3[Trace Correlation]
+    E --> E4[Performance Monitoring]
+
+    B1 --> F[JSON State Files]
+    C1 --> F
+    F --> F1[work_claims.json]
+    F --> F2[agent_status.json]
+    F --> F3[coordination_log.json]
+    F --> F4[telemetry_spans.jsonl]
+
+    D1 --> G[AI Models]
+    G --> G1[Claude API]
+    G --> G2[Ollama Local]
+    G --> G3[Fallback Analysis]
+
+    E1 --> H[Observability Stack]
+    H --> H1[Grafana Dashboards]
+    H --> H2[Prometheus Metrics]
+    H --> H3[Jaeger Tracing]
+
+    I[XAVOS Integration] --> A
+    I --> I1[Phoenix LiveView]
+    I --> I2[Ash Framework]
+    I --> I3[Reactor Telemetry]
+
+    J[Worktree Management] --> A
+    J --> J1[Environment Isolation]
+    J --> J2[Port Allocation]
+    J --> J3[Configuration Overlays]
+
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec

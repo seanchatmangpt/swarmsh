@@ -1,0 +1,35 @@
+XAVOS Deployment Log - Sun Jun 15 23:38:04 PDT 2025
+2025-06-15 23:38:04 [INFO] [0;34mValidating prerequisites...[0m
+2025-06-15 23:38:04 [SUCCESS] [0;32mPostgreSQL connection verified[0m
+2025-06-15 23:38:04 [SUCCESS] [0;32mPrerequisites validation completed[0m
+2025-06-15 23:38:04 [INFO] [0;34mXAVOS worktree already exists[0m
+2025-06-15 23:38:04 [INFO] [0;34mPhoenix app already exists[0m
+2025-06-15 23:38:04 [INFO] [0;34mSetting up database...[0m
+2025-06-15 23:38:05 [SUCCESS] [0;32mDatabase created successfully[0m
+2025-06-15 23:38:05 [INFO] [0;34mRunning initial migrations...[0m
+2025-06-15 23:38:06 [SUCCESS] [0;32mDatabase setup completed[0m
+2025-06-15 23:38:06 [INFO] [0;34mInstalling core Ash packages...[0m
+2025-06-15 23:38:06 [INFO] [0;34mInstalling ash ~>3.0...[0m
+2025-06-15 23:38:06 [INFO] [0;34mash already installed[0m
+2025-06-15 23:38:06 [INFO] [0;34mInstalling ash_postgres ~>2.0...[0m
+2025-06-15 23:38:06 [INFO] [0;34mash_postgres already installed[0m
+2025-06-15 23:38:06 [INFO] [0;34mInstalling ash_phoenix ~>2.0...[0m
+2025-06-15 23:38:06 [INFO] [0;34mash_phoenix already installed[0m
+2025-06-15 23:38:06 [SUCCESS] [0;32mCore Ash packages installed[0m
+2025-06-15 23:38:06 [INFO] [0;34mInstalling Ash authentication...[0m
+2025-06-15 23:38:06 [INFO] [0;34mInstalling ash_authentication ~>4.0...[0m
+2025-06-15 23:38:06 [INFO] [0;34mInstalling ash_authentication_phoenix ~>2.0...[0m
+2025-06-15 23:38:06 [SUCCESS] [0;32mAsh authentication packages installed[0m
+2025-06-15 23:38:06 [INFO] [0;34mInstalling additional Ash packages...[0m
+2025-06-15 23:38:06 [INFO] [0;34mAttempting to install ash_admin ~>0.10...[0m
+2025-06-15 23:38:06 [INFO] [0;34mValidating package: ash_admin[0m
+2025-06-15 23:38:07 [SUCCESS] [0;32mPackage ash_admin exists and is accessible[0m
+2025-06-15 23:38:07 [INFO] [0;34mAttempting to install ash_json_api ~>1.4...[0m
+2025-06-15 23:38:07 [INFO] [0;34mValidating package: ash_json_api[0m
+2025-06-15 23:38:08 [SUCCESS] [0;32mPackage ash_json_api exists and is accessible[0m
+2025-06-15 23:38:08 [SUCCESS] [0;32mAdditional Ash packages processed[0m
+2025-06-15 23:38:08 [INFO] [0;34mCreating Ash foundation...[0m
+2025-06-15 23:38:08 [SUCCESS] [0;32mAsh foundation created[0m
+2025-06-15 23:38:08 [INFO] [0;34mSetting up Ash database...[0m
+2025-06-15 23:38:08 [INFO] [0;34mCreating manual migration...[0m
+2025-06-15 23:38:08 [INFO] [0;34mRunning Ash migrations...[0m

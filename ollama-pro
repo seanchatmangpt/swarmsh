@@ -1,0 +1,891 @@
+#!/usr/bin/env bash
+
+# Ollama Pro - Advanced CLI Wrapper for Ollama
+# Version: 1.0.0
+# A comprehensive wrapper that enhances Ollama with advanced features
+
+set -euo pipefail
+
+# Source OpenTelemetry instrumentation
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -f "$SCRIPT_DIR/otel-bash.sh" ]]; then
+    source "$SCRIPT_DIR/otel-bash.sh"
+else
+    # Fallback no-op functions if OTEL lib not found
+    span_start() { echo "noop"; }
+    span_end() { true; }
+    span_event() { true; }
+    record_metric() { true; }
+    trace_exec() { shift; "$@"; }
+fi
+
+# Configuration
+readonly SCRIPT_NAME="$(basename "$0")"
+readonly SCRIPT_VERSION="1.0.0"
+readonly CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ollama-pro"
+readonly CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ollama-pro"
+readonly SESSION_DIR="$CACHE_DIR/sessions"
+readonly LOG_DIR="$CACHE_DIR/logs"
+readonly METRICS_FILE="$CACHE_DIR/metrics.json"
+readonly DEFAULT_CONFIG="$CONFIG_DIR/config.json"
+readonly DEFAULT_HOST="${OLLAMA_HOST:-http://localhost:11434}"
+
+# Create necessary directories
+mkdir -p "$CONFIG_DIR" "$CACHE_DIR" "$SESSION_DIR" "$LOG_DIR"
+
+# Color codes for output
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[0;33m'
+readonly BLUE='\033[0;34m'
+readonly PURPLE='\033[0;35m'
+readonly CYAN='\033[0;36m'
+readonly NC='\033[0m' # No Color
+
+# Logging levels
+readonly LOG_LEVEL_ERROR=1
+readonly LOG_LEVEL_WARN=2
+readonly LOG_LEVEL_INFO=3
+readonly LOG_LEVEL_DEBUG=4
+
+# Default values
+DEBUG_MODE=false
+VERBOSE_MODE=false
+LOG_LEVEL=$LOG_LEVEL_INFO
+RETRY_ATTEMPTS=3
+RETRY_DELAY=2
+TIMEOUT=300
+STREAM_MODE=true
+FORMAT="text"
+SESSION_ID=""
+CURRENT_MODEL=""
+MULTIMODAL_MODE=false
+
+# Performance optimization flags
+OLLAMA_FLASH_ATTENTION="${OLLAMA_FLASH_ATTENTION:-0}"
+OLLAMA_KV_CACHE_TYPE="${OLLAMA_KV_CACHE_TYPE:-f16}"
+OLLAMA_NUM_PARALLEL="${OLLAMA_NUM_PARALLEL:-1}"
+OLLAMA_MAX_LOADED_MODELS="${OLLAMA_MAX_LOADED_MODELS:-1}"
+
+# Trap handlers for cleanup
+trap cleanup EXIT
+trap 'echo -e "\n${RED}Interrupted${NC}"; exit 130' INT TERM
+
+# Cleanup function
+cleanup() {
+    if [[ -n "${TEMP_DIR:-}" ]] && [[ -d "$TEMP_DIR" ]]; then
+        rm -rf "$TEMP_DIR"
+    fi
+}
+
+# Logging functions
+log() {
+    local level=$1
+    shift
+    local message="$*"
+    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    
+    if [[ $level -le $LOG_LEVEL ]]; then
+        case $level in
+            $LOG_LEVEL_ERROR)
+                echo -e "${RED}[ERROR]${NC} $message" >&2
+                ;;
+            $LOG_LEVEL_WARN)
+                echo -e "${YELLOW}[WARN]${NC} $message" >&2
+                ;;
+            $LOG_LEVEL_INFO)
+                echo -e "${BLUE}[INFO]${NC} $message"
+                ;;
+            $LOG_LEVEL_DEBUG)
+                echo -e "${PURPLE}[DEBUG]${NC} $message"
+                ;;
+        esac
+    fi
+    
+    # Log to file
+    echo "[$timestamp] $message" >> "$LOG_DIR/ollama-pro.log"
+}
+
+log_error() { log $LOG_LEVEL_ERROR "$@"; }
+log_warn() { log $LOG_LEVEL_WARN "$@"; }
+log_info() { log $LOG_LEVEL_INFO "$@"; }
+log_debug() { log $LOG_LEVEL_DEBUG "$@"; }
+
+# Configuration management
+load_config() {
+    if [[ -f "$DEFAULT_CONFIG" ]]; then
+        log_debug "Loading configuration from $DEFAULT_CONFIG"
+        # Parse JSON config (simplified for bash)
+        if command -v jq &> /dev/null; then
+            export $(jq -r 'to_entries | .[] | "\(.key)=\(.value)"' "$DEFAULT_CONFIG")
+        fi
+    fi
+}
+
+save_config() {
+    local config_json=$(cat <<EOF
+{
+    "host": "$DEFAULT_HOST",
+    "default_model": "${DEFAULT_MODEL:-}",
+    "timeout": $TIMEOUT,
+    "retry_attempts": $RETRY_ATTEMPTS,
+    "retry_delay": $RETRY_DELAY,
+    "flash_attention": $OLLAMA_FLASH_ATTENTION,
+    "kv_cache_type": "$OLLAMA_KV_CACHE_TYPE",
+    "num_parallel": $OLLAMA_NUM_PARALLEL,
+    "max_loaded_models": $OLLAMA_MAX_LOADED_MODELS
+}
+EOF
+)
+    echo "$config_json" > "$DEFAULT_CONFIG"
+    log_info "Configuration saved to $DEFAULT_CONFIG"
+}
+
+# Error handling with retry logic
+retry_with_backoff() {
+    local max_attempts=$RETRY_ATTEMPTS
+    local delay=$RETRY_DELAY
+    local attempt=1
+    local exit_code=0
+    
+    local span_id=$(span_start "retry.backoff" "INTERNAL")
+    span_event "retry.start" "{\"max_attempts\": $max_attempts}"
+    
+    while [[ $attempt -le $max_attempts ]]; do
+        log_debug "Attempt $attempt of $max_attempts"
+        span_event "retry.attempt" "{\"attempt\": $attempt}"
+        
+        if "$@"; then
+            span_end "$span_id" "OK"
+            record_metric "retry.success" 1 "count" "counter"
+            record_metric "retry.attempts" "$attempt" "count" "histogram"
+            return 0
+        else
+            exit_code=$?
+        fi
+        
+        if [[ $attempt -lt $max_attempts ]]; then
+            log_warn "Command failed, retrying in ${delay}s..."
+            sleep "$delay"
+            delay=$((delay * 2))  # Exponential backoff
+        fi
+        
+        attempt=$((attempt + 1))
+    done
+    
+    log_error "Command failed after $max_attempts attempts"
+    span_end "$span_id" "ERROR" "Max retry attempts exceeded"
+    record_metric "retry.failed" 1 "count" "counter"
+    return $exit_code
+}
+
+# API interaction functions
+api_request() {
+    local method="${1:-GET}"
+    local endpoint="$2"
+    local data="${3:-}"
+    local stream="${4:-false}"
+    
+    local span_id=$(span_start "api.request" "CLIENT")
+    span_event "api.request.start" "{\"method\": \"$method\", \"endpoint\": \"$endpoint\"}"
+    
+    local url="${DEFAULT_HOST}${endpoint}"
+    local curl_args=(
+        -X "$method"
+        -H "Content-Type: application/json"
+        --fail-with-body
+        --silent
+        --show-error
+    )
+    
+    if [[ -n "$data" ]]; then
+        curl_args+=(-d "$data")
+    fi
+    
+    if [[ "$stream" == "true" ]]; then
+        curl_args+=(--no-buffer)
+    fi
+    
+    if [[ $DEBUG_MODE == true ]]; then
+        log_debug "API Request: $method $url"
+        [[ -n "$data" ]] && log_debug "Request Data: $data"
+    fi
+    
+    local start_time=$(date +%s%N)
+    if ! curl "${curl_args[@]}" "$url"; then
+        log_error "API request failed: $method $url"
+        span_end "$span_id" "ERROR" "API request failed"
+        record_metric "api.request.failed" 1 "count" "counter"
+        return 1
+    fi
+    local end_time=$(date +%s%N)
+    local duration=$(( (end_time - start_time) / 1000000 ))
+    
+    span_end "$span_id" "OK"
+    record_metric "api.request.duration" "$duration" "ms" "histogram"
+    record_metric "api.request.success" 1 "count" "counter"
+}
+
+# Model management functions
+list_models() {
+    local span_id=$(span_start "model.list" "INTERNAL")
+    log_info "Fetching available models..."
+    
+    local response=$(api_request GET /api/tags)
+    
+    if [[ -z "$response" ]]; then
+        log_error "Failed to fetch models"
+        span_end "$span_id" "ERROR" "Failed to fetch models"
+        return 1
+    fi
+    
+    local model_count=$(echo "$response" | jq -r '.models | length')
+    record_metric "models.available" "$model_count" "count" "gauge"
+    
+    echo -e "${GREEN}Available Models:${NC}"
+    echo "$response" | jq -r '.models[] | "\(.name)\t\(.size)\t\(.modified)"' | column -t -s $'\t'
+    
+    span_end "$span_id" "OK"
+}
+
+pull_model() {
+    local model=$1
+    local span_id=$(span_start "model.pull" "CLIENT")
+    span_event "model.pull.start" "{\"model\": \"$model\"}"
+    log_info "Pulling model: $model"
+    
+    local data=$(jq -n --arg model "$model" '{name: $model}')
+    local start_time=$(date +%s)
+    
+    api_request POST /api/pull "$data" true | while IFS= read -r line; do
+        if [[ -n "$line" ]]; then
+            local status=$(echo "$line" | jq -r '.status // empty' 2>/dev/null)
+            local progress=$(echo "$line" | jq -r '.completed // 0' 2>/dev/null)
+            local total=$(echo "$line" | jq -r '.total // 0' 2>/dev/null)
+            
+            if [[ -n "$status" ]]; then
+                if [[ "$total" -gt 0 ]]; then
+                    local percent=$((progress * 100 / total))
+                    printf "\r${CYAN}[%-50s] %d%%${NC}" "$(printf '#%.0s' $(seq 1 $((percent / 2))))" "$percent"
+                    record_metric "model.pull.progress" "$percent" "percent" "gauge"
+                else
+                    echo -e "\r${BLUE}$status${NC}"
+                fi
+            fi
+        fi
+    done
+    echo
+    
+    local end_time=$(date +%s)
+    local duration=$((end_time - start_time))
+    record_metric "model.pull.duration" "$duration" "seconds" "histogram"
+    record_metric "model.pulled" 1 "count" "counter"
+    
+    span_end "$span_id" "OK"
+}
+
+show_model_info() {
+    local model=$1
+    log_info "Fetching model information: $model"
+    
+    local data=$(jq -n --arg model "$model" '{name: $model}')
+    local response=$(api_request POST /api/show "$data")
+    
+    if [[ -z "$response" ]]; then
+        log_error "Failed to fetch model info"
+        return 1
+    fi
+    
+    echo -e "${GREEN}Model Information:${NC}"
+    echo "$response" | jq -r '
+        "Name: \(.name)",
+        "Modified: \(.modified_at)",
+        "Size: \(.size)",
+        "",
+        "Template:",
+        .template,
+        "",
+        "Parameters:",
+        (.parameters | to_entries[] | "  \(.key): \(.value)")
+    '
+}
+
+# Session management
+create_session() {
+    local span_id=$(span_start "session.create" "INTERNAL")
+    
+    SESSION_ID="session_$(date +%s)_$$"
+    local session_file="$SESSION_DIR/$SESSION_ID.json"
+    
+    local session_data=$(jq -n \
+        --arg id "$SESSION_ID" \
+        --arg model "${CURRENT_MODEL:-}" \
+        --arg created "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+        '{
+            id: $id,
+            model: $model,
+            created: $created,
+            messages: []
+        }')
+    
+    echo "$session_data" > "$session_file"
+    log_debug "Created session: $SESSION_ID"
+    
+    record_metric "session.created" 1 "count" "counter"
+    span_event "session.created" "{\"session_id\": \"$SESSION_ID\"}"
+    span_end "$span_id" "OK"
+}
+
+load_session() {
+    local session_id=$1
+    local session_file="$SESSION_DIR/$session_id.json"
+    
+    if [[ ! -f "$session_file" ]]; then
+        log_error "Session not found: $session_id"
+        return 1
+    fi
+    
+    SESSION_ID=$session_id
+    CURRENT_MODEL=$(jq -r '.model // empty' "$session_file")
+    log_info "Loaded session: $SESSION_ID"
+}
+
+save_message() {
+    local role=$1
+    local content=$2
+    local session_file="$SESSION_DIR/$SESSION_ID.json"
+    
+    if [[ ! -f "$session_file" ]]; then
+        create_session
+    fi
+    
+    local temp_file=$(mktemp)
+    jq --arg role "$role" --arg content "$content" \
+        '.messages += [{role: $role, content: $content}]' \
+        "$session_file" > "$temp_file"
+    
+    mv "$temp_file" "$session_file"
+}
+
+# Chat functions
+chat_completion() {
+    local model=$1
+    local prompt=$2
+    local use_context=${3:-true}
+    
+    local span_id=$(span_start "chat.completion" "INTERNAL")
+    span_event "chat.start" "{\"model\": \"$model\", \"context\": \"$use_context\"}"
+    record_metric "chat.request.start" 1 "count" "counter"
+    
+    local messages="[]"
+    
+    if [[ "$use_context" == "true" ]] && [[ -n "$SESSION_ID" ]]; then
+        local session_file="$SESSION_DIR/$SESSION_ID.json"
+        if [[ -f "$session_file" ]]; then
+            messages=$(jq '.messages' "$session_file")
+        fi
+    fi
+    
+    # Add current message
+    messages=$(echo "$messages" | jq --arg content "$prompt" '. + [{role: "user", content: $content}]')
+    local message_count=$(echo "$messages" | jq '. | length')
+    record_metric "chat.context.messages" "$message_count" "count" "gauge"
+    
+    local data=$(jq -n \
+        --arg model "$model" \
+        --argjson messages "$messages" \
+        --argjson stream "$([[ $STREAM_MODE == true ]] && echo true || echo false)" \
+        '{
+            model: $model,
+            messages: $messages,
+            stream: $stream
+        }')
+    
+    save_message "user" "$prompt"
+    
+    local response=""
+    local start_time=$(date +%s%N)
+    if [[ $STREAM_MODE == true ]]; then
+        api_request POST /api/chat "$data" true | while IFS= read -r line; do
+            if [[ -n "$line" ]]; then
+                local content=$(echo "$line" | jq -r '.message.content // empty' 2>/dev/null)
+                if [[ -n "$content" ]]; then
+                    echo -n "$content"
+                    response+="$content"
+                fi
+            fi
+        done
+        echo
+    else
+        response=$(api_request POST /api/chat "$data" | jq -r '.message.content')
+        echo "$response"
+    fi
+    local end_time=$(date +%s%N)
+    local duration=$(( (end_time - start_time) / 1000000 ))
+    
+    save_message "assistant" "$response"
+    
+    # Record metrics
+    local response_length=${#response}
+    record_metric "chat.response.length" "$response_length" "characters" "histogram"
+    record_metric "chat.completion.duration" "$duration" "ms" "histogram"
+    
+    span_end "$span_id" "OK"
+}
+
+# Multi-modal support
+process_image() {
+    local image_path=$1
+    
+    if [[ ! -f "$image_path" ]]; then
+        log_error "Image file not found: $image_path"
+        return 1
+    fi
+    
+    # Convert to base64
+    local base64_image=$(base64 < "$image_path" | tr -d '\n')
+    echo "$base64_image"
+}
+
+multimodal_chat() {
+    local model=$1
+    local prompt=$2
+    local image_path=$3
+    
+    log_info "Processing multimodal request with image: $image_path"
+    
+    local base64_image=$(process_image "$image_path")
+    if [[ -z "$base64_image" ]]; then
+        return 1
+    fi
+    
+    local data=$(jq -n \
+        --arg model "$model" \
+        --arg prompt "$prompt" \
+        --arg image "$base64_image" \
+        --argjson stream "$([[ $STREAM_MODE == true ]] && echo true || echo false)" \
+        '{
+            model: $model,
+            prompt: $prompt,
+            images: [$image],
+            stream: $stream
+        }')
+    
+    api_request POST /api/generate "$data" "$STREAM_MODE" | while IFS= read -r line; do
+        if [[ -n "$line" ]]; then
+            local response=$(echo "$line" | jq -r '.response // empty' 2>/dev/null)
+            if [[ -n "$response" ]]; then
+                echo -n "$response"
+            fi
+        fi
+    done
+    echo
+}
+
+# Performance monitoring
+update_metrics() {
+    local operation=$1
+    local duration=$2
+    local model=$3
+    
+    local timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+    local metric=$(jq -n \
+        --arg op "$operation" \
+        --arg duration "$duration" \
+        --arg model "$model" \
+        --arg timestamp "$timestamp" \
+        '{
+            operation: $op,
+            duration: $duration,
+            model: $model,
+            timestamp: $timestamp
+        }')
+    
+    if [[ -f "$METRICS_FILE" ]]; then
+        local temp_file=$(mktemp)
+        jq --argjson metric "$metric" '. + [$metric]' "$METRICS_FILE" > "$temp_file"
+        mv "$temp_file" "$METRICS_FILE"
+    else
+        echo "[$metric]" > "$METRICS_FILE"
+    fi
+}
+
+show_metrics() {
+    if [[ ! -f "$METRICS_FILE" ]]; then
+        log_warn "No metrics available"
+        return
+    fi
+    
+    echo -e "${GREEN}Performance Metrics:${NC}"
+    jq -r '.[] | "\(.timestamp)\t\(.operation)\t\(.model)\t\(.duration)s"' "$METRICS_FILE" | column -t -s $'\t'
+}
+
+# Custom model creation
+create_custom_model() {
+    local name=$1
+    local modelfile=$2
+    
+    if [[ ! -f "$modelfile" ]]; then
+        log_error "Modelfile not found: $modelfile"
+        return 1
+    fi
+    
+    log_info "Creating custom model: $name"
+    
+    local data=$(jq -n \
+        --arg name "$name" \
+        --arg modelfile "$(cat "$modelfile")" \
+        '{name: $name, modelfile: $modelfile}')
+    
+    api_request POST /api/create "$data" true | while IFS= read -r line; do
+        if [[ -n "$line" ]]; then
+            local status=$(echo "$line" | jq -r '.status // empty' 2>/dev/null)
+            [[ -n "$status" ]] && echo -e "${BLUE}$status${NC}"
+        fi
+    done
+}
+
+# Interactive mode
+interactive_mode() {
+    local model=${1:-$DEFAULT_MODEL}
+    
+    if [[ -z "$model" ]]; then
+        echo -e "${RED}Error: No model specified${NC}"
+        echo "Use: $SCRIPT_NAME chat <model> or set a default model"
+        return 1
+    fi
+    
+    CURRENT_MODEL=$model
+    create_session
+    
+    echo -e "${GREEN}Ollama Pro Interactive Mode${NC}"
+    echo -e "${CYAN}Model: $model${NC}"
+    echo -e "${YELLOW}Commands: /exit, /clear, /save, /load <session>, /set <param> <value>${NC}"
+    echo -e "${YELLOW}Multiline: Use ''' to start/end multiline input${NC}"
+    echo
+    
+    local multiline=false
+    local multiline_content=""
+    
+    while true; do
+        if [[ $multiline == true ]]; then
+            echo -n "... "
+        else
+            echo -n "> "
+        fi
+        
+        read -r input
+        
+        # Handle multiline
+        if [[ "$input" == "'''" ]]; then
+            if [[ $multiline == true ]]; then
+                multiline=false
+                chat_completion "$model" "$multiline_content"
+                multiline_content=""
+            else
+                multiline=true
+            fi
+            continue
+        fi
+        
+        if [[ $multiline == true ]]; then
+            multiline_content+="$input\n"
+            continue
+        fi
+        
+        # Handle commands
+        case "$input" in
+            /exit|/quit)
+                echo "Goodbye!"
+                break
+                ;;
+            /clear)
+                clear
+                ;;
+            /save)
+                echo "Session saved: $SESSION_ID"
+                ;;
+            /load\ *)
+                load_session "${input#/load }"
+                ;;
+            /set\ *)
+                local parts=($input)
+                local param="${parts[1]}"
+                local value="${parts[2]}"
+                echo "Setting $param=$value"
+                # TODO: Implement parameter setting
+                ;;
+            "")
+                continue
+                ;;
+            *)
+                local start_time=$(date +%s)
+                chat_completion "$model" "$input"
+                local end_time=$(date +%s)
+                local duration=$((end_time - start_time))
+                update_metrics "chat" "$duration" "$model"
+                ;;
+        esac
+    done
+}
+
+# Help system
+show_help() {
+    cat <<EOF
+${GREEN}Ollama Pro v$SCRIPT_VERSION${NC}
+Advanced CLI wrapper for Ollama with enhanced features
+
+${YELLOW}Usage:${NC}
+  $SCRIPT_NAME [options] <command> [arguments]
+
+${YELLOW}Commands:${NC}
+  ${CYAN}Core Commands:${NC}
+    run <model> [prompt]         Run a model (interactive if no prompt)
+    chat <model>                 Start interactive chat session
+    serve                        Start Ollama server
+    pull <model>                 Download a model
+    push <model>                 Upload a model to registry
+    
+  ${CYAN}Model Management:${NC}
+    list                         List available models
+    show <model>                 Show model information
+    create <name> <modelfile>    Create custom model
+    rm <model>                   Remove a model
+    cp <source> <dest>           Copy a model
+    
+  ${CYAN}Advanced Features:${NC}
+    vision <model> <image> [prompt]  Process image with vision model
+    embed <model> <text>         Generate embeddings
+    session list                 List saved sessions
+    session load <id>            Load a session
+    metrics                      Show performance metrics
+    config                       Edit configuration
+    
+${YELLOW}Options:${NC}
+  -h, --help                   Show this help
+  -v, --version                Show version
+  -d, --debug                  Enable debug mode
+  -V, --verbose                Enable verbose output
+  --host <url>                 Ollama host (default: $DEFAULT_HOST)
+  --model <name>               Default model
+  --no-stream                  Disable streaming
+  --format <format>            Output format (text, json, markdown)
+  --timeout <seconds>          Request timeout (default: $TIMEOUT)
+  --retry <attempts>           Retry attempts (default: $RETRY_ATTEMPTS)
+  
+${YELLOW}Environment Variables:${NC}
+  OLLAMA_HOST                  Ollama server URL
+  OLLAMA_MODELS                Model storage path
+  OLLAMA_NUM_PARALLEL          Parallel request limit
+  OLLAMA_MAX_LOADED_MODELS     Maximum loaded models
+  OLLAMA_FLASH_ATTENTION       Enable flash attention (0/1)
+  OLLAMA_KV_CACHE_TYPE         Cache type (f16, q8_0, q4_0)
+  
+${YELLOW}Examples:${NC}
+  # Interactive chat with context
+  $SCRIPT_NAME chat llama2
+  
+  # Quick prompt
+  $SCRIPT_NAME run llama2 "Explain quantum computing"
+  
+  # Vision model with image
+  $SCRIPT_NAME vision llava:13b image.jpg "What's in this image?"
+  
+  # Create custom model
+  $SCRIPT_NAME create mymodel ./Modelfile
+  
+  # Performance monitoring
+  $SCRIPT_NAME metrics
+
+${YELLOW}Configuration:${NC}
+  Config file: $DEFAULT_CONFIG
+  Cache dir:   $CACHE_DIR
+  Log dir:     $LOG_DIR
+
+For more information: https://github.com/ollama/ollama
+EOF
+}
+
+# Main command processing
+main() {
+    local main_span_id=$(span_start "ollama_pro.main" "INTERNAL")
+    span_event "main.start" "{\"args\": \"$*\"}"
+    record_metric "command.invocation" 1 "count" "counter"
+    
+    # Parse global options
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -h|--help)
+                show_help
+                exit 0
+                ;;
+            -v|--version)
+                echo "Ollama Pro v$SCRIPT_VERSION"
+                exit 0
+                ;;
+            -d|--debug)
+                DEBUG_MODE=true
+                LOG_LEVEL=$LOG_LEVEL_DEBUG
+                shift
+                ;;
+            -V|--verbose)
+                VERBOSE_MODE=true
+                LOG_LEVEL=$LOG_LEVEL_INFO
+                shift
+                ;;
+            --host)
+                DEFAULT_HOST="$2"
+                shift 2
+                ;;
+            --model)
+                DEFAULT_MODEL="$2"
+                shift 2
+                ;;
+            --no-stream)
+                STREAM_MODE=false
+                shift
+                ;;
+            --format)
+                FORMAT="$2"
+                shift 2
+                ;;
+            --timeout)
+                TIMEOUT="$2"
+                shift 2
+                ;;
+            --retry)
+                RETRY_ATTEMPTS="$2"
+                shift 2
+                ;;
+            *)
+                break
+                ;;
+        esac
+    done
+    
+    # Load configuration
+    trace_exec "config.load" load_config
+    
+    # Process commands
+    local command="${1:-}"
+    shift || true
+    
+    if [[ -n "$command" ]]; then
+        local cmd_span_id=$(span_start "command.$command" "INTERNAL")
+        span_event "command.start" "{\"command\": \"$command\"}"
+        record_metric "command.$command" 1 "count" "counter"
+    fi
+    
+    case "$command" in
+        run)
+            local model="${1:-$DEFAULT_MODEL}"
+            shift || true
+            if [[ $# -eq 0 ]]; then
+                trace_exec "interactive_mode" interactive_mode "$model"
+            else
+                local prompt="$*"
+                trace_exec "chat_completion" chat_completion "$model" "$prompt" false
+            fi
+            ;;
+        chat)
+            local model="${1:-$DEFAULT_MODEL}"
+            trace_exec "interactive_mode" interactive_mode "$model"
+            ;;
+        serve)
+            log_info "Starting Ollama server..."
+            ollama serve
+            ;;
+        pull)
+            local model="$1"
+            trace_exec "pull_model" pull_model "$model"
+            ;;
+        push)
+            local model="$1"
+            log_info "Pushing model: $model"
+            ollama push "$model"
+            ;;
+        list)
+            trace_exec "list_models" list_models
+            ;;
+        show)
+            local model="$1"
+            trace_exec "show_model_info" show_model_info "$model"
+            ;;
+        create)
+            local name="$1"
+            local modelfile="$2"
+            create_custom_model "$name" "$modelfile"
+            ;;
+        rm)
+            local model="$1"
+            log_info "Removing model: $model"
+            ollama rm "$model"
+            ;;
+        cp)
+            local source="$1"
+            local dest="$2"
+            log_info "Copying model: $source -> $dest"
+            ollama cp "$source" "$dest"
+            ;;
+        vision)
+            local model="$1"
+            local image="$2"
+            shift 2 || true
+            local prompt="${*:-What do you see in this image?}"
+            MULTIMODAL_MODE=true
+            trace_exec "multimodal_chat" multimodal_chat "$model" "$prompt" "$image"
+            ;;
+        embed)
+            local model="$1"
+            shift
+            local text="$*"
+            log_info "Generating embeddings with $model"
+            local data=$(jq -n --arg model "$model" --arg prompt "$text" '{model: $model, prompt: $prompt}')
+            api_request POST /api/embeddings "$data" | jq '.'
+            ;;
+        session)
+            case "${1:-}" in
+                list)
+                    echo -e "${GREEN}Available Sessions:${NC}"
+                    ls -la "$SESSION_DIR"/*.json 2>/dev/null | awk '{print $9}' | xargs -n1 basename | sed 's/\.json$//'
+                    ;;
+                load)
+                    load_session "$2"
+                    ;;
+                *)
+                    echo "Usage: $SCRIPT_NAME session {list|load <id>}"
+                    ;;
+            esac
+            ;;
+        metrics)
+            trace_exec "show_metrics" show_metrics
+            ;;
+        config)
+            trace_exec "save_config" save_config
+            ${EDITOR:-nano} "$DEFAULT_CONFIG"
+            ;;
+        "")
+            show_help
+            span_end "${cmd_span_id:-noop}" "ERROR" "No command provided"
+            span_end "$main_span_id" "ERROR" "No command provided"
+            exit 1
+            ;;
+        *)
+            log_error "Unknown command: $command"
+            show_help
+            span_end "${cmd_span_id:-noop}" "ERROR" "Unknown command"
+            span_end "$main_span_id" "ERROR" "Unknown command"
+            exit 1
+            ;;
+    esac
+    
+    # End command span if it was started
+    if [[ -n "$command" ]]; then
+        span_end "${cmd_span_id:-noop}" "OK"
+    fi
+    
+    span_end "$main_span_id" "OK"
+}
+
+# Run main function
+main "$@"

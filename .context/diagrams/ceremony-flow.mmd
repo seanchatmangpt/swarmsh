@@ -1,0 +1,60 @@
+graph TD
+    A[Scrum@Scale Ceremonies] --> B[PI Planning]
+    A --> C[Scrum of Scrums]
+    A --> D[MetaScrum]
+    A --> E[Portfolio Kanban]
+
+    B --> B1[./coordination_helper.sh pi-planning]
+    B --> B2[Quarterly Coordination]
+    B --> B3[Cross-Team Dependencies]
+    B --> B4[Capacity Planning]
+
+    C --> C1[./coordination_helper.sh scrum-of-scrums]
+    C --> C2[Daily Cross-Team Sync]
+    C --> C3[Impediment Resolution]
+    C --> C4[Integration Coordination]
+
+    D --> D1[./coordination_helper.sh meta-scrum]
+    D --> D2[Strategic Alignment]
+    D --> D3[Resource Optimization]
+    D --> D4[Portfolio Health]
+
+    E --> E1[./coordination_helper.sh kanban]
+    E --> E2[Epic Management]
+    E --> E3[Value Stream Flow]
+    E --> E4[WIP Limits]
+
+    F[Agent Execution Layer] --> F1[Sprint Planning]
+    F --> F2[Daily Execution]
+    F --> F3[Sprint Review]
+    F --> F4[Retrospective]
+
+    F1 --> G1[Work Decomposition]
+    F1 --> G2[Capacity Allocation]
+    F1 --> G3[Priority Assignment]
+
+    F2 --> H1[Atomic Work Claiming]
+    F2 --> H2[Progress Tracking]
+    F2 --> H3[Status Synchronization]
+
+    F3 --> I1[Velocity Calculation]
+    F3 --> I2[Quality Assessment]
+    F3 --> I3[Delivery Validation]
+
+    F4 --> J1[Performance Analysis]
+    F4 --> J2[Process Improvement]
+    F4 --> J3[AI Optimization]
+
+    K[AI Intelligence] --> K1[Priority Analysis]
+    K --> K2[Team Formation]
+    K --> K3[Risk Assessment]
+    K --> K4[Predictive Analytics]
+
+    K1 --> L1[./claude-analyze-priorities.sh]
+    K2 --> L2[./claude-team-analysis.sh]
+    K3 --> L3[./claude-health-analysis.sh]
+    K4 --> L4[./intelligent_completion_engine.sh]
+
+    style A fill:#e1f5fe
+    style F fill:#e8f5e8
+    style K fill:#fff3e0

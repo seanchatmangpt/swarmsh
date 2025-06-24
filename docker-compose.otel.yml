@@ -1,0 +1,116 @@
+# Docker Compose for OpenTelemetry Testing Infrastructure
+
+version: '3.8'
+
+services:
+  # OpenTelemetry Collector
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: ollama-pro-otel-collector
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector.yaml:/etc/otel-collector-config.yaml:ro
+      - ./telemetry-data:/tmp/telemetry-data
+    ports:
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP HTTP receiver
+      - "8889:8889"   # Prometheus metrics
+      - "8888:8888"   # Collector internal metrics
+      - "13133:13133" # Health check
+      - "55679:55679" # ZPages
+    environment:
+      - HOSTNAME=otel-collector
+      - OTEL_TIMESTAMP=${OTEL_TIMESTAMP:-$(date -u +%Y-%m-%dT%H:%M:%SZ)}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:13133/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - otel-network
+
+  # Jaeger for trace visualization
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: ollama-pro-jaeger
+    ports:
+      - "16686:16686" # Jaeger UI
+      - "14250:14250" # Accept jaeger.thrift over gRPC
+      - "14268:14268" # Accept jaeger.thrift over HTTP
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - otel-network
+    depends_on:
+      otel-collector:
+        condition: service_healthy
+
+  # Prometheus for metrics storage and visualization
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ollama-pro-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - otel-network
+    depends_on:
+      otel-collector:
+        condition: service_healthy
+
+  # Grafana for advanced metrics visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ollama-pro-grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+      - GF_USERS_ALLOW_SIGN_UP=false
+    networks:
+      - otel-network
+    depends_on:
+      - prometheus
+
+  # Mock Ollama server for testing
+  mock-ollama:
+    build:
+      context: .
+      dockerfile: Dockerfile.mock-ollama
+    container_name: ollama-pro-mock-server
+    ports:
+      - "11434:11434"
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+    networks:
+      - otel-network
+    depends_on:
+      otel-collector:
+        condition: service_healthy
+
+volumes:
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+networks:
+  otel-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

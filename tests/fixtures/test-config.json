@@ -1,0 +1,6 @@
+{
+    "host": "http://localhost:11435",
+    "default_model": "llama2",
+    "timeout": 30,
+    "retry_attempts": 3
+}

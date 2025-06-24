@@ -1,0 +1,692 @@
+#!/usr/bin/env bash
+
+# TDD Swarm - Concurrent Sub-Agent System for Test-Driven Development
+# Version: 1.0.0
+# Spawns maximum concurrent agents for parallel TDD workflows
+
+set -euo pipefail
+
+# Configuration
+readonly SCRIPT_NAME="$(basename "$0")"
+readonly SCRIPT_VERSION="1.0.0"
+readonly WORK_DIR="${TDD_WORK_DIR:-$(pwd)}"
+readonly AGENT_DIR="${WORK_DIR}/.tdd-agents"
+readonly LOG_DIR="${AGENT_DIR}/logs"
+readonly STATE_DIR="${AGENT_DIR}/state"
+readonly COMM_DIR="${AGENT_DIR}/comm"
+readonly RESULTS_DIR="${AGENT_DIR}/results"
+
+# System limits
+readonly MAX_AGENTS="${TDD_MAX_AGENTS:-$(nproc)}"
+readonly MAX_MEMORY_PER_AGENT="${TDD_MEMORY_PER_AGENT:-2G}"
+readonly AGENT_TIMEOUT="${TDD_AGENT_TIMEOUT:-300}"
+readonly COORDINATION_PORT="${TDD_COORD_PORT:-9999}"
+
+# Agent types
+readonly AGENT_TYPES=(
+    "test-generator"
+    "code-implementer"
+    "test-runner"
+    "refactorer"
+    "code-reviewer"
+    "integration-tester"
+    "performance-tester"
+    "security-scanner"
+)
+
+# Create necessary directories
+mkdir -p "$AGENT_DIR" "$LOG_DIR" "$STATE_DIR" "$COMM_DIR" "$RESULTS_DIR"
+
+# Colors for output
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[0;33m'
+readonly BLUE='\033[0;34m'
+readonly PURPLE='\033[0;35m'
+readonly CYAN='\033[0;36m'
+readonly NC='\033[0m'
+
+# Global state
+declare -A ACTIVE_AGENTS
+declare -A AGENT_PIDS
+declare -A AGENT_STATUS
+declare -A TASK_QUEUE
+COORDINATOR_PID=""
+
+# Cleanup on exit
+trap cleanup EXIT INT TERM
+
+cleanup() {
+    echo -e "\n${YELLOW}Shutting down TDD Swarm...${NC}"
+    
+    # Kill all agents
+    for pid in "${AGENT_PIDS[@]}"; do
+        if kill -0 "$pid" 2>/dev/null; then
+            kill -TERM "$pid" 2>/dev/null || true
+        fi
+    done
+    
+    # Kill coordinator
+    if [[ -n "$COORDINATOR_PID" ]] && kill -0 "$COORDINATOR_PID" 2>/dev/null; then
+        kill -TERM "$COORDINATOR_PID" 2>/dev/null || true
+    fi
+    
+    # Wait for processes to exit
+    wait
+    
+    echo -e "${GREEN}TDD Swarm shutdown complete${NC}"
+}
+
+# Logging functions
+log() {
+    local level=$1
+    local agent=$2
+    local message=$3
+    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    local color=""
+    
+    case $level in
+        ERROR) color=$RED ;;
+        WARN) color=$YELLOW ;;
+        INFO) color=$BLUE ;;
+        SUCCESS) color=$GREEN ;;
+        DEBUG) color=$PURPLE ;;
+    esac
+    
+    echo -e "${color}[$timestamp][$agent] $message${NC}"
+    echo "[$timestamp][$level][$agent] $message" >> "$LOG_DIR/swarm.log"
+}
+
+# Agent lifecycle management
+spawn_agent() {
+    local agent_type=$1
+    local agent_id="${agent_type}-$$-$(date +%s%N)"
+    local agent_log="$LOG_DIR/${agent_id}.log"
+    local agent_state="$STATE_DIR/${agent_id}.state"
+    
+    log INFO "COORDINATOR" "Spawning agent: $agent_id"
+    
+    # Create agent state file
+    cat > "$agent_state" <<EOF
+{
+    "id": "$agent_id",
+    "type": "$agent_type",
+    "status": "initializing",
+    "started": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+    "pid": null,
+    "tasks_completed": 0
+}
+EOF
+    
+    # Spawn agent process
+    (
+        exec > "$agent_log" 2>&1
+        agent_main "$agent_type" "$agent_id"
+    ) &
+    
+    local pid=$!
+    AGENT_PIDS["$agent_id"]=$pid
+    ACTIVE_AGENTS["$agent_id"]=$agent_type
+    AGENT_STATUS["$agent_id"]="running"
+    
+    # Update state with PID
+    local temp_state=$(mktemp)
+    jq --arg pid "$pid" '.pid = $pid | .status = "running"' "$agent_state" > "$temp_state"
+    mv "$temp_state" "$agent_state"
+    
+    log SUCCESS "COORDINATOR" "Agent spawned: $agent_id (PID: $pid)"
+}
+
+# Main agent process
+agent_main() {
+    local agent_type=$1
+    local agent_id=$2
+    local comm_pipe="$COMM_DIR/${agent_id}.pipe"
+    
+    # Create named pipe for communication
+    mkfifo "$comm_pipe"
+    
+    # Agent-specific initialization
+    case $agent_type in
+        test-generator)
+            test_generator_agent "$agent_id" "$comm_pipe"
+            ;;
+        code-implementer)
+            code_implementer_agent "$agent_id" "$comm_pipe"
+            ;;
+        test-runner)
+            test_runner_agent "$agent_id" "$comm_pipe"
+            ;;
+        refactorer)
+            refactorer_agent "$agent_id" "$comm_pipe"
+            ;;
+        code-reviewer)
+            code_reviewer_agent "$agent_id" "$comm_pipe"
+            ;;
+        integration-tester)
+            integration_tester_agent "$agent_id" "$comm_pipe"
+            ;;
+        performance-tester)
+            performance_tester_agent "$agent_id" "$comm_pipe"
+            ;;
+        security-scanner)
+            security_scanner_agent "$agent_id" "$comm_pipe"
+            ;;
+    esac
+    
+    # Cleanup
+    rm -f "$comm_pipe"
+}
+
+# Test Generator Agent
+test_generator_agent() {
+    local agent_id=$1
+    local comm_pipe=$2
+    
+    log INFO "$agent_id" "Test generator agent started"
+    
+    while true; do
+        # Wait for task
+        if read -t 1 task < "$comm_pipe" 2>/dev/null; then
+            log INFO "$agent_id" "Received task: $task"
+            
+            # Parse task
+            local task_type=$(echo "$task" | jq -r '.type')
+            local target=$(echo "$task" | jq -r '.target')
+            
+            case $task_type in
+                generate-unit-tests)
+                    generate_unit_tests "$agent_id" "$target"
+                    ;;
+                generate-integration-tests)
+                    generate_integration_tests "$agent_id" "$target"
+                    ;;
+                generate-property-tests)
+                    generate_property_based_tests "$agent_id" "$target"
+                    ;;
+            esac
+            
+            # Report completion
+            report_task_complete "$agent_id" "$task"
+        fi
+        
+        # Check for shutdown signal
+        if [[ -f "$AGENT_DIR/shutdown" ]]; then
+            break
+        fi
+        
+        sleep 0.1
+    done
+    
+    log INFO "$agent_id" "Test generator agent shutting down"
+}
+
+# Code Implementer Agent
+code_implementer_agent() {
+    local agent_id=$1
+    local comm_pipe=$2
+    
+    log INFO "$agent_id" "Code implementer agent started"
+    
+    while true; do
+        if read -t 1 task < "$comm_pipe" 2>/dev/null; then
+            log INFO "$agent_id" "Implementing: $task"
+            
+            local test_file=$(echo "$task" | jq -r '.test_file')
+            local implementation_target=$(echo "$task" | jq -r '.target')
+            
+            # Analyze test to understand requirements
+            local requirements=$(analyze_test_requirements "$test_file")
+            
+            # Generate implementation
+            implement_code "$agent_id" "$requirements" "$implementation_target"
+            
+            report_task_complete "$agent_id" "$task"
+        fi
+        
+        [[ -f "$AGENT_DIR/shutdown" ]] && break
+        sleep 0.1
+    done
+}
+
+# Test Runner Agent
+test_runner_agent() {
+    local agent_id=$1
+    local comm_pipe=$2
+    
+    log INFO "$agent_id" "Test runner agent started"
+    
+    while true; do
+        if read -t 1 task < "$comm_pipe" 2>/dev/null; then
+            local test_command=$(echo "$task" | jq -r '.command')
+            local test_pattern=$(echo "$task" | jq -r '.pattern // "*"')
+            
+            log INFO "$agent_id" "Running tests: $test_pattern"
+            
+            # Run tests and capture results
+            local result_file="$RESULTS_DIR/${agent_id}-$(date +%s).json"
+            run_tests "$test_command" "$test_pattern" > "$result_file"
+            
+            # Analyze results
+            analyze_test_results "$agent_id" "$result_file"
+            
+            report_task_complete "$agent_id" "$task" "$result_file"
+        fi
+        
+        [[ -f "$AGENT_DIR/shutdown" ]] && break
+        sleep 0.1
+    done
+}
+
+# Coordinator Process
+start_coordinator() {
+    log INFO "COORDINATOR" "Starting TDD Swarm Coordinator"
+    
+    # Start coordinator server
+    (
+        coordinator_server
+    ) &
+    
+    COORDINATOR_PID=$!
+    log SUCCESS "COORDINATOR" "Coordinator started (PID: $COORDINATOR_PID)"
+}
+
+coordinator_server() {
+    local task_id=0
+    
+    # Initialize task queue
+    echo '[]' > "$STATE_DIR/task_queue.json"
+    
+    # Spawn initial agents
+    spawn_initial_agents
+    
+    # Main coordination loop
+    while true; do
+        # Monitor agent health
+        monitor_agents
+        
+        # Process task queue
+        process_task_queue
+        
+        # Balance workload
+        balance_workload
+        
+        # Check for new work
+        check_for_new_work
+        
+        [[ -f "$AGENT_DIR/shutdown" ]] && break
+        sleep 1
+    done
+}
+
+spawn_initial_agents() {
+    log INFO "COORDINATOR" "Spawning initial agent swarm"
+    
+    # Calculate optimal agent distribution
+    local agents_per_type=$((MAX_AGENTS / ${#AGENT_TYPES[@]}))
+    local remaining_slots=$((MAX_AGENTS % ${#AGENT_TYPES[@]}))
+    
+    # Spawn agents for each type
+    for agent_type in "${AGENT_TYPES[@]}"; do
+        local count=$agents_per_type
+        
+        # Add extra agent for load balancing
+        if [[ $remaining_slots -gt 0 ]]; then
+            ((count++))
+            ((remaining_slots--))
+        fi
+        
+        for ((i=0; i<count; i++)); do
+            spawn_agent "$agent_type"
+            sleep 0.1  # Stagger spawning
+        done
+    done
+    
+    log SUCCESS "COORDINATOR" "Initial swarm spawned: $(echo ${#AGENT_PIDS[@]}) agents"
+}
+
+monitor_agents() {
+    for agent_id in "${!AGENT_PIDS[@]}"; do
+        local pid="${AGENT_PIDS[$agent_id]}"
+        
+        if ! kill -0 "$pid" 2>/dev/null; then
+            log WARN "COORDINATOR" "Agent $agent_id (PID: $pid) has died"
+            
+            # Clean up dead agent
+            unset AGENT_PIDS["$agent_id"]
+            unset ACTIVE_AGENTS["$agent_id"]
+            AGENT_STATUS["$agent_id"]="dead"
+            
+            # Respawn if needed
+            local agent_type="${ACTIVE_AGENTS[$agent_id]}"
+            if [[ -n "$agent_type" ]]; then
+                log INFO "COORDINATOR" "Respawning $agent_type agent"
+                spawn_agent "$agent_type"
+            fi
+        fi
+    done
+}
+
+# Task distribution
+distribute_task() {
+    local task=$1
+    local task_type=$(echo "$task" | jq -r '.type')
+    local suitable_agents=()
+    
+    # Find suitable agents
+    for agent_id in "${!ACTIVE_AGENTS[@]}"; do
+        local agent_type="${ACTIVE_AGENTS[$agent_id]}"
+        
+        if can_handle_task "$agent_type" "$task_type"; then
+            suitable_agents+=("$agent_id")
+        fi
+    done
+    
+    if [[ ${#suitable_agents[@]} -eq 0 ]]; then
+        log ERROR "COORDINATOR" "No suitable agent for task: $task_type"
+        return 1
+    fi
+    
+    # Select least loaded agent
+    local selected_agent=""
+    local min_load=999999
+    
+    for agent_id in "${suitable_agents[@]}"; do
+        local load=$(get_agent_load "$agent_id")
+        
+        if [[ $load -lt $min_load ]]; then
+            min_load=$load
+            selected_agent=$agent_id
+        fi
+    done
+    
+    # Send task to agent
+    local comm_pipe="$COMM_DIR/${selected_agent}.pipe"
+    echo "$task" > "$comm_pipe"
+    
+    log INFO "COORDINATOR" "Task distributed to $selected_agent"
+}
+
+# Helper functions
+generate_unit_tests() {
+    local agent_id=$1
+    local target=$2
+    
+    log INFO "$agent_id" "Generating unit tests for: $target"
+    
+    # Analyze code structure
+    local functions=$(extract_functions "$target")
+    local classes=$(extract_classes "$target")
+    
+    # Generate test file
+    local test_file="${target%.py}_test.py"
+    
+    cat > "$test_file" <<EOF
+import pytest
+from unittest.mock import Mock, patch
+import sys
+sys.path.insert(0, '$(dirname "$target")')
+from $(basename "$target" .py) import *
+
+# Generated by TDD Swarm Agent: $agent_id
+# Target: $target
+
+EOF
+    
+    # Generate tests for each function
+    while IFS= read -r func; do
+        generate_function_test "$func" >> "$test_file"
+    done <<< "$functions"
+    
+    log SUCCESS "$agent_id" "Generated tests: $test_file"
+}
+
+run_tests() {
+    local command=$1
+    local pattern=$2
+    
+    # Detect test framework
+    if [[ -f "pytest.ini" ]] || [[ -f "setup.cfg" ]]; then
+        pytest -v "$pattern" --json-report --json-report-file=-
+    elif [[ -f "package.json" ]] && grep -q "jest" "package.json"; then
+        npm test -- "$pattern" --json
+    elif [[ -f "go.mod" ]]; then
+        go test -v -json "./..." | grep "$pattern"
+    else
+        # Generic test execution
+        eval "$command $pattern"
+    fi
+}
+
+# Workload balancing
+balance_workload() {
+    local total_agents=${#AGENT_PIDS[@]}
+    local idle_agents=0
+    local overloaded_agents=0
+    
+    for agent_id in "${!AGENT_STATUS[@]}"; do
+        local load=$(get_agent_load "$agent_id")
+        
+        if [[ $load -eq 0 ]]; then
+            ((idle_agents++))
+        elif [[ $load -gt 5 ]]; then
+            ((overloaded_agents++))
+        fi
+    done
+    
+    # Scale agents if needed
+    if [[ $idle_agents -gt $((total_agents / 2)) ]]; then
+        # Too many idle agents, consider scaling down
+        log INFO "COORDINATOR" "High idle rate: $idle_agents/$total_agents agents idle"
+    elif [[ $overloaded_agents -gt 0 ]] && [[ $total_agents -lt $MAX_AGENTS ]]; then
+        # Spawn more agents
+        log INFO "COORDINATOR" "Scaling up: $overloaded_agents agents overloaded"
+        spawn_agent "${AGENT_TYPES[$((RANDOM % ${#AGENT_TYPES[@]}))]}"
+    fi
+}
+
+# Results aggregation
+aggregate_results() {
+    local result_files=("$RESULTS_DIR"/*.json)
+    local summary_file="$RESULTS_DIR/summary-$(date +%s).json"
+    
+    jq -s '
+        {
+            total_tests: (. | map(.total_tests // 0) | add),
+            passed: (. | map(.passed // 0) | add),
+            failed: (. | map(.failed // 0) | add),
+            skipped: (. | map(.skipped // 0) | add),
+            duration: (. | map(.duration // 0) | add),
+            coverage: (. | map(.coverage // 0) | add / length),
+            timestamp: now | strftime("%Y-%m-%dT%H:%M:%SZ")
+        }
+    ' "${result_files[@]}" > "$summary_file"
+    
+    log SUCCESS "COORDINATOR" "Results aggregated: $summary_file"
+}
+
+# Utility functions
+can_handle_task() {
+    local agent_type=$1
+    local task_type=$2
+    
+    case $agent_type in
+        test-generator)
+            [[ $task_type == generate-* ]]
+            ;;
+        code-implementer)
+            [[ $task_type == implement-* ]]
+            ;;
+        test-runner)
+            [[ $task_type == run-* ]]
+            ;;
+        refactorer)
+            [[ $task_type == refactor-* ]]
+            ;;
+        code-reviewer)
+            [[ $task_type == review-* ]]
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+get_agent_load() {
+    local agent_id=$1
+    local state_file="$STATE_DIR/${agent_id}.state"
+    
+    if [[ -f "$state_file" ]]; then
+        jq -r '.current_tasks // 0' "$state_file"
+    else
+        echo 0
+    fi
+}
+
+report_task_complete() {
+    local agent_id=$1
+    local task=$2
+    local result_file=${3:-}
+    
+    local state_file="$STATE_DIR/${agent_id}.state"
+    local temp_state=$(mktemp)
+    
+    # Update agent state
+    jq '.tasks_completed += 1 | .current_tasks = ((.current_tasks // 1) - 1)' "$state_file" > "$temp_state"
+    mv "$temp_state" "$state_file"
+    
+    # Log completion
+    log SUCCESS "$agent_id" "Task completed"
+    
+    # Send result to coordinator
+    if [[ -n "$result_file" ]]; then
+        cp "$result_file" "$RESULTS_DIR/completed-$(basename "$result_file")"
+    fi
+}
+
+# Main execution
+main() {
+    case "${1:-}" in
+        start)
+            echo -e "${GREEN}Starting TDD Swarm...${NC}"
+            echo -e "${CYAN}Maximum agents: $MAX_AGENTS${NC}"
+            echo -e "${CYAN}Work directory: $WORK_DIR${NC}"
+            
+            # Start coordinator
+            start_coordinator
+            
+            # Wait for coordinator
+            wait "$COORDINATOR_PID"
+            ;;
+            
+        stop)
+            echo -e "${YELLOW}Stopping TDD Swarm...${NC}"
+            touch "$AGENT_DIR/shutdown"
+            ;;
+            
+        status)
+            echo -e "${GREEN}TDD Swarm Status${NC}"
+            echo -e "${CYAN}Active Agents: ${#AGENT_PIDS[@]}${NC}"
+            
+            for agent_id in "${!ACTIVE_AGENTS[@]}"; do
+                local agent_type="${ACTIVE_AGENTS[$agent_id]}"
+                local pid="${AGENT_PIDS[$agent_id]}"
+                local status="${AGENT_STATUS[$agent_id]}"
+                echo -e "  $agent_id ($agent_type) - PID: $pid - Status: $status"
+            done
+            
+            # Show recent results
+            if ls "$RESULTS_DIR"/*.json &>/dev/null; then
+                echo -e "\n${GREEN}Recent Results:${NC}"
+                aggregate_results
+                cat "$RESULTS_DIR/summary-"*.json | jq '.' | tail -20
+            fi
+            ;;
+            
+        logs)
+            tail -f "$LOG_DIR/swarm.log"
+            ;;
+            
+        clean)
+            echo -e "${YELLOW}Cleaning TDD Swarm data...${NC}"
+            rm -rf "$AGENT_DIR"
+            ;;
+            
+        test)
+            # Run a test scenario
+            echo -e "${GREEN}Running TDD Swarm test scenario...${NC}"
+            
+            # Create test task
+            local test_task=$(jq -n '{
+                type: "generate-unit-tests",
+                target: "sample.py",
+                priority: "high"
+            }')
+            
+            echo "$test_task" > "$STATE_DIR/test_task.json"
+            
+            # Start swarm
+            "$0" start &
+            local swarm_pid=$!
+            
+            # Wait and check
+            sleep 10
+            "$0" status
+            
+            # Stop swarm
+            "$0" stop
+            wait "$swarm_pid"
+            ;;
+            
+        *)
+            cat <<EOF
+${GREEN}TDD Swarm v$SCRIPT_VERSION${NC}
+Concurrent Sub-Agent System for Test-Driven Development
+
+${YELLOW}Usage:${NC}
+  $SCRIPT_NAME {start|stop|status|logs|clean|test}
+
+${YELLOW}Commands:${NC}
+  start   - Start the TDD swarm with maximum concurrent agents
+  stop    - Gracefully stop all agents
+  status  - Show current swarm status and results
+  logs    - Follow swarm logs
+  clean   - Remove all swarm data
+  test    - Run a test scenario
+
+${YELLOW}Environment Variables:${NC}
+  TDD_WORK_DIR       - Working directory (default: current)
+  TDD_MAX_AGENTS     - Maximum concurrent agents (default: CPU count)
+  TDD_MEMORY_PER_AGENT - Memory limit per agent (default: 2G)
+  TDD_AGENT_TIMEOUT  - Agent task timeout in seconds (default: 300)
+  TDD_COORD_PORT     - Coordinator port (default: 9999)
+
+${YELLOW}Agent Types:${NC}
+  - test-generator: Creates unit, integration, and property-based tests
+  - code-implementer: Implements code to satisfy tests
+  - test-runner: Executes tests and reports results
+  - refactorer: Improves code while maintaining test coverage
+  - code-reviewer: Reviews code for quality and best practices
+  - integration-tester: Tests component interactions
+  - performance-tester: Profiles and optimizes performance
+  - security-scanner: Identifies security vulnerabilities
+
+${YELLOW}Examples:${NC}
+  # Start swarm with default settings
+  $SCRIPT_NAME start
+
+  # Start with custom agent count
+  TDD_MAX_AGENTS=16 $SCRIPT_NAME start
+
+  # Check status
+  $SCRIPT_NAME status
+
+  # View logs
+  $SCRIPT_NAME logs
+EOF
+            ;;
+    esac
+}
+
+# Run main
+main "$@"

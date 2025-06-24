@@ -1,0 +1,57 @@
+graph LR
+    A[Agent Request] --> B{Work Available?}
+    B -->|Yes| C[Atomic Claim via flock]
+    B -->|No| D[Wait/Poll]
+    D --> B
+
+    C --> E{Claim Successful?}
+    E -->|Yes| F[Emit Start Span]
+    E -->|No| D
+
+    F --> G[Execute Work]
+    G --> H[Progress Updates]
+    H --> I[Emit Progress Spans]
+    I --> J{Work Complete?}
+    J -->|No| G
+    J -->|Yes| K[Collect Results]
+
+    K --> L[Update Status]
+    L --> M[Emit Completion Span]
+    M --> N[Release Resources]
+    N --> O[AI Analysis]
+
+    O --> P[Priority Adjustment]
+    O --> Q[Performance Metrics]
+    O --> R[Team Formation]
+
+    P --> S[Update Work Queue]
+    Q --> T[Velocity Tracking]
+    R --> U[Agent Rebalancing]
+
+    S --> V[Next Cycle]
+    T --> V
+    U --> V
+    V --> B
+
+    subgraph "Telemetry Flow"
+        F --> W[telemetry_spans.jsonl]
+        I --> W
+        M --> W
+    end
+
+    subgraph "State Management"
+        C --> X[work_claims.json]
+        L --> Y[agent_status.json]
+        K --> Z[coordination_log.json]
+    end
+
+    subgraph "AI Intelligence"
+        O --> AA[Claude Analysis]
+        O --> BB[Ollama Local]
+        O --> CC[Fallback Logic]
+    end
+
+    style A fill:#e3f2fd
+    style G fill:#e8f5e8
+    style O fill:#fff3e0
+    style W fill:#fce4ec

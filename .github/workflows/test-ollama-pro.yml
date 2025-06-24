@@ -1,0 +1,119 @@
+name: Test Ollama Pro
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'ollama-pro'
+      - 'test-ollama-pro.sh'
+      - '.github/workflows/test-ollama-pro.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'ollama-pro'
+      - 'test-ollama-pro.sh'
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ['3.9', '3.10', '3.11']
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        # Install jq
+        if [[ "$RUNNER_OS" == "Linux" ]]; then
+          sudo apt-get update
+          sudo apt-get install -y jq
+        elif [[ "$RUNNER_OS" == "macOS" ]]; then
+          brew install jq
+        fi
+        
+        # Install Python dependencies for mock server
+        pip install --upgrade pip
+    
+    - name: Make scripts executable
+      run: |
+        chmod +x ollama-pro
+        chmod +x test-ollama-pro.sh
+    
+    - name: Run tests
+      run: |
+        ./test-ollama-pro.sh --verbose
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-${{ matrix.os }}-py${{ matrix.python-version }}
+        path: tests/results/
+    
+    - name: Generate coverage badge
+      if: success() && matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
+      run: |
+        # Extract test results
+        TOTAL=$(grep "Total:" tests/results/test-report-*.json | awk '{print $2}')
+        PASSED=$(grep "passed:" tests/results/test-report-*.json | awk '{print $2}')
+        RATE=$(echo "scale=0; $PASSED * 100 / $TOTAL" | bc)
+        
+        # Generate badge
+        if [[ $RATE -ge 90 ]]; then
+          COLOR="brightgreen"
+        elif [[ $RATE -ge 70 ]]; then
+          COLOR="yellow"
+        else
+          COLOR="red"
+        fi
+        
+        echo "Test coverage: ${RATE}%"
+        echo "::set-output name=coverage::${RATE}%"
+        echo "::set-output name=color::${COLOR}"
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run ShellCheck
+      uses: ludeeus/action-shellcheck@2.0.0
+      with:
+        scandir: '.'
+        check_together: 'yes'
+        severity: 'warning'
+        ignore_paths: 'tests'
+    
+    - name: Check POSIX compliance
+      run: |
+        # Check for bashisms in supposedly POSIX scripts
+        if command -v checkbashisms &> /dev/null; then
+          checkbashisms ollama-pro || true
+        fi
+
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run Trivy security scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+    
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
