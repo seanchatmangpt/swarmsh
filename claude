@@ -1,0 +1,202 @@
+#!/bin/bash
+
+# Claude CLI Wrapper - Bridges Claude calls to ollama-pro
+# This script provides Claude CLI compatibility using ollama-pro backend
+
+# Configuration
+OLLAMA_PRO_SCRIPT="$(dirname "$0")/ollama-pro"
+DEFAULT_MODEL="${OLLAMA_MODEL:-qwen3}"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/claude-wrapper"
+TIMEOUT_SECONDS="${CLAUDE_TIMEOUT:-30}"
+
+# Create cache directory
+mkdir -p "$CACHE_DIR"
+
+# Parse command line arguments
+PRINT_MODE=false
+OUTPUT_FORMAT="text"
+INPUT_FORMAT="text"
+VERBOSE=false
+PROMPT=""
+INPUT_DATA=""
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -p|--print)
+            PRINT_MODE=true
+            shift
+            ;;
+        --output-format)
+            OUTPUT_FORMAT="$2"
+            shift 2
+            ;;
+        --input-format)
+            INPUT_FORMAT="$2"
+            shift 2
+            ;;
+        --verbose)
+            VERBOSE=true
+            shift
+            ;;
+        *)
+            if [[ -z "$PROMPT" ]]; then
+                PROMPT="$1"
+            fi
+            shift
+            ;;
+    esac
+done
+
+# Read input data from stdin if available
+if [[ -p /dev/stdin ]]; then
+    INPUT_DATA=$(cat)
+fi
+
+# Combine input data and prompt for context
+if [[ -n "$INPUT_DATA" ]]; then
+    FULL_PROMPT="$INPUT_DATA
+
+$PROMPT"
+else
+    FULL_PROMPT="$PROMPT"
+fi
+
+# Generate ollama-pro command
+OLLAMA_ARGS=("$OLLAMA_PRO_SCRIPT" "run" "$DEFAULT_MODEL")
+
+# Add format specification based on output format
+if [[ "$OUTPUT_FORMAT" == "json" ]]; then
+    OLLAMA_ARGS+=("--format" "json")
+    FULL_PROMPT="$FULL_PROMPT
+
+Please respond in valid JSON format."
+elif [[ "$OUTPUT_FORMAT" == "stream-json" ]]; then
+    OLLAMA_ARGS+=("--format" "json")
+    FULL_PROMPT="$FULL_PROMPT
+
+Please respond in valid JSON format with streaming compatibility."
+fi
+
+# Add no-stream for non-streaming output
+if [[ "$OUTPUT_FORMAT" != "stream-json" ]]; then
+    OLLAMA_ARGS+=("--no-stream")
+fi
+
+# Add the prompt
+OLLAMA_ARGS+=("$FULL_PROMPT")
+
+# Generate cache key for common requests
+generate_cache_key() {
+    echo -n "$DEFAULT_MODEL:$OUTPUT_FORMAT:$FULL_PROMPT" | sha256sum | cut -d' ' -f1
+}
+
+# Check cache for repeated requests
+check_cache() {
+    local cache_key="$1"
+    local cache_file="$CACHE_DIR/$cache_key"
+    
+    if [[ -f "$cache_file" ]]; then
+        local cache_age=$(($(date +%s) - $(stat -f %m "$cache_file" 2>/dev/null || stat -c %Y "$cache_file" 2>/dev/null || echo 0)))
+        # Use cache if less than 5 minutes old
+        if [[ $cache_age -lt 300 ]]; then
+            cat "$cache_file"
+            return 0
+        fi
+    fi
+    return 1
+}
+
+# Save response to cache
+save_to_cache() {
+    local cache_key="$1"
+    local response="$2"
+    local cache_file="$CACHE_DIR/$cache_key"
+    
+    echo "$response" > "$cache_file"
+}
+
+# Execute ollama-pro with timeout and caching
+execute_with_timeout() {
+    local cache_key=$(generate_cache_key)
+    
+    # Check cache first for common requests
+    if [[ ${#FULL_PROMPT} -lt 500 ]] && check_cache "$cache_key"; then
+        if [[ "$VERBOSE" == "true" ]]; then
+            echo "Cache hit for request" >&2
+        fi
+        return 0
+    fi
+    
+    if [[ "$VERBOSE" == "true" ]]; then
+        echo "Executing: ${OLLAMA_ARGS[*]}" >&2
+    fi
+    
+    # Use timeout to prevent hanging
+    local temp_output=$(mktemp)
+    local exit_code=0
+    
+    if command -v timeout >/dev/null 2>&1; then
+        timeout "$TIMEOUT_SECONDS" "${OLLAMA_ARGS[@]}" 2>/dev/null > "$temp_output" || exit_code=$?
+    else
+        # Fallback for systems without timeout command
+        "${OLLAMA_ARGS[@]}" 2>/dev/null > "$temp_output" &
+        local pid=$!
+        local count=0
+        while kill -0 "$pid" 2>/dev/null && [[ $count -lt $TIMEOUT_SECONDS ]]; do
+            sleep 1
+            ((count++))
+        done
+        if kill -0 "$pid" 2>/dev/null; then
+            kill -TERM "$pid" 2>/dev/null
+            sleep 2
+            kill -KILL "$pid" 2>/dev/null
+            exit_code=124
+        fi
+        wait "$pid" 2>/dev/null || exit_code=$?
+    fi
+    
+    if [[ $exit_code -eq 0 ]]; then
+        local response=$(cat "$temp_output" | grep -v "^\[TRACE_EVENT\]" | grep -v "^\[METRIC\]" | grep -v "^declare -x")
+        echo "$response"
+        
+        # Cache successful short responses
+        if [[ ${#FULL_PROMPT} -lt 500 ]] && [[ ${#response} -gt 0 ]]; then
+            save_to_cache "$cache_key" "$response"
+        fi
+        
+        rm -f "$temp_output"
+        return 0
+    else
+        rm -f "$temp_output"
+        return $exit_code
+    fi
+}
+
+# Execute with fallback handling
+if execute_with_timeout; then
+    exit 0
+else
+    exit_code=$?
+    if [[ "$VERBOSE" == "true" ]]; then
+        echo "Command failed with exit code: $exit_code" >&2
+    fi
+    
+    # Provide contextual fallback based on the request
+    case "$OUTPUT_FORMAT" in
+        "json")
+            if [[ $exit_code -eq 124 ]]; then
+                echo '{"status": "timeout", "message": "Request timed out after '$TIMEOUT_SECONDS' seconds", "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}'
+            else
+                echo '{"status": "error", "message": "ollama-pro backend unavailable", "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}'
+            fi
+            ;;
+        *)
+            if [[ $exit_code -eq 124 ]]; then
+                echo "Request timed out - try a simpler query or increase timeout"
+            else
+                echo "Analysis unavailable - ollama-pro backend not responding"
+            fi
+            ;;
+    esac
+    exit 1
+fi

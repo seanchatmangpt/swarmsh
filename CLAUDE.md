@@ -98,10 +98,26 @@ nohup ../coordinated_real_agent_worker.sh > /tmp/agent.log 2>&1 &
 - `openssl` (trace ID generation)
 - `bc` (mathematical calculations)
 
+### AI Integration
+- **ollama-pro** (Local AI analysis backend)
+- **ollama** (LLM inference engine)
+- **claude wrapper** (Compatibility layer for Claude CLI calls)
+
 ### Platform Notes
 - **macOS**: `flock` not available by default (install via `brew install util-linux`)
 - **Linux**: Full `flock` support available
 - Set `COORDINATION_MODE="simple"` as fallback without `flock`
+
+### AI Configuration
+```bash
+# Environment variables for AI integration
+export OLLAMA_MODEL="qwen3"              # Default model for analysis
+export CLAUDE_TIMEOUT="30"              # Timeout in seconds for AI requests
+export OLLAMA_HOST="http://localhost:11434"  # Ollama server endpoint
+
+# Test AI integration
+./claude --print "test" --output-format json
+```
 
 ## Development Patterns
 
@@ -130,6 +146,27 @@ All coordination operations generate distributed traces compatible with:
 - XAVOS system monitoring
 - N8n workflow orchestration
 - Reactor middleware telemetry
+
+### AI Analysis Commands
+```bash
+# Priority analysis with ollama-pro backend
+./coordination_helper.sh claude-analyze-priorities
+
+# Team analysis and optimization
+./coordination_helper.sh claude-team-analysis
+
+# System health monitoring
+./coordination_helper.sh claude-health-analysis
+
+# AI intelligence dashboard
+./coordination_helper.sh claude-dashboard
+```
+
+**AI Performance Features**:
+- **Response caching** for improved performance (5-minute TTL)
+- **30-second timeout** protection with graceful fallbacks
+- **Context-aware responses** based on coordination state
+- **JSON and stream format** support for structured analysis
 
 ## Performance Characteristics
 
