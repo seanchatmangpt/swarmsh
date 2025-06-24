@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-06-24T21:30:01Z",
+  "health_score": 90,
+  "status": "healthy",
+  "issues": ["Agent status file stale: 58450s old"],
+  "telemetry": {
+    "trace_id": "eec92fbd23f60367d7ecad3c76cd91a8",
+    "span_id": "ce58d77b43a7e3b2",
+    "operation": "8020.health.monitoring"
+  }
+}

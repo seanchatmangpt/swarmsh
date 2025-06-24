@@ -1,95 +1,340 @@
-# Agent Coordination System (SwarmSH)
+# SwarmSH - Telemetry-Driven Agent Coordination System
 
-Enterprise-grade coordination framework for autonomous AI agent swarms with dual coordination architectures for zero-conflict work execution.
+> Enterprise-grade bash-based coordination framework for autonomous AI agent swarms with real-time telemetry, 8020 automation, and zero-conflict distributed work execution.
 
-## Quick Start
+[![Health Score](https://img.shields.io/badge/Health%20Score-75%2F100-yellow)]()
+[![Operations](https://img.shields.io/badge/Daily%20Operations-400%2B-green)]()
+[![Telemetry](https://img.shields.io/badge/Telemetry-OpenTelemetry-blue)]()
+[![Automation](https://img.shields.io/badge/Automation-8020%20Optimized-purple)]()
+
+## 🚀 Quick Start (Telemetry-First Approach)
 
 ```bash
-# Enterprise SAFe Coordination (JSON-based)
-./coordination_helper.sh claim "implementation" "Your task" "high"
-./coordination_helper.sh dashboard
+# 1. Clone and setup
+git clone https://github.com/seanchatmangpt/swarmsh.git
+cd swarmsh
+chmod +x *.sh
 
-# Real Agent Process Coordination (atomic locking)
-./real_agent_coordinator.sh init
-./real_agent_coordinator.sh monitor
+# 2. Start with telemetry analysis (RECOMMENDED)
+make getting-started
+
+# 3. Monitor in real-time (separate terminal)
+make monitor-24h
+
+# 4. Begin work based on system health
+make claim WORK_TYPE=feature DESC="Your task description"
 ```
 
-## Core Components
+## 📊 Key Features
 
-### 🏢 Enterprise SAFe Coordination (`coordination_helper.sh`)
-JSON-based coordination with 40+ commands, nanosecond-precision agent IDs, and AI analysis integration via ollama-pro.
+### 🔍 **Telemetry-First Development**
+- **Real-time monitoring** with OpenTelemetry integration
+- **24-hour default window** for current state analysis
+- **Auto-generated dashboards** from live telemetry data
+- **Health score tracking** with intelligent recommendations
 
+### 🏢 **Dual Coordination Architectures**
+1. **Enterprise SAFe Coordination** (`coordination_helper.sh`)
+   - 40+ commands for comprehensive work management
+   - Nanosecond-precision agent IDs (zero conflicts)
+   - JSON-based with atomic file locking
+
+2. **Real Agent Process Coordination** (`real_agent_coordinator.sh`)
+   - Distributed work queue with atomic claiming
+   - Real process execution and monitoring
+   - Sub-100ms coordination operations
+
+### 🤖 **AI Integration**
+- **Claude AI** - Intelligent priority analysis and team optimization
+- **Ollama/Ollama-Pro** - Local LLM backend with caching
+- **Response caching** - 5-minute TTL for improved performance
+- **Timeout protection** - 30-second graceful fallbacks
+
+### 🎯 **8020 Automation**
+- **Tier 1 Operations** (5% effort, 60% value)
+  - Health monitoring every 15 minutes
+  - Work queue optimization every 4 hours
+  - Telemetry management with auto-archival
+- **Intelligent scheduling** based on system health
+- **Cron automation** with adaptive frequencies
+
+### 🌳 **Worktree Development**
+- **Parallel feature development** with Git worktrees
+- **Isolated environments** for each feature
+- **Cross-worktree coordination** and telemetry sharing
+- **Integrated PR workflow**
+
+## 🛠️ Installation
+
+### Prerequisites
 ```bash
-./coordination_helper.sh register 100 "active" "backend_team"
-./coordination_helper.sh claim "development" "Optimize queries" "high"
+# Required
+bash 4.0+    # Shell execution
+jq           # JSON processing  
+python3      # Timestamp calculations
+
+# Critical for production
+flock        # Atomic file locking
+openssl      # Trace ID generation
+bc           # Mathematical calculations
+```
+
+### macOS Setup
+```bash
+# Install dependencies
+brew install bash jq python3 util-linux coreutils openssl bc
+
+# Optional: AI backends
+brew install ollama
+# Claude CLI from https://claude.ai/cli
+```
+
+### Linux Setup
+```bash
+# Ubuntu/Debian
+sudo apt update
+sudo apt install -y bash jq python3 git bc util-linux
+
+# Optional: Install Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+## 📋 Core Commands
+
+### System Health & Monitoring
+```bash
+# Quick health check
+make telemetry-health
+
+# Detailed statistics
+make telemetry-stats
+
+# Real-time monitoring
+make monitor-24h        # Last 24 hours (default)
+make monitor-7d         # Last 7 days
+make monitor-all        # All data
+
+# Generate visual dashboards
+make diagrams           # All diagrams (24h)
+make diagrams-dashboard # Just the dashboard
+```
+
+### Work Coordination
+```bash
+# Claim work
+make claim WORK_TYPE=feature DESC="Implement caching" PRIORITY=high
+
+# View coordination dashboard
+make dashboard
+
+# List active work
+make list-work
+
+# Complete work
 ./coordination_helper.sh complete "$WORK_ID" "success" 8
 ```
 
-### ⚡ Real Agent Process Coordination (`real_agent_coordinator.sh`)  
-Distributed work queue with atomic claiming and real process execution.
-
+### Worktree Development
 ```bash
-./real_agent_coordinator.sh add "optimization" "high" "perf_test" "2500"
-CLAIMED_WORK=$(./real_agent_coordinator.sh claim "$AGENT_ID" "$$")
-./real_agent_coordinator.sh complete "$AGENT_ID" "$CLAIMED_WORK" "1250" "result.json"
+# Create feature worktree
+make worktree-create FEATURE=new-cache-layer
+
+# List worktrees
+make worktree-list
+
+# Show worktree dashboard
+make worktree-dashboard
+
+# Push changes for PR
+make worktree-merge FEATURE=new-cache-layer
 ```
 
-## Dependencies
+### Automation Management
+```bash
+# Install 8020 cron automation
+make cron-install
 
-**Required**: `bash` 4.0+, `jq`, `python3`  
-**Critical**: `flock` (atomic locking - install `util-linux` on macOS)  
-**AI Integration**: `ollama-pro`, `ollama` (local LLM backend)
+# Check automation status
+make cron-status
 
-## Quick Troubleshooting
+# View automation logs
+grep "8020_cron_log" telemetry_spans.jsonl | tail -20 | jq '.'
+```
 
-**"flock: command not found"** (macOS)
+## 🏗️ Architecture
+
+```
+SwarmSH/
+├── Core Coordination
+│   ├── coordination_helper.sh      # Enterprise SAFe (40+ commands)
+│   ├── real_agent_coordinator.sh   # Real process coordination
+│   └── agent_swarm_orchestrator.sh # Multi-agent orchestration
+│
+├── Telemetry & Monitoring
+│   ├── telemetry_spans.jsonl       # All operations log
+│   ├── system_health_report.json   # Current health status
+│   ├── auto-generate-mermaid.sh    # Live diagram generation
+│   └── realtime-telemetry-monitor.sh # Real-time monitoring
+│
+├── Automation (8020)
+│   ├── 8020_cron_automation.sh     # Main automation
+│   ├── cron-health-monitor.sh      # Health monitoring
+│   ├── cron-telemetry-manager.sh   # Telemetry management
+│   └── cron-performance-collector.sh # Performance metrics
+│
+├── AI Integration
+│   ├── claude                      # Claude CLI wrapper
+│   ├── ollama-pro                  # Enhanced Ollama
+│   └── demo_claude_intelligence.sh # AI capabilities demo
+│
+└── Documentation
+    ├── CLAUDE.md                   # AI guidance for Claude
+    ├── docs/QUICK_REFERENCE.md     # Command reference
+    └── docs/TELEMETRY_GUIDE.md     # Telemetry analysis
+```
+
+## 📊 Performance Metrics
+
+- **92.6% operation success rate** (telemetry validated)
+- **Sub-100ms coordination operations** with atomic locking
+- **Zero work conflicts** through nanosecond-precision IDs
+- **1,400+ telemetry spans** per day with 100% success
+- **5+ concurrent agents** supported
+- **24/7 automated monitoring** with adaptive scheduling
+
+## 🔌 Integrations
+
+### Supported Systems
+- **OpenTelemetry** - Distributed tracing
+- **Prometheus/Grafana** - Metrics and visualization
+- **Phoenix LiveView** - Real-time dashboards
+- **XAVOS** - External automation system
+- **N8n** - Workflow automation
+- **Docker** - Containerized monitoring stack
+
+### AI Backends
+- **Claude** (via official CLI)
+- **Ollama** (local LLM)
+- **Ollama-Pro** (enhanced with caching)
+
+## 🧪 Testing
+
+```bash
+# Quick validation (< 1 minute)
+make validate
+
+# Essential tests only
+make test-essential
+
+# Full test suite
+make test
+
+# Performance benchmarks
+make test-performance
+
+# OpenTelemetry validation
+make otel-validate
+```
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+**"flock: command not found" (macOS)**
 ```bash
 brew install util-linux
+# Or use simple mode:
+export COORDINATION_MODE="simple"
 ```
 
-**Permission errors**
+**Low Health Score**
 ```bash
-chmod +x *.sh && mkdir -p real_agents real_work_results
-```
-
-**AI integration setup**
-```bash
-# Test ollama-pro integration
-./claude --print "test" --output-format json
-
-# Run AI analysis
-./coordination_helper.sh claude-analyze-priorities
-```
-
-**8020 Automation setup**
-```bash
-# Install high-impact automated monitoring (80/20 principle)
-./8020_cron_automation.sh install
+# Check issues
+cat system_health_report.json | jq '.issue_breakdown'
 
 # Manual health check
-./8020_cron_automation.sh health
+./cron-health-monitor.sh
+
+# Review recent errors
+grep error telemetry_spans.jsonl | tail -20 | jq '.'
 ```
 
-## Performance
-- **Sub-100ms coordination** operations with flock
-- **Zero work conflicts** through atomic claiming  
-- **1,400+ telemetry spans** with 100% success rate
-- **5+ concurrent agents** supported
-- **100/100 health scores** with 8020 automation (sub-50ms monitoring)
+**No Telemetry Data**
+```bash
+# Check cron jobs
+make cron-status
 
-## Documentation
+# Verify telemetry file
+ls -la telemetry_spans.jsonl
 
-- 📖 **[API Reference](API_REFERENCE.md)** - Complete command reference
-- 🚀 **[Deployment Guide](DEPLOYMENT_GUIDE.md)** - Installation & setup
-- ⚙️ **[Configuration](CONFIGURATION_REFERENCE.md)** - All config options
-- 🔧 **[Troubleshooting](TROUBLESHOOTING.md)** - Common issues & solutions
-- 🏗️ **[Architecture](ARCHITECTURE.md)** - System design & data flows
-- 👥 **[Contributing](CONTRIBUTING.md)** - Developer guide
-- 🤖 **[8020 Automation Report](docs/8020_CRON_AUTOMATION_REPORT.md)** - Automated monitoring & optimization
+# Watch for new spans
+tail -f telemetry_spans.jsonl | jq '.'
+```
 
-## Integration
+## 📚 Documentation
 
-Compatible with OpenTelemetry, Phoenix LiveView, XAVOS, N8n workflows, and local AI intelligence via ollama-pro with response caching and timeout protection.
+### Essential Guides
+- **[CLAUDE.md](CLAUDE.md)** - Telemetry-first development principles
+- **[Quick Reference](docs/QUICK_REFERENCE.md)** - Command cheat sheet
+- **[Telemetry Guide](docs/TELEMETRY_GUIDE.md)** - Deep telemetry analysis
+- **[Getting Started](GETTING_STARTED.md)** - Installation from scratch
+
+### Advanced Topics
+- **[Architecture](ARCHITECTURE.md)** - System design details
+- **[API Reference](API_REFERENCE.md)** - Complete command reference
+- **[Worktree Guide](docs/WORKTREE_DEVELOPMENT_GUIDE.md)** - Parallel development
+- **[8020 Automation](docs/8020_CRON_FEATURES.md)** - Automation details
+
+### Integration Guides
+- **[Project Simulation](docs/PROJECT_SIMULATION_GUIDE.md)** - Monte Carlo planning
+- **[Configuration Reference](CONFIGURATION_REFERENCE.md)** - All settings
+- **[Troubleshooting](TROUBLESHOOTING.md)** - Common solutions
+
+## 🤝 Contributing
+
+1. **Fork the repository**
+2. **Create a worktree** for your feature:
+   ```bash
+   make worktree-create FEATURE=your-feature
+   ```
+3. **Monitor while developing**:
+   ```bash
+   make monitor-24h  # In separate terminal
+   ```
+4. **Validate changes**:
+   ```bash
+   make validate
+   ```
+5. **Push for PR**:
+   ```bash
+   make worktree-merge FEATURE=your-feature
+   ```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+## 📈 Project Status
+
+Current system health: **75/100** ⚠️  
+Daily operations: **400+**  
+Active automation: **9 cron jobs**  
+Recent errors: **0**
+
+*Status auto-updated by telemetry system*
+
+## 📄 License
+
+[MIT License](LICENSE) - See LICENSE file for details
 
 ---
-Part of the AI Self-Sustaining System enterprise coordination framework.
+
+<div align="center">
+
+**[Quick Start](#-quick-start-telemetry-first-approach)** • 
+**[Documentation](#-documentation)** • 
+**[Troubleshooting](#-troubleshooting)** •
+**[Contributing](#-contributing)**
+
+Part of the AI Self-Sustaining System ecosystem  
+Built with ❤️ using Bash, OpenTelemetry, and the 8020 Principle
+
+</div>

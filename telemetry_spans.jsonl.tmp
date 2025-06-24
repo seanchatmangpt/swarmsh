@@ -1,121 +1,3 @@
-{"trace_id":"421d93aef271b5e04154e5d4698a5020","span_id":"26b2fce8d7ef044c","operation":"8020.cron.automation","command":"health","total_duration_ms":275,"status":"completed"}
-{"trace_id":"f69e84957f22c656270399a1f933c54b","span_id":"22c5cb7a773fbd9a","operation":"8020_cron_log","level":"INFO","message":"⚡ Starting 80/20 work queue optimization","timestamp":"2025-06-24T09:00:01Z"}
-{"trace_id":"0c45d841be4e30cfa9e0ef7edd455b51","span_id":"f2730ed43e4eee2e","operation":"8020_cron_log","level":"INFO","message":"📊 Starting 80/20 metrics collection","timestamp":"2025-06-24T09:00:01Z"}
-{"trace_id":"1f5ac255d8c0b404d47fcb0e2534b093","span_id":"a6c0e6c7b54dbd52","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T09:00:01Z"}
-{"trace_id":"f69e84957f22c656270399a1f933c54b","span_id":"f1bf3ae24ff9fbfa","operation":"8020_cron_log","level":"INFO","message":"🧹 Cleaning completed work from main claims file","timestamp":"2025-06-24T09:00:01Z"}
-{"trace_id":"1f5ac255d8c0b404d47fcb0e2534b093","span_id":"9b4bddb834dc45d0","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T09:00:01Z"}
-{"trace_id":"f69e84957f22c656270399a1f933c54b","span_id":"c95a14e40904dc0f","operation":"8020.work.optimization","duration_ms":339,"optimizations":0}
-{"trace_id":"1f5ac255d8c0b404d47fcb0e2534b093","span_id":"fd4d09250d41146e","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 13450s old","timestamp":"2025-06-24T09:00:01Z"}
-{"trace_id":"f69e84957f22c656270399a1f933c54b","span_id":"abc527c3c2f24665","operation":"8020_cron_log","level":"INFO","message":"✅ Work queue optimization complete (339ms) - Applied 0 optimizations","timestamp":"2025-06-24T09:00:01Z"}
-{"trace_id":"07fe422ba8c5a2594bdd718186618f33","span_id":"7a732af7182f2122","operation":"health_monitor.filesystem_check","service":"cron-health-monitor","status":"completed","duration_ms":150,"timestamp":"2025-06-24T09:00:01Z","metrics":{"filesystem_issues":0,"file_health":[
-  {
-    "file": "work_claims.json",
-    "status": "healthy",
-    "size_bytes": 4993,
-    "age_hours": 3
-  },
-  {
-    "file": "agent_status.json",
-    "status": "healthy",
-    "size_bytes": 16459,
-    "age_hours": 5
-  },
-  {
-    "file": "coordination_log.json",
-    "status": "healthy",
-    "size_bytes": 45894,
-    "age_hours": 5
-  }
-],"checked_files":3,"checked_scripts":2}}
-{"trace_id":"f69e84957f22c656270399a1f933c54b","span_id":"8a80afa048894298","operation":"8020.cron.automation","command":"optimize","total_duration_ms":497,"status":"completed"}
-{"trace_id":"0c45d841be4e30cfa9e0ef7edd455b51","span_id":"74d93a437157054f","operation":"8020.metrics.collection","duration_ms":356,"active_work":00,"active_agents":52}
-{"trace_id":"1f5ac255d8c0b404d47fcb0e2534b093","span_id":"40cdd4369960776e","operation":"8020.health.monitoring","duration_ms":357,"health_score":90,"status":"healthy","issues_count":1}
-{"trace_id":"0c45d841be4e30cfa9e0ef7edd455b51","span_id":"16d35cc4633a3359","operation":"8020_cron_log","level":"INFO","message":"✅ Metrics collection complete (356ms) - Report: /Users/sac/dev/swarmsh/logs/metrics_20250624_020001.json","timestamp":"2025-06-24T09:00:01Z"}
-{"trace_id":"1f5ac255d8c0b404d47fcb0e2534b093","span_id":"da0c02c289a8cb35","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (357ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_020001.json","timestamp":"2025-06-24T09:00:01Z"}
-{"trace_id":"0c45d841be4e30cfa9e0ef7edd455b51","span_id":"a898457fc09f6632","operation":"8020.cron.automation","command":"metrics","total_duration_ms":540,"status":"completed"}
-{"trace_id":"1f5ac255d8c0b404d47fcb0e2534b093","span_id":"18c1264e6be06f71","operation":"8020.cron.automation","command":"health","total_duration_ms":523,"status":"completed"}
-{"trace_id":"07fe422ba8c5a2594bdd718186618f33","span_id":"7a732af7182f2122","operation":"health_monitor.coordination_check","service":"cron-health-monitor","status":"completed","duration_ms":200,"timestamp":"2025-06-24T09:00:01Z","metrics":{"coordination_issues":0,"total_work":9,"active_work":9,"completed_work":0,"failed_work":0,"completion_rate":0,"error_rate":0,"active_agents":44}}
-{"trace_id":"07fe422ba8c5a2594bdd718186618f33","span_id":"7a732af7182f2122","operation":"health_monitor.telemetry_check","service":"cron-health-monitor","status":"completed","duration_ms":100,"timestamp":"2025-06-24T09:00:01Z","metrics":{"telemetry_issues":1,"telemetry_details":{"status":"present","size_bytes":79317,"line_count":702,"recent_spans":00}}}
-{"trace_id":"07fe422ba8c5a2594bdd718186618f33","span_id":"7a732af7182f2122","operation":"health_monitor.resource_check","service":"cron-health-monitor","status":"completed","duration_ms":100,"timestamp":"2025-06-24T09:00:01Z","metrics":{"resource_issues":1,"disk_usage_percent":61,"memory_usage_percent":99}}
-{"trace_id":"07fe422ba8c5a2594bdd718186618f33","span_id":"7a732af7182f2122","operation":"health_monitor.health_report","service":"cron-health-monitor","status":"completed","duration_ms":150,"timestamp":"2025-06-24T09:00:02Z","metrics":{"health_score":65,"total_issues":2,"alert_generated":true}}
-{"trace_id":"07fe422ba8c5a2594bdd718186618f33","span_id":"7a732af7182f2122","operation":"health_monitor.monitoring_complete","service":"cron-health-monitor","status":"completed","duration_ms":1057,"timestamp":"2025-06-24T09:00:02Z","metrics":{"health_score":65,"total_issues":2,"duration_ms":1057,"alert_generated":true}}
-{"trace_id":"262437800aa8724f83e6b8bfbf05f886","span_id":"b688055214e71d45","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T09:15:00Z"}
-{"trace_id":"262437800aa8724f83e6b8bfbf05f886","span_id":"6d31986dd1777991","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T09:15:00Z"}
-{"trace_id":"262437800aa8724f83e6b8bfbf05f886","span_id":"3c0219545e81aa8f","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 14349s old","timestamp":"2025-06-24T09:15:00Z"}
-{"trace_id":"262437800aa8724f83e6b8bfbf05f886","span_id":"b160e9b780baf400","operation":"8020.health.monitoring","duration_ms":218,"health_score":90,"status":"healthy","issues_count":1}
-{"trace_id":"262437800aa8724f83e6b8bfbf05f886","span_id":"62a5d814e168f9a2","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (218ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_021500.json","timestamp":"2025-06-24T09:15:01Z"}
-{"trace_id":"262437800aa8724f83e6b8bfbf05f886","span_id":"c5a838e8d893d7e7","operation":"8020.cron.automation","command":"health","total_duration_ms":314,"status":"completed"}
-{"trace_id":"673896c96e9fe700fd4f16bf6926a5df","span_id":"cbb6e32e10ad320e","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T09:30:00Z"}
-{"trace_id":"372950f851623ae6460204dc72da274f","span_id":"28bdaefaa42afaa0","operation":"8020_cron_log","level":"INFO","message":"📊 Starting 80/20 metrics collection","timestamp":"2025-06-24T09:30:00Z"}
-{"trace_id":"673896c96e9fe700fd4f16bf6926a5df","span_id":"4179de8d965a561f","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T09:30:00Z"}
-{"trace_id":"673896c96e9fe700fd4f16bf6926a5df","span_id":"928703d0c6f279d4","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 15249s old","timestamp":"2025-06-24T09:30:00Z"}
-{"trace_id":"372950f851623ae6460204dc72da274f","span_id":"09774de67d04d76a","operation":"8020.metrics.collection","duration_ms":190,"active_work":00,"active_agents":52}
-{"trace_id":"673896c96e9fe700fd4f16bf6926a5df","span_id":"7bfd672b001b193d","operation":"8020.health.monitoring","duration_ms":199,"health_score":90,"status":"healthy","issues_count":1}
-{"trace_id":"372950f851623ae6460204dc72da274f","span_id":"31db3dd9cfca3155","operation":"8020_cron_log","level":"INFO","message":"✅ Metrics collection complete (190ms) - Report: /Users/sac/dev/swarmsh/logs/metrics_20250624_023000.json","timestamp":"2025-06-24T09:30:00Z"}
-{"trace_id":"673896c96e9fe700fd4f16bf6926a5df","span_id":"b2cccfa28a235e5f","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (199ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_023000.json","timestamp":"2025-06-24T09:30:00Z"}
-{"trace_id":"372950f851623ae6460204dc72da274f","span_id":"2bcee0f23535bb2b","operation":"8020.cron.automation","command":"metrics","total_duration_ms":275,"status":"completed"}
-{"trace_id":"673896c96e9fe700fd4f16bf6926a5df","span_id":"15f993a9db9bfec1","operation":"8020.cron.automation","command":"health","total_duration_ms":290,"status":"completed"}
-{"trace_id":"d00a539c61eaf73f2980b2a50744a8e0","span_id":"24909bd83bc67626","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T09:45:00Z"}
-{"trace_id":"d00a539c61eaf73f2980b2a50744a8e0","span_id":"19e9343dc2fce617","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T09:45:00Z"}
-{"trace_id":"d00a539c61eaf73f2980b2a50744a8e0","span_id":"07e18f619c71c59a","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 16149s old","timestamp":"2025-06-24T09:45:00Z"}
-{"trace_id":"d00a539c61eaf73f2980b2a50744a8e0","span_id":"129f2df2a0e73c84","operation":"8020.health.monitoring","duration_ms":172,"health_score":90,"status":"healthy","issues_count":1}
-{"trace_id":"d00a539c61eaf73f2980b2a50744a8e0","span_id":"82416bbb1659b74a","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (172ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_024500.json","timestamp":"2025-06-24T09:45:00Z"}
-{"trace_id":"d00a539c61eaf73f2980b2a50744a8e0","span_id":"4eb01228d3716a83","operation":"8020.cron.automation","command":"health","total_duration_ms":235,"status":"completed"}
-{"trace_id":"d3f1aeb50d679b1afa1697a9046d325b","span_id":"1688a26cc7d941c3","operation":"8020_cron_log","level":"INFO","message":"📊 Starting 80/20 metrics collection","timestamp":"2025-06-24T10:00:01Z"}
-{"trace_id":"03efde420a2192e047313d2c91fe2c7d","span_id":"c11955f64decc96c","operation":"8020_cron_log","level":"INFO","message":"⚡ Starting 80/20 work queue optimization","timestamp":"2025-06-24T10:00:01Z"}
-{"trace_id":"0e4b1d46d617ed3d0b67354dc4b96eec","span_id":"0c627114feb2e0cb","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T10:00:01Z"}
-{"trace_id":"03efde420a2192e047313d2c91fe2c7d","span_id":"1a4751878983a0e4","operation":"8020_cron_log","level":"INFO","message":"🧹 Cleaning completed work from main claims file","timestamp":"2025-06-24T10:00:01Z"}
-{"trace_id":"0e4b1d46d617ed3d0b67354dc4b96eec","span_id":"a9fc4380392cc203","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T10:00:01Z"}
-{"trace_id":"03efde420a2192e047313d2c91fe2c7d","span_id":"8d8dbd5058aa4872","operation":"8020.work.optimization","duration_ms":282,"optimizations":0}
-{"trace_id":"0e4b1d46d617ed3d0b67354dc4b96eec","span_id":"0fda226d3b2457a0","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 17050s old","timestamp":"2025-06-24T10:00:01Z"}
-{"trace_id":"03efde420a2192e047313d2c91fe2c7d","span_id":"d1591e09272de3bc","operation":"8020_cron_log","level":"INFO","message":"✅ Work queue optimization complete (282ms) - Applied 0 optimizations","timestamp":"2025-06-24T10:00:01Z"}
-{"trace_id":"03efde420a2192e047313d2c91fe2c7d","span_id":"29d3cbb3f4bcf229","operation":"8020.cron.automation","command":"optimize","total_duration_ms":393,"status":"completed"}
-{"trace_id":"d3f1aeb50d679b1afa1697a9046d325b","span_id":"0b5720cc2965e757","operation":"8020.metrics.collection","duration_ms":346,"active_work":00,"active_agents":52}
-{"trace_id":"0e4b1d46d617ed3d0b67354dc4b96eec","span_id":"7d6eff306af7ef9d","operation":"8020.health.monitoring","duration_ms":361,"health_score":90,"status":"healthy","issues_count":1}
-{"trace_id":"d3f1aeb50d679b1afa1697a9046d325b","span_id":"c62fa74b2d484090","operation":"8020_cron_log","level":"INFO","message":"✅ Metrics collection complete (346ms) - Report: /Users/sac/dev/swarmsh/logs/metrics_20250624_030001.json","timestamp":"2025-06-24T10:00:01Z"}
-{"trace_id":"d3f1aeb50d679b1afa1697a9046d325b","span_id":"ab8e4dc00e6e8a4e","operation":"8020.cron.automation","command":"metrics","total_duration_ms":445,"status":"completed"}
-{"trace_id":"0e4b1d46d617ed3d0b67354dc4b96eec","span_id":"7b15127ad7ead6f4","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (361ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_030001.json","timestamp":"2025-06-24T10:00:01Z"}
-{"trace_id":"0e4b1d46d617ed3d0b67354dc4b96eec","span_id":"cb3ce1837f987894","operation":"8020.cron.automation","command":"health","total_duration_ms":453,"status":"completed"}
-{"trace_id":"aad0583bbe3d48c36a3aa2bee71802a9","span_id":"b21ce5bbda5f1e8b","operation":"auto_cleanup","service":"auto-cleanup","duration_ms":130,"status":"success","exit_code":0}
-{"trace_id":"1d8ba5842d66cc657f197915bc67c581","span_id":"a638f77d9cee711c","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T10:15:01Z"}
-{"trace_id":"1d8ba5842d66cc657f197915bc67c581","span_id":"92781d0178cf5171","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T10:15:01Z"}
-{"trace_id":"1d8ba5842d66cc657f197915bc67c581","span_id":"31d17f5f0206818e","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 17950s old","timestamp":"2025-06-24T10:15:01Z"}
-{"trace_id":"1d8ba5842d66cc657f197915bc67c581","span_id":"0145d52cdcb8c406","operation":"8020.health.monitoring","duration_ms":189,"health_score":90,"status":"healthy","issues_count":1}
-{"trace_id":"1d8ba5842d66cc657f197915bc67c581","span_id":"15586736e33ab220","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (189ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_031501.json","timestamp":"2025-06-24T10:15:01Z"}
-{"trace_id":"1d8ba5842d66cc657f197915bc67c581","span_id":"0499413e32cf5daf","operation":"8020.cron.automation","command":"health","total_duration_ms":270,"status":"completed"}
-{"trace_id":"2ea2f95d9584a60447a04051d5553e70","span_id":"e0ce8861ebd43183","operation":"8020_cron_log","level":"INFO","message":"📊 Starting 80/20 metrics collection","timestamp":"2025-06-24T10:30:00Z"}
-{"trace_id":"53b3bdc62e762a0c85da0e4965063346","span_id":"21e0fc58302c6b30","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T10:30:00Z"}
-{"trace_id":"53b3bdc62e762a0c85da0e4965063346","span_id":"82310fbfc30fd453","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T10:30:01Z"}
-{"trace_id":"53b3bdc62e762a0c85da0e4965063346","span_id":"c73d544a4d1b384a","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 18850s old","timestamp":"2025-06-24T10:30:01Z"}
-{"trace_id":"2ea2f95d9584a60447a04051d5553e70","span_id":"b54e77e7b8ccd398","operation":"8020.metrics.collection","duration_ms":301,"active_work":00,"active_agents":52}
-{"trace_id":"53b3bdc62e762a0c85da0e4965063346","span_id":"7a6426e01c78fc52","operation":"8020.health.monitoring","duration_ms":303,"health_score":90,"status":"healthy","issues_count":1}
-{"trace_id":"2ea2f95d9584a60447a04051d5553e70","span_id":"43f81b65c1e93ab4","operation":"8020_cron_log","level":"INFO","message":"✅ Metrics collection complete (301ms) - Report: /Users/sac/dev/swarmsh/logs/metrics_20250624_033000.json","timestamp":"2025-06-24T10:30:01Z"}
-{"trace_id":"53b3bdc62e762a0c85da0e4965063346","span_id":"0b60d2001e664f0d","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (303ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_033001.json","timestamp":"2025-06-24T10:30:01Z"}
-{"trace_id":"2ea2f95d9584a60447a04051d5553e70","span_id":"e8bf8c417b0f9b5a","operation":"8020.cron.automation","command":"metrics","total_duration_ms":395,"status":"completed"}
-{"trace_id":"53b3bdc62e762a0c85da0e4965063346","span_id":"71081ff81b4d2ea2","operation":"8020.cron.automation","command":"health","total_duration_ms":400,"status":"completed"}
-{"trace_id":"d6b324793f8f36518c91d8567d09ed0a","span_id":"9cfed8ac6078e62f","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T10:45:00Z"}
-{"trace_id":"d6b324793f8f36518c91d8567d09ed0a","span_id":"881f7edf5d2827a6","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T10:45:01Z"}
-{"trace_id":"d6b324793f8f36518c91d8567d09ed0a","span_id":"1b55ce38e6ba71dd","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 19749s old","timestamp":"2025-06-24T10:45:01Z"}
-{"trace_id":"d6b324793f8f36518c91d8567d09ed0a","span_id":"e8021889f8e4ac25","operation":"8020.health.monitoring","duration_ms":99,"health_score":90,"status":"healthy","issues_count":1}
-{"trace_id":"d6b324793f8f36518c91d8567d09ed0a","span_id":"6569f380c604371e","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (99ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_034501.json","timestamp":"2025-06-24T10:45:01Z"}
-{"trace_id":"d6b324793f8f36518c91d8567d09ed0a","span_id":"68ea7b1d42c2e791","operation":"8020.cron.automation","command":"health","total_duration_ms":177,"status":"completed"}
-{"trace_id":"0b30f22f259a46a3db9d3fcd4b184dc8","span_id":"e30535151852874e","operation":"8020_cron_log","level":"INFO","message":"📊 Starting 80/20 metrics collection","timestamp":"2025-06-24T11:00:00Z"}
-{"trace_id":"a601f5d3018639ff2c1c8fd076140279","span_id":"d1539f0591630ac9","operation":"8020_cron_log","level":"INFO","message":"⚡ Starting 80/20 work queue optimization","timestamp":"2025-06-24T11:00:00Z"}
-{"trace_id":"9b66eda9299f6890aeaa7533afc08b8c","span_id":"3d78f95e388b584f","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T11:00:00Z"}
-{"trace_id":"a601f5d3018639ff2c1c8fd076140279","span_id":"2f112efff8cfd60b","operation":"8020_cron_log","level":"INFO","message":"🧹 Cleaning completed work from main claims file","timestamp":"2025-06-24T11:00:01Z"}
-{"trace_id":"9b66eda9299f6890aeaa7533afc08b8c","span_id":"6e80bc548ce02696","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T11:00:01Z"}
-{"trace_id":"a601f5d3018639ff2c1c8fd076140279","span_id":"1f4fb61b03fa1a74","operation":"8020.work.optimization","duration_ms":293,"optimizations":0}
-{"trace_id":"9b66eda9299f6890aeaa7533afc08b8c","span_id":"06fb2aca3aded976","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 20650s old","timestamp":"2025-06-24T11:00:01Z"}
-{"trace_id":"ff716dfb5badc9c9cfc7d2ed76016052","span_id":"efbaef874e79c0b7","operation":"health_monitor.filesystem_check","service":"cron-health-monitor","status":"completed","duration_ms":150,"timestamp":"2025-06-24T11:00:01Z","metrics":{"filesystem_issues":0,"file_health":[
-  {
-    "file": "work_claims.json",
-    "status": "healthy",
-    "size_bytes": 4993,
-    "age_hours": 5
-  },
-  {
-    "file": "agent_status.json",
-    "status": "healthy",
     "size_bytes": 16459,
     "age_hours": 7
   },
@@ -498,3 +380,121 @@
   }
 ],"checked_files":3,"checked_scripts":2}}
 {"trace_id":"ce60eee36fd607d481af729d06f5bc83","span_id":"83ecc4cd88a42110","operation":"8020_cron_log","level":"INFO","message":"📦 Archiving telemetry data (    1143 entries)","timestamp":"2025-06-24T19:00:01Z"}
+{"trace_id":"dd662dee7e49fde297ae2908181fc50a","span_id":"ffe0d5ffceb5810a","operation":"telemetry_manager.health_check","service":"cron-telemetry-manager","status":"completed","duration_ms":100,"timestamp":"2025-06-24T19:00:01Z","metrics":{"file_size_bytes":160791,"line_count":    1138,"file_age_hours":0,"health_issues":0,"malformed_lines":0,"status":"healthy"}}
+{"trace_id":"414f279b2512bfd43ad7d920a41acfb3","span_id":"da28b92940167b1b","operation":"8020.metrics.collection","duration_ms":301,"active_work":00,"active_agents":52}
+{"trace_id":"123392e334787e38b8834973d1449080","span_id":"fc6bb02fbca97e3a","operation":"8020.health.monitoring","duration_ms":307,"health_score":90,"status":"healthy","issues_count":1}
+{"trace_id":"414f279b2512bfd43ad7d920a41acfb3","span_id":"c8f6b6c195662510","operation":"8020_cron_log","level":"INFO","message":"✅ Metrics collection complete (301ms) - Report: /Users/sac/dev/swarmsh/logs/metrics_20250624_120001.json","timestamp":"2025-06-24T19:00:01Z"}
+{"trace_id":"123392e334787e38b8834973d1449080","span_id":"00b5917285f27b86","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (307ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_120001.json","timestamp":"2025-06-24T19:00:01Z"}
+{"trace_id":"414f279b2512bfd43ad7d920a41acfb3","span_id":"4737631973c17739","operation":"8020.cron.automation","command":"metrics","total_duration_ms":465,"status":"completed"}
+{"trace_id":"123392e334787e38b8834973d1449080","span_id":"77f44c405fa3cbb5","operation":"8020.cron.automation","command":"health","total_duration_ms":468,"status":"completed"}
+{"trace_id":"dd662dee7e49fde297ae2908181fc50a","span_id":"ffe0d5ffceb5810a","operation":"telemetry_manager.archive","service":"cron-telemetry-manager","status":"skipped","duration_ms":25,"timestamp":"2025-06-24T19:00:01Z","metrics":{"reason":"thresholds_not_exceeded","file_size":163643,"line_count":    1169}}
+{"trace_id":"ab732f9080c2f7f345d8900f7651bfd3","span_id":"94a55d267282e3de","operation":"health_monitor.coordination_check","service":"cron-health-monitor","status":"completed","duration_ms":200,"timestamp":"2025-06-24T19:00:01Z","metrics":{"coordination_issues":0,"total_work":9,"active_work":9,"completed_work":0,"failed_work":0,"completion_rate":0,"error_rate":0,"active_agents":44}}
+{"trace_id":"dd662dee7e49fde297ae2908181fc50a","span_id":"ffe0d5ffceb5810a","operation":"telemetry_manager.cleanup","service":"cron-telemetry-manager","status":"completed","duration_ms":150,"timestamp":"2025-06-24T19:00:01Z","metrics":{"files_removed":0,"total_size_removed":0,"retention_days":30}}
+{"trace_id":"ab732f9080c2f7f345d8900f7651bfd3","span_id":"94a55d267282e3de","operation":"health_monitor.telemetry_check","service":"cron-health-monitor","status":"completed","duration_ms":100,"timestamp":"2025-06-24T19:00:01Z","metrics":{"telemetry_issues":0,"telemetry_details":{"status":"present","size_bytes":165546,"line_count":1175,"recent_spans":23}}}
+{"trace_id":"dd662dee7e49fde297ae2908181fc50a","span_id":"ffe0d5ffceb5810a","operation":"telemetry_manager.performance_report","service":"cron-telemetry-manager","status":"completed","duration_ms":100,"timestamp":"2025-06-24T19:00:01Z","metrics":{"health_score":100,"active_size":165546,"archive_count":       0,"recent_spans":477}}
+{"trace_id":"ab732f9080c2f7f345d8900f7651bfd3","span_id":"94a55d267282e3de","operation":"health_monitor.resource_check","service":"cron-health-monitor","status":"completed","duration_ms":100,"timestamp":"2025-06-24T19:00:01Z","metrics":{"resource_issues":1,"disk_usage_percent":61,"memory_usage_percent":98}}
+{"trace_id":"dd662dee7e49fde297ae2908181fc50a","span_id":"ffe0d5ffceb5810a","operation":"telemetry_manager.maintenance_complete","service":"cron-telemetry-manager","status":"completed","duration_ms":617,"timestamp":"2025-06-24T19:00:01Z","metrics":{"health_issues":2025-06-24 12:00:00 [INFO] Checking telemetry file health...
+2025-06-24 12:00:01 [INFO] File statistics: 160791 bytes,     1138 lines, 0h old
+{"trace_id":"dd662dee7e49fde297ae2908181fc50a","span_id":"ffe0d5ffceb5810a","operation":"telemetry_manager.health_check","service":"cron-telemetry-manager","status":"completed","duration_ms":100,"timestamp":"2025-06-24T19:00:01Z","metrics":{"file_size_bytes":160791,"line_count":    1138,"file_age_hours":0,"health_issues":0,"malformed_lines":0,"status":"healthy"}}
+0,"archived_lines":2025-06-24 12:00:01 [INFO] Archiving telemetry data...
+2025-06-24 12:00:01 [INFO] No archival needed (size: 163643, lines:     1169)
+{"trace_id":"dd662dee7e49fde297ae2908181fc50a","span_id":"ffe0d5ffceb5810a","operation":"telemetry_manager.archive","service":"cron-telemetry-manager","status":"skipped","duration_ms":25,"timestamp":"2025-06-24T19:00:01Z","metrics":{"reason":"thresholds_not_exceeded","file_size":163643,"line_count":    1169}},"removed_archives":2025-06-24 12:00:01 [INFO] Cleaning old archives (retention: 30 days)...
+{"trace_id":"dd662dee7e49fde297ae2908181fc50a","span_id":"ffe0d5ffceb5810a","operation":"telemetry_manager.cleanup","service":"cron-telemetry-manager","status":"completed","duration_ms":150,"timestamp":"2025-06-24T19:00:01Z","metrics":{"files_removed":0,"total_size_removed":0,"retention_days":30}}
+2025-06-24 12:00:01 [INFO] Removed 0 old archives, freed 0 bytes
+0,"duration_ms":617,"report_file":"telemetry_performance_report.json"}}
+{"trace_id":"ab732f9080c2f7f345d8900f7651bfd3","span_id":"94a55d267282e3de","operation":"health_monitor.health_report","service":"cron-health-monitor","status":"completed","duration_ms":150,"timestamp":"2025-06-24T19:00:01Z","metrics":{"health_score":75,"total_issues":1,"alert_generated":false}}
+{"trace_id":"ab732f9080c2f7f345d8900f7651bfd3","span_id":"94a55d267282e3de","operation":"health_monitor.monitoring_complete","service":"cron-health-monitor","status":"completed","duration_ms":680,"timestamp":"2025-06-24T19:00:01Z","metrics":{"health_score":75,"total_issues":1,"duration_ms":680,"alert_generated":false}}
+{"trace_id":"0bd7207bcdd57c435efe8d89692f1097","span_id":"d7f9c0bf96a3b20d","operation":"mermaid_generator.metrics_extracted","status":"completed","timestamp":"2025-06-24T19:00:45Z","metrics":{"total_spans":     419,"recent_spans":     100,"avg_health":75,"timeframe":"24h"}}
+{"trace_id":"0bd7207bcdd57c435efe8d89692f1097","span_id":"6d8c8588950b1178","operation":"mermaid_generator.dashboard_generated","status":"completed","timestamp":"2025-06-24T19:00:45Z","metrics":{"health_score":75,"total_spans":     419}}
+{"trace_id":"0bd7207bcdd57c435efe8d89692f1097","span_id":"c86f7b3ce33f5337","operation":"mermaid_generator.generation_complete","status":"completed","timestamp":"2025-06-24T19:00:45Z","metrics":{"files_generated":1,"diagram_type":"dashboard"}}
+{"trace_id":"8098393ec5ccaa757eabc9d941b22e4f","span_id":"942a495cb9a926ac","operation":"mermaid_generator.metrics_extracted","status":"completed","timestamp":"2025-06-24T19:00:56Z","metrics":{"total_spans":    1192,"recent_spans":     100,"avg_health":75,"timeframe":"all"}}
+{"trace_id":"8098393ec5ccaa757eabc9d941b22e4f","span_id":"41dc0b730a46b51b","operation":"mermaid_generator.dashboard_generated","status":"completed","timestamp":"2025-06-24T19:00:56Z","metrics":{"health_score":75,"total_spans":    1192}}
+{"trace_id":"8098393ec5ccaa757eabc9d941b22e4f","span_id":"f2598b51a46f533e","operation":"mermaid_generator.generation_complete","status":"completed","timestamp":"2025-06-24T19:00:56Z","metrics":{"files_generated":1,"diagram_type":"dashboard"}}
+{"trace_id":"0acd62f318c37811f46ef6a18c7d0668","span_id":"560481e2650d0279","operation":"mermaid_generator.metrics_extracted","status":"completed","timestamp":"2025-06-24T19:07:07Z","metrics":{"total_spans":     425,"recent_spans":     100,"avg_health":75,"timeframe":"24h"}}
+{"trace_id":"0acd62f318c37811f46ef6a18c7d0668","span_id":"8dcf1c9f36639c8a","operation":"mermaid_generator.dashboard_generated","status":"completed","timestamp":"2025-06-24T19:07:07Z","metrics":{"health_score":75,"total_spans":     425}}
+{"trace_id":"0acd62f318c37811f46ef6a18c7d0668","span_id":"f87e4c5d2291ac73","operation":"mermaid_generator.generation_complete","status":"completed","timestamp":"2025-06-24T19:07:07Z","metrics":{"files_generated":1,"diagram_type":"dashboard"}}
+{"trace_id":"cbec41d64d39260427d69a2aed64c9f1","span_id":"74380f21b8fc32d1","operation":"mermaid_generator.metrics_extracted","status":"completed","timestamp":"2025-06-24T19:07:51Z","metrics":{"total_spans":     428,"recent_spans":     100,"avg_health":75,"timeframe":"24h"}}
+{"trace_id":"cbec41d64d39260427d69a2aed64c9f1","span_id":"235570ac4965639b","operation":"mermaid_generator.dashboard_generated","status":"completed","timestamp":"2025-06-24T19:07:51Z","metrics":{"health_score":75,"total_spans":     428}}
+{"trace_id":"cbec41d64d39260427d69a2aed64c9f1","span_id":"df185621b2a00051","operation":"mermaid_generator.generation_complete","status":"completed","timestamp":"2025-06-24T19:07:51Z","metrics":{"files_generated":1,"diagram_type":"dashboard"}}
+{"trace_id":"bdd2ab2d45dbd6b1882621cc0397808b","span_id":"9307a45fd2ce5905","operation":"mermaid_generator.metrics_extracted","status":"completed","timestamp":"2025-06-24T19:07:56Z","metrics":{"total_spans":     431,"recent_spans":     100,"avg_health":90,"timeframe":"7d"}}
+{"trace_id":"bdd2ab2d45dbd6b1882621cc0397808b","span_id":"a8015dc069828782","operation":"mermaid_generator.dashboard_generated","status":"completed","timestamp":"2025-06-24T19:07:56Z","metrics":{"health_score":90,"total_spans":     431}}
+{"trace_id":"bdd2ab2d45dbd6b1882621cc0397808b","span_id":"b79399d8d85efbea","operation":"mermaid_generator.generation_complete","status":"completed","timestamp":"2025-06-24T19:07:56Z","metrics":{"files_generated":1,"diagram_type":"dashboard"}}
+{"trace_id":"053f94e74e3c1818b5fb9fe02ae7503d","span_id":"5ba73454b7f216ca","operation":"mermaid_generator.metrics_extracted","status":"completed","timestamp":"2025-06-24T19:07:56Z","metrics":{"total_spans":    1204,"recent_spans":     100,"avg_health":90,"timeframe":"all"}}
+{"trace_id":"053f94e74e3c1818b5fb9fe02ae7503d","span_id":"bd78cf883c1e7147","operation":"mermaid_generator.dashboard_generated","status":"completed","timestamp":"2025-06-24T19:07:56Z","metrics":{"health_score":90,"total_spans":    1204}}
+{"trace_id":"053f94e74e3c1818b5fb9fe02ae7503d","span_id":"a5b70e86ddb99663","operation":"mermaid_generator.generation_complete","status":"completed","timestamp":"2025-06-24T19:07:56Z","metrics":{"files_generated":1,"diagram_type":"dashboard"}}
+{"trace_id":"f559158515cfccb401b4804129f2fad6","span_id":"1aa5c021576800a7","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T19:15:01Z"}
+{"trace_id":"f559158515cfccb401b4804129f2fad6","span_id":"42f3af8f07cc1bcf","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T19:15:01Z"}
+{"trace_id":"f559158515cfccb401b4804129f2fad6","span_id":"81ec769f4cdaf1ec","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 50350s old","timestamp":"2025-06-24T19:15:01Z"}
+{"trace_id":"f559158515cfccb401b4804129f2fad6","span_id":"83abeb5173dec4f7","operation":"8020.health.monitoring","duration_ms":225,"health_score":90,"status":"healthy","issues_count":1}
+{"trace_id":"f559158515cfccb401b4804129f2fad6","span_id":"9afa4eeaad01540c","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (225ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_121501.json","timestamp":"2025-06-24T19:15:01Z"}
+{"trace_id":"f559158515cfccb401b4804129f2fad6","span_id":"7944606be44e1f1d","operation":"8020.cron.automation","command":"health","total_duration_ms":318,"status":"completed"}
+{"trace_id":"bc8c77970e9c12e301a708dd4f7d88c4","span_id":"69a41bf55d8e6ad3","operation":"mermaid_generator.metrics_extracted","status":"completed","timestamp":"2025-06-24T19:18:04Z","metrics":{"total_spans":     441,"recent_spans":     100,"avg_health":90,"timeframe":"24h"}}
+{"trace_id":"bc8c77970e9c12e301a708dd4f7d88c4","span_id":"1b6787c5570aea0c","operation":"mermaid_generator.dashboard_generated","status":"completed","timestamp":"2025-06-24T19:18:04Z","metrics":{"health_score":90,"total_spans":     441}}
+{"trace_id":"bc8c77970e9c12e301a708dd4f7d88c4","span_id":"da5e7d52bd434042","operation":"mermaid_generator.generation_complete","status":"completed","timestamp":"2025-06-24T19:18:04Z","metrics":{"files_generated":1,"diagram_type":"dashboard"}}
+{"trace_id":"8a7d3a25ce592621fc233bdf62379e94","span_id":"855226b849f8ed27","operation":"8020_cron_log","level":"INFO","message":"⚡ Starting 80/20 work queue optimization","timestamp":"2025-06-24T21:00:00Z"}
+{"trace_id":"4cce80b55f526620d40d24796710992e","span_id":"05150df4b2a8f2b6","operation":"8020_cron_log","level":"INFO","message":"📊 Starting 80/20 metrics collection","timestamp":"2025-06-24T21:00:00Z"}
+{"trace_id":"4caa7a7d1635ffc28b624e4bb1ac0912","span_id":"3aa8fc2bfe0ebf6b","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T21:00:00Z"}
+{"trace_id":"8a7d3a25ce592621fc233bdf62379e94","span_id":"9b8f4842d1f453ca","operation":"8020_cron_log","level":"INFO","message":"🧹 Cleaning completed work from main claims file","timestamp":"2025-06-24T21:00:00Z"}
+{"trace_id":"4caa7a7d1635ffc28b624e4bb1ac0912","span_id":"11cb9f62d69827bc","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T21:00:00Z"}
+{"trace_id":"4caa7a7d1635ffc28b624e4bb1ac0912","span_id":"27916e7817bf0311","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 56649s old","timestamp":"2025-06-24T21:00:00Z"}
+{"trace_id":"8a7d3a25ce592621fc233bdf62379e94","span_id":"426b5eb60cc098f1","operation":"8020_cron_log","level":"INFO","message":"📦 Archiving telemetry data (    1221 entries)","timestamp":"2025-06-24T21:00:00Z"}
+{"trace_id":"6910ccb9b1f88d3e0250b0f25a0bebd0","span_id":"a043c5ed574ceba6","operation":"health_monitor.filesystem_check","service":"cron-health-monitor","status":"completed","duration_ms":150,"timestamp":"2025-06-24T21:00:00Z","metrics":{"filesystem_issues":0,"file_health":[
+  {
+    "file": "work_claims.json",
+    "status": "healthy",
+    "size_bytes": 4993,
+    "age_hours": 15
+  },
+  {
+    "file": "agent_status.json",
+    "status": "healthy",
+    "size_bytes": 16459,
+    "age_hours": 17
+  },
+  {
+    "file": "coordination_log.json",
+    "status": "healthy",
+    "size_bytes": 45894,
+    "age_hours": 17
+  }
+],"checked_files":3,"checked_scripts":2}}
+{"trace_id":"4cce80b55f526620d40d24796710992e","span_id":"1b38c03cc9411977","operation":"8020.metrics.collection","duration_ms":351,"active_work":00,"active_agents":52}
+{"trace_id":"4caa7a7d1635ffc28b624e4bb1ac0912","span_id":"82a2932b84fe1975","operation":"8020.health.monitoring","duration_ms":357,"health_score":90,"status":"healthy","issues_count":1}
+{"trace_id":"4cce80b55f526620d40d24796710992e","span_id":"9eeb245cad25a2aa","operation":"8020_cron_log","level":"INFO","message":"✅ Metrics collection complete (351ms) - Report: /Users/sac/dev/swarmsh/logs/metrics_20250624_140000.json","timestamp":"2025-06-24T21:00:01Z"}
+{"trace_id":"4cce80b55f526620d40d24796710992e","span_id":"cc375a6a5c44ecec","operation":"8020.cron.automation","command":"metrics","total_duration_ms":503,"status":"completed"}
+{"trace_id":"4caa7a7d1635ffc28b624e4bb1ac0912","span_id":"3dbd5f04704253dc","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (357ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_140000.json","timestamp":"2025-06-24T21:00:01Z"}
+{"trace_id":"4caa7a7d1635ffc28b624e4bb1ac0912","span_id":"4f029653b67f9fc0","operation":"8020.cron.automation","command":"health","total_duration_ms":514,"status":"completed"}
+{"trace_id":"6910ccb9b1f88d3e0250b0f25a0bebd0","span_id":"a043c5ed574ceba6","operation":"health_monitor.coordination_check","service":"cron-health-monitor","status":"completed","duration_ms":200,"timestamp":"2025-06-24T21:00:01Z","metrics":{"coordination_issues":0,"total_work":9,"active_work":9,"completed_work":0,"failed_work":0,"completion_rate":0,"error_rate":0,"active_agents":44}}
+{"trace_id":"6910ccb9b1f88d3e0250b0f25a0bebd0","span_id":"a043c5ed574ceba6","operation":"health_monitor.telemetry_check","service":"cron-health-monitor","status":"completed","duration_ms":100,"timestamp":"2025-06-24T21:00:01Z","metrics":{"telemetry_issues":0,"telemetry_details":{"status":"present","size_bytes":179278,"line_count":1250,"recent_spans":23}}}
+{"trace_id":"6910ccb9b1f88d3e0250b0f25a0bebd0","span_id":"a043c5ed574ceba6","operation":"health_monitor.resource_check","service":"cron-health-monitor","status":"completed","duration_ms":100,"timestamp":"2025-06-24T21:00:01Z","metrics":{"resource_issues":1,"disk_usage_percent":61,"memory_usage_percent":98}}
+{"trace_id":"6910ccb9b1f88d3e0250b0f25a0bebd0","span_id":"a043c5ed574ceba6","operation":"health_monitor.health_report","service":"cron-health-monitor","status":"completed","duration_ms":150,"timestamp":"2025-06-24T21:00:01Z","metrics":{"health_score":75,"total_issues":1,"alert_generated":false}}
+{"trace_id":"6910ccb9b1f88d3e0250b0f25a0bebd0","span_id":"a043c5ed574ceba6","operation":"health_monitor.monitoring_complete","service":"cron-health-monitor","status":"completed","duration_ms":757,"timestamp":"2025-06-24T21:00:01Z","metrics":{"health_score":75,"total_issues":1,"duration_ms":757,"alert_generated":false}}
+{"trace_id":"2e828bbaab52f1e64913eabf1ae1c0c1","span_id":"e9eb2c0628e9cea3","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T21:15:01Z"}
+{"trace_id":"2e828bbaab52f1e64913eabf1ae1c0c1","span_id":"aa38bc522f945965","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T21:15:01Z"}
+{"trace_id":"2e828bbaab52f1e64913eabf1ae1c0c1","span_id":"89f0e8087decdfbe","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 57550s old","timestamp":"2025-06-24T21:15:01Z"}
+{"trace_id":"2e828bbaab52f1e64913eabf1ae1c0c1","span_id":"2527cd0c41893733","operation":"8020.health.monitoring","duration_ms":135,"health_score":90,"status":"healthy","issues_count":1}
+{"trace_id":"2e828bbaab52f1e64913eabf1ae1c0c1","span_id":"af28bbfb2502e083","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (135ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_141501.json","timestamp":"2025-06-24T21:15:01Z"}
+{"trace_id":"2e828bbaab52f1e64913eabf1ae1c0c1","span_id":"91829257411c3872","operation":"8020.cron.automation","command":"health","total_duration_ms":181,"status":"completed"}
+{"trace_id":"1a230abc7a6f3a609d32f82ce2119037","span_id":"1ce4d5d1a4a81f05","operation":"8020_cron_log","level":"INFO","message":"📊 Starting 80/20 metrics collection","timestamp":"2025-06-24T21:30:01Z"}
+{"trace_id":"eec92fbd23f60367d7ecad3c76cd91a8","span_id":"5c139b62762f20c8","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T21:30:01Z"}
+{"trace_id":"eec92fbd23f60367d7ecad3c76cd91a8","span_id":"6eb5562547c9baef","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T21:30:01Z"}
+{"trace_id":"eec92fbd23f60367d7ecad3c76cd91a8","span_id":"2bc885dbd5d24a91","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 58450s old","timestamp":"2025-06-24T21:30:01Z"}
+{"trace_id":"1a230abc7a6f3a609d32f82ce2119037","span_id":"4e8da3e99b5f03e7","operation":"8020.metrics.collection","duration_ms":170,"active_work":00,"active_agents":52}
+{"trace_id":"eec92fbd23f60367d7ecad3c76cd91a8","span_id":"ce58d77b43a7e3b2","operation":"8020.health.monitoring","duration_ms":175,"health_score":90,"status":"healthy","issues_count":1}
+{"trace_id":"1a230abc7a6f3a609d32f82ce2119037","span_id":"bf447182eeaf2263","operation":"8020_cron_log","level":"INFO","message":"✅ Metrics collection complete (170ms) - Report: /Users/sac/dev/swarmsh/logs/metrics_20250624_143001.json","timestamp":"2025-06-24T21:30:01Z"}
+{"trace_id":"1a230abc7a6f3a609d32f82ce2119037","span_id":"144cab2cd4b70ec4","operation":"8020.cron.automation","command":"metrics","total_duration_ms":227,"status":"completed"}
+{"trace_id":"eec92fbd23f60367d7ecad3c76cd91a8","span_id":"ac547237f9356cdc","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (175ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_143001.json","timestamp":"2025-06-24T21:30:01Z"}
+{"trace_id":"eec92fbd23f60367d7ecad3c76cd91a8","span_id":"f03173f99494c9ff","operation":"8020.cron.automation","command":"health","total_duration_ms":242,"status":"completed"}
+{"trace_id":"455f5cd03aca4d63abc516f20d30d2b4","span_id":"52e286092748302e","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T21:45:00Z"}
+{"trace_id":"455f5cd03aca4d63abc516f20d30d2b4","span_id":"00746175d6f059bf","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T21:45:00Z"}
+{"trace_id":"455f5cd03aca4d63abc516f20d30d2b4","span_id":"e6156d8d8705ccac","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 59349s old","timestamp":"2025-06-24T21:45:00Z"}
+{"trace_id":"455f5cd03aca4d63abc516f20d30d2b4","span_id":"4cc8815ee956287e","operation":"8020.health.monitoring","duration_ms":150,"health_score":90,"status":"healthy","issues_count":1}
+{"trace_id":"455f5cd03aca4d63abc516f20d30d2b4","span_id":"726407037f583214","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (150ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_144500.json","timestamp":"2025-06-24T21:45:00Z"}
+{"trace_id":"455f5cd03aca4d63abc516f20d30d2b4","span_id":"c1e873b564392568","operation":"8020.cron.automation","command":"health","total_duration_ms":211,"status":"completed"}
+{"trace_id":"e568241bf86666c72b84b1292e571c65","span_id":"1723a874f0ffeaf9","operation":"8020_cron_log","level":"INFO","message":"⚡ Starting 80/20 work queue optimization","timestamp":"2025-06-24T22:00:01Z"}
+{"trace_id":"3bb62c4a05f87052a7907d720362d0fb","span_id":"4bf64bb4c33b144e","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T22:00:01Z"}
+{"trace_id":"f660092308317770d9a388f53cb674f5","span_id":"56be907bee68229d","operation":"8020_cron_log","level":"INFO","message":"📊 Starting 80/20 metrics collection","timestamp":"2025-06-24T22:00:01Z"}
+{"trace_id":"e568241bf86666c72b84b1292e571c65","span_id":"99db54aea39499ac","operation":"8020_cron_log","level":"INFO","message":"🧹 Cleaning completed work from main claims file","timestamp":"2025-06-24T22:00:01Z"}
+{"trace_id":"3bb62c4a05f87052a7907d720362d0fb","span_id":"18723b3ba94dac66","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T22:00:01Z"}
+{"trace_id":"3bb62c4a05f87052a7907d720362d0fb","span_id":"ee687120a261ae53","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 60250s old","timestamp":"2025-06-24T22:00:01Z"}
+{"trace_id":"e568241bf86666c72b84b1292e571c65","span_id":"245d99d8b6368f18","operation":"8020_cron_log","level":"INFO","message":"📦 Archiving telemetry data (    1281 entries)","timestamp":"2025-06-24T22:00:01Z"}
