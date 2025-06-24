@@ -1,0 +1,103 @@
+# OpenTelemetry Collector Configuration - 80/20 Optimized
+# High-value telemetry collection for SwarmSH coordination system
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+        cors:
+          allowed_origins:
+            - http://localhost:*
+            - http://swarmsh-coordination:*
+
+  # Prometheus metrics scraping
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'otel-collector'
+          static_configs:
+            - targets: ['0.0.0.0:8889']
+        - job_name: 'swarmsh-coordination'
+          static_configs:
+            - targets: ['swarmsh-coordination:8080']
+          scrape_interval: 30s
+
+processors:
+  # Batch processor for efficiency
+  batch:
+    timeout: 1s
+    send_batch_size: 1024
+    send_batch_max_size: 2048
+
+  # Resource processor to add deployment info
+  resource:
+    attributes:
+      - key: deployment.environment
+        value: production
+        action: upsert
+      - key: service.namespace
+        value: swarmsh
+        action: upsert
+
+  # Memory limiter to prevent OOM
+  memory_limiter:
+    limit_mib: 128
+    spike_limit_mib: 32
+
+  # Probabilistic sampling for high volume traces
+  probabilistic_sampler:
+    sampling_percentage: 10.0
+
+exporters:
+  # Jaeger for distributed tracing
+  jaeger:
+    endpoint: http://jaeger:14250
+    tls:
+      insecure: true
+
+  # Prometheus for metrics
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    namespace: swarmsh
+    const_labels:
+      deployment: production
+
+  # File exporter for backup/debugging
+  file:
+    path: /tmp/telemetry-data/traces.jsonl
+    rotation:
+      max_megabytes: 50
+      max_days: 7
+      max_backups: 3
+
+  # Logging exporter for debugging
+  logging:
+    loglevel: warn
+    sampling_initial: 5
+    sampling_thereafter: 200
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, resource, batch, probabilistic_sampler]
+      exporters: [jaeger, file, logging]
+    
+    metrics:
+      receivers: [otlp, prometheus]
+      processors: [memory_limiter, resource, batch]
+      exporters: [prometheus, logging]
+
+  extensions: [health_check]
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+    path: "/health"
+
+  # Memory ballast for stability
+  memory_ballast:
+    size_mib: 64

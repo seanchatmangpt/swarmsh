@@ -1,0 +1,44 @@
+{
+    "timestamp": "2025-06-24T05:42:21Z",
+    "alert_type": "system_health",
+    "severity": "critical",
+    "health_score": ,
+    "threshold": 70,
+    "issues_summary": {"filesystem":2025-06-23 22:42:20 [HEALTH] Checking filesystem health...
+{"trace_id":"bf0280ef171adce0a39be02fe50ad00b","span_id":"f4de8a999319b30c","operation":"health_monitor.filesystem_check","service":"cron-health-monitor","status":"completed","duration_ms":150,"timestamp":"2025-06-24T05:42:20Z","metrics":{"filesystem_issues":0,"file_health":[
+  {
+    "file": "work_claims.json",
+    "status": "healthy",
+    "size_bytes": 4993,
+    "age_hours": 0
+  },
+  {
+    "file": "agent_status.json",
+    "status": "healthy",
+    "size_bytes": 16459,
+    "age_hours": 1
+  },
+  {
+    "file": "coordination_log.json",
+    "status": "healthy",
+    "size_bytes": 45894,
+    "age_hours": 1
+  }
+],"checked_files":3,"checked_scripts":2}}
+0,"coordination":2025-06-23 22:42:20 [HEALTH] Checking coordination system health...
+{"trace_id":"bf0280ef171adce0a39be02fe50ad00b","span_id":"f4de8a999319b30c","operation":"health_monitor.coordination_check","service":"cron-health-monitor","status":"completed","duration_ms":200,"timestamp":"2025-06-24T05:42:20Z","metrics":{"coordination_issues":0,"total_work":9,"active_work":9,"completed_work":0,"failed_work":0,"completion_rate":0,"error_rate":0,"active_agents":44}}
+0,"telemetry":2025-06-23 22:42:20 [HEALTH] Checking telemetry health...
+2025-06-23 22:42:21 [WARN] No recent telemetry activity
+{"trace_id":"bf0280ef171adce0a39be02fe50ad00b","span_id":"f4de8a999319b30c","operation":"health_monitor.telemetry_check","service":"cron-health-monitor","status":"completed","duration_ms":100,"timestamp":"2025-06-24T05:42:21Z","metrics":{"telemetry_issues":1,"telemetry_details":{"status":"present","size_bytes":29167,"line_count":378,"recent_spans":00}}}
+1,"resources":2025-06-23 22:42:21 [HEALTH] Checking system resources...
+2025-06-23 22:42:21 [CRITICAL] High memory usage: 99%
+{"trace_id":"bf0280ef171adce0a39be02fe50ad00b","span_id":"f4de8a999319b30c","operation":"health_monitor.resource_check","service":"cron-health-monitor","status":"completed","duration_ms":100,"timestamp":"2025-06-24T05:42:21Z","metrics":{"resource_issues":1,"disk_usage_percent":61,"memory_usage_percent":99}}
+1},
+    "trace_id": "bf0280ef171adce0a39be02fe50ad00b",
+    "recommended_actions": [
+        "Review system health report",
+        "Check coordination files",
+        "Monitor resource usage",
+        "Consider system maintenance"
+    ]
+}

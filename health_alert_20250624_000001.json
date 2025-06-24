@@ -1,0 +1,15 @@
+{
+    "timestamp": "2025-06-24T07:00:01Z",
+    "alert_type": "system_health",
+    "severity": "warning",
+    "health_score": 65,
+    "threshold": 70,
+    "issues_summary": {"filesystem":0,"coordination":0,"telemetry":1,"resources":1},
+    "trace_id": "396d7d125028414369c01f64f202133f",
+    "recommended_actions": [
+        "Review system health report",
+        "Check coordination files",
+        "Monitor resource usage",
+        "Consider system maintenance"
+    ]
+}

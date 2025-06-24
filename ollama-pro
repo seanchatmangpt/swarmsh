@@ -202,7 +202,13 @@ api_request() {
     )
     
     if [[ -n "$data" ]]; then
-        curl_args+=(-d "$data")
+        if [[ "$data" == @* ]]; then
+            # File upload mode for large payloads
+            curl_args+=(-d "$data")
+        else
+            # Regular data mode
+            curl_args+=(-d "$data")
+        fi
     fi
     
     if [[ "$stream" == "true" ]]; then
@@ -311,6 +317,53 @@ show_model_info() {
         "Parameters:",
         (.parameters | to_entries[] | "  \(.key): \(.value)")
     '
+}
+
+# List running models
+list_running_models() {
+    local span_id=$(span_start "model.ps" "INTERNAL")
+    log_info "Fetching running models..."
+    
+    local response=$(api_request GET /api/ps)
+    
+    if [[ -z "$response" ]]; then
+        log_error "Failed to fetch running models"
+        span_end "$span_id" "ERROR" "Failed to fetch running models"
+        return 1
+    fi
+    
+    local model_count=$(echo "$response" | jq -r '.models | length' 2>/dev/null || echo "0")
+    record_metric "models.running" "$model_count" "count" "gauge"
+    
+    echo -e "${GREEN}Running Models:${NC}"
+    if [[ $model_count -eq 0 ]]; then
+        echo "No models currently running"
+    else
+        echo "$response" | jq -r '.models[]? | "\(.name)\t\(.size)\t\(.processor)\t\(.until)"' | column -t -s $'\t'
+    fi
+    
+    span_end "$span_id" "OK"
+}
+
+# Stop a running model
+stop_model() {
+    local model=$1
+    local span_id=$(span_start "model.stop" "CLIENT")
+    span_event "model.stop.start" "{\"model\": \"$model\"}"
+    log_info "Stopping model: $model"
+    
+    local data=$(jq -n --arg model "$model" '{name: $model}')
+    
+    if api_request POST /api/stop "$data"; then
+        log_info "Model stopped: $model"
+        record_metric "model.stopped" 1 "count" "counter"
+        span_end "$span_id" "OK"
+    else
+        log_error "Failed to stop model: $model"
+        record_metric "model.stop.failed" 1 "count" "counter"
+        span_end "$span_id" "ERROR" "Failed to stop model"
+        return 1
+    fi
 }
 
 # Session management
@@ -455,34 +508,60 @@ multimodal_chat() {
     local prompt=$2
     local image_path=$3
     
+    local span_id=$(span_start "multimodal_chat" "INTERNAL")
+    span_event "multimodal.start" "{\"model\": \"$model\", \"image_path\": \"$image_path\"}"
     log_info "Processing multimodal request with image: $image_path"
     
     local base64_image=$(process_image "$image_path")
     if [[ -z "$base64_image" ]]; then
+        span_end "$span_id" "ERROR" "Failed to process image"
         return 1
     fi
     
-    local data=$(jq -n \
-        --arg model "$model" \
-        --arg prompt "$prompt" \
-        --arg image "$base64_image" \
-        --argjson stream "$([[ $STREAM_MODE == true ]] && echo true || echo false)" \
-        '{
-            model: $model,
-            prompt: $prompt,
-            images: [$image],
-            stream: $stream
-        }')
+    record_metric "multimodal.image.size" "${#base64_image}" "characters" "histogram"
     
-    api_request POST /api/generate "$data" "$STREAM_MODE" | while IFS= read -r line; do
+    # Use temp file for large base64 data to avoid command line length limits
+    local temp_json=$(mktemp)
+    local temp_b64=$(mktemp)
+    
+    # Write base64 to temp file
+    echo "$base64_image" > "$temp_b64"
+    
+    # Create JSON structure using temp file
+    cat > "$temp_json" <<EOF
+{
+    "model": "$model",
+    "prompt": "$prompt",
+    "images": ["$(cat "$temp_b64")"],
+    "stream": $([[ $STREAM_MODE == true ]] && echo true || echo false)
+}
+EOF
+    
+    local start_time=$(date +%s%N)
+    
+    # Make API request with temp file
+    if api_request POST /api/generate "@$temp_json" "$STREAM_MODE" | while IFS= read -r line; do
         if [[ -n "$line" ]]; then
             local response=$(echo "$line" | jq -r '.response // empty' 2>/dev/null)
             if [[ -n "$response" ]]; then
                 echo -n "$response"
             fi
         fi
-    done
-    echo
+    done; then
+        echo
+        local end_time=$(date +%s%N)
+        local duration=$(( (end_time - start_time) / 1000000 ))
+        record_metric "multimodal.completion.duration" "$duration" "ms" "histogram"
+        span_end "$span_id" "OK"
+    else
+        local end_time=$(date +%s%N)
+        local duration=$(( (end_time - start_time) / 1000000 ))
+        record_metric "multimodal.completion.failed" "1" "count" "counter"
+        span_end "$span_id" "ERROR" "API request failed"
+    fi
+    
+    # Cleanup temp files
+    rm -f "$temp_json" "$temp_b64"
 }
 
 # Performance monitoring
@@ -564,7 +643,7 @@ interactive_mode() {
     echo -e "${GREEN}Ollama Pro Interactive Mode${NC}"
     echo -e "${CYAN}Model: $model${NC}"
     echo -e "${YELLOW}Commands: /exit, /clear, /save, /load <session>, /set <param> <value>${NC}"
-    echo -e "${YELLOW}Multiline: Use ''' to start/end multiline input${NC}"
+    echo -e "${YELLOW}Multiline: Use \"\"\" to start/end multiline input (or ''')${NC}"
     echo
     
     local multiline=false
@@ -579,8 +658,8 @@ interactive_mode() {
         
         read -r input
         
-        # Handle multiline
-        if [[ "$input" == "'''" ]]; then
+        # Handle multiline (support both ''' and """)
+        if [[ "$input" == "'''" ]] || [[ "$input" == '"""' ]]; then
             if [[ $multiline == true ]]; then
                 multiline=false
                 chat_completion "$model" "$multiline_content"
@@ -651,7 +730,9 @@ ${YELLOW}Commands:${NC}
     
   ${CYAN}Model Management:${NC}
     list                         List available models
+    ps                           List currently running models
     show <model>                 Show model information
+    stop <model>                 Stop a currently running model
     create <name> <modelfile>    Create custom model
     rm <model>                   Remove a model
     cp <source> <dest>           Copy a model
@@ -810,9 +891,16 @@ main() {
         list)
             time_operation "list_models" list_models
             ;;
+        ps)
+            time_operation "list_running_models" list_running_models
+            ;;
         show)
             local model="$1"
             time_operation "show_model_info" show_model_info "$model"
+            ;;
+        stop)
+            local model="$1"
+            time_operation "stop_model" stop_model "$model"
             ;;
         create)
             local name="$1"

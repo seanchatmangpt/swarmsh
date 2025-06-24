@@ -14,7 +14,11 @@ readonly OTEL_METRICS_ENABLED="${OTEL_METRICS_ENABLED:-true}"
 # Generate random hex ID
 generate_hex_id() {
     local length=${1:-16}
-    LC_ALL=C tr -dc 'a-f0-9' < /dev/urandom | head -c "$length"
+    # Use a more reliable method for ID generation
+    python3 -c "import secrets; print(secrets.token_hex($((length/2))))" 2>/dev/null || \
+    dd if=/dev/urandom bs=1 count=$((length/2)) 2>/dev/null | xxd -p | tr -d '\n' || \
+    echo "$(date +%s)$(( RANDOM ))$(( RANDOM ))" | md5sum | cut -c1-"$length" 2>/dev/null || \
+    printf "%0${length}x" "$((RANDOM * RANDOM))"
 }
 
 # Get nanosecond timestamp

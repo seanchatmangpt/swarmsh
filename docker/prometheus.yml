@@ -1,0 +1,58 @@
+# Prometheus Configuration - 80/20 Optimized
+# High-value metrics collection for SwarmSH coordination system
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'swarmsh-production'
+    deployment: 'production'
+
+rule_files:
+  # Add alerting rules here if needed
+  # - "swarmsh_alerts.yml"
+
+scrape_configs:
+  # OpenTelemetry Collector metrics
+  - job_name: 'otel-collector'
+    static_configs:
+      - targets: ['otel-collector:8889']
+    scrape_interval: 15s
+    metrics_path: '/metrics'
+
+  # SwarmSH Coordination system metrics
+  - job_name: 'swarmsh-coordination'
+    static_configs:
+      - targets: ['swarmsh-coordination:8080']
+    scrape_interval: 30s
+    metrics_path: '/metrics'
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+    scrape_interval: 30s
+
+  # Node/container metrics (if node_exporter is added)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['localhost:9100']
+    scrape_interval: 30s
+
+  # Agent worker metrics
+  - job_name: 'agent-workers'
+    static_configs:
+      - targets: ['agent-worker:8080']
+    scrape_interval: 30s
+
+# Retention and storage
+storage:
+  tsdb:
+    retention.time: 7d
+    retention.size: 1GB
+
+# Remote write configuration (for external monitoring)
+# remote_write:
+#   - url: "https://your-monitoring-service/api/v1/write"
+#     headers:
+#       Authorization: "Bearer YOUR_TOKEN"

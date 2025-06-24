@@ -1,0 +1,29 @@
+{
+    "project_name": "shopsmart-mobile-test",
+    "complexity": "high",
+    "simulated_at": "2025-06-24T18:57:33Z",
+    "simulation_type": "ai_enhanced_monte_carlo",
+    "base_parameters": {
+        "duration_days": 60,
+        "team_size": 6,
+        "complexity_factor": 2.00
+    },
+    "estimates": {
+        "optimistic": "48 days",
+        "realistic": "72 days", 
+        "pessimistic": "90 days",
+        "recommended": "77 days (with buffer)"
+    },
+    "risk_assessment": {
+        "technical_risk": 0.35,
+        "resource_risk": 0.25,
+        "timeline_risk": 0.4,
+        "overall_risk": ".33"
+    },
+    "recommendations": {
+        "confidence_level": "80%",
+        "buffer_percentage": "15%",
+        "critical_path": ["requirements", "core_development", "testing", "deployment"],
+        "success_probability": ".67"
+    }
+}

@@ -1,0 +1,15 @@
+# Grafana Dashboard Provisioning - 80/20 Optimized
+# Essential dashboard configuration for SwarmSH monitoring
+
+apiVersion: 1
+
+providers:
+  - name: 'SwarmSH Dashboards'
+    orgId: 1
+    folder: 'SwarmSH'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/swarmsh

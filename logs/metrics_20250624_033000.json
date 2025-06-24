@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-06-24T10:30:01Z",
+  "work_queue": {
+    "active": 00,
+    "pending": 00,
+    "completed": 00,
+    "total": 0
+  },
+  "agents": {
+    "active": 52
+  },
+  "fast_path": {
+    "entries":       12
+  },
+  "system": {
+    "disk_usage_percent": 61,
+    "load_average": "0.0"
+  },
+  "telemetry": {
+    "trace_id": "2ea2f95d9584a60447a04051d5553e70",
+    "span_id": "b54e77e7b8ccd398",
+    "operation": "8020.metrics.collection"
+  }
+}

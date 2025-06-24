@@ -12,12 +12,12 @@ readonly OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="${OTEL_EXPORTER_OTLP_TRACES_ENDPOIN
 readonly OTEL_TRACE_ENABLED="${OTEL_TRACE_ENABLED:-true}"
 readonly OTEL_METRICS_ENABLED="${OTEL_METRICS_ENABLED:-true}"
 
-# Trace context
-declare -g TRACE_ID=""
-declare -g SPAN_ID=""
-declare -g PARENT_SPAN_ID=""
-declare -A ACTIVE_SPANS
-declare -A SPAN_START_TIMES
+# Trace context (compatible with older bash versions)
+TRACE_ID=""
+SPAN_ID=""
+PARENT_SPAN_ID=""
+declare -A ACTIVE_SPANS 2>/dev/null || true
+declare -A SPAN_START_TIMES 2>/dev/null || true
 
 # Generate random hex string
 generate_id() {

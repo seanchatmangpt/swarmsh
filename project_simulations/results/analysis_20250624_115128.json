@@ -1,0 +1,45 @@
+{
+    "source_document": "sample_project_onepager.md",
+    "analyzed_at": "2025-06-24T18:51:28Z",
+    "content_length":     2741,
+    "extraction_success": true,
+    "content_preview": "# E-Commerce Mobile App - Project One-Pager
+
+## Project Overview
+**Project Name**: ShopSmart Mobile App  
+**Duration**: 8-12 weeks  
+**Team Size**: 4-6 developers  
+**Budget**: $150k - $200k
+
+## Business Objectives
+- Create a mobile-first e-commerce platform for small businesses
+- Enable inventory management and order processing
+- Support offline functionality with sync capabilities
+- Target 10k+ active users within 6 months of launch
+
+## Core Features
+
+### Phase 1 - MVP (4 weeks)
+- User authentication and profiles
+- Product catalog browsing
+- Shopping cart functionality
+- Basic checkout process
+- Payment integration (Stripe)
+
+### Phase 2 - Enhanced Features (3 weeks)
+- Inventory management dashboard
+- Order tracking and notifications
+- Customer reviews and ratings
+- Search and filtering capabilities
+
+### Phase 3 - Advanced Features (3 weeks)
+- Offline mode with data sync
+- Analytics dashboard
+- Multi-vendor support
+- Push notifications
+
+## Technical Requirements
+
+### Frontend
+- React "
+}

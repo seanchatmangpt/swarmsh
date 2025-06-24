@@ -1,0 +1,23 @@
+# SwarmSH Docker Crontab - 80/20 Optimized Automation
+# High-value automation jobs for containerized coordination system
+
+# Telemetry Management - Every 4 hours
+0 */4 * * * /app/cron-telemetry-manager.sh maintain >> /app/logs/telemetry_manager_cron.log 2>&1
+
+# System Health Monitoring - Every 2 hours  
+0 */2 * * * /app/cron-health-monitor.sh monitor >> /app/logs/health_monitor_cron.log 2>&1
+
+# Work Item Archival - Daily at 3 AM
+0 3 * * * /app/coordination_helper.sh optimize_work_claims_performance >> /app/logs/work_archival_cron.log 2>&1
+
+# Performance Baseline Collection - Every 6 hours
+0 */6 * * * /app/cron-performance-collector.sh collect >> /app/logs/performance_collector_cron.log 2>&1
+
+# Autonomous Decision Engine - Every 8 hours
+0 */8 * * * /app/autonomous_decision_engine.sh analyze >> /app/logs/autonomous_decisions_cron.log 2>&1
+
+# Log Rotation - Weekly on Sunday at 2 AM
+0 2 * * 0 find /app/logs -name "*.log" -size +50M -exec mv {} {}.old \; && find /app/logs -name "*.log.old" -mtime +7 -delete
+
+# Container Health Self-Check - Every 30 minutes
+*/30 * * * * /app/docker-healthcheck.sh >> /app/logs/container_health.log 2>&1

@@ -1,0 +1,27 @@
+0 3 * * * /Users/sac/dev/ai-self-sustaining-system/agent_coordination/auto_cleanup.sh
+0 * * * * /usr/bin/python3 /Users/sac/claude-desktop-context/automation/cdcs_orchestrator.py >> /Users/sac/claude-desktop-context/automation/logs/orchestrator.log 2>&1 # CDCS_ORCHESTRATOR
+0 */4 * * * /usr/bin/python3 -c 'from automation.agents.pattern_miner import PatternMiner; from automation.cdcs_orchestrator import CDCSOrchestrator; o=CDCSOrchestrator(); PatternMiner(o).run()' >> /Users/sac/claude-desktop-context/automation/logs/pattern_miner.log 2>&1 # CDCS_PATTERN_MINER
+0 2 * * * /usr/bin/python3 -c 'from automation.agents.memory_optimizer import MemoryOptimizer; from automation.cdcs_orchestrator import CDCSOrchestrator; o=CDCSOrchestrator(); MemoryOptimizer(o).run()' >> /Users/sac/claude-desktop-context/automation/logs/memory_optimizer.log 2>&1 # CDCS_MEMORY_OPTIMIZER
+0 3 * * 0 /usr/bin/python3 -c 'from automation.agents.knowledge_synthesizer import KnowledgeSynthesizer; from automation.cdcs_orchestrator import CDCSOrchestrator; o=CDCSOrchestrator(); KnowledgeSynthesizer(o).run()' >> /Users/sac/claude-desktop-context/automation/logs/knowledge_synthesizer.log 2>&1 # CDCS_KNOWLEDGE_SYNTHESIZER
+0 */6 * * * /usr/bin/python3 -c 'from automation.agents.evolution_hunter import EvolutionHunter; from automation.cdcs_orchestrator import CDCSOrchestrator; o=CDCSOrchestrator(); EvolutionHunter(o).run()' >> /Users/sac/claude-desktop-context/automation/logs/evolution_hunter.log 2>&1 # CDCS_EVOLUTION_HUNTER
+*/30 8-18 * * 1-5 /usr/bin/python3 -c 'from automation.agents.predictive_loader import PredictiveLoader; from automation.cdcs_orchestrator import CDCSOrchestrator; o=CDCSOrchestrator(); PredictiveLoader(o).run()' >> /Users/sac/claude-desktop-context/automation/logs/predictive_loader.log 2>&1 # CDCS_PREDICTIVE_LOADER
+0 */2 * * * /usr/bin/python3 -c 'from automation.agents.system_health_monitor import SystemHealthMonitor; from automation.cdcs_orchestrator import CDCSOrchestrator; o=CDCSOrchestrator(); SystemHealthMonitor(o).run()' >> /Users/sac/claude-desktop-context/automation/logs/system_health_monitor.log 2>&1 # CDCS_HEALTH_MONITOR
+*/15 * * * * /usr/bin/python3 -c 'import json; from pathlib import Path; p=Path("/Users/sac/claude-desktop-context/patterns/cache"); p.mkdir(exist_ok=True); (p/"last_refresh.txt").write_text(str(__import__("datetime").datetime.now()))' >> /Users/sac/claude-desktop-context/automation/logs/cache_refresh.log 2>&1 # CDCS_CACHE_REFRESH
+0 0 * * * find /Users/sac/claude-desktop-context/automation/logs -name '*.log' -size +100M -exec mv {} {}.old \; && find /Users/sac/claude-desktop-context/automation/logs -name '*.log.old' -mtime +7 -delete # CDCS_LOG_ROTATION
+*/5 * * * * pgrep -f 'aggregator.py' || /usr/bin/python3 /Users/sac/claude-desktop-context/automation/telemetry/aggregator.py >> /Users/sac/claude-desktop-context/automation/logs/telemetry_aggregator.log 2>&1 & # CDCS_TELEMETRY_AGGREGATOR
+0 */6 * * * . /Users/sac/claude-desktop-context/automation/telemetry.env && /usr/bin/python3 /Users/sac/claude-desktop-context/automation/advanced_loops/validation_framework.py >> /Users/sac/claude-desktop-context/automation/logs/validation.log 2>&1 # CDCS_VALIDATION
+*/5 * * * * /Users/sac/claude-desktop-context/implementation_loop.sh >> /Users/sac/claude-desktop-context/logs/implementation_loop.log 2>&1
+
+# 80/20 SwarmSH Automation (High-Impact Scheduled Tasks)
+# Health monitoring every 15 minutes (prevents failures)
+*/15 * * * * /Users/sac/dev/swarmsh/8020_cron_automation.sh health
+
+# Work queue optimization every hour (maintains performance)  
+0 * * * * /Users/sac/dev/swarmsh/8020_cron_automation.sh optimize
+
+# Metrics collection every 30 minutes (provides visibility)
+*/30 * * * * /Users/sac/dev/swarmsh/8020_cron_automation.sh metrics
+
+# Daily cleanup at 3 AM (maintenance)
+0 3 * * * /Users/sac/dev/swarmsh/auto_cleanup.sh
+

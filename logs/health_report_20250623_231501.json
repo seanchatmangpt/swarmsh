@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-06-24T06:15:01Z",
+  "health_score": 100,
+  "status": "healthy",
+  "issues": [],
+  "telemetry": {
+    "trace_id": "61b323684b5f0f61d7c4caf3ac8f48f6",
+    "span_id": "746e8442626279b1",
+    "operation": "8020.health.monitoring"
+  }
+}

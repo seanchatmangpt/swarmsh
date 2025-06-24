@@ -5,7 +5,7 @@ WORK_TYPE="$2"
 
 while true; do
     # Check for work
-    work=$(jq -r ".[] | select(.assigned_to == \"$AGENT_ID\" and .status == \"pending\") | .id" ../work_claims.json 2>/dev/null | head -1)
+    work=$(jq -r ".[] | select(.agent_id == \"$AGENT_ID\" and .status == \"active\") | .work_item_id" work_claims.json 2>/dev/null | head -1)
     
     if [[ -n "$work" ]]; then
         # Update to active
@@ -15,7 +15,8 @@ while true; do
         sleep $((RANDOM % 5 + 1))
         
         # Complete work
-        ./coordination_helper.sh complete "$work" "Completed by real agent $AGENT_ID" >/dev/null 2>&1
+        echo "[$(date '+%H:%M:%S')] Agent $AGENT_ID completing work: $work"
+        ./coordination_helper.sh complete "$work" "Completed by real agent $AGENT_ID"
         
         echo "[$(date '+%H:%M:%S')] Agent $AGENT_ID completed work: $work"
     fi

@@ -1,0 +1,17 @@
+{
+    "timestamp": "2025-06-24T19:00:01Z",
+    "trace_id": "ab732f9080c2f7f345d8900f7651bfd3",
+    "health_score": 75,
+    "status": "good",
+    "total_issues": 1,
+    "issue_breakdown": {
+        "filesystem_issues": 0,
+        "coordination_issues": 0,
+        "telemetry_issues": 0,
+        "resource_issues": 1
+    },
+    "alert_generated": false,
+    "alert_file": "",
+    "next_check_recommended": "2025-06-24T14:00:01Z",
+    "recommendations": ["Schedule system maintenance", "Review error logs", "Check resource allocation"]
+}

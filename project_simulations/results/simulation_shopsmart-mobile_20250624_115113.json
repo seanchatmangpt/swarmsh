@@ -1,0 +1,23 @@
+{
+    "project_name": "shopsmart-mobile",
+    "complexity": "high",
+    "simulated_at": "2025-06-24T18:51:13Z",
+    "simulation_parameters": {
+        "base_duration_days": 60,
+        "base_team_size": 5,
+        "complexity_factor": 1.5,
+        "iterations": 1000
+    },
+    "results": {
+        "statistics": {
+            "duration": {
+                "mean": 72.5,
+                "p90": 85.2
+            }
+        },
+        "recommendations": {
+            "estimated_duration": "78.3 days",
+            "confidence_level": "80%"
+        }
+    }
+}
