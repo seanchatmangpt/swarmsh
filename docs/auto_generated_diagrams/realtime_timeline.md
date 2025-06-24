@@ -1,22 +1,22 @@
 # Real-Time System Timeline
 
-*Auto-generated from telemetry data: Tue Jun 24 11:45:42 PDT 2025*
+*Auto-generated from telemetry data: Tue Jun 24 15:09:53 PDT 2025*
 
 ```mermaid
 timeline
-    title System Operations Timeline (Last 24 Hours)
+    title System Operations Timeline (24h window)
     
     section 🚀 System Startup
         06:00 : System Initialize
-              : 111 operations started
+              : 49 operations started
     
     section 📊 Active Monitoring
-        10:45 : Health Check
+        14:09 : Health Check
                                                                                                                                                            : Score: 75/100
-        11:15 : Metrics Collection
+        14:39 : Metrics Collection
                                                                                                             :      100 recent spans
-        11:45 : Current Status
-                       :     1116 total operations
+        15:09 : Current Status
+                       :      493 total operations
                        : System Healthy
     
     section 🔄 Automation Cycle
@@ -29,9 +29,9 @@ timeline
 ```
 
 ## Current Metrics
-- **Total Telemetry Spans:**     1116
+- **Total Telemetry Spans:**      493
 - **Recent Activity:**      100 operations
 - **Average Health Score:** 75/100
 - **Status:** 🟡 Warning
 
-*Last updated: Tue Jun 24 11:45:42 PDT 2025*
+*Last updated: Tue Jun 24 15:09:53 PDT 2025*

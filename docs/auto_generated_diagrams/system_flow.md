@@ -1,6 +1,6 @@
 # System Flow Diagram
 
-*Auto-generated: Tue Jun 24 11:45:42 PDT 2025*
+*Auto-generated: Tue Jun 24 15:09:53 PDT 2025*
 
 ```mermaid
 flowchart TD
@@ -29,7 +29,7 @@ flowchart TD
     P -->|Yes| Q[✅ System Healthy]
     P -->|No| R[⚠️ Generate Alert]
     
-    I --> S[📊 Telemetry Data<br/>    1119 spans]
+    I --> S[📊 Telemetry Data<br/>     496 spans]
     J --> S
     K --> S
     
@@ -53,4 +53,4 @@ flowchart TD
 - **Active Cron Jobs:** 9 automation tasks
 - **System Health:** ✅ Operational
 
-*Generated: Tue Jun 24 11:45:42 PDT 2025*
+*Generated: Tue Jun 24 15:10:07 PDT 2025*

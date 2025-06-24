@@ -1,6 +1,6 @@
 # System Architecture Graph
 
-*Auto-generated architecture overview: Tue Jun 24 11:45:43 PDT 2025*
+*Auto-generated architecture overview: Tue Jun 24 15:10:12 PDT 2025*
 
 ```mermaid
 graph TB
@@ -12,7 +12,7 @@ graph TB
     end
     
     subgraph "📊 Data Layer"
-        F[Telemetry Spans<br/>    1124 records] --> G[Health Reports]
+        F[Telemetry Spans<br/>     501 records] --> G[Health Reports]
         F --> H[Performance Metrics]
         F --> I[System Alerts]
     end
@@ -24,7 +24,7 @@ graph TB
     end
     
     subgraph "🔧 Execution Layer"
-        N[Script Repository<br/>      72 scripts] --> O[Cron Scheduler]
+        N[Script Repository<br/>      85 scripts] --> O[Cron Scheduler]
         N --> P[Manual Execution]
         N --> Q[API Integration]
     end
@@ -65,9 +65,9 @@ graph TB
 ```
 
 ## Architecture Statistics
-- **Automation Scripts:**       72 executable files
+- **Automation Scripts:**       85 executable files
 - **Configuration Files:**       88 data files
-- **Telemetry Records:**     1125 spans generated
+- **Telemetry Records:**      502 spans generated
 - **Health Score:** 90/100
 
-*Architecture snapshot: Tue Jun 24 11:45:43 PDT 2025*
+*Architecture snapshot: Tue Jun 24 15:10:27 PDT 2025*
