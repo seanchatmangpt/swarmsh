@@ -1,0 +1,2414 @@
+  "status": "error",
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "s2s.error": "file_lock_conflict"
+  "trace_id": "2895034c0368d667989a766cf46afa9c",
+  "status": "error",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "medium",
+  "s2s.error": "file_lock_conflict"
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "testing_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-15T20:52:55.6599Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "span_id": "9725b2b4cc15df4e",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "quality_gates_execution",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "trace_id": "4af3dccd7c545a0158a86323269126c6",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750023786191951000",
+  "span_id": "0c7bf0c9d09b2532",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "performance_benchmark",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "progress_update"
+  "start_time": "2025-06-15T21:43:48.5122Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "5ea746048b2bb353650645e3bedf5972",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750023954212542000",
+  "span_id": "850771b466138767",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "claude_code_validation",
+  "s2s.priority": "critical",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "progress_update"
+  "start_time": "2025-06-15T21:46:16.6250Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "cf10b8bb752e1baf79e937f418360849",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.progress_percent": 50,
+  "s2s.status": "compilation_error_detected",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "critical",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "critical",
+  "s2s.status": "success"
+  "start_time": "2025-06-15T22:02:17.2584Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 57,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "operation_name": "s2s.claude.priority_analysis",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+    "system.component": "agent_coordination",
+  "status": "success",
+  "span_id": "c1b4705b563737d1",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "start_time": "2025-06-16T03:13:55.8232Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "513dd74207f620373ad7dc42006f765d",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "timestamp": "2025-06-16T04:09:13.3NZ",
+  }
+    "claude.version": "headless_v1.0",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "attributes": {
+  "operation_name": "s2s.claude.priority_analysis",
+    "service.name": "e2e-validation",
+    "s2s.component": "coordination_helper",
+}
+    "system.component": "agent_coordination",
+  "status": "success",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+}
+    "claude.version": "headless_v1.0",
+  "duration_ms": 22,
+  "span_id": "dc305c230566403a",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.recommendations_count": 3
+  "attributes": {
+  "operation_name": "s2s.claude_headless.engineering_fallback",
+  "trace_id": "94a10ddb8606c53fe76307f1f2455319",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.claude_available": true,
+  "status": "failed",
+  "span_id": "e981b9faafbec84b",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "critical",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T04:22:26.4830Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "97cb1ffac8d2e683599422de06be93b9",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750048148205295000",
+  "span_id": "f9c5129aa94bf117",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "e2e_otel_validation",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+  "operation_name": "s2s.claude_headless.stream_analyze",
+  "timestamp": "2025-06-16T04:33:00.3NZ",
+  }
+  "duration_ms": 7662,
+    "s2s.component": "coordination_helper",
+  },
+  "span_id": "a5afbe58e9f8b854",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "start_time": "2025-06-16T04:33:09.1032Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "span_id": "24f5816456c830bf",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "e2e_otel_validation",
+  "span_id": "7f37a620648e6ee9",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "start_time": "2025-06-16T04:34:16.2159Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "4184a3e027fb8b7082ebc78e2aeb8f3d",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "trace_id": "d82ee6edc69d75d090f455341f5d94ee",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750048580230331000",
+  "trace_id": "ba82ebffc0999802fe723f54c9edb433",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "timestamp": "2025-06-16T04:36:36.3NZ",
+  }
+    "claude.version": "headless_v1.0",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750051014409005000",
+  "trace_id": "fa60a2ca3640785571dbe1d7bcee522e",
+    "system": "ai_self_sustaining_system"
+  "status": "in_progress",
+  "operation": "e2e.validation.work_claim",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750051129005365000",
+  "trace_id": "fa60a2ca3640785571dbe1d7bcee522e",
+    "system": "ai_self_sustaining_system"
+  "start_time": "2025-06-16T05:18:50.2278Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "fa60a2ca3640785571dbe1d7bcee522e",
+    "system": "ai_self_sustaining_system"
+  "status": "in_progress",
+  "operation": "e2e.validation.grafana_dashboard",
+}
+    "validation_id": "e2e_validation_1750051029",
+  "timestamp": "2025-06-15T22:18:51-07:00",
+  "trace_id": "fa60a2ca3640785571dbe1d7bcee522e",
+    "system": "ai_self_sustaining_system"
+  "duration_ms": 101543044000,
+  "trace_id": "fa60a2ca3640785571dbe1d7bcee522e",
+    "system": "ai_self_sustaining_system"
+  "duration_ms": 101599439000,
+  "trace_id": "fa60a2ca3640785571dbe1d7bcee522e",
+    "system": "ai_self_sustaining_system"
+  "duration_ms": 101648652000,
+  "span_id": "221ff5cb81a16c66",
+  }
+  "metadata": {
+  "trace_id": "2b287acb9808afbeee578cfff6c3d822",
+    "system": "ai_self_sustaining_system"
+  "status": "in_progress",
+  "operation": "e2e.validation.work_claim",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "step": "work_progress",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+{
+    "step": "work_completion",
+  "duration_ms": 41301487000,
+  "span_id": "a4f2318739451581",
+  }
+  "metadata": {
+  "service": "e2e-autonomous-validation",
+{
+    "step": "component_agent_coordination",
+  "timestamp": "2025-06-15T22:20:14-07:00",
+  "trace_id": "2b287acb9808afbeee578cfff6c3d822",
+    "system": "ai_self_sustaining_system"
+  "duration_ms": 42248917000,
+  "span_id": "ef3ed7f95bfe4394",
+  }
+  "status": "completed",
+  "operation": "e2e.validation.component_promex_metrics",
+}
+  "metadata": {
+  "service": "e2e-autonomous-validation",
+{
+    "validation_id": "e2e_validation_1750051172",
+  "timestamp": "2025-06-15T22:20:14-07:00",
+  "trace_id": "2b287acb9808afbeee578cfff6c3d822",
+    "system": "ai_self_sustaining_system"
+  "status": "completed",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750051392875245000",
+  "trace_id": "9dfe3cb324e3275d188df9012669a06a",
+    "version": "1.0.0"
+  }
+  "duration_ms": 51,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "validation.timestamp": "1750051439",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T05:24:18.3NZ",
+  "span_attributes": {
+  "operation_name": "s2s.work.claim",
+    "service.name": "comprehensive-e2e-validation",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "validation_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "end_time": "2025-06-15T23:27:51-07:00",
+    "system.component": "autonomous_coordination",
+      "validation_type": "comprehensive_e2e"
+        "trace_id": "169fcbec7be2597c765046ae41b783be",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+    "claude.version": "headless_v1.0",
+  "duration_ms": 21,
+  "span_id": "95d124ab2ae7dc84",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.recommendations_count": 3
+  "start_time": "2025-06-16T06:29:11.3NZ",
+    "validation.type": "comprehensive_e2e",
+  }
+  "duration_ms": 27,
+    "environment": "development",
+    }
+        "span_id": "b603ba575c264dc2"
+  "service_name": "comprehensive-e2e-validation",
+    "validation.session": "comprehensive_e2e_1750055378",
+      "os": "Darwin",
+      "fields": {
+  "span_id": "6d2bc7f03a2022b0",
+    "message": "Checkpoint completed successfully"
+    "service_name": "comprehensive-e2e-validation",
+      "timestamp": "2025-06-15T23:29:38-07:00",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750055386301842000",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "trace_validation_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+}
+    "system.component": "agent_coordination",
+  "status": "success",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 100,
+    "validation.dir": "/tmp/comprehensive_e2e_otel_1750055488"
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "test_orchestrator_master_1750055757_c5e4b5aa451e7040",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 58,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "span_id": "e32038366e983dcf",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "start_time": "2025-06-16T06:36:03.7246Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "span_id": "a82faa254e4c2bff",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "in_progress",
+  "status": "failed",
+  "span_id": "6f89ca17048b1966",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "test_orchestrator_master_1750055757_c5e4b5aa451e7040",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 55,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "medium",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 26,
+    "s2s.component": "coordination_helper",
+  },
+  "span_id": "161ccd164af83392",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "trace_validation_test",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "progress_update"
+  "start_time": "2025-06-16T06:36:23.1960Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "master_1750055757_c5e4b5aa451e7040",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750055785710528000",
+  "span_id": "7cfdd8ef321534bf",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "trace_validation_progress",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T06:36:32.2017Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "master_1750055757_c5e4b5aa451e7040",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.progress_percent": 50,
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "test_orchestrator_master_1750055757_c5e4b5aa451e7040",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 57,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "progress_update"
+  "start_time": "2025-06-16T06:36:43.9776Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 28,
+    "s2s.component": "coordination_helper",
+  },
+  "span_id": "1fd6de9b7c4a47c7",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "in_progress",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750055804765018000",
+  "trace_id": "master_1750055757_c5e4b5aa451e7040",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.progress_percent": 75,
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750055813467797000",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 28,
+    "s2s.component": "coordination_helper",
+  },
+  "span_id": "11985d0d903fed95",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "test_orchestrator_master_1750055757_c5e4b5aa451e7040",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 55,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "progress_update"
+  "start_time": "2025-06-16T06:37:09.3591Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "master_1750055757_c5e4b5aa451e7040",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750055831652069000",
+  "span_id": "cadce08843ab5803",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "in_progress",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750055832229340000",
+  "trace_id": "master_1750055757_c5e4b5aa451e7040",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.progress_percent": 75,
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "test_orchestrator_master_1750055757_c5e4b5aa451e7040",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 26,
+    "s2s.component": "coordination_helper",
+  },
+  "span_id": "bdadeb28d989b386",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "trace_validation_test",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "progress_update"
+  "attributes": {
+  "operation_name": "s2s.claude_headless.engineering_fallback",
+  "trace_id": "f8463ead06d4a3fc8c655d2c5b838cf9",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.claude_available": true,
+  "status": "failed",
+  "span_id": "9cf11e8ff4b9a489",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+  "start_time": "2025-06-15T23:38:00-07:00",
+  "span_id": "2d7f80eeaa1d5244",
+  "start_time": "2025-06-15T23:38:00-07:00",
+  "status": {"code": "OK", "message": "Orchestration operation completed"},
+  "status": {"code": "OK", "message": "Orchestration operation completed"},
+  }
+    "script.name": "claude_code_headless.sh",
+    "successful.traces": 0,
+    "total.scripts.executed": 0,
+    "total.scripts.executed": 0,
+  "span_id": "1e948b8bef0c06f9",
+  "status": {"code": "OK", "message": "Orchestration operation completed"},
+    "script.path": "/Users/sac/dev/ai-self-sustaining-system/agent_coordination/coordination_helper.bats",
+    "script.name": "coordination_helper.bats",
+    "failed.traces": 0
+  "start_time": "2025-06-15T23:38:00-07:00",
+    "total.scripts.executed": 0,
+{
+    "orchestration.session": "infinite_trace_1750055877",
+    "orchestration.execution_counter": 1,
+    "successful.traces": 0,
+  "start_time": "2025-06-15T23:38:01-07:00",
+    "total.scripts.executed": 0,
+  "span_id": "f8d3668b05487251",
+  "status": {"code": "OK", "message": "Orchestration operation completed"},
+    "script.path": "/Users/sac/dev/ai-self-sustaining-system/agent_coordination/coordination_helper.sh.backup.commands-fix",
+    "script.path": "/Users/sac/dev/ai-self-sustaining-system/agent_coordination/create_s2s_worktree.sh",
+    "script.name": "coordination_helper.sh.backup.commands-fix",
+    "failed.traces": 0
+  "start_time": "2025-06-15T23:38:01-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:02-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:02-07:00",
+    "script.path": "/Users/sac/dev/ai-self-sustaining-system/agent_coordination/test_coordination_helper.sh",
+    "script.name": "test_coordination_helper.sh",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:02-07:00",
+    "script.path": "/Users/sac/dev/ai-self-sustaining-system/agent_coordination/coordination_helper.sh.backup.portability-fix",
+    "script.name": "coordination_helper.sh.backup.portability-fix",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:02-07:00",
+    "script.path": "/Users/sac/dev/ai-self-sustaining-system/agent_coordination/coordination_helper.sh.backup.claude-fix",
+    "script.name": "coordination_helper.sh.backup.claude-fix",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:02-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:03-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:03-07:00",
+    "script.path": "/Users/sac/dev/ai-self-sustaining-system/agent_coordination/coordination_helper.sh",
+    "script.name": "coordination_helper.sh",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:03-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:03-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:04-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:04-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:07-07:00",
+    "script.path": "/Users/sac/dev/ai-self-sustaining-system/worktrees/phoenix-ai-nexus/ai_self_sustaining_minimal/coordination_helper.sh",
+    "script.name": "coordination_helper.sh",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:07-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:08-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:08-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:08-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:08-07:00",
+    "script.path": "/Users/sac/dev/ai-self-sustaining-system/worktrees/phoenix-ai-nexus/agent_coordination/coordination_helper.bats",
+    "script.name": "coordination_helper.bats",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:12-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:13-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:13-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:13-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:17-07:00",
+    "script.path": "/Users/sac/dev/ai-self-sustaining-system/worktrees/phoenix-ai-nexus/agent_coordination/test_coordination_helper.sh",
+    "script.name": "test_coordination_helper.sh",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:19-07:00",
+    "total.scripts.executed": 0,
+  "start_time": "2025-06-15T23:38:27-07:00",
+    "total.scripts.executed": 0,
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "critical",
+  "s2s.operation": "work_claim",
+  "status": "failed",
+  "span_id": "3a9f49238a207803",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+  "duration_ms": 7437,
+  "trace_id": "c80a42aa18ad3ab2ef7c0cf7533d56f1",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "service": "e2e-autonomous-validation",
+{
+    "step": "coordination_workflow_start",
+  "duration_ms": 71970000,
+  "span_id": "dbec0d8854c88366",
+}
+    "test.session": "test_session_1750056063329086000",
+  "status": {"code": "OK", "message": "Correlation test span"},
+  "operation_name": "test.correlation.phoenix",
+{
+    "test.session": "test_session_1750056063329086000"
+  "tags": {
+  "start_time": "2025-06-15T23:41:03-07:00",
+{
+    "test.session": "test_session_1750056063329086000",
+  "status": {"code": "OK", "message": "Successful operation"},
+  "span_id": "a21f950b9d2cea03",
+  }
+    "test.type": "success_tracking",
+  "start_time": "2025-06-15T23:41:03-07:00",
+{
+    "test.session": "test_session_1750056063329086000"
+  "tags": {
+  "start_time": "2025-06-15T23:41:11-07:00",
+  "trace_id": "141d9ce4ff709e5412e3806453b70571",
+  }
+    "test.type": "correlation_validation",
+  "duration_ns": 9694000000,
+  "span_id": "2273609edffcfb3e",
+}
+    "test.outcome": "success",
+  "duration_ns": 10175000000,
+  "trace_id": "4e936a402c72c242a0b80ec711ec1248",
+    "successful.traces": 1
+  "tags": {
+  "operation_name": "test.success.tracking_5",
+}
+    "test.outcome": "failure",
+  "duration_ns": 30420000000,
+  "span_id": "7289c361bf1584d3",
+}
+    "test.session": "test_session_1750056080715989000",
+  "status": {"code": "OK", "message": "Correlation test span"},
+  "operation_name": "test.correlation.phoenix",
+{
+    "test.session": "test_session_1750056080715989000"
+  "tags": {
+  "start_time": "2025-06-15T23:41:20-07:00",
+{
+    "test.session": "test_session_1750056080715989000",
+  "status": {"code": "OK", "message": "Successful operation"},
+  "span_id": "b165bc755fa47583",
+  }
+    "test.type": "success_tracking",
+  "start_time": "2025-06-15T23:41:20-07:00",
+{
+    "test.session": "test_session_1750056080715989000"
+  "start_time": "2025-06-16T06:41:42.8142Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "timestamp": "2025-06-16T06:42:41.3NZ",
+  }
+    "claude.version": "headless_v1.0",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+{
+    "name": "live-trace-validation",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750056186171644000",
+  "trace_id": "99ed265e52c5494d2ee1341e1b58da44",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750056206294197000",
+  "span_id": "38373bab9297ebaf",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "observability_infrastructure",
+  "s2s.priority": "critical",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+  "operation_name": "s2s.claude_headless.stream_analyze",
+  "timestamp": "2025-06-16T06:44:27.3NZ",
+  }
+  "duration_ms": 7677,
+    "s2s.component": "coordination_helper",
+  },
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "start_time": "2025-06-16T06:45:26.7098Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 42,
+    "validation.type": "simple_e2e",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+}
+    "system.component": "agent_coordination",
+  "status": "success",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 53,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "attributes": {
+  "operation_name": "s2s.claude.priority_analysis",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750056378953171000",
+  "timestamp": "2025-06-16T06:46:21.3NZ",
+  }
+    "claude.version": "headless_v1.0",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750056382094263000",
+  "timestamp": "2025-06-16T06:46:49.3NZ",
+  }
+    "claude.version": "headless_v1.0",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "attributes": {
+  "operation_name": "s2s.claude.priority_analysis",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750056452054959000",
+  "trace_id": "20c0d04f3ccd6f164268a0b65c8fbc56",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+work_1750056452054959000",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "8020_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T06:47:43.4533Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 56,
+    "s2s.component": "coordination_helper",
+  },
+}
+    "system.component": "agent_coordination",
+  "status": "success",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+}
+    "claude.version": "headless_v1.0",
+  "duration_ms": 21,
+  "span_id": "6c01c52907b4d005",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.recommendations_count": 3
+  "start_time": "2025-06-16T06:48:16.4530Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 27,
+    "s2s.component": "coordination_helper",
+  },
+  "span_id": "a5b0815ad0ee1844",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "in_progress",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T06:48:20.1692Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "master_1750056496_feef907df387724b",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.progress_percent": 75,
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "test_orchestrator_master_1750056496_feef907df387724b",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 55,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "progress_update"
+  "attributes": {
+  "operation_name": "s2s.claude_headless.engineering_fallback",
+  "trace_id": "a91d187fa93821029d34a7c5dd623114",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.claude_available": true,
+  "status": "failed",
+  "span_id": "879a67e32238ad31",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750056521314870000",
+  "trace_id": "master_1750056496_feef907df387724b",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.progress_percent": 50,
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 54,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750056538887635000",
+  "trace_id": "7be2be5bca900ee759745952be2b29d2",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750056542054400000",
+  "span_id": "9bdb341ce8ef2388",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "8020_iteration_4",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "medium",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "validation_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T06:50:56.3069Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "7f12beef43f547154fe52fb99966fef5",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750056664540397000",
+  "span_id": "07e511bf6c610059",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_1",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "medium",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T06:51:56.8765Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 61,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750056717245170000",
+  "trace_id": "a731cff09452dec62ca2b489b2214751",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750056717392670000",
+  "span_id": "648dae14191bc76a",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "8020_throughput_optimization",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "medium",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 61,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "critical",
+  "s2s.team": "meta_8020_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "tags": {
+  "start_time": "2025-06-15T23:55:38-07:00",
+  "trace_id": "ce7fbb2eead5de703d21ecc7a98432f0",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750056944247560000",
+  "span_id": "94db82ba4ddfe74e",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "8020_next_cycle_preparation",
+  "span_id": "3f573f45e2127bc9",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "start_time": "2025-06-16T06:56:07.7061Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  "trace_id": "463f8ca2e623432ad6455ea901b59264",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "trace_id": "046893f284f557072a4ce9d656ac54d0",
+    "work_claim_trace": true
+  "status": {"code": "OK", "message": "Synthetic span for correlation"},
+  "operation_name": "s2s.work.synthetic",
+}
+    "source": "80_20_correlation_fix",
+  "start_time": "2025-06-16T06:56:16.3NZ",
+  "trace_id": "2fa9e86fbf0dfcdab7ad51e234302cf0",
+    "work_claim_trace": true
+  "status": {"code": "OK", "message": "Synthetic span for correlation"},
+  "operation_name": "s2s.work.synthetic",
+}
+    "source": "80_20_correlation_fix",
+  "start_time": "2025-06-16T06:56:16.3NZ",
+  "trace_id": "679c91310058fff366b4e9e063d9d8d8",
+    "work_claim_trace": true
+  "status": {"code": "OK", "message": "Synthetic span for correlation"},
+  "operation_name": "s2s.work.synthetic",
+}
+    "source": "80_20_correlation_fix",
+  "start_time": "2025-06-16T06:56:16.3NZ",
+  "trace_id": "7d15b48dff64f9f1014d89d5759c42d9",
+    "work_claim_trace": true
+  "status": {"code": "OK", "message": "Synthetic span for correlation"},
+  "operation_name": "s2s.work.synthetic",
+}
+    "source": "80_20_correlation_fix",
+  "start_time": "2025-06-16T06:56:16.3NZ",
+  "trace_id": "969213e9e89e23e438baf7e3c1229415",
+    "work_claim_trace": true
+  "status": {"code": "OK", "message": "Synthetic span for correlation"},
+  "operation_name": "s2s.work.synthetic",
+}
+    "source": "80_20_correlation_fix",
+  "start_time": "2025-06-16T06:56:16.3NZ",
+  "trace_id": "a01dbca9ec40c3dd65d341a372600f6e",
+    "work_claim_trace": true
+  "status": {"code": "OK", "message": "Synthetic span for correlation"},
+  "operation_name": "s2s.work.synthetic",
+}
+    "source": "80_20_correlation_fix",
+  "start_time": "2025-06-16T06:56:16.3NZ",
+  "trace_id": "aa44c13a8d6034d6ac2d4a1dc2b17138",
+    "work_claim_trace": true
+  "status": {"code": "OK", "message": "Synthetic span for correlation"},
+  "operation_name": "s2s.work.synthetic",
+}
+    "source": "80_20_correlation_fix",
+  "start_time": "2025-06-16T06:56:16.3NZ",
+  "trace_id": "c5b17051b2867c14e2e7b7e818cd74c2",
+    "work_claim_trace": true
+  "status": {"code": "OK", "message": "Synthetic span for correlation"},
+  "operation_name": "s2s.work.synthetic",
+}
+    "source": "80_20_correlation_fix",
+  "start_time": "2025-06-16T06:56:16.3NZ",
+  "trace_id": "e0a4d8a41cc38a312a5db5ad8b2810c0",
+    "work_claim_trace": true
+  "status": {"code": "OK", "message": "Synthetic span for correlation"},
+  "operation_name": "s2s.work.synthetic",
+}
+    "source": "80_20_correlation_fix",
+  "start_time": "2025-06-16T06:56:16.3NZ",
+  "trace_id": "f8f93a233e44fe1bd5853f22cb6012cd",
+    "work_claim_trace": true
+  "start_time": "2025-06-16T06:57:21.6382Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 55,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750057041973029000",
+  "trace_id": "02f4d3a5ebe14c3f81b947f836709474",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750057042114904000",
+  "span_id": "6d5a41d190aed8e7",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_6",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T06:59:58.5342Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 57,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750057198865009000",
+  "trace_id": "1e361f1793c86fe3b6013f15d0c19e86",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750057198995358000",
+  "span_id": "067fe3811655aabc",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_7",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "medium",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "critical",
+  "s2s.operation": "work_claim",
+  "duration_ms": 7429,
+  "trace_id": "899d79f4439dc7f1f8cfc5e1cf0f07b8",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "operation_name": "comprehensive_e2e_validation",
+    "service.name": "comprehensive-e2e-validation",
+    "validation.timestamp": 1750057303,
+  "span_id": "7f859b92fc17cedb",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "8020_truth_implementation",
+  "span_id": "5f33768a3d225755",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "e2e_test_fix",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.status": "testing_completion",
+  "status": "failed",
+  "span_id": "803714a01fb5987c",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "verification_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+}
+    "claude.version": "headless_v1.0",
+  "duration_ms": 20,
+  "span_id": "7f764cdbe6032e2e",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.recommendations_count": 3
+  "start_time": "2025-06-16T07:08:02.3NZ",
+    "validation.type": "comprehensive_e2e",
+  }
+  "duration_ms": 58,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750057835771338000",
+  "trace_id": "137ed8a0887a17addf3f1c39178dd820",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750057839096011000",
+  "span_id": "fff8a5bbdfe5487c",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_2",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:10:40.0432Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 57,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750057840379121000",
+  "trace_id": "2edfa86912d5a82e7ac2a5bc69b9ee11",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750057840650278000",
+  "span_id": "7779add9dc7a7c9f",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "8020_throughput_optimization",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "medium",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:10:57.2588Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 56,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750057857590875000",
+  "trace_id": "32baadb70afb9015a948963c95c86a6b",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750057857726888000",
+  "span_id": "b24cf78e7f3fc9eb",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_9",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "meta_8020_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:11:14.4815Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 58,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750057874820560000",
+  "trace_id": "b1ed4cfd68559a590f3ef117ee96aabe",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750057874964313000",
+  "span_id": "383e8ff2bf594684",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_6",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:11:25.2702Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+    "claude.version": "headless_v1.0",
+  "duration_ms": 20,
+  "span_id": "08ec698d1e32b141",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.recommendations_count": 3
+  "attributes": {
+  "operation_name": "s2s.claude_headless.engineering_fallback",
+  "trace_id": "17002c8bc3dbf2b79b5cad71c6da133a",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.claude_available": true,
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:12:53.8040Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 61,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750057977353992000",
+  "trace_id": "584f07d0eac8dab2529088c27ad7f916",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750057977499430000",
+  "span_id": "1a13e30dab1491cd",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_4",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:12:58.4735Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 63,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750057991525426000",
+  "trace_id": "ee5fa45782b10f87282ac1caa916119b",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750057991671267000",
+  "span_id": "77bb01f40bef63c1",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_1",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:13:15.8443Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 63,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750057996205145000",
+  "trace_id": "0dea23d298a592652d87959f31834133",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750057996346732000",
+  "span_id": "95b2238f8b8a37ce",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "iteration_3_preparation",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "meta_8020_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:13:33.1328Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 65,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750058013497409000",
+  "trace_id": "22c2f05eef4fa332e17d0f1d6be38da6",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750058013647255000",
+  "span_id": "238e8b3248bb188c",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_8",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:15:11.1939Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 60,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750058114718445000",
+  "trace_id": "9ae22a54ae05dde268f3c94474673696",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750058114863513000",
+  "span_id": "42029de78de09db8",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_5",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:15:15.8249Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 64,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750058128786922000",
+  "trace_id": "2800f9c310d1548bc13d82e733858b7d",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750058132160592000",
+  "span_id": "ce2677e82fdb91dd",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_2",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:15:33.1601Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 64,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750058133508083000",
+  "trace_id": "78908f0245550174fbf1107bf1b11695",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750058133800455000",
+  "trace_id": "6f329c261fc54b397dead4ceb18de224",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "trace_id": "812798ef0c59a4f5a45613d4fb05e768",
+    "version": "1.0.0"
+    "e2e.validation": true,
+  "span_id": "e137ce7e3aa4b165",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "8020_throughput_optimization",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "medium",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "real_work_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:15:50.2775Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 64,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750058150617342000",
+  "trace_id": "e6e4f87f8ac9d163e40a1a55b6c13dca",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750058150767938000",
+  "span_id": "0c2b2403b3ae950c",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "benchmark_test_8",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "low",
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "benchmark_team",
+  "duration_ms": 7436,
+  "trace_id": "68604967a7aba7295cbebf189efccd2c",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "real_work_team",
+  "duration_ms": 7446,
+  "trace_id": "0e694751af18569b00dac8163104e741",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "meta_8020_team",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:19:01.0756Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 64,
+    "s2s.component": "coordination_helper",
+  },
+  "s2s.priority": "critical",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750058513323072000",
+  "trace_id": "b9494f49c1f1adcf35e492fda8c59895",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750058611491912000",
+  "span_id": "fca45b9f75d0ea82",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "progress_update"
+  "start_time": "2025-06-16T07:25:28.2350Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 68,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750058819023988000",
+  "trace_id": "e882939fe83555950c180743f67fab0e",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750058821837965000",
+  "trace_id": "29ca7335929cd3290cf79fd9d7dd1ef9",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "trace_id": "002882b9c769c6efdbae488cec97db4c",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750058916591428000",
+  "span_id": "db24a6190e5eb94a",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "Testing real system performance",
+  "status": "failed",
+  "span_id": "901e6429b165432f",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "attributes": {
+  "operation_name": "s2s.claude_headless.engineering_fallback",
+  "trace_id": "0c57f24ca8db3dae53dc1e146efecbba",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.claude_available": true,
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:33:24.9270Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 31,
+    "s2s.component": "coordination_helper",
+  },
+  "trace_id": "edbb126e7f9cbb4755c1397935e7ef74",
+  }
+    "test.type": "baseline_validation",
+  "duration_ns": 30415000000,
+  "span_id": "9bfe6ea8d6af9601",
+}
+    "test.component": "reactor",
+  "status": {"code": "OK", "message": "Correlation test span"},
+  "operation_name": "test.success.tracking_1",
+}
+    "test.outcome": "success",
+  "duration_ns": 10271000000,
+  "trace_id": "fbac655bf986c579d417cd6a9b43a886",
+    "successful.traces": 1
+  "tags": {
+  "operation_name": "test.failure.tracking",
+}
+    "test.workflow_step": "claim",
+  "status": "failed",
+  "span_id": "0d1e7f62ccf9efb1",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750059270792934000",
+  "trace_id": "10d991bbdb48634e2aef322d0d7ffa4f",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750059295496685000",
+  "trace_id": "c4d88abe588ea663a22994231ef2a062",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "trace_id": "986ea87d076af63d084f34b9acf84c90",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750059325594785000",
+  "trace_id": "e26765caabd7064cce13709ece8e9929",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "trace_id": "2d750ad79cd28f806ab958f24ef332c9",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "autonomous_agent_1750059340837791000",
+  "trace_id": "95d9ac9e7c971c7941eae5bc6cc59304",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "trace_id": "bfb5b445e01d41a1304b7e97bade7657",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "autonomous_agent_1750059357343570000",
+  "span_id": "4d8d0d6b0545f2c8",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "BeamOps V3 observability infrastructure fully deployed - Grafana, Prometheus, Jaeger operational with custom PromEx metrics",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "start_time": "2025-06-16T07:36:18.7867Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+    "claude.version": "headless_v1.0",
+  "duration_ms": 21,
+  "span_id": "38e9712501d6a4e6",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.recommendations_count": 3
+  "start_time": "2025-06-16T07:36:58.6950Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+}
+  "duration_ms": 64,
+    "s2s.component": "coordination_helper",
+  },
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+}
+  "duration_ms": 32,
+    "s2s.component": "coordination_helper",
+  },
+  "span_id": "bc20a7bbdf409d9c",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "implementing_promex_integration",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "span_id": "0284e96fa9d3468a",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "in_progress",
+  "trace_id": "96fa6b302b454094f67d5712d9de5221",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750059695681299000",
+    "trace_forced": false
+  "start_time": "2025-06-16T07:41:50.6566Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+    "coordination_trace_id": "",
+  "status": "failed",
+  "span_id": "89921c07359488a8",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750059839694775000",
+    "coordination_trace_id": "",
+  "status": "failed",
+  "span_id": "8e75c3e03733d3d2",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750059873598312000",
+    "coordination_trace_id": "",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+    "force_trace_id": "",
+  "duration_ms": 7449,
+  "trace_id": "902345932fab38182eea43bfe3d3e405",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+}
+    "system.component": "agent_coordination",
+  "status": "success",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+},
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+    "force_trace_id": "",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "forced_trace_context": {
+  "operation_name": "s2s.work.claim",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.team": "autonomous_team",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750060002384094000",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+    "force_trace_id": "",
+  "duration_ms": 7448,
+  "trace_id": "53ec54ec68e86814c1b97fe1dadfe0fa",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+  }
+    "claude.version": "headless_v1.0",
+  "duration_ms": 22,
+  "span_id": "a3e78ffdd4161e5a",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.recommendations_count": 3
+  "trace_id": "83d574184e143570f58c401916648193",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+    "coordination_trace_id": "",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "trace_id": "dafe31cafbcf246cd32583eb18f31721",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+    "coordination_trace_id": "",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "span_id": "d032e1cf332754dc",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "observability_infrastructure",
+  }
+  "duration_ms": 65,
+    "s2s.component": "coordination_helper",
+  },
+  "forced_trace_context": {
+  "operation_name": "s2s.work.progress",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+},
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "progress_update"
+  "span_id": "76ff7f3051e1ad9a",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.work_type": "observability_test",
+  }
+  "duration_ms": 36,
+    "s2s.component": "coordination_helper",
+  },
+    "trace_forced": false
+  "start_time": "2025-06-16T07:48:14.1601Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+},
+  "span_id": "e63e2cf875d83a6f",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "start_time": "2025-06-16T07:48:15.4171Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+    "trace_forced": false
+  "attributes": {
+  "operation_name": "s2s.claude_headless.engineering_fallback",
+  "trace_id": "638801c00d08e147cd7d39a7fcbc8126",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.claude_available": true,
+  "trace_id": "7526841df9fce5ea8281210c4071ffef",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "autonomous_agent_1750060116767085000",
+    "trace_forced": false
+  "start_time": "2025-06-16T07:48:47.8412Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+    "coordination_trace_id": "",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "trace_id": "428dc13a1ffa42de21efad9fdc62006e",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+    "coordination_trace_id": "",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "trace_id": "273777a152b3fd1698384d54c12cd839",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+    "coordination_trace_id": "",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "trace_id": "2d2821d96c191109e147d7790544588b",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+    "coordination_trace_id": "",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+  "s2s.status": "success"
+  "trace_id": "b372c97caab66cd2d4432928fdfb29b6",
+}
+    "system.component": "agent_coordination",
+  "status": "ok",
+    "s2s.component": "coordination_helper",
+    "coordination_trace_id": "",
+  "status": "failed",
+  "span_id": "b3727a54474b31ac",
+{
+    "name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "s2s.analysis_type": "priority_analysis",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "attributes": {
+  "operation_name": "s2s.claude.priority_analysis",
+    "service.name": "s2s-coordination",
+    "s2s.component": "coordination_helper",
+  "forced_trace_context": {
+  "operation_name": "s2s.claude_headless.stream_analyze",
+  "timestamp": "2025-06-16T07:52:52.3NZ",
+  }
+  "duration_ms": 7715,
+    "s2s.component": "coordination_helper",
+  },
+  }
+  "duration_ms": 26,
+    "s2s.component": "coordination_helper",
+  },
+    "trace_forced": false
+  "start_time": "2025-06-16T07:53:30.0549Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+},
+  "span_id": "0349fa0294e34365",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "start_time": "2025-06-16T07:53:30.7133Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+    "trace_forced": false
+  "start_time": "2025-06-16T07:54:31.3577Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "testing"
+  "s2s.priority": "critical",
+},
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "progress_update"
+  "span_id": "935a149e328e4d66",
+  },
+    "s2s.component": "coordination_helper",
+  "s2s.status": "design",
+  "trace_id": "9b2bad33dbc59f0bcc8ad7b7b39943d5",
+    "version": "1.2.0"
+    "s2s.component": "coordination_helper",
+  "s2s.progress_percent": 75,
+{
+    "name": "s2s-coordination-demo",
+    "s2s.component": "coordination_helper",
+  "s2s.work_item_id": "work_1750060471266118000",
+}
+    "system.component": "agent_coordination",
+  "status": "success",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+},
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+    "force_trace_id": "",
+  "duration_ms": 7478,
+  "trace_id": "50413e1ded7bc928cf0b98758f2ae73b",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+}
+    "system.component": "agent_coordination",
+  "status": "success",
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+},
+  "span_id": "7e82afda88602862",
+{
+    "observability.pattern": "engineering_elixir_applications"
+  "start_time": "2025-06-16T07:57:35.9221Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+    "trace_forced": false
+  "attributes": {
+  "operation_name": "s2s.claude_headless.engineering_fallback",
+  "trace_id": "52fd85758837adb90d00860cd1a1405e",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.claude_available": true,
+  "timestamp": "2025-06-16T07:58:27.3NZ",
+  }
+    "claude.version": "headless_v1.0",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+    "force_trace_id": "",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "timestamp": "2025-06-16T07:59:37.3NZ",
+  }
+    "claude.version": "headless_v1.0",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+    "force_trace_id": "",
+  "duration_ms": 7460,
+  "trace_id": "6dd40d771fa434b14d33601b897a7975",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+    "force_trace_id": "",
+  "span_kind": "internal",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+  "s2s.operation": "work_claim",
+  "trace_id": "e4cb5000908cbbe1652362b269927e58",
+    "version": "1.0.0"
+    "s2s.component": "coordination_helper",
+  "s2s.agent_id": "agent_1750061120135518000",
+    "trace_forced": false
+  "start_time": "2025-06-16T08:06:05.9142Z",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+},
+  "parent_span_id": "",
+  "resource_attributes": {
+    "s2s.component": "coordination_helper",
+  "s2s.priority": "high",
+}
+  "service": {
+    "s2s.component": "coordination_helper",
+  "span_attributes": {
+    "force_trace_id": "",
+  "duration_ms": 7482,
+  "trace_id": "d3e3591cc05ad938274ca4a97eb9d2f1",
+}
+{"trace_id":"fab9eb667b22132db3909a10dc4996f2","span_id":"efd6e3502a47ed29","operation":"test_coordination_helper_session","service":"test-coordination-helper","status":"started"}
+{"trace_id":"fab9eb667b22132db3909a10dc4996f2","span_id":"efd6e3502a47ed29","operation":"test_coordination_helper_session","service":"test-coordination-helper","duration_ms":978,"status":"failed","tests_run":20,"tests_passed":19,"success_rate":95}
+{"trace_id":"2724ee60f7d70a534dbef552f398c735","operation":"8020_analysis_session","service":"8020-analyzer","duration_ms":488,"status":"completed","analysis_file":"/Users/sac/dev/swarmsh/8020_analysis_1750741598.json"}
+  "operation": "8020_optimization_session",
+{
+  "trace_id": "8740d56b13df87ffe3e63f4302b16bad",
+  "operation": "8020_optimization_session",
+  "service": "8020-optimizer",
+  "status": "started",
+  "timestamp": "2025-06-24T05:07:50Z"
+}

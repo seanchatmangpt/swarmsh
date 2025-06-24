@@ -1,0 +1,16 @@
+{
+  "reality_trace_id": "reality_1750741597769685000",
+  "timestamp": "2025-06-23T22:07:08-07:00",
+  "actual_health": {
+    "coordination_response_ms": 14.80,
+    "file_system_response_ms": 5.39,
+    "json_parsing_response_ms": 8.36,
+    "calculated_health_score": 100
+  },
+  "health_criteria": {
+    "coordination_threshold_ms": 1000,
+    "file_threshold_ms": 500,
+    "json_threshold_ms": 200
+  },
+  "measurement_method": "actual_system_responsiveness"
+}

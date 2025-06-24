@@ -1,0 +1,16 @@
+{
+  "reality_trace_id": "reality_1750741597769685000",
+  "timestamp": "2025-06-23T22:07:08-07:00",
+  "actual_agents": {
+    "json_entries": 44,
+    "coordination_processes":        0,
+    "shell_processes":        0
+0,
+    "agent_processes":        1,
+    "memory_usage_mb": 18.5781
+  },
+  "reality_check": {
+    "json_vs_processes": "0% actual",
+    "process_efficiency": ".42 MB per agent entry"
+  }
+}

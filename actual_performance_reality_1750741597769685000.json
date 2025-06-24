@@ -1,0 +1,15 @@
+{
+  "reality_trace_id": "reality_1750741597769685000",
+  "timestamp": "2025-06-23T22:07:07-07:00",
+  "actual_performance": {
+    "observation_duration_seconds": 30,
+    "actual_completions": 0,
+    "real_operations_per_hour": 0,
+    "real_completion_rate": 56.73,
+    "baseline_completed": 80,
+    "final_completed": 80,
+    "total_work_items": 141
+  },
+  "verification_method": "real_time_observation",
+  "no_extrapolation": true
+}

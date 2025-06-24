@@ -565,7 +565,7 @@ claude_analyze_work_priorities() {
     
     # Enhanced structured prompt with JSON schema specification
     local priority_analysis
-    priority_analysis=$(cat "$work_claims_path" | claude -p "
+    priority_analysis=$(cat "$work_claims_path" | claude --print --output-format json "
 Analyze this Scrum at Scale work coordination data and provide intelligent prioritization recommendations.
 
 Context: This is a JSON array of active work items in an AI agent swarm using nanosecond-precision coordination.
@@ -596,8 +596,7 @@ REQUIRED OUTPUT SCHEMA:
   \"confidence_score\": number_0_to_1
 }
 
-Output ONLY valid JSON matching this exact schema.
-" --output-format json 2>/dev/null)
+Output ONLY valid JSON matching this exact schema." 2>/dev/null)
     
     if [ $? -eq 0 ] && [ -n "$priority_analysis" ]; then
         # Validate JSON structure before saving
@@ -682,7 +681,7 @@ EOF
     )
     
     # Use Claude with stream-json for real-time insights
-    echo "$combined_data" | claude -p "
+    echo "$combined_data" | claude --print --output-format stream-json --verbose "
 Provide real-time coordination insights for this AI agent swarm focusing on: $focus_area
 
 Monitor the coordination state and provide actionable insights in this JSON format:
@@ -694,8 +693,7 @@ Monitor the coordination state and provide actionable insights in this JSON form
   \"next_recommendation\": \"specific_action\"
 }
 
-Keep responses concise and immediately actionable.
-" --output-format stream-json | while IFS= read -r line; do
+Keep responses concise and immediately actionable." | while IFS= read -r line; do
         # Process each streamed JSON response
         if echo "$line" | jq empty 2>/dev/null; then
             local timestamp=$(echo "$line" | jq -r '.timestamp // "unknown"')
@@ -750,7 +748,7 @@ claude_pipe_analyzer() {
     esac
     
     # Pipe through Claude with structured output
-    echo "$input_data" | claude -p "$analysis_prompt" --output-format json
+    echo "$input_data" | claude --print --output-format json "$analysis_prompt"
 }
 
 # Enhanced Claude intelligence with error handling and retry logic
@@ -814,7 +812,7 @@ EOF
     
     # Use Claude for intelligent team formation analysis
     local team_analysis
-    team_analysis=$(echo "$combined_data" | claude -p "
+    team_analysis=$(echo "$combined_data" | claude --print --output-format json "
 Analyze this AI agent swarm coordination data to suggest optimal team formation for Scrum at Scale.
 
 The data includes current agent assignments and active work items. 
@@ -829,8 +827,7 @@ Please provide:
 
 Focus on maximizing team velocity while maintaining quality and coordination efficiency.
 
-Output format: JSON with team formation recommendations and rationale.
-" --output-format json 2>/dev/null)
+Output format: JSON with team formation recommendations and rationale." 2>/dev/null)
     
     if [ $? -eq 0 ] && [ -n "$team_analysis" ]; then
         echo "✅ Claude Team Analysis Complete"
@@ -863,7 +860,7 @@ EOF
     
     # Use Claude for comprehensive system health analysis
     local health_analysis
-    health_analysis=$(echo "$system_data" | claude -p "
+    health_analysis=$(echo "$system_data" | claude --print --output-format json "
 Analyze this Scrum at Scale AI agent swarm coordination system health data.
 
 Please provide comprehensive analysis including:
@@ -893,8 +890,7 @@ Please provide comprehensive analysis including:
    - Medium-term optimizations
    - Long-term architectural improvements
 
-Output format: JSON with detailed health analysis and prioritized recommendations.
-" --output-format json 2>/dev/null)
+Output format: JSON with detailed health analysis and prioritized recommendations." 2>/dev/null)
     
     if [ $? -eq 0 ] && [ -n "$health_analysis" ]; then
         echo "✅ Claude System Health Analysis Complete"
@@ -936,7 +932,7 @@ EOF
     
     # Use Claude for intelligent work recommendation
     local work_recommendation
-    work_recommendation=$(echo "$system_state" | claude -p "
+    work_recommendation=$(echo "$system_state" | claude --print --output-format json "
 Analyze this AI agent swarm state to recommend optimal work claiming strategy.
 
 Consider:
@@ -953,8 +949,7 @@ Provide specific recommendation for this agent including:
 - Any coordination considerations or dependencies?
 - Risk assessment and mitigation strategies?
 
-Output format: JSON with specific work claiming recommendation and rationale.
-" --output-format json 2>/dev/null)
+Output format: JSON with specific work claiming recommendation and rationale." 2>/dev/null)
     
     if [ $? -eq 0 ] && [ -n "$work_recommendation" ]; then
         echo "✅ Claude Work Recommendation Available"
@@ -1500,7 +1495,7 @@ Focus on Engineering Elixir Applications patterns for comprehensive observabilit
         fi
     elif command -v claude >/dev/null 2>&1; then
         echo "⚠️  Using legacy Claude CLI (non-streaming)"
-        claude_analysis=$(echo "$context_data" | claude --input-format json --output-format json --prompt "
+        claude_analysis=$(echo "$context_data" | claude --print --output-format json "
 Analyze the S@S coordination data and provide structured recommendations for:
 1. Work item prioritization based on dependencies and impact
 2. Optimal agent assignments based on specialization and capacity
@@ -1718,6 +1713,81 @@ EOF
     echo "🏥 Health analysis completed and saved"
 }
 
+# Team Analysis Function (maps to claude-team command)
+claude_team_analysis() {
+    local team_filter="${1:-all}"
+    claude_suggest_team_formation "$team_filter"
+}
+
+# 80/20 Performance Optimization: Archive completed work claims
+optimize_work_claims_performance() {
+    local work_claims="$COORDINATION_DIR/work_claims.json"
+    local archive_dir="$COORDINATION_DIR/archived_claims"
+    local trace_id="${COORDINATION_TRACE_ID:-$(generate_trace_id)}"
+    
+    if [[ ! -f "$work_claims" ]]; then
+        echo "No work claims file found"
+        return 0
+    fi
+    
+    # Check if optimization is needed (file size threshold)
+    local line_count=$(wc -l < "$work_claims")
+    local threshold=${OPTIMIZATION_THRESHOLD:-1000}
+    
+    if [[ $line_count -lt $threshold ]]; then
+        echo "File size ($line_count lines) below threshold ($threshold), skipping optimization"
+        return 0
+    fi
+    
+    echo "🚀 Starting 80/20 performance optimization (trace: $trace_id)"
+    local start_time=$(date +%s%N)
+    
+    # Create archive directory
+    mkdir -p "$archive_dir"
+    
+    # Create timestamped archive for completed work
+    local archive_file="$archive_dir/completed_claims_$(date +%Y%m%d_%H%M%S).json"
+    
+    # Extract completed work claims for archival
+    local completed_count=$(jq '[.[] | select(.status == "completed")] | length' "$work_claims")
+    
+    if [[ $completed_count -gt 0 ]]; then
+        echo "📦 Archiving $completed_count completed work claims to $archive_file"
+        jq '[.[] | select(.status == "completed")]' "$work_claims" > "$archive_file"
+        
+        # Create optimized file with only active claims
+        local temp_file="$work_claims.optimize.tmp"
+        jq '[.[] | select(.status != "completed")]' "$work_claims" > "$temp_file"
+        
+        # Atomic move
+        mv "$temp_file" "$work_claims"
+        
+        local end_time=$(date +%s%N)
+        local duration_ms=$(( (end_time - start_time) / 1000000 ))
+        local new_line_count=$(wc -l < "$work_claims")
+        local reduction_percent=$(( (line_count - new_line_count) * 100 / line_count ))
+        
+        echo "✅ Optimization complete:"
+        echo "   Before: $line_count lines"
+        echo "   After:  $new_line_count lines"
+        echo "   Reduction: ${reduction_percent}%"
+        echo "   Duration: ${duration_ms}ms"
+        echo "   Archive: $archive_file"
+        
+        # Log telemetry for the optimization
+        log_telemetry_span "work_claims_optimization" "completed" "$trace_id" "{
+            \"lines_before\": $line_count,
+            \"lines_after\": $new_line_count,
+            \"reduction_percent\": $reduction_percent,
+            \"duration_ms\": $duration_ms,
+            \"completed_archived\": $completed_count,
+            \"archive_file\": \"$archive_file\"
+        }"
+    else
+        echo "No completed work claims found to archive"
+    fi
+}
+
 # Main command dispatcher
 case "${1:-help}" in
     "claim")
@@ -1789,6 +1859,9 @@ case "${1:-help}" in
     "claude-enhanced"|"enhanced")
         claude_enhanced_analysis "$2" "$3" "$4" "$5"
         ;;
+    "optimize")
+        optimize_work_claims_performance
+        ;;
     "generate-id")
         generate_agent_id
         ;;
@@ -1830,6 +1903,7 @@ case "${1:-help}" in
         echo "  generate-id                                         - Generate nanosecond agent ID"
         echo ""
         echo "🔧 Utility Commands:"
+        echo "  optimize                                            - 80/20 performance optimization (archive completed work)"
         echo "  help                                                - Show this help"
         echo ""
         echo "🌟 Features:"
@@ -1898,74 +1972,6 @@ cleanup_stale_work_items() {
     echo "TTL cleanup completed. Backup: $backup_file"
 }
 
-# 80/20 Performance Optimization: Archive completed work claims
-optimize_work_claims_performance() {
-    local work_claims="$COORDINATION_DIR/work_claims.json"
-    local archive_dir="$COORDINATION_DIR/archived_claims"
-    local trace_id="${COORDINATION_TRACE_ID:-$(generate_trace_id)}"
-    
-    if [[ ! -f "$work_claims" ]]; then
-        echo "No work claims file found"
-        return 0
-    fi
-    
-    # Check if optimization is needed (file size threshold)
-    local line_count=$(wc -l < "$work_claims")
-    local threshold=${OPTIMIZATION_THRESHOLD:-1000}
-    
-    if [[ $line_count -lt $threshold ]]; then
-        echo "File size ($line_count lines) below threshold ($threshold), skipping optimization"
-        return 0
-    fi
-    
-    echo "🚀 Starting 80/20 performance optimization (trace: $trace_id)"
-    local start_time=$(date +%s%N)
-    
-    # Create archive directory
-    mkdir -p "$archive_dir"
-    
-    # Create timestamped archive for completed work
-    local archive_file="$archive_dir/completed_claims_$(date +%Y%m%d_%H%M%S).json"
-    
-    # Extract completed work claims for archival
-    local completed_count=$(jq '[.[] | select(.status == "completed")] | length' "$work_claims")
-    
-    if [[ $completed_count -gt 0 ]]; then
-        echo "📦 Archiving $completed_count completed work claims to $archive_file"
-        jq '[.[] | select(.status == "completed")]' "$work_claims" > "$archive_file"
-        
-        # Create optimized file with only active claims
-        local temp_file="$work_claims.optimize.tmp"
-        jq '[.[] | select(.status != "completed")]' "$work_claims" > "$temp_file"
-        
-        # Atomic move
-        mv "$temp_file" "$work_claims"
-        
-        local end_time=$(date +%s%N)
-        local duration_ms=$(( (end_time - start_time) / 1000000 ))
-        local new_line_count=$(wc -l < "$work_claims")
-        local reduction_percent=$(( (line_count - new_line_count) * 100 / line_count ))
-        
-        echo "✅ Optimization complete:"
-        echo "   Before: $line_count lines"
-        echo "   After:  $new_line_count lines"
-        echo "   Reduction: ${reduction_percent}%"
-        echo "   Duration: ${duration_ms}ms"
-        echo "   Archive: $archive_file"
-        
-        # Log telemetry for the optimization
-        log_telemetry_span "work_claims_optimization" "completed" "$trace_id" "{
-            \"lines_before\": $line_count,
-            \"lines_after\": $new_line_count,
-            \"reduction_percent\": $reduction_percent,
-            \"duration_ms\": $duration_ms,
-            \"completed_archived\": $completed_count,
-            \"archive_file\": \"$archive_file\"
-        }"
-    else
-        echo "No completed work claims found to archive"
-    fi
-}
 
 # Auto-cleanup hook - call this periodically
 auto_cleanup_stale_items() {

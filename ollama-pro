@@ -8,7 +8,9 @@ set -euo pipefail
 
 # Source OpenTelemetry instrumentation
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [[ -f "$SCRIPT_DIR/otel-bash.sh" ]]; then
+if [[ -f "$SCRIPT_DIR/otel-simple.sh" ]]; then
+    source "$SCRIPT_DIR/otel-simple.sh"
+elif [[ -f "$SCRIPT_DIR/otel-bash.sh" ]]; then
     source "$SCRIPT_DIR/otel-bash.sh"
 else
     # Fallback no-op functions if OTEL lib not found
@@ -17,6 +19,7 @@ else
     span_event() { true; }
     record_metric() { true; }
     trace_exec() { shift; "$@"; }
+    time_operation() { shift; "$@"; }
 fi
 
 # Configuration
@@ -781,15 +784,15 @@ main() {
             local model="${1:-$DEFAULT_MODEL}"
             shift || true
             if [[ $# -eq 0 ]]; then
-                trace_exec "interactive_mode" interactive_mode "$model"
+                time_operation "interactive_mode" interactive_mode "$model"
             else
                 local prompt="$*"
-                trace_exec "chat_completion" chat_completion "$model" "$prompt" false
+                time_operation "chat_completion" chat_completion "$model" "$prompt" false
             fi
             ;;
         chat)
             local model="${1:-$DEFAULT_MODEL}"
-            trace_exec "interactive_mode" interactive_mode "$model"
+            time_operation "interactive_mode" interactive_mode "$model"
             ;;
         serve)
             log_info "Starting Ollama server..."
@@ -797,7 +800,7 @@ main() {
             ;;
         pull)
             local model="$1"
-            trace_exec "pull_model" pull_model "$model"
+            time_operation "pull_model" pull_model "$model"
             ;;
         push)
             local model="$1"
@@ -805,11 +808,11 @@ main() {
             ollama push "$model"
             ;;
         list)
-            trace_exec "list_models" list_models
+            time_operation "list_models" list_models
             ;;
         show)
             local model="$1"
-            trace_exec "show_model_info" show_model_info "$model"
+            time_operation "show_model_info" show_model_info "$model"
             ;;
         create)
             local name="$1"

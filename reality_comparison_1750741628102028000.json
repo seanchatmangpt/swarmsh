@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-06-23T22:07:08-07:00",
+  "reality_check": {
+    "performance": {
+      "claimed_ops_hour": 148,
+      "actual_ops_hour": ,
+      "accuracy_percent": 0
+    },
+    "health": {
+      "claimed_health": 95,
+      "actual_health": ,
+      "accuracy_percent": 
+    },
+    "agents": {
+      "claimed_agents": 50,
+      "actual_processes": ,
+      "accuracy_percent": 
+    }
+  },
+  "verdict": {
+    "performance_realistic": true,
+    "health_realistic": false,
+    "agents_realistic": false
+  }
+}
