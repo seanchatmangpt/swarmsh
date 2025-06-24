@@ -181,3 +181,188 @@ All coordination operations generate distributed traces compatible with:
 - Work claim conflicts (should be zero)
 - Agent capacity utilization
 - Telemetry span generation success
+
+## 8020 Automation & Telemetry Analysis
+
+### CRITICAL: Data-Driven Decision Making
+
+**ALWAYS use telemetry data to guide your work**. The system generates comprehensive telemetry spans for every operation. Use these commands to understand system behavior:
+
+```bash
+# View telemetry statistics across timeframes
+./telemetry-timeframe-stats.sh
+
+# Real-time monitoring (defaults to 24h window)
+make monitor-24h      # Monitor last 24 hours
+make monitor-7d       # Monitor last 7 days
+make monitor-all      # Monitor all data
+
+# Generate visual dashboards from live data
+make diagrams         # Generate all diagrams (24h default)
+make diagrams-24h     # Last 24 hours
+make diagrams-7d      # Last 7 days
+make diagrams-all     # All available data
+
+# Check specific telemetry data
+tail -n 100 telemetry_spans.jsonl | jq '.'
+```
+
+### 8020 Principle Implementation
+
+The system implements the Pareto Principle (80/20 rule) for maximum efficiency:
+
+1. **Tier 1 Operations (5% effort, 60% value)**:
+   - Health monitoring (every 15 min)
+   - Work queue optimization (every 4h)
+   - Telemetry management (every 4h)
+
+2. **Tier 2 Operations (15% effort, 20% value)**:
+   - Performance metrics collection
+   - Agent status synchronization
+   - Automated cleanup routines
+
+3. **Intelligent Scheduling**:
+   - Frequency adjusts based on system health
+   - Lower health scores trigger more frequent checks
+   - All decisions logged in telemetry
+
+### Using Telemetry to Guide Work
+
+**Before making any changes or claims**:
+
+1. **Check Current System State**:
+   ```bash
+   # View live dashboard
+   ./auto-generate-mermaid.sh dashboard
+   
+   # Check health status
+   cat system_health_report.json | jq '.'
+   
+   # Monitor active operations
+   ./realtime-telemetry-monitor.sh 24h 60  # Update every 60s
+   ```
+
+2. **Analyze Recent Activity**:
+   ```bash
+   # What operations are most frequent?
+   ./telemetry-timeframe-stats.sh
+   
+   # Are there any failures?
+   grep -i "error\|fail" telemetry_spans.jsonl | tail -20 | jq '.'
+   
+   # What's the current operation rate?
+   # High rate = system busy, Low rate = possible issues
+   ```
+
+3. **Make Data-Driven Decisions**:
+   - If health < 70: Focus on fixing issues first
+   - If operation rate drops: Check automation status
+   - If telemetry shows errors: Investigate root cause
+
+### Automation Status Verification
+
+**Always verify automation is running correctly**:
+
+```bash
+# Check cron jobs
+make cron-status
+
+# Verify recent automation runs
+grep "8020_cron_log" telemetry_spans.jsonl | tail -10 | jq '.'
+
+# Check automation health
+./cron-health-monitor.sh
+
+# View automation performance report
+cat telemetry_performance_report.json | jq '.'
+```
+
+### Key Files to Monitor
+
+- **`telemetry_spans.jsonl`** - All system operations (filter by timeframe)
+- **`system_health_report.json`** - Current health score and issues
+- **`telemetry_performance_report.json`** - Performance metrics
+- **`work_claims.json`** - Active work items
+- **`docs/auto_generated_diagrams/`** - Visual system state
+
+### Best Practices
+
+1. **Trust Only Verified Data**:
+   - Never assume operations succeeded
+   - Always check telemetry spans
+   - Validate with `grep`, `jq`, and monitoring tools
+
+2. **Use Time Windows Effectively**:
+   - Default to 24h for current state
+   - Use 7d for trend analysis
+   - Use 'all' only when investigating historical issues
+
+3. **Monitor Before Acting**:
+   - Run `make telemetry-stats` before major changes
+   - Check `make diagrams-dashboard` for visual overview
+   - Use `make monitor-24h` during active development
+
+4. **Validate Automation**:
+   - Ensure cron jobs are active: `crontab -l | grep 8020`
+   - Check recent runs: `ls -la *_report.json`
+   - Monitor span generation rate
+
+### Example Workflow
+
+```bash
+# 1. Start your work session
+make telemetry-stats          # Understand current state
+make diagrams-dashboard       # Visual overview
+
+# 2. Monitor while working
+make monitor-24h              # In another terminal
+
+# 3. Before claiming work
+./coordination_helper.sh dashboard
+./coordination_helper.sh list-work
+
+# 4. After making changes
+make validate                 # Run tests
+grep "your_operation" telemetry_spans.jsonl | jq '.'  # Verify
+
+# 5. Generate reports
+make diagrams                 # Update all visualizations
+```
+
+### Performance Optimization Indicators
+
+Watch for these patterns in telemetry:
+
+- **Healthy System**: 80+ health score, steady operation rate
+- **Needs Attention**: 60-79 health, fluctuating rates
+- **Critical**: <60 health, dropping operation counts
+- **Overloaded**: Very high operation rates, increasing errors
+
+Remember: **Every decision should be backed by telemetry data!**
+
+## Additional Resources
+
+- **[Quick Reference Card](docs/QUICK_REFERENCE.md)** - Essential commands for daily use
+- **[Telemetry Guide](docs/TELEMETRY_GUIDE.md)** - Deep dive into telemetry analysis
+- **[8020 Cron Features](docs/8020_CRON_FEATURES.md)** - Automation documentation
+- **[8020 Gantt Charts](docs/8020_CRON_GANTT.md)** - Visual timeline planning
+
+## Start Here
+
+When beginning work on this codebase, ALWAYS run these commands first:
+
+```bash
+# 1. Understand system state
+make telemetry-stats
+
+# 2. Check health
+cat system_health_report.json | jq '.health_score'
+
+# 3. View dashboard
+make diagrams-dashboard
+
+# 4. Start monitoring (in separate terminal)
+make monitor-24h
+```
+
+Only proceed with work after understanding the current system state from telemetry!

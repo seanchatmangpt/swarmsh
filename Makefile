@@ -397,6 +397,52 @@ format-check:
 	@echo "🔍 Checking Script Formatting..."
 	@find . -name "*.sh" -exec shfmt -d -i 4 -ci {} + || true
 
+# === GIT AUTOMATION ===
+
+# Git add, commit, push with intelligent message generation
+commit: git-commit
+
+git-commit:
+	@echo "🔄 Automated Git Workflow Starting..."
+	@# Check for changes
+	@if [ -z "$$(git status --porcelain)" ]; then \
+		echo "✅ No changes to commit"; \
+		exit 0; \
+	fi
+	@# Generate commit message from changes
+	@echo "📝 Analyzing changes for commit message..."
+	@git add .
+	@# Create detailed commit message
+	@COMMIT_MSG=$$(git diff --cached --stat | head -20 | \
+		awk 'BEGIN {print "Update: "} \
+		/files? changed/ {print "- " $$1 " files changed, " $$4 " insertions(+), " $$6 " deletions(-)"} \
+		!/files? changed/ && NF {print "- " $$1}' | \
+		head -10); \
+	git commit -m "$${COMMIT_MSG}" -m "" -m "🤖 Generated with [Claude Code](https://claude.ai/code)" -m "" -m "Co-Authored-By: Claude <noreply@anthropic.com>" || \
+	git commit -m "Update project files" -m "" -m "🤖 Generated with [Claude Code](https://claude.ai/code)" -m "" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
+	@git push
+	@echo "✅ Changes committed and pushed successfully"
+
+# Quick commit with custom message
+quick-commit:
+	@if [ -z "$(MSG)" ]; then \
+		echo "Usage: make quick-commit MSG=\"Your commit message\""; \
+		exit 1; \
+	fi
+	@echo "🔄 Quick commit with message: $(MSG)"
+	@git add .
+	@git commit -m "$(MSG)" -m "" -m "🤖 Generated with [Claude Code](https://claude.ai/code)" -m "" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
+	@git push
+	@echo "✅ Changes committed and pushed successfully"
+
+# Git status check
+git-status:
+	@echo "📊 Git Repository Status:"
+	@git status -sb
+	@echo ""
+	@echo "📈 Recent commits:"
+	@git log --oneline -5
+
 # === CI/CD OPERATIONS ===
 
 # Continuous Integration
@@ -544,6 +590,11 @@ help:
 	@echo "  make format        - Format scripts"
 	@echo "  make ci            - Continuous integration"
 	@echo "  make cd            - Continuous deployment"
+	@echo ""
+	@echo "📝 GIT AUTOMATION:"
+	@echo "  make commit        - Auto git add, commit, push with smart message"
+	@echo "  make quick-commit MSG=\"message\" - Quick commit with custom message"
+	@echo "  make git-status    - Show git status and recent commits"
 	@echo ""
 	@echo "📋 COORDINATION:"
 	@echo "  make claim WORK_TYPE=<type> DESC=<desc> - Claim work"
