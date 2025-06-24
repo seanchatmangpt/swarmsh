@@ -5,7 +5,16 @@
 
 set -euo pipefail
 
+# Source shell utilities for timestamp and token generation
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/shell-utils.sh"
+elif [ -f "$SCRIPT_DIR/lib/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/lib/shell-utils.sh"
+else
+    echo "Error: shell-utils.sh not found" >&2
+    exit 1
+fi
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # Configuration
@@ -538,7 +547,7 @@ EOF
   "ash_project_path": "$project_name",
   "original_app_path": "$PROJECT_ROOT/phoenix_app",
   "migration_phase": "foundation",
-  "created_at": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+  "created_at": "$(get_iso_timestamp)",
   "trace_id": "$trace_id",
   "key_features": [
     "agent_coordination",

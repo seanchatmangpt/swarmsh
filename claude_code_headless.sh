@@ -24,6 +24,17 @@
 
 set -euo pipefail
 
+# Source shell utilities for timestamp and token generation
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/shell-utils.sh"
+elif [ -f "$SCRIPT_DIR/lib/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/lib/shell-utils.sh"
+else
+    echo "Error: shell-utils.sh not found" >&2
+    exit 1
+fi
+
 # Configuration
 CLAUDE_TIMEOUT=${CLAUDE_TIMEOUT:-30}
 MAX_RETRIES=${MAX_RETRIES:-2}
@@ -56,7 +67,7 @@ log_error() {
 # Create OpenTelemetry trace context
 create_otel_context() {
     local operation="$1"
-    echo "$(python3 -c "import secrets; print(secrets.token_hex(16))")"
+    echo "$(generate_hex_token 16)"
 }
 
 # Emit telemetry for Claude operations
@@ -70,7 +81,7 @@ emit_telemetry() {
 {
   "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)",
   "trace_id": "$trace_id",
-  "span_id": "$(python3 -c "import secrets; print(secrets.token_hex(8))")",
+  "span_id": "$(generate_hex_token 8)",
   "operation_name": "${TRACE_PREFIX}.${operation}",
   "duration_ms": $duration_ms,
   "status": "$status",
@@ -92,7 +103,7 @@ EOF
 # Health check for Claude CLI availability and functionality
 claude_health_check() {
     local trace_id=$(create_otel_context "health_check")
-    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+    local start_time=$(get_time_ms)
     
     log_info "Performing Claude CLI health check..."
     
@@ -104,7 +115,7 @@ claude_health_check() {
     # Test with simple prompt
     local test_response
     if test_response=$(echo '{"test": "health check"}' | timeout 10s claude --input-format json --output-format json --prompt "Return exactly: {\"status\": \"healthy\", \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" 2>/dev/null); then
-        local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+        local end_time=$(get_time_ms)
         local duration=$((end_time - start_time))
         
         # Validate JSON response
@@ -118,7 +129,7 @@ claude_health_check() {
             return 1
         fi
     else
-        local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+        local end_time=$(get_time_ms)
         local duration=$((end_time - start_time))
         log_error "Claude CLI health check failed"
         emit_telemetry "health_check" "failed" "$duration" "$trace_id"
@@ -131,7 +142,7 @@ claude_stream_analyze() {
     local input_data="$1"
     local prompt="$2"
     local trace_id=$(create_otel_context "stream_analyze")
-    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+    local start_time=$(get_time_ms)
     
     log_info "Starting Claude streaming analysis (Trace: $trace_id)"
     
@@ -157,7 +168,7 @@ claude_stream_analyze() {
             
             # Validate output
             if [ -s "$temp_output" ] && jq . "$temp_output" >/dev/null 2>&1; then
-                local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+                local end_time=$(get_time_ms)
                 local duration=$((end_time - start_time))
                 
                 log_success "Claude analysis completed successfully (${duration}ms, attempt $attempt)"
@@ -192,7 +203,7 @@ claude_stream_analyze() {
     done
     
     # All attempts failed
-    local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+    local end_time=$(get_time_ms)
     local duration=$((end_time - start_time))
     
     log_error "All Claude attempts failed after $max_attempts tries"
@@ -237,7 +248,7 @@ claude_file_analyze() {
 # Engineering Elixir Applications inspired fallback analysis
 engineering_fallback() {
     local trace_id=$(create_otel_context "engineering_fallback")
-    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+    local start_time=$(get_time_ms)
     
     log_warning "Using Engineering Elixir Applications fallback analysis"
     
@@ -305,7 +316,7 @@ engineering_fallback() {
 EOF
     )
     
-    local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+    local end_time=$(get_time_ms)
     local duration=$((end_time - start_time))
     
     emit_telemetry "engineering_fallback" "success" "$duration" "$trace_id"

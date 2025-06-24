@@ -1090,5 +1090,12 @@
     "agent_id": "agent_1750061172756344000",
     "result": "success",
     "velocity_points": 8
+  },
+  {
+    "work_item_id": "work_1750809081523689000",
+    "completed_at": "2025-06-24T23:52:26Z",
+    "agent_id": "agent_1750809146384777000",
+    "result": "success",
+    "velocity_points": 10
   }
 ]

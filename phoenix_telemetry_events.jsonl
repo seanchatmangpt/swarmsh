@@ -118,3 +118,15 @@
     "trace_id": "unknown"
   }
 }
+{
+  "timestamp": "2025-06-24T23:52:26Z",
+  "event_type": "work_completed",
+  "source": "coordination_helper",
+  "metadata": {
+    "param1": "success",
+    "param2": "autonomous_team", 
+    "param3": "10",
+    "agent_id": "unknown",
+    "trace_id": "unknown"
+  }
+}

@@ -33,7 +33,7 @@
 # DEPENDENCIES:
 #   - jq (JSON processing)
 #   - openssl (trace ID generation)
-#   - python3 (timestamp calculations)
+#   - shell-utils.sh (timestamp and token generation)
 #   - claude (AI analysis - currently non-functional)
 #
 # SESSION MEMORY MANAGEMENT:
@@ -61,6 +61,17 @@
 #
 ##############################################################################
 
+# Source shell utilities for timestamp and token generation
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/shell-utils.sh"
+elif [ -f "$SCRIPT_DIR/lib/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/lib/shell-utils.sh"
+else
+    echo "Error: shell-utils.sh not found" >&2
+    exit 1
+fi
+
 # Allow override for testing
 COORDINATION_DIR="${COORDINATION_DIR:-/Users/sac/dev/ai-self-sustaining-system/agent_coordination}"
 WORK_CLAIMS_FILE="work_claims.json"
@@ -76,14 +87,14 @@ OTEL_SERVICE_VERSION="${OTEL_SERVICE_VERSION:-1.0.0}"
 
 # Generate OpenTelemetry trace ID (128-bit, 32 hex characters)
 generate_trace_id() {
-    # Generate 128-bit trace ID using random hex
-    echo "$(openssl rand -hex 16)"
+    # Generate 128-bit trace ID using shell utilities
+    echo "$(generate_hex_token 16)"
 }
 
 # Generate OpenTelemetry span ID (64-bit, 16 hex characters) 
 generate_span_id() {
-    # Generate 64-bit span ID using random hex
-    echo "$(openssl rand -hex 8)"
+    # Generate 64-bit span ID using shell utilities
+    echo "$(generate_hex_token 8)"
 }
 
 # Create OpenTelemetry context for S@S operations
@@ -156,7 +167,7 @@ log_telemetry_span() {
   "operation_name": "$span_name",
   "span_kind": "$span_kind",
   "status": "$status",
-  "start_time": "$(python3 -c "import datetime; print(datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+  "start_time": "$(get_iso_timestamp)",
   "duration_ms": $duration_ms,
   "service": {
     "name": "$OTEL_SERVICE_NAME",
@@ -212,7 +223,7 @@ claim_work() {
     
     # Create OpenTelemetry trace context for work claiming
     local trace_id=$(create_otel_context "s2s.work.claim")
-    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+    local start_time=$(get_time_ms)
     
     # Generate unique nanosecond-based IDs
     local agent_id="${AGENT_ID:-$(generate_agent_id)}"
@@ -291,7 +302,7 @@ EOF
         register_agent_in_team "$agent_id" "$team"
         
         # Log successful work claim telemetry
-        local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+        local end_time=$(get_time_ms)
         local duration_ms=$((end_time - start_time))
         local claim_attributes=$(cat <<EOF
 {
@@ -314,7 +325,7 @@ EOF
         return 0
     else
         # Log failed work claim telemetry
-        local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+        local end_time=$(get_time_ms)
         local duration_ms=$((end_time - start_time))
         local conflict_attributes=$(cat <<EOF
 {
@@ -391,7 +402,7 @@ update_progress() {
     
     # Create OpenTelemetry trace context for progress update
     local trace_id=$(create_otel_context "s2s.work.progress")
-    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+    local start_time=$(get_time_ms)
     
     if [ -z "$work_item_id" ]; then
         echo "❌ ERROR: No work item ID specified"
@@ -425,7 +436,7 @@ update_progress() {
     fi
     
     # Log progress update telemetry
-    local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+    local end_time=$(get_time_ms)
     local duration_ms=$((end_time - start_time))
     local progress_attributes=$(cat <<EOF
 {
@@ -1544,7 +1555,7 @@ value_stream_mapping() {
 # Analyze work priorities using Claude intelligence
 claude_analyze_work_priorities() {
     local trace_id=$(create_otel_context "s2s.claude.analyze_priorities")
-    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+    local start_time=$(get_time_ms)
     
     echo "🧠 CLAUDE WORK PRIORITY ANALYSIS"
     echo "==============================="
@@ -1707,7 +1718,7 @@ EOF
     fi
     
     # Log telemetry
-    local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+    local end_time=$(get_time_ms)
     local duration_ms=$((end_time - start_time))
     local analysis_attributes=$(cat <<EOF
 {

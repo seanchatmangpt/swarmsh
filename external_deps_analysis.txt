@@ -1,0 +1,42 @@
+./enhanced_trace_correlation.sh:        python3 -c "
+./agent_swarm_orchestrator.sh:  "created_at": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+./agent_swarm_orchestrator.sh:        jq ".status = \"$new_status\" | .last_updated = \"$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")\"" "$SWARM_STATE_FILE" > "$temp_file"
+./test-vision.sh:    python3 /tmp/mock_vision_server.py &
+./claude_code_headless.sh:    echo "$(python3 -c "import secrets; print(secrets.token_hex(16))")"
+./claude_code_headless.sh:  "span_id": "$(python3 -c "import secrets; print(secrets.token_hex(8))")",
+./claude_code_headless.sh:    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./claude_code_headless.sh:        local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./claude_code_headless.sh:        local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./claude_code_headless.sh:    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./claude_code_headless.sh:                local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./claude_code_headless.sh:    local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./claude_code_headless.sh:    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./claude_code_headless.sh:    local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./worktree_environment_manager.sh:  "created_at": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+./test-essential.sh:    test_critical "python3 available" command -v python3
+./test-essential.sh:  • Core dependencies (bash, jq, python3)
+./create_s2s_worktree.sh:  "timestamp": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+./create_s2s_worktree.sh:  "created_at": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+./create_s2s_worktree.sh:  "created_at": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+./manage_worktrees.sh:  "timestamp": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+./project_simulation_engine.sh:    if command -v python3 >/dev/null 2>&1; then
+./project_simulation_engine.sh:        simulation_results=$(echo "$simulation_script" | python3 - "$base_duration_days" "$base_team_size" "$base_complexity_factor" "$iterations" 2>/dev/null || echo '{"error": "simulation_failed"}')
+./project_simulation_engine.sh:    echo "  • Monte Carlo: $(command -v python3 >/dev/null && echo "Full Featured" || echo "Basic Mode")"
+./test-ollama-pro.sh:    python3 "$TEST_TEMP/mock_server.py" &
+./validate_documentation.sh:run_test "python3 availability" "command -v python3"
+./coordination_helper.sh:  "start_time": "$(python3 -c "import datetime; print(datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+./coordination_helper.sh:    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./coordination_helper.sh:        local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./coordination_helper.sh:        local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./coordination_helper.sh:    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./coordination_helper.sh:    local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./coordination_helper.sh:    local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./coordination_helper.sh:    local end_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./create_ash_phoenix_worktree.sh:  "created_at": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+./test_worktree_gaps.sh:    "python3:Python 3"
+./otel-simple.sh:    python3 -c "import secrets; print(secrets.token_hex($((length/2))))" 2>/dev/null || \
+./coordination_helper_no_python.sh:    # local start_time=$(python3 -c "import time; print(int(time.time() * 1000))")
+./coordination_helper_no_python.sh:    # local trace_id=$(python3 -c "import secrets; print(secrets.token_hex(16))")
+./coordination_helper_no_python.sh:    # local span_id=$(python3 -c "import secrets; print(secrets.token_hex(8))")
+./coordination_helper_no_python.sh:trace_id=$(create_otel_context_no_python "demo.operation")
+./coordination_helper_no_python.sh:claim_work_no_python "feature" "Remove Python dependencies" "high" "optimization_team"

@@ -5,7 +5,16 @@
 
 set -euo pipefail
 
+# Source shell utilities for timestamp and token generation
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/shell-utils.sh"
+elif [ -f "$SCRIPT_DIR/lib/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/lib/shell-utils.sh"
+else
+    echo "Error: shell-utils.sh not found" >&2
+    exit 1
+fi
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 WORKTREES_DIR="$PROJECT_ROOT/worktrees"
 SHARED_COORDINATION_DIR="$PROJECT_ROOT/shared_coordination"
@@ -31,7 +40,7 @@ log_shared_telemetry() {
   "span_id": "$(openssl rand -hex 8)",
   "operation": "$operation",
   "status": "$status",
-  "timestamp": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+  "timestamp": "$(get_iso_timestamp)",
   "service": {
     "name": "$OTEL_SERVICE_NAME",
     "version": "1.0.0"

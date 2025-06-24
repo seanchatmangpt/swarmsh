@@ -1570,3 +1570,48 @@ EOF < /dev/null{"trace_id":"cc4f5aba9208946d5d2db7a22cd9fb17","operation":"readm
     "script_path": "/Users/sac/dev/swarmsh/worktrees/auto-docs"
   }
 }
+{
+  "timestamp": "2025-06-24T23:48:16.3NZ",
+  "trace_id": "7e0c1ef9dcbbd649b0e18a1351941bb3",
+  "span_id": "93ff88b901f4e2e5",
+  "operation_name": "s2s.claude_headless.health_check",
+  "duration_ms": 487,
+  "status": "failed",
+  "attributes": {
+    "claude.version": "headless_v1.0",
+    "system.component": "agent_coordination",
+    "observability.pattern": "engineering_elixir_applications"
+  }
+}
+{
+  "trace_id": "bb3882fd842b7f6ed6d6517b70f6e432",
+  "span_id": "1cab52346d9845cb",
+  "parent_span_id": "",
+  "operation_name": "s2s.work.claim_fast",
+  "span_kind": "internal",
+  "status": "ok",
+  "start_time": "2025-06-24T23:51:21.559Z",
+  "duration_ms": 21,
+  "service": {
+    "name": "s2s-coordination",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "s2s-coordination",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  },
+  "span_attributes": {
+            "s2s.work_item_id": "work_1750809081523689000",
+            "s2s.agent_id": "test_agent_python_removal", 
+            "s2s.work_type": "python_removal_test",
+            "s2s.fast_path": true,
+            "s2s.optimization": "8020_iteration_2"
+        },
+  "forced_trace_context": {
+    "force_trace_id": "",
+    "coordination_trace_id": "",
+    "trace_forced": false
+  }
+}

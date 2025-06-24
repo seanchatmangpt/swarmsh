@@ -5,7 +5,16 @@
 
 set -euo pipefail
 
+# Source shell utilities for timestamp and token generation
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/shell-utils.sh"
+elif [ -f "$SCRIPT_DIR/lib/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/lib/shell-utils.sh"
+else
+    echo "Error: shell-utils.sh not found" >&2
+    exit 1
+fi
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 WORKTREES_DIR="$PROJECT_ROOT/worktrees"
 SHARED_COORDINATION_DIR="$PROJECT_ROOT/shared_coordination"
@@ -96,7 +105,7 @@ EOF
 {
   "swarm_id": "$SWARM_ID",
   "status": "initializing",
-  "created_at": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+  "created_at": "$(get_iso_timestamp)",
   "active_agents": 0,
   "total_capacity": 0,
   "utilized_capacity": 0,
@@ -312,7 +321,7 @@ update_swarm_state() {
     
     if [ -f "$SWARM_STATE_FILE" ]; then
         local temp_file=$(mktemp)
-        jq ".status = \"$new_status\" | .last_updated = \"$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")\"" "$SWARM_STATE_FILE" > "$temp_file"
+        jq ".status = \"$new_status\" | .last_updated = \"$(get_iso_timestamp)\"" "$SWARM_STATE_FILE" > "$temp_file"
         mv "$temp_file" "$SWARM_STATE_FILE"
     fi
 }

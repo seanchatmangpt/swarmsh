@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Source shell utilities for timestamp and token generation
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/shell-utils.sh"
+elif [ -f "$SCRIPT_DIR/lib/shell-utils.sh" ]; then
+    source "$SCRIPT_DIR/lib/shell-utils.sh"
+else
+    echo "Error: shell-utils.sh not found" >&2
+    exit 1
+fi
+
 # S@S Worktree Creation Script with Agent Coordination Integration
 # Creates isolated worktrees with full S@S coordination support
 
@@ -44,7 +55,7 @@ log_shared_telemetry() {
   "operation": "$operation",
   "worktree": "$worktree_name", 
   "status": "$status",
-  "timestamp": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+  "timestamp": "$(get_iso_timestamp)",
   "service": {
     "name": "$OTEL_SERVICE_NAME",
     "version": "$OTEL_SERVICE_VERSION"
@@ -69,7 +80,7 @@ register_worktree() {
   "worktree_name": "$worktree_name",
   "branch_name": "$branch_name", 
   "worktree_path": "$worktree_path",
-  "created_at": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+  "created_at": "$(get_iso_timestamp)",
   "trace_id": "$trace_id",
   "status": "active",
   "agents": [],
@@ -144,7 +155,7 @@ create_s2s_worktree() {
   "worktree_name": "$worktree_name",
   "branch_name": "$branch_name",
   "base_branch": "$base_branch",
-  "created_at": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
+  "created_at": "$(get_iso_timestamp)",
   "trace_id": "$trace_id",
   "shared_coordination_dir": "$SHARED_COORDINATION_DIR",
   "project_root": "$PROJECT_ROOT"

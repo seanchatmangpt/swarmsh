@@ -70,7 +70,7 @@ check_dependencies() {
     
     test_critical "bash version" bash -c '[[ ${BASH_VERSION%%.*} -ge 4 ]]'
     test_critical "jq available" command -v jq
-    test_critical "python3 available" command -v python3
+    # test_critical "python3 available" command -v python3  # Removed Python dependency
     test_optional "openssl available" command -v openssl
     test_optional "flock available" command -v flock
 }
@@ -250,7 +250,7 @@ Options:
   --verbose, -v    Detailed output
 
 This script tests the 20% of functionality that provides 80% of validation value:
-  • Core dependencies (bash, jq, python3)
+  • Core dependencies (bash, jq, shell-utils)
   • Basic coordination (claim, progress, complete)
   • OpenTelemetry essentials (span generation)
   • Performance baselines
