@@ -1898,6 +1898,75 @@ cleanup_stale_work_items() {
     echo "TTL cleanup completed. Backup: $backup_file"
 }
 
+# 80/20 Performance Optimization: Archive completed work claims
+optimize_work_claims_performance() {
+    local work_claims="$COORDINATION_DIR/work_claims.json"
+    local archive_dir="$COORDINATION_DIR/archived_claims"
+    local trace_id="${COORDINATION_TRACE_ID:-$(generate_trace_id)}"
+    
+    if [[ ! -f "$work_claims" ]]; then
+        echo "No work claims file found"
+        return 0
+    fi
+    
+    # Check if optimization is needed (file size threshold)
+    local line_count=$(wc -l < "$work_claims")
+    local threshold=${OPTIMIZATION_THRESHOLD:-1000}
+    
+    if [[ $line_count -lt $threshold ]]; then
+        echo "File size ($line_count lines) below threshold ($threshold), skipping optimization"
+        return 0
+    fi
+    
+    echo "🚀 Starting 80/20 performance optimization (trace: $trace_id)"
+    local start_time=$(date +%s%N)
+    
+    # Create archive directory
+    mkdir -p "$archive_dir"
+    
+    # Create timestamped archive for completed work
+    local archive_file="$archive_dir/completed_claims_$(date +%Y%m%d_%H%M%S).json"
+    
+    # Extract completed work claims for archival
+    local completed_count=$(jq '[.[] | select(.status == "completed")] | length' "$work_claims")
+    
+    if [[ $completed_count -gt 0 ]]; then
+        echo "📦 Archiving $completed_count completed work claims to $archive_file"
+        jq '[.[] | select(.status == "completed")]' "$work_claims" > "$archive_file"
+        
+        # Create optimized file with only active claims
+        local temp_file="$work_claims.optimize.tmp"
+        jq '[.[] | select(.status != "completed")]' "$work_claims" > "$temp_file"
+        
+        # Atomic move
+        mv "$temp_file" "$work_claims"
+        
+        local end_time=$(date +%s%N)
+        local duration_ms=$(( (end_time - start_time) / 1000000 ))
+        local new_line_count=$(wc -l < "$work_claims")
+        local reduction_percent=$(( (line_count - new_line_count) * 100 / line_count ))
+        
+        echo "✅ Optimization complete:"
+        echo "   Before: $line_count lines"
+        echo "   After:  $new_line_count lines"
+        echo "   Reduction: ${reduction_percent}%"
+        echo "   Duration: ${duration_ms}ms"
+        echo "   Archive: $archive_file"
+        
+        # Log telemetry for the optimization
+        log_telemetry_span "work_claims_optimization" "completed" "$trace_id" "{
+            \"lines_before\": $line_count,
+            \"lines_after\": $new_line_count,
+            \"reduction_percent\": $reduction_percent,
+            \"duration_ms\": $duration_ms,
+            \"completed_archived\": $completed_count,
+            \"archive_file\": \"$archive_file\"
+        }"
+    else
+        echo "No completed work claims found to archive"
+    fi
+}
+
 # Auto-cleanup hook - call this periodically
 auto_cleanup_stale_items() {
     local current_hour=$(date +%H)
@@ -1906,6 +1975,9 @@ auto_cleanup_stale_items() {
     if [[ "$current_hour" == "$cleanup_hour" ]]; then
         echo "Running automatic TTL cleanup..."
         cleanup_stale_work_items 24
+        
+        # Run 80/20 performance optimization
+        optimize_work_claims_performance
         
         # Also clean up benchmark tests specifically
         bash "$COORDINATION_DIR/benchmark_cleanup_script.sh" --auto

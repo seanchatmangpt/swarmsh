@@ -19342,3 +19342,7 @@ work_1750059204837473000",
 {"trace_id":"3936b20031d988ff74ef7739b081dbbb","span_id":"74d732aa0b89ce67","operation":"auto_cleanup","service":"auto-cleanup","duration_ms":58,"status":"success","exit_code":0}
 {"trace_id":"9e58ed12d648a4ab739b9ae1c98b8abd","span_id":"b05cd1800ce1e7e7","operation":"comprehensive_cleanup_session","service":"comprehensive-cleanup","dry_run":"true","status":"started"}
 {"trace_id":"9e58ed12d648a4ab739b9ae1c98b8abd","span_id":"c15b3bd7e6fecb23","operation":"cleanup_timestamped_files","service":"comprehensive-cleanup","status":"started"}
+{"trace_id":"9e58ed12d648a4ab739b9ae1c98b8abd","span_id":"c15b3bd7e6fecb23","operation":"cleanup_timestamped_files","service":"comprehensive-cleanup","duration_ms":345,"status":"completed","files_processed":0}
+{"trace_id":"9e58ed12d648a4ab739b9ae1c98b8abd","span_id":"b05cd1800ce1e7e7","operation":"comprehensive_cleanup_session","service":"comprehensive-cleanup","duration_ms":938,"status":"completed","dry_run":"true"}
+{"trace_id":"fab9eb667b22132db3909a10dc4996f2","span_id":"efd6e3502a47ed29","operation":"test_coordination_helper_session","service":"test-coordination-helper","status":"started"}
+{"trace_id":"fab9eb667b22132db3909a10dc4996f2","span_id":"efd6e3502a47ed29","operation":"test_coordination_helper_session","service":"test-coordination-helper","duration_ms":978,"status":"failed","tests_run":20,"tests_passed":19,"success_rate":95}

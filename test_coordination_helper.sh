@@ -9,9 +9,9 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/otel-bash.sh" 2>/dev/null || true
 
-# OpenTelemetry configuration
-export OTEL_SERVICE_NAME="test-coordination-helper"
-export OTEL_SERVICE_VERSION="1.0.0"
+# Fallback functions if OTEL library not available
+generate_trace_id() { openssl rand -hex 16 2>/dev/null || echo "$(date +%s%N)"; }
+generate_span_id() { openssl rand -hex 8 2>/dev/null || echo "$(date +%s%N | cut -c-16)"; }
 
 # Generate test session trace
 TEST_TRACE_ID=$(generate_trace_id)
