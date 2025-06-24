@@ -305,6 +305,112 @@ env-monitor:
 	@echo "👀 Monitoring Worktree Environments..."
 	@./manage_worktrees.sh monitor
 
+# === WORKTREE DEVELOPMENT ===
+
+# Create a new feature worktree
+worktree-create:
+	@if [ -z "$(FEATURE)" ]; then \
+		echo "Usage: make worktree-create FEATURE=<feature-name> [BRANCH=<branch-name>]"; \
+		exit 1; \
+	fi
+	@echo "🌳 Creating worktree for feature: $(FEATURE)"
+	@if [ -n "$(BRANCH)" ]; then \
+		./create_s2s_worktree.sh "$(FEATURE)" "$(BRANCH)"; \
+	else \
+		./create_s2s_worktree.sh "$(FEATURE)"; \
+	fi
+	@echo "✅ Worktree created at: worktrees/$(FEATURE)"
+	@echo "📝 Next steps:"
+	@echo "  1. cd worktrees/$(FEATURE)"
+	@echo "  2. ./coordination_helper.sh init-session"
+	@echo "  3. Start developing!"
+
+# List all worktrees
+worktree-list:
+	@echo "🌳 Active Worktrees:"
+	@./manage_worktrees.sh list
+
+# Show worktree status
+worktree-status:
+	@if [ -z "$(FEATURE)" ]; then \
+		echo "📊 All Worktrees Status:"; \
+		for wt in worktrees/*/; do \
+			if [ -d "$$wt" ]; then \
+				feature=$$(basename "$$wt"); \
+				echo ""; \
+				echo "=== $$feature ==="; \
+				./manage_worktrees.sh status "$$feature" 2>/dev/null || echo "Status unavailable"; \
+			fi; \
+		done; \
+	else \
+		echo "📊 Worktree Status: $(FEATURE)"; \
+		./manage_worktrees.sh status "$(FEATURE)"; \
+	fi
+
+# Navigate to worktree (shows path)
+worktree-cd:
+	@if [ -z "$(FEATURE)" ]; then \
+		echo "Usage: make worktree-cd FEATURE=<feature-name>"; \
+		exit 1; \
+	fi
+	@if [ -d "worktrees/$(FEATURE)" ]; then \
+		echo "📁 Worktree path: worktrees/$(FEATURE)"; \
+		echo "Run: cd worktrees/$(FEATURE)"; \
+	else \
+		echo "❌ Worktree not found: $(FEATURE)"; \
+		echo "Available worktrees:"; \
+		ls -1 worktrees/ 2>/dev/null || echo "No worktrees found"; \
+	fi
+
+# Remove and cleanup worktree
+worktree-cleanup:
+	@if [ -z "$(FEATURE)" ]; then \
+		echo "Usage: make worktree-cleanup FEATURE=<feature-name>"; \
+		exit 1; \
+	fi
+	@echo "🧹 Cleaning up worktree: $(FEATURE)"
+	@./manage_worktrees.sh remove "$(FEATURE)"
+	@./manage_worktrees.sh cleanup
+	@echo "✅ Worktree cleaned up"
+
+# Merge worktree changes
+worktree-merge:
+	@if [ -z "$(FEATURE)" ]; then \
+		echo "Usage: make worktree-merge FEATURE=<feature-name>"; \
+		exit 1; \
+	fi
+	@echo "🔀 Merging worktree: $(FEATURE)"
+	@cd worktrees/$(FEATURE) && \
+		BRANCH=$$(git branch --show-current) && \
+		echo "Current branch: $$BRANCH" && \
+		git push -u origin $$BRANCH && \
+		echo "✅ Pushed to origin/$$BRANCH" && \
+		echo "📝 Next: Create PR at https://github.com/seanchatmangpt/swarmsh/pulls"
+
+# Show cross-worktree coordination
+worktree-cross:
+	@echo "🔗 Cross-Worktree Coordination:"
+	@./manage_worktrees.sh cross
+
+# Quick worktree workflow status
+worktree-dashboard:
+	@echo "🎯 Worktree Development Dashboard"
+	@echo "================================="
+	@echo ""
+	@echo "📊 Active Worktrees:"
+	@ls -1 worktrees/ 2>/dev/null | sed 's/^/  - /' || echo "  None"
+	@echo ""
+	@echo "🔄 Recent Worktree Activity:"
+	@tail -5 shared_coordination/shared_telemetry.jsonl 2>/dev/null | \
+		jq -r '"\(.timestamp // "N/A") | \(.service // "unknown") | \(.operation_name // .operation // "unknown")"' || \
+		echo "  No recent activity"
+	@echo ""
+	@echo "💡 Quick Commands:"
+	@echo "  make worktree-create FEATURE=my-feature  # Create new"
+	@echo "  make worktree-list                       # List all"
+	@echo "  make worktree-status FEATURE=my-feature  # Check status"
+	@echo "  make worktree-cleanup FEATURE=my-feature # Remove"
+
 # === TELEMETRY & OBSERVABILITY ===
 
 # Start OpenTelemetry Stack
@@ -344,6 +450,36 @@ quick-start:
 	@echo "🚀 Quick Start: Complete Agent Swarm Setup..."
 	@./quick_start_agent_swarm.sh
 	@echo "✅ Quick start completed"
+
+# Getting started - telemetry-first workflow
+getting-started:
+	@echo "🎯 Getting Started with Telemetry-First Development"
+	@echo "=================================================="
+	@echo ""
+	@echo "Step 1: Understanding System State..."
+	@$(MAKE) telemetry-health
+	@echo ""
+	@echo "Step 2: Generating Visual Dashboard..."
+	@$(MAKE) diagrams-dashboard >/dev/null 2>&1
+	@echo "✅ Dashboard generated at: docs/auto_generated_diagrams/live_dashboard.md"
+	@echo ""
+	@echo "📚 Next Steps:"
+	@echo "  1. Run 'make monitor-24h' in a separate terminal"
+	@echo "  2. Review 'make quick-ref' for common commands"
+	@echo "  3. Check 'make telemetry-guide' for analysis techniques"
+	@echo ""
+	@echo "🔍 Based on telemetry analysis:"
+	@HEALTH=$$(jq '.health_score' system_health_report.json 2>/dev/null || echo "0"); \
+	if [ "$$HEALTH" -ge 80 ]; then \
+		echo "  ✅ System healthy - You can proceed with development"; \
+		echo "  💡 Try: make claim WORK_TYPE=feature DESC='your task'"; \
+	elif [ "$$HEALTH" -ge 60 ]; then \
+		echo "  ⚠️  System needs attention - Review issues first"; \
+		echo "  💡 Try: make diagrams-flow to understand system state"; \
+	else \
+		echo "  ❌ System critical - Troubleshoot before continuing"; \
+		echo "  💡 Try: grep error telemetry_spans.jsonl | tail -10 | jq '.'"; \
+	fi
 
 # Demonstration
 demo:
@@ -499,6 +635,7 @@ help:
 	@echo "===================================="
 	@echo ""
 	@echo "🚀 QUICK START:"
+	@echo "  make getting-started - Telemetry-first workflow guide (RECOMMENDED)"
 	@echo "  make quick-start    - One-command complete setup"
 	@echo "  make all           - Initialize, deploy, start, and show status"
 	@echo ""
@@ -548,6 +685,16 @@ help:
 	@echo "  make env-isolate   - Configure isolation"
 	@echo "  make env-monitor   - Monitor environments"
 	@echo ""
+	@echo "🌳 WORKTREE DEVELOPMENT:"
+	@echo "  make worktree-create FEATURE=<name> - Create feature worktree"
+	@echo "  make worktree-list    - List all active worktrees"
+	@echo "  make worktree-status [FEATURE=<name>] - Show worktree status"
+	@echo "  make worktree-dashboard - Quick workflow overview"
+	@echo "  make worktree-cd FEATURE=<name> - Show worktree path"
+	@echo "  make worktree-merge FEATURE=<name> - Push changes for PR"
+	@echo "  make worktree-cleanup FEATURE=<name> - Remove worktree"
+	@echo "  make worktree-cross   - Cross-worktree coordination"
+	@echo ""
 	@echo "📡 TELEMETRY:"
 	@echo "  make telemetry-start - Start OpenTelemetry stack"
 	@echo "  make telemetry-stop  - Stop OpenTelemetry stack"
@@ -577,6 +724,12 @@ help:
 	@echo "  make monitor-7d    - Monitor telemetry (7d window)"
 	@echo "  make monitor-all   - Monitor telemetry (all data)"
 	@echo "  make telemetry-stats - Show telemetry statistics"
+	@echo "  make telemetry-compare - Compare timeframe windows"
+	@echo "  make telemetry-health - Quick health check"
+	@echo ""
+	@echo "📚 DOCUMENTATION:"
+	@echo "  make quick-ref     - Show quick reference card"
+	@echo "  make telemetry-guide - Show telemetry analysis guide"
 	@echo ""
 	@echo "🎯 PROJECT SIMULATION & PLANNING:"
 	@echo "  make project-analyze DOC=<file> PROJECT=<name> - Full document analysis pipeline"
@@ -692,6 +845,55 @@ telemetry-stats:
 	@echo "📊 Generating telemetry timeframe statistics..."
 	@chmod +x ./telemetry-timeframe-stats.sh
 	@./telemetry-timeframe-stats.sh
+
+telemetry-compare:
+	@echo "📊 Comparing telemetry across timeframes..."
+	@chmod +x ./compare-timeframes.sh
+	@./compare-timeframes.sh
+
+# Quick reference and help
+quick-ref:
+	@echo "📚 Showing Quick Reference Card..."
+	@cat docs/QUICK_REFERENCE.md
+
+telemetry-guide:
+	@echo "📖 Showing Telemetry Guide..."
+	@cat docs/TELEMETRY_GUIDE.md
+
+# Quick telemetry health check
+telemetry-health:
+	@echo "🏥 Quick Telemetry Health Check"
+	@echo "================================"
+	@printf "Health Score: "
+	@jq -r '.health_score' system_health_report.json 2>/dev/null || echo "N/A"
+	@printf "Total Operations: "
+	@wc -l < telemetry_spans.jsonl 2>/dev/null | tr -d ' ' || echo "0"
+	@printf "Operations (24h): "
+	@TIMESTAMP=$$(date -u -d "24 hours ago" +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-24H +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || echo "2025-06-23T00:00:00Z"); \
+	COUNT=0; \
+	while IFS= read -r line; do \
+		if echo "$$line" | jq -e --arg ts "$$TIMESTAMP" '.timestamp >= $$ts' >/dev/null 2>&1; then \
+			COUNT=$$((COUNT + 1)); \
+		fi; \
+	done < telemetry_spans.jsonl 2>/dev/null; \
+	echo $$COUNT
+	@printf "Active Cron Jobs: "
+	@crontab -l 2>/dev/null | grep -c "8020\|cron-" || echo "0"
+	@printf "Telemetry File Size: "
+	@ls -lh telemetry_spans.jsonl 2>/dev/null | awk '{print $$5}' || echo "N/A"
+	@printf "Recent Errors: "
+	@grep -c '"status":"error"' telemetry_spans.jsonl 2>/dev/null || echo "0"
+	@echo ""
+	@echo ""
+	@# Provide quick recommendation
+	@HEALTH=$$(jq -r '.health_score' system_health_report.json 2>/dev/null || echo "0"); \
+	if [ "$$HEALTH" -ge 80 ]; then \
+		echo "✅ Status: System Healthy - Ready for development"; \
+	elif [ "$$HEALTH" -ge 60 ]; then \
+		echo "⚠️  Status: Needs Attention - Review issues before proceeding"; \
+	else \
+		echo "❌ Status: Critical - Troubleshoot before continuing"; \
+	fi
 
 # Default target for make without arguments
 .DEFAULT_GOAL := help
