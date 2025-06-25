@@ -1,5 +1,5 @@
 #!/bin/bash
-# Shell utility functions to replace Python dependencies
+# Shell utility functions for portable timestamp and token generation
 # Provides portable timestamp and random generation functions
 
 # Get current time in milliseconds (portable)
