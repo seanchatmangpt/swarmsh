@@ -1,0 +1,7 @@
+{
+    "system": {
+        "hostname": "swarmsh-primary-001",
+        "region": "us-west-2",
+        "cluster_size": 5
+    }
+}

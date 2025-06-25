@@ -1,0 +1,17 @@
+{
+    "system": {
+        "health": 85
+    },
+    "agents": {
+        "count": 12,
+        "list": [
+            {"id": "agent_001", "role": "Parser", "status": "active"},
+            {"id": "agent_002", "role": "Renderer", "status": "active"},
+            {"id": "agent_003", "role": "Cache", "status": "inactive"}
+        ]
+    },
+    "telemetry": {
+        "spans": 1247
+    },
+    "timestamp": "2025-06-24T16:45:00Z"
+}

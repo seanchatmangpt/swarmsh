@@ -1,0 +1,12 @@
+{
+    "system": {
+        "name": "SwarmSH-AGI",
+        "version": "3.0.0",
+        "health": 95
+    },
+    "environment": "production",
+    "deployment": {
+        "region": "us-west-2",
+        "cluster": "swarmsh-primary"
+    }
+}

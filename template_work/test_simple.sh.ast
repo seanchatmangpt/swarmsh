@@ -1,0 +1,17 @@
+{
+  "type": "template",
+  "blocks": [
+    {
+      "type": "variable",
+      "name": "name",
+      "filters": [],
+      "line": 1
+    },
+    {
+      "type": "variable",
+      "name": "role",
+      "filters": [],
+      "line": 2
+    }
+  ]
+}

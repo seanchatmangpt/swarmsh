@@ -1,0 +1,7 @@
+{
+    "system": {
+        "name": 123,
+        "health": "invalid"
+    },
+    "invalid_field": "should_be_filtered"
+}

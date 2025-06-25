@@ -1,0 +1,19 @@
+{
+    "app": "SwarmSH",
+    "version": "3.0.0",
+    "null_field": null,
+    "empty_string": "",
+    "data": {
+        "users": [
+            {"name": "Alice", "active": true, "metadata": null},
+            {"name": "Bob", "active": true, "metadata": ""},
+            {"name": "Charlie", "active": false, "metadata": null}
+        ],
+        "config": {
+            "timeout": 30,
+            "enabled": true,
+            "description": null,
+            "options": {}
+        }
+    }
+}

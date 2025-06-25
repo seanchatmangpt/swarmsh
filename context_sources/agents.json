@@ -1,0 +1,25 @@
+{
+    "agents": [
+        {
+            "id": "agi_agent_001",
+            "role": "Intelligence_Coordinator",
+            "status": "active",
+            "capacity": 100,
+            "specialization": "context_analysis"
+        },
+        {
+            "id": "agi_agent_002", 
+            "role": "Template_Optimizer",
+            "status": "active",
+            "capacity": 85,
+            "specialization": "performance_tuning"
+        },
+        {
+            "id": "agi_agent_003",
+            "role": "Security_Monitor",
+            "status": "active", 
+            "capacity": 90,
+            "specialization": "threat_detection"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "app": {"type": "string"},
+        "version": {"type": "string"},
+        "environment": {"type": "string"}
+    },
+    "required": ["app", "version"]
+}

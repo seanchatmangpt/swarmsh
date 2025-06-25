@@ -1,0 +1,15 @@
+{
+    "metrics": {
+        "total_operations": 15847,
+        "success_rate": 99.2,
+        "avg_response_time": 42,
+        "context_compositions": 1284,
+        "schema_validations": 2156,
+        "security_scans": 892
+    },
+    "realtime": {
+        "current_load": 78,
+        "active_renders": 23,
+        "queue_depth": 5
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "type": "object",
+    "properties": {
+        "system": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "version": {"type": "string"},
+                "health": {"type": "number", "minimum": 0, "maximum": 100}
+            },
+            "required": ["name", "health"]
+        },
+        "agents": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "string"},
+                    "role": {"type": "string"},
+                    "status": {"type": "string"},
+                    "capacity": {"type": "number"}
+                },
+                "required": ["id", "role", "status"]
+            }
+        },
+        "metrics": {
+            "type": "object",
+            "properties": {
+                "total_operations": {"type": "number"},
+                "success_rate": {"type": "number"},
+                "avg_response_time": {"type": "number"}
+            }
+        }
+    },
+    "required": ["system"]
+}

@@ -1,0 +1,6 @@
+{
+    "app": "SwarmSH", 
+    "command": "$(rm -rf /)",
+    "script": "eval('malicious code')",
+    "shell": "`cat /etc/passwd`"
+}

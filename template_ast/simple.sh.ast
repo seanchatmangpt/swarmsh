@@ -1,0 +1,11 @@
+{
+  "type": "template",
+  "blocks": [
+    {
+      "type": "variable",
+      "name": "name",
+      "filters": [],
+      "line": 1
+    }
+  ]
+}

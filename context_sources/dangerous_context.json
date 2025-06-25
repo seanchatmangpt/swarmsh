@@ -1,0 +1,8 @@
+{
+    "system": {
+        "name": "test",
+        "health": 80
+    },
+    "dangerous": "$(rm -rf /)",
+    "eval_attempt": "eval('malicious_code')"
+}
