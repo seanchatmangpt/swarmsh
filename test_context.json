@@ -1,0 +1,53 @@
+{
+    "timestamp": "2025-06-24T16:30:00Z",
+    "environment": "production",
+    "health_score": 92,
+    "agents": [
+        {
+            "id": "agent_render_1750806123456789",
+            "role": "Template_Render_Agent",
+            "capacity": 10
+        },
+        {
+            "id": "agent_parse_1750806123456790",
+            "role": "Parser_Agent", 
+            "capacity": 5
+        },
+        {
+            "id": "agent_cache_1750806123456791",
+            "role": "Cache_Agent",
+            "capacity": 8
+        }
+    ],
+    "recent_claims": [
+        {
+            "priority": "high",
+            "description": "Parse critical template",
+            "status": "completed",
+            "agent_id": "agent_parse_1750806123456790"
+        },
+        {
+            "priority": "medium",
+            "description": "Render user dashboard",
+            "status": "in_progress",
+            "agent_id": "agent_render_1750806123456789"
+        },
+        {
+            "priority": "low",
+            "description": "Cache hot templates",
+            "status": "pending",
+            "agent_id": null
+        }
+    ],
+    "optimization": {
+        "enabled": true,
+        "cache_hit_rate": 82.5,
+        "hot_templates": ["index.sh", "dashboard.sh", "report.sh"],
+        "avg_render_ms": 45
+    },
+    "telemetry": {
+        "total_spans": 15842,
+        "success_rate": 99.2,
+        "active_traces": 42
+    }
+}

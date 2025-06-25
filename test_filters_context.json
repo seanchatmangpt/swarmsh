@@ -1,0 +1,6 @@
+{
+    "name": "swarmsh",
+    "ROLE": "AGENT", 
+    "message": "Hello World"
+}
+EOF < /dev/null
