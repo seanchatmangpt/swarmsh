@@ -14,8 +14,7 @@ readonly OTEL_METRICS_ENABLED="${OTEL_METRICS_ENABLED:-true}"
 # Generate random hex ID
 generate_hex_id() {
     local length=${1:-16}
-    # Use a more reliable method for ID generation (Python removed)
-    # python3 -c "import secrets; print(secrets.token_hex($((length/2))))" 2>/dev/null || \
+    # Use portable shell methods for ID generation
     dd if=/dev/urandom bs=1 count=$((length/2)) 2>/dev/null | xxd -p | tr -d '\n' || \
     echo "$(date +%s)$(( RANDOM ))$(( RANDOM ))" | md5sum | cut -c1-"$length" 2>/dev/null || \
     printf "%0${length}x" "$((RANDOM * RANDOM))"

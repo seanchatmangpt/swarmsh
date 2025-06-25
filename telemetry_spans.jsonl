@@ -1615,3 +1615,35 @@ EOF < /dev/null{"trace_id":"cc4f5aba9208946d5d2db7a22cd9fb17","operation":"readm
     "trace_forced": false
   }
 }
+{
+  "trace_id": "cc170f4c03ad66b316e6cacd9a8d1e90",
+  "span_id": "99d9568ca177982a",
+  "parent_span_id": "",
+  "operation_name": "s2s.work.claim_fast",
+  "span_kind": "internal",
+  "status": "ok",
+  "start_time": "2025-06-25T00:01:19.978Z",
+  "duration_ms": 21,
+  "service": {
+    "name": "s2s-coordination",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "s2s-coordination",
+    "service.version": "1.0.0",
+    "s2s.component": "coordination_helper",
+    "deployment.environment": "development"
+  },
+  "span_attributes": {
+            "s2s.work_item_id": "work_1750809679940237000",
+            "s2s.agent_id": "final_test_agent", 
+            "s2s.work_type": "final_validation",
+            "s2s.fast_path": true,
+            "s2s.optimization": "8020_iteration_2"
+        },
+  "forced_trace_context": {
+    "force_trace_id": "",
+    "coordination_trace_id": "",
+    "trace_forced": false
+  }
+}

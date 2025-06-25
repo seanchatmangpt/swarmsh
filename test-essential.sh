@@ -70,7 +70,7 @@ check_dependencies() {
     
     test_critical "bash version" bash -c '[[ ${BASH_VERSION%%.*} -ge 4 ]]'
     test_critical "jq available" command -v jq
-    # test_critical "python3 available" command -v python3  # Removed Python dependency
+    # Core dependency validation handled by shell-utils sourcing
     test_optional "openssl available" command -v openssl
     test_optional "flock available" command -v flock
 }

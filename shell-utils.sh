@@ -10,9 +10,9 @@ get_time_ms() {
     elif date +%s%3N >/dev/null 2>&1; then
         # GNU date (Linux)
         date +%s%3N
-    elif command -v perl >/dev/null 2>&1; then
-        # Fallback to perl (more common than python)
-        perl -MTime::HiRes=time -e 'printf "%.0f\n", time * 1000'
+    elif command -v awk >/dev/null 2>&1; then
+        # Fallback using awk (more commonly available)
+        awk 'BEGIN {printf "%.0f\n", systime() * 1000}'
     else
         # Ultimate fallback using nanoseconds
         # Note: This might not work on all systems

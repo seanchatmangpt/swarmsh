@@ -97,7 +97,7 @@ jq empty agent_status.json
 jq empty shared_coordination/swarm_config.json
 
 # Fix JSON syntax
-python3 -m json.tool work_claims.json > /dev/null
+jq empty work_claims.json > /dev/null
 
 # Reset corrupted files
 cp work_claims.json.backup work_claims.json
@@ -441,16 +441,13 @@ export DATABASE_URL="postgresql://swarmsh:secure_password@localhost:5432/swarmsh
 # Check for corruption
 jq empty work_claims.json agent_status.json coordination_log.json
 
-# Find the corrupted line
-python3 -c "
-import json
-with open('work_claims.json') as f:
-    try:
-        json.load(f)
-        print('Valid JSON')
-    except json.JSONDecodeError as e:
-        print(f'Error at line {e.lineno}: {e.msg}')
-"
+# Find the corrupted line using jq
+if jq empty work_claims.json 2>/dev/null; then
+    echo "Valid JSON"
+else
+    echo "Invalid JSON - use 'jq .' to see detailed error"
+    jq . work_claims.json
+fi
 ```
 
 **Solutions:**

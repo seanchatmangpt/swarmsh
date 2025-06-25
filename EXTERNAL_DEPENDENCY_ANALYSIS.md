@@ -73,10 +73,10 @@ python3 -c "import secrets; print(secrets.token_hex(8))"
 
 ## 🔧 Other External Dependencies Found
 
-### Perl Usage
+### AWK Usage (Fallback)
 ```bash
-# Found in some utility scripts
-perl -MTime::HiRes=time -e 'printf "%.0f\n", time * 1000'
+# Used as fallback for timestamp calculations
+awk 'BEGIN {printf "%.0f\n", systime() * 1000}'
 ```
 
 ### Node.js References
