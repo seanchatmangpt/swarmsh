@@ -1,0 +1,69 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:50Z",
+    "trace_id": "a54d9d08ecdade5824907f672bd52ca3",
+    "request_id": "req_1750813130567006000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "dashboard-fast",
+  "status": "completed",
+  "output": "⚡ FAST-PATH SCRUM AT SCALE DASHBOARD
+====================================
+🚀 Using 80/20 optimized dashboard (bypasses JSON parsing)
+
+🎯 CURRENT PROGRAM INCREMENT (PI):
+  PI: PI_2025_Q2 - Enterprise Coordination & Scrum at Scale
+  ART: AI Self-Sustaining Agile Release Train
+  Sprint: sprint_2025_15 (2025-06-15 to 2025-06-29)
+
+👥 AGENT TEAMS & STATUS:
+  📊 Active Agents: 59
+
+📋 ACTIVE WORK (CURRENT SPRINT):
+  📊 Active Work Items:       73 (fast-path)
+  🔥 Critical Priority: 0
+0
+  ⬆️ High Priority: 0
+0
+  🔧 Recent Work Items:
+    🔧 work_1750812935024390000: reliability_test (medium) [autonomous_team]
+    🔧 work_1750812935146146000: reliability_test (medium) [autonomous_team]
+    🔧 work_1750812935263284000: reliability_test (medium) [autonomous_team]
+    🔧 work_1750812935381012000: reliability_test (medium) [autonomous_team]
+    🔧 work_1750812935503628000: reliability_test (medium) [autonomous_team]
+
+📈 VELOCITY & METRICS:
+  📊 Current Sprint Velocity: 2228 story points
+  🎯 Sprint Goal: Implement consistent JSON-based coordination system
+  ⏱️ Sprint Progress: 2025-06-24
+
+🔄 UPCOMING SCRUM AT SCALE EVENTS:
+  📅 Daily Scrum of Scrums: Every day at 09:30 UTC
+  🎯 Sprint Review & Retrospective: 2025-06-29
+  🚀 System Demo: Bi-weekly (next: TBD)
+  🔍 PI Planning: Quarterly (next: 2025-08-15)
+
+⚡ Fast-path performance: 97ms (optimized for high-frequency monitoring)",
+  "executed_at": "2025-06-25T00:58:50Z"
+},
+  "metadata": {
+    "execution_time_ms": 119,
+    "agent_id": "unknown",
+    "operation": "dashboard-fast",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

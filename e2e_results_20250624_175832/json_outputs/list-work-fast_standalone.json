@@ -1,0 +1,113 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:49Z",
+    "trace_id": "3916ae346a934f5abf4e4916238a6a14",
+    "request_id": "req_1750813129395999000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "list-work-fast",
+  "status": "completed",
+  "output": "⚡ Using 80/20 fast-path work listing
+📋 ACTIVE WORK ITEMS (Fast Path):
+  🔧 work_1750812935024390000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812935146146000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812935263284000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812935381012000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812935503628000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812935630018000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812935765772000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812935896700000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812936017917000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812936144701000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812936292821000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812936413591000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812936539403000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812936659518000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812936783384000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812936905841000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812937025790000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812937144060000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812937260769000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812937377910000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812937494195000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812937613633000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812937743025000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812937860835000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812937984633000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812938117344000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812938242619000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812938370542000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812938490092000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812938609710000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812938729830000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812938860910000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812938995495000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812939118498000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812939239288000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812939358794000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812939479494000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812939601284000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812939721754000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812939840836000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812939965217000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812940086920000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812940209125000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812940327132000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812940446171000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812940576407000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812940700049000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812940822698000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812940945046000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812941065153000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812941188988000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812941308445000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812941427248000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812941549028000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812941674427000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812941797364000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812941917889000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812942037666000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812942160605000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812942281399000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812942401209000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812942517989000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812942638308000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812942759898000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812942892730000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812943014929000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812943135727000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812943256552000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750812943375849000: reliability_test (medium) [autonomous_team]
+  🔧 work_1750813112728833000: template_optimization (dashboard) [templates']
+  🔧 work_1750813113905495000: performance_tuning (system) [performance']
+  🔧 work_1750813124770370000: api_test (integration) [test']
+  🔧 work_1750813124887235000: fast_test (claim) [test']
+
+📊 SUMMARY:
+  Fast-path items: 73
+  Regular items: 65
+  Total active: 138
+  Query time: 882ms",
+  "executed_at": "2025-06-25T00:58:50Z"
+},
+  "metadata": {
+    "execution_time_ms": 924,
+    "agent_id": "unknown",
+    "operation": "list-work-fast",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

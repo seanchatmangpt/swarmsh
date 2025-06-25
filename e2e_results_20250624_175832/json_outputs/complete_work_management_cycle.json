@@ -1,0 +1,38 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:33Z",
+    "trace_id": "bc2cfd8f0a6b88a5983586a12148b156",
+    "request_id": "req_1750813113392082000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Work completed successfully"
+  },
+  "data": {
+  "work_item": {
+    "id": "work_1750813112",
+    "status": "completed",
+    "result": "successfully_completed",
+    "velocity_points": 8,
+    "completed_at": "2025-06-25T00:58:33Z",
+    "original_output": "✅ COMPLETED: Released claim for work_1750813112 (successfully_completed) - 8 velocity points
+📊 VELOCITY: Added 8 points to team autonomous_team velocity"
+  }
+},
+  "metadata": {
+    "execution_time_ms": 90,
+    "agent_id": "unknown",
+    "operation": "complete",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

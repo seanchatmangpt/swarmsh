@@ -1,0 +1,34 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T01:00:09Z",
+    "trace_id": "8da66280a0a9b48dd38e1e6d8529a314",
+    "request_id": "req_1750813209867152000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "optimize",
+  "status": "completed",
+  "output": "🚀 Starting 80/20 performance optimization (trace: a555e1910e01867c9692cb7b290dc417)
+No completed work claims found to archive",
+  "executed_at": "2025-06-25T01:00:09Z"
+},
+  "metadata": {
+    "execution_time_ms": 40,
+    "agent_id": "unknown",
+    "operation": "optimize",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

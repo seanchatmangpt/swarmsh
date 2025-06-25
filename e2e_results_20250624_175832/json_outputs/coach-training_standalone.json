@@ -1,0 +1,66 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:51Z",
+    "trace_id": "cbd99b5e26c8063cc4151e09acb59bab",
+    "request_id": "req_1750813131350647000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "coach-training",
+  "status": "completed",
+  "output": "🎓 SCRUM AT SCALE COACH TRAINING
+===============================
+
+📚 TRAINING PROGRAM: Advanced SAFe® Leadership
+📅 Duration: 2-day intensive workshop
+🏆 Certification: SAFe® Release Train Engineer (RTE)
+
+🎯 LEARNING OBJECTIVES:
+  1. 🚀 ART Launch and Facilitation
+     • PI Planning facilitation techniques
+     • Inspect & Adapt workshop leadership
+     • System Demo orchestration
+
+  2. 🔄 Continuous Improvement Leadership
+     • Kaizen event facilitation
+     • Value stream mapping
+     • Metrics-driven improvement
+
+  3. 🤝 Servant Leadership in Action
+     • Impediment removal strategies
+     • Cross-functional team coaching
+     • Conflict resolution techniques
+
+🛠️ PRACTICAL EXERCISES:
+  ✅ Mock PI Planning Session (4 hours)
+  ✅ Problem-Solving Workshop Facilitation
+  ✅ ART Metrics Analysis and Action Planning
+  ✅ Difficult Conversation Role-Playing
+
+📈 COACHING COMPETENCY AREAS:
+  🎯 Agile Coaching: Advanced (Level 4/5)
+  🏗️ Technical Coaching: Intermediate (Level 3/5)
+  🤝 Enterprise Coaching: Advanced (Level 4/5)
+  📊 Lean-Agile Leadership: Expert (Level 5/5)",
+  "executed_at": "2025-06-25T00:58:51Z"
+},
+  "metadata": {
+    "execution_time_ms": 22,
+    "agent_id": "unknown",
+    "operation": "coach-training",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

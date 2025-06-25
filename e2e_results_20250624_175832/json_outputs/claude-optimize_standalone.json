@@ -1,0 +1,38 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:59:07Z",
+    "trace_id": "26451dbfe6ccb0ac9f6fcdc9973cc779",
+    "request_id": "req_1750813147369436000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "claude-optimize",
+  "status": "completed",
+  "output": "🎯 CLAUDE AGENT ASSIGNMENT OPTIMIZATION
+======================================
+🔍 Trace ID: a15a45a066274f5ab8c7f9811bb1a04b
+👥 Target: all_teams
+
+🎯 Optimization analysis completed and saved",
+  "executed_at": "2025-06-25T00:59:07Z"
+},
+  "metadata": {
+    "execution_time_ms": 354,
+    "agent_id": "unknown",
+    "operation": "claude-optimize",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

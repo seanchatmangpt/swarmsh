@@ -1,0 +1,36 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:44Z",
+    "trace_id": "381149beeed08a6ba2403d5f3cd3f072",
+    "request_id": "req_1750813124975777000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "claim-slow",
+  "status": "completed",
+  "output": "🔍 Trace ID: bdf87d7f90d949a3ecf688aaf8c8a8da
+🤖 Agent agent_1750813125935113000 claiming work: work_1750813125937570000
+✅ SUCCESS: Claimed work item work_1750813125937570000 for team test'
+🔧 REGISTERED: Agent agent_1750813125935113000 in team test' with 100% capacity",
+  "executed_at": "2025-06-25T00:58:46Z"
+},
+  "metadata": {
+    "execution_time_ms": 1044,
+    "agent_id": "unknown",
+    "operation": "claim-slow",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

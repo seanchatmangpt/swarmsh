@@ -1,0 +1,48 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:32Z",
+    "trace_id": "ae4232c3d1e98ad86dcb9eeb889e43b8",
+    "request_id": "req_1750813112703628000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Work item claimed successfully"
+  },
+  "data": {
+  "work_item": {
+    "id": "work_1750813112728833000",
+    "agent_id": "agent_1750813112726370000",
+    "type": "template_optimization",
+    "description": "'Optimize",
+    "priority": "dashboard",
+    "team": "templates'",
+    "status": "claimed",
+    "original_output": "⚡ Using 80/20 fast-path optimization
+🔍 Trace ID: 0ec2d3a35e732da07d2dffd98755b720
+🤖 Agent agent_1750813112726370000 claiming work: work_1750813112728833000
+✅ SUCCESS: Fast-path claimed work item work_1750813112728833000 for team templates' (23ms)
+🔧 Fast-path: Skipped agent registration for performance"
+  },
+  "coordination": {
+    "conflicts_detected": 0,
+    "work_queue_depth": 5,
+    "available_agents": 8
+  }
+},
+  "metadata": {
+    "execution_time_ms": 75,
+    "agent_id": "unknown",
+    "operation": "claim",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

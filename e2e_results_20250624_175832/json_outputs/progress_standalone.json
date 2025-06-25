@@ -1,0 +1,37 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T01:00:10Z",
+    "trace_id": "08009b004baea1a98f4ddeab045437a7",
+    "request_id": "req_1750813210278646000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Progress updated successfully"
+  },
+  "data": {
+  "work_item": {
+    "id": "nonexistent_work_id",
+    "progress_percent": 50,
+    "status": "in_progress",
+    "updated_at": "2025-06-25T01:00:10Z",
+    "original_output": "🔍 Trace ID: bb96ebc95c6e4b9829c7d5b5b5d28c6d
+📈 PROGRESS: Updated nonexistent_work_id to 50% (in_progress)"
+  }
+},
+  "metadata": {
+    "execution_time_ms": 77,
+    "agent_id": "unknown",
+    "operation": "progress",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

@@ -1,0 +1,79 @@
+Command,JSON_Status,OTEL_Status,Response_Time_MS,Trace_ID,Workflow_Context,Notes
+claim template_optimization 'Optimize dashboard templates' high performance_team,FAIL,FAIL,122,unknown,work_management_cycle,invalid_json
+progress work_1750813112 25 in_progress,FAIL,FAIL,110,unknown,work_management_cycle,invalid_json
+progress work_1750813112 75 nearly_complete,FAIL,FAIL,107,unknown,work_management_cycle,invalid_json
+complete work_1750813112 successfully_completed 8,FAIL,FAIL,131,unknown,work_management_cycle,invalid_json
+register agent_1750813113 performance_team 15 optimization,PASS,PASS,108,ac96da689de702c72171b51f22381633,agent_work_assignment,
+claim performance_tuning 'Tune system performance' critical performance_team,FAIL,FAIL,109,unknown,agent_work_assignment,invalid_json
+progress work_1750813113 50 in_progress,FAIL,FAIL,112,unknown,agent_work_assignment,invalid_json
+pi-planning ,FAIL,FAIL,70,unknown,scrum_at_scale_ceremony,invalid_json
+system-demo ,FAIL,FAIL,70,unknown,scrum_at_scale_ceremony,invalid_json
+inspect-adapt ,FAIL,FAIL,66,unknown,scrum_at_scale_ceremony,invalid_json
+claude-analyze-priorities ,FAIL,FAIL,7698,unknown,ai_analysis_pipeline,invalid_json,slow_response
+claude-health-analysis ,FAIL,FAIL,769,unknown,ai_analysis_pipeline,invalid_json
+claude-team-analysis performance_team,FAIL,FAIL,443,unknown,ai_analysis_pipeline,invalid_json
+portfolio-kanban ,FAIL,FAIL,61,unknown,portfolio_management,invalid_json
+coach-training ,FAIL,FAIL,63,unknown,portfolio_management,invalid_json
+art-sync ,FAIL,FAIL,75,unknown,portfolio_management,invalid_json
+claim api_test 'API integration test' high api_team,FAIL,FAIL,119,unknown,standalone,invalid_json
+claim-fast fast_test 'Fast claim test' medium,FAIL,FAIL,106,unknown,standalone,invalid_json
+claim-slow slow_test 'Slow claim test' low,FAIL,FAIL,1082,unknown,standalone,invalid_json,slow_response
+claim-intelligent ai_test 'AI-enhanced claim' critical,FAIL,FAIL,1499,unknown,standalone,invalid_json,slow_response
+claim-ai ai_test2 'AI claim alias' high,FAIL,FAIL,1524,unknown,standalone,invalid_json,slow_response
+progress work_1750813129 60 active,FAIL,FAIL,117,unknown,standalone,invalid_json
+complete work_1750813129 completed 10,FAIL,FAIL,108,unknown,standalone,invalid_json
+list-work ,FAIL,FAIL,66,unknown,standalone,invalid_json
+list-work-fast ,FAIL,FAIL,963,unknown,standalone,invalid_json
+register agent_1750813130 coordination_team 20 management,PASS,PASS,105,30fc872f599c189d31d53562312934c5,standalone,
+dashboard ,FAIL,FAIL,87,unknown,standalone,invalid_json
+dashboard-fast ,FAIL,FAIL,159,unknown,standalone,invalid_json
+pi-planning ,FAIL,FAIL,76,unknown,standalone,invalid_json
+scrum-of-scrums ,FAIL,FAIL,64,unknown,standalone,invalid_json
+innovation-planning ,FAIL,FAIL,67,unknown,standalone,invalid_json
+ip ,FAIL,FAIL,67,unknown,standalone,invalid_json
+system-demo ,FAIL,FAIL,66,unknown,standalone,invalid_json
+inspect-adapt ,FAIL,FAIL,62,unknown,standalone,invalid_json
+ia ,FAIL,FAIL,62,unknown,standalone,invalid_json
+art-sync ,FAIL,FAIL,64,unknown,standalone,invalid_json
+portfolio-kanban ,FAIL,FAIL,64,unknown,standalone,invalid_json
+coach-training ,FAIL,FAIL,65,unknown,standalone,invalid_json
+value-stream ,FAIL,FAIL,67,unknown,standalone,invalid_json
+vsm ,FAIL,FAIL,65,unknown,standalone,invalid_json
+claude-analyze-priorities ,FAIL,FAIL,7716,unknown,standalone,invalid_json,slow_response
+claude-priorities ,FAIL,FAIL,7664,unknown,standalone,invalid_json,slow_response
+claude-optimize-assignments ,FAIL,FAIL,427,unknown,standalone,invalid_json
+claude-optimize ,FAIL,FAIL,391,unknown,standalone,invalid_json
+claude-health-analysis ,FAIL,FAIL,497,unknown,standalone,invalid_json
+claude-health ,FAIL,FAIL,389,unknown,standalone,invalid_json
+claude-team-analysis performance_team,FAIL,FAIL,400,unknown,standalone,invalid_json
+claude-team coordination_team,FAIL,FAIL,402,unknown,standalone,invalid_json
+claude-dashboard ,FAIL,FAIL,53,unknown,standalone,invalid_json
+intelligence ,FAIL,FAIL,53,unknown,standalone,invalid_json
+claude-stream coordination 30,FAIL,FAIL,30009,unknown,standalone,command_failed,slow_response
+stream performance 45,FAIL,FAIL,30015,unknown,standalone,command_failed,slow_response
+claude-pipe priorities,FAIL,FAIL,67,unknown,standalone,invalid_json
+pipe bottlenecks,FAIL,FAIL,66,unknown,standalone,invalid_json
+claude-enhanced priorities input output analysis,FAIL,FAIL,58,unknown,standalone,invalid_json
+enhanced optimization data results analysis,FAIL,FAIL,57,unknown,standalone,invalid_json
+optimize ,FAIL,FAIL,78,unknown,standalone,invalid_json
+generate-id ,PASS,PASS,95,840f2c597237c86da5dd3a3340e99192,standalone,
+help ,FAIL,FAIL,55,unknown,standalone,invalid_json
+invalid_command_test_12345 ,FAIL,FAIL,62,unknown,standalone,invalid_json
+claim ,FAIL,FAIL,108,unknown,standalone,invalid_json
+progress nonexistent_work_id 50,FAIL,FAIL,114,unknown,standalone,invalid_json
+complete invalid_work_id,FAIL,FAIL,99,unknown,standalone,invalid_json
+generate-id ,PASS,PASS,109,40ffe7655c0416ac6f28b98ce5724484,rapid_sequence,
+claim stress_test_2 'Stress test 2' medium stress_team,FAIL,FAIL,133,unknown,standalone,invalid_json
+generate-id ,PASS,PASS,101,6bbcbab7d6b411d2ce080e037c6be687,rapid_sequence,
+generate-id ,PASS,PASS,102,b207cfeca8354e83e58dbaccff6bfc5d,rapid_sequence,
+generate-id ,PASS,PASS,106,052a6c19aac6a8ab625f9d62812200ba,rapid_sequence,
+generate-id ,PASS,PASS,111,e1c3c5fc28391958c836959d2c596b37,rapid_sequence,
+claim stress_test_3 'Stress test 3' medium stress_team,FAIL,FAIL,1263,unknown,standalone,invalid_json,slow_response
+claim stress_test_6 'Stress test 6' medium stress_team,FAIL,FAIL,1262,unknown,standalone,invalid_json,slow_response
+claim stress_test_4 'Stress test 4' medium stress_team,FAIL,FAIL,1263,unknown,standalone,invalid_json,slow_response
+claim stress_test_7 'Stress test 7' medium stress_team,FAIL,FAIL,1261,unknown,standalone,invalid_json,slow_response
+claim stress_test_9 'Stress test 9' medium stress_team,FAIL,FAIL,1259,unknown,standalone,invalid_json,slow_response
+claim stress_test_1 'Stress test 1' medium stress_team,FAIL,FAIL,1266,unknown,standalone,invalid_json,slow_response
+claim stress_test_8 'Stress test 8' medium stress_team,FAIL,FAIL,1262,unknown,standalone,invalid_json,slow_response
+claim stress_test_10 'Stress test 10' medium stress_team,FAIL,FAIL,1261,unknown,standalone,invalid_json,slow_response
+claim stress_test_5 'Stress test 5' medium stress_team,FAIL,FAIL,1301,unknown,standalone,invalid_json,slow_response

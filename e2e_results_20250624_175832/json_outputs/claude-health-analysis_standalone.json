@@ -1,0 +1,37 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:59:07Z",
+    "trace_id": "074aa7886d10238b5bd5d78a45c57a07",
+    "request_id": "req_1750813147762661000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "claude-health-analysis",
+  "status": "completed",
+  "output": "🏥 CLAUDE SWARM HEALTH ANALYSIS
+===============================
+🔍 Trace ID: ed23424d707ab8481096e2755a2cd142
+
+🏥 Health analysis completed and saved",
+  "executed_at": "2025-06-25T00:59:08Z"
+},
+  "metadata": {
+    "execution_time_ms": 460,
+    "agent_id": "unknown",
+    "operation": "claude-health-analysis",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

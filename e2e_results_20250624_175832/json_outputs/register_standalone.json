@@ -1,0 +1,41 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:50Z",
+    "trace_id": "30fc872f599c189d31d53562312934c5",
+    "request_id": "req_1750813130367611000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Agent registered successfully"
+  },
+  "data": {
+  "agent": {
+    "id": "agent_1750813130",
+    "team": "coordination_team",
+    "capacity": {
+      "current": 0,
+      "maximum": 20
+    },
+    "specialization": "management",
+    "status": "active",
+    "registered_at": "2025-06-25T00:58:50Z",
+    "original_output": "🔧 REGISTERED: Agent agent_1750813130 in team coordination_team with 20% capacity"
+  }
+},
+  "metadata": {
+    "execution_time_ms": 31,
+    "agent_id": "unknown",
+    "operation": "register",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

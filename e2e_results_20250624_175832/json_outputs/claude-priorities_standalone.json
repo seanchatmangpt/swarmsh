@@ -1,0 +1,50 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:59Z",
+    "trace_id": "2aea3d194699cd34d1f68a6f9890a8ed",
+    "request_id": "req_1750813139271857000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "claude-priorities",
+  "status": "completed",
+  "output": "🧠 CLAUDE WORK PRIORITY ANALYSIS
+===============================
+🔍 Trace ID: 58bfe2a92dc6425728cd86bf46ae661d
+
+🚀 Attempting Claude Code streaming analysis...
+🚀 Using Claude Code headless integration (Engineering Elixir Applications)
+✅ Claude Code headless analysis completed successfully
+📊 Priority Recommendations:
+  🎯 observability_infrastructure: Priority 95 - Critical: Need comprehensive monitoring for coordination performance with Promex + Grafana
+  🎯 distributed_tracing: Priority 90 - Essential: Trace correlation across agent coordination boundaries with OpenTelemetry
+  🎯 performance_monitoring: Priority 85 - Important: Real-time visibility into system performance with live dashboards
+
+🔧 Optimization Opportunities:
+  ⚡ promex_integration: Add custom Promex metrics for agent coordination performance tracking (Impact: 0.85)
+  ⚡ grafana_dashboards: Engineering Elixir Applications: Real-time coordination monitoring dashboards (Impact: 0.80)
+  ⚡ trace_correlation: OpenTelemetry correlation between coordination events and system performance (Impact: 0.75)
+
+🎯 Analysis Confidence: 70.00%",
+  "executed_at": "2025-06-25T00:59:06Z"
+},
+  "metadata": {
+    "execution_time_ms": 7628,
+    "agent_id": "unknown",
+    "operation": "claude-priorities",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

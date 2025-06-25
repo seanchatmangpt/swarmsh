@@ -1,0 +1,38 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:47Z",
+    "trace_id": "7ebb788f22abd417ff2b6d223af33a68",
+    "request_id": "req_1750813127564922000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "claim-ai",
+  "status": "completed",
+  "output": "🎯 Claude Intelligence: Analyzing optimal work claim for agent agent_1750813127584683000...
+⚠️ AI work recommendation unavailable - proceeding with requested work
+🔍 Trace ID: b2f5d102701d4497ddc61f9ae527c75b
+🤖 Agent agent_1750813128959279000 claiming work: work_1750813128961606000
+✅ SUCCESS: Claimed work item work_1750813128961606000 for team alias'
+🔧 REGISTERED: Agent agent_1750813128959279000 in team alias' with 100% capacity",
+  "executed_at": "2025-06-25T00:58:49Z"
+},
+  "metadata": {
+    "execution_time_ms": 1482,
+    "agent_id": "unknown",
+    "operation": "claim-ai",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

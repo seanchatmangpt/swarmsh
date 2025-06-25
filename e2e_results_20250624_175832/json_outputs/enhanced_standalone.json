@@ -1,0 +1,34 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T01:00:09Z",
+    "trace_id": "45d9a026609199ef13acc94799e0f4db",
+    "request_id": "req_1750813209806614000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "enhanced",
+  "status": "completed",
+  "output": "🧠 Enhanced Claude Analysis: optimization
+❌ All attempts failed - generating fallback analysis",
+  "executed_at": "2025-06-25T01:00:09Z"
+},
+  "metadata": {
+    "execution_time_ms": 20,
+    "agent_id": "unknown",
+    "operation": "enhanced",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

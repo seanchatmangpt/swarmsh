@@ -1,0 +1,46 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:59:09Z",
+    "trace_id": "08b5f87e8f79f71a8b98ea2b344c3084",
+    "request_id": "req_1750813149518110000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "intelligence",
+  "status": "completed",
+  "output": "
+🧠 CLAUDE INTELLIGENCE COORDINATION DASHBOARD
+==============================================
+
+📊 AVAILABLE AI ANALYSIS REPORTS:
+  🎯 Work Priority Analysis: Available
+  👥 Team Formation Analysis: Available
+  🔍 System Health Analysis: Available
+
+🚀 AI ANALYSIS COMMANDS:
+  claude-analyze-priorities    - Analyze work priority optimization with structured JSON
+  claude-optimize-assignments [team] - Optimize agent assignments and load balancing
+  claude-health-analysis       - Comprehensive swarm health analysis
+  claude-team-analysis [team]  - Detailed team performance and dynamics analysis",
+  "executed_at": "2025-06-25T00:59:09Z"
+},
+  "metadata": {
+    "execution_time_ms": 17,
+    "agent_id": "unknown",
+    "operation": "intelligence",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

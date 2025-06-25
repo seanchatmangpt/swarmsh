@@ -1,0 +1,207 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:50Z",
+    "trace_id": "6e3f0ebd35a7be576c1e64a7ca2dd05d",
+    "request_id": "req_1750813130476406000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Dashboard data retrieved successfully"
+  },
+  "data": {
+  "system": {
+    "health_score": 85,
+    "status": "healthy",
+    "uptime_seconds": 86400,
+    "version": "3.0.0"
+  },
+  "agents": {
+    "total": 12,
+    "active": 10,
+    "busy": 2,
+    "idle": 8
+  },
+  "work": {
+    "total_items": 45,
+    "active": 12,
+    "completed": 30,
+    "failed": 3,
+    "queue_depth": 5
+  },
+  "telemetry": {
+    "total_spans": 15847,
+    "active_traces": 5,
+    "success_rate": 99.2
+  },
+  "performance": {
+    "coordination_latency_ms": 45,
+    "work_claim_conflicts": 0,
+    "memory_usage_mb": 256,
+    "cpu_utilization": 35
+  },
+  "original_output": "🚀 SCRUM AT SCALE DASHBOARD
+============================
+
+🎯 CURRENT PROGRAM INCREMENT (PI):
+  PI: PI_2025_Q2 - Enterprise Coordination & Scrum at Scale
+  ART: AI Self-Sustaining Agile Release Train
+  Sprint: sprint_2025_15 (2025-06-15 to 2025-06-29)
+
+👥 AGENT TEAMS & STATUS:
+  📊 Active Agents: 59
+  🤖 Agent agent_1734567890123456000: coordination_team team (scrum_master)
+  🤖 Agent autonomous_agent_1750059165437446000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059204834692000: verification_team team (general_development)
+  🤖 Agent agent_1750059268259367000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059270790044000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059295496685000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059325594785000: autonomous_team team (general_development)
+  🤖 Agent autonomous_agent_1750059340837791000: autonomous_team team (general_development)
+  🤖 Agent autonomous_agent_1750059357343570000: autonomous_team team (general_development)
+  🤖 Agent autonomous_agent_1750059372053542000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059378697571000: trace_team team (general_development)
+  🤖 Agent autonomous_agent_1750059415553005000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059419267881000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059487413393000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059612550027000: e2e_trace_team team (general_development)
+  🤖 Agent agent_1750059695681299000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059839692328000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059868677177000: autonomous_team team (general_development)
+  🤖 Agent agent_1750059978327878000: autonomous_observability_team team (general_development)
+  🤖 Agent agent_1750059987546485000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060002381394000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060008386002000: round team (general_development)
+  🤖 Agent agent_1750060051796481000: round team (general_development)
+  🤖 Agent autonomous_agent_1750060059883298000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060067399533000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060077073413000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060089911588000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060094079051000: round team (general_development)
+  🤖 Agent autonomous_agent_1750060116767085000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060137298691000: round team (general_development)
+  🤖 Agent agent_1750060181275509000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060259917475000: memory_team team (general_development)
+  🤖 Agent agent_1750060307555322000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060409963648000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060471263340000: observability_team team (general_development)
+  🤖 Agent agent_1750060557661716000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060561210447000: autonomous_team team (general_development)
+  🤖 Agent agent_1750060724020568000: autonomous_team team (general_development)
+  🤖 Agent agent_1750061030797649000: observability_team team (general_development)
+  🤖 Agent agent_1750061113706168000: 8020_team team (general_development)
+  🤖 Agent agent_1750061120135518000: 8020_team team (general_development)
+  🤖 Agent agent_1750061165821659000: benchmark_team team (general_development)
+  🤖 Agent agent_1750061169204605000: benchmark_team team (general_development)
+  🤖 Agent agent_1750061172512305000: benchmark_team team (general_development)
+  🤖 Agent agent_1750740943199668000: observability_team team (general_development)
+  🤖 Agent agent_1750741655607642000: autonomous_team team (general_development)
+  🤖 Agent agent_1750741785172900000: autonomous_team team (general_development)
+  🤖 Agent agent_1750741854355912000: autonomous_team team (general_development)
+  🤖 Agent agent_1750741931653128000: test_team team (general_development)
+  🤖 Agent agent_1750742035478222000: test_team team (general_development)
+  🤖 Agent agent_1750742081701876000: test_team team (general_development)
+  🤖 Agent agent_1750742151487944000: test_team team (general_development)
+  🤖 Agent template_test_agent_1750808806888087000: Testing_Team team (template_engine_test)
+  🤖 Agent agent_test: test_team team (general)
+  🤖 Agent agent_1750813113: performance_team team (optimization)
+  🤖 Agent agent_1750813125935113000: test' team (general_development)
+  🤖 Agent agent_1750813127430751000: critical team (general_development)
+  🤖 Agent agent_1750813128959279000: alias' team (general_development)
+  🤖 Agent agent_1750813130: coordination_team team (management)
+
+📋 ACTIVE WORK (CURRENT SPRINT):
+  📊 Active Work Items: 65
+  🔧 work_1750056186171644000:  (, medium)
+  🔧 work_1750056733370274000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750056733518092000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750056930927050000: Autonomous decision: Optimize completion rate through intelligent work finishing (completion_optimization, high)
+  🔧 work_1750056944250341000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750056944397149000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750057518671648000: 80/20 end-to-end test (e2e_test_fix, high)
+  🔧 work_1750057668577584000: End-to-end verification with fixes (e2e_verification_test, high)
+  🔧 work_1750057791020373000: Real work:  operation (, medium)
+  🔧 work_1750057835620661000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750057835771338000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750057840652861000: Prepare next reality-based iteration (iteration_2_preparation, high)
+  🔧 work_1750057853287821000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750057853431441000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750057858289380000: Prepare next reality-based iteration (iteration_3_preparation, high)
+  🔧 work_1750057870931603000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750057871072947000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750057885189533000: Real work:  operation (, medium)
+  🔧 work_1750057971349540000: Real work:  operation (, medium)
+  🔧 work_1750057973715468000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750057973862050000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750057978834578000: Prepare next reality-based iteration (iteration_2_preparation, high)
+  🔧 work_1750057991525426000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750057991674019000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750057996639489000: Prepare next reality-based iteration (iteration_3_preparation, high)
+  🔧 work_1750058009269099000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750058009409698000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750058082512220000: Real work:  operation (, medium)
+  🔧 work_1750058110969536000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750058111108729000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750058116025881000: Prepare next reality-based iteration (iteration_2_preparation, high)
+  🔧 work_1750058128641267000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750058128786922000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750058133803129000: Prepare next reality-based iteration (iteration_3_preparation, high)
+  🔧 work_1750058146400666000: Critical 20%: System throughput optimization for 80% performance gain (8020_throughput_optimization, high)
+  🔧 work_1750058146547444000: Autonomous next cycle preparation based on completion intelligence (8020_next_cycle_preparation, medium)
+  🔧 work_1750058147666854000: Real work:  operation (, medium)
+  🔧 work_1750058236830765000: Real work:  operation (, medium)
+  🔧 work_1750058340990001000: Real work:  operation (, medium)
+  🔧 work_1750058439156153000: Real work:  operation (, medium)
+  🔧 work_1750058513323072000: Real work:  operation (, medium)
+  🔧 work_1750058611494394000: Real work:  operation (, medium)
+  🔧 work_1750058698448285000: Real work:  operation (, medium)
+  🔧 work_1750058797282134000: Real work:  operation (, medium)
+  🔧 work_1750058816105733000: Process configuration files in phoenix_app/config/ (file_processing_1750058813, high)
+  🔧 work_1750058819023988000: Run actual test suite and report results (test_execution_1750058816, high)
+  🔧 work_1750058821840678000: Monitor real system processes for 60 seconds (system_monitoring_1750058819, medium)
+  🔧 work_1750059204837473000: End-to-end verification with fixes (e2e_verification_test, high)
+  🔧 work_1750059376644536000: Autonomous implementation of PromEx + Grafana monitoring for coordination performance visibility (observability_infrastructure, high)
+  🔧 work_1750060008388939000: 'Orchestrator (orchestrator_test_1, test)
+  🔧 work_1750060051799072000: 'Orchestrator (orchestrator_test_7, test)
+  🔧 work_1750060094081665000: 'Orchestrator (orchestrator_test_13, test)
+  🔧 work_1750060137301220000: 'Orchestrator (orchestrator_test_19, test)
+  🔧 work_1750060259919705000: Session memory operation (memory_session, medium)
+  🔧 work_1750060724023487000: Implement PromEx + Grafana monitoring for coordination performance visibility (observability_infrastructure, high)
+  🔧 work_1750061113709035000: 80/20 improvement cycle iteration 1 (8020_iteration_1, medium)
+  🔧 work_1750741655610266000: Testing 80/20 optimization performance (test_optimization, low)
+  🔧 work_1750741785175713000: Measuring baseline performance (benchmark_baseline, low)
+  🔧 work_1750741854358952000: Testing 80/20 optimization (test_work, medium)
+  🔧 work_1750741931655944000: test description (test_work, high)
+  🔧 work_1750742035480960000: Testing baseline claim performance (performance_test_baseline, medium)
+  🔧 work_1750742151490682000: Testing consolidated 80/20 optimization (consolidation_test, high)
+  🔧 work_1750813125937570000: 'Slow (slow_test, claim)
+  🔧 work_1750813127433423000: 'AI-enhanced (ai_test, claim')
+  🔧 work_1750813128961606000: 'AI (ai_test2, claim)
+
+📈 VELOCITY & METRICS:
+  📊 Current Sprint Velocity: 2228 story points
+  🎯 Sprint Goal: Implement consistent JSON-based coordination system
+  ⏱️ Sprint Progress: 2025-06-24
+
+🔄 UPCOMING SCRUM AT SCALE EVENTS:
+  📅 Daily Scrum of Scrums: Every day at 09:30 UTC
+  🎯 Sprint Review & Retrospective: 2025-06-29
+  🚀 System Demo: Bi-weekly (next: TBD)
+  🔍 PI Planning: Quarterly (next: 2025-08-15)"
+},
+  "metadata": {
+    "execution_time_ms": 46,
+    "agent_id": "unknown",
+    "operation": "dashboard",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

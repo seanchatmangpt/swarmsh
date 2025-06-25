@@ -1,0 +1,23 @@
+🤖 SCRUM AT SCALE AGENT COORDINATION HELPER
+==========================================
+
+📊 System Health: 85/100
+👥 Active Agents: 10/12
+📋 Work Queue: 12 active, 5 pending
+⚡ Performance: 45ms avg coordination latency
+
+🎯 Team Status:
+  parser_team: 3 agents
+  render_team: 4 agents
+  cache_team: 2 agents
+  coordination_team: 3 agents
+
+📈 Recent Activity:
+  ✅ Completed Work: 30
+  ❌ Failed Work: 3
+  📊 Success Rate: 99.2%
+
+🔍 Telemetry:
+  📋 Total Spans: 15847
+  🔄 Active Traces: 5
+  📈 Spans/Min: 24

@@ -1,0 +1,6 @@
+Workflow_Name,Status,Duration_MS,Trace_Correlation,Description
+work_management_cycle,FAIL,951,PARTIAL,Complete cycle: claim work -> update progress -> complete work
+agent_work_assignment,FAIL,687,PARTIAL,Register agent, claim work, track progress
+scrum_at_scale_ceremony,FAIL,562,PARTIAL,PI Planning -> System Demo -> Inspect & Adapt cycle
+ai_analysis_pipeline,FAIL,9268,PARTIAL,Complete AI analysis: priorities -> health -> team analysis
+portfolio_management,FAIL,561,PARTIAL,Portfolio planning and management cycle

@@ -1,0 +1,98 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:49Z",
+    "trace_id": "772535f2915f23eb77052f8404f93533",
+    "request_id": "req_1750813129328200000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "list-work",
+  "status": "completed",
+  "output": "📋 ACTIVE WORK ITEMS (Traditional):
+  🔧 work_1750056186171644000:  (medium) [autonomous_team]
+  🔧 work_1750056733370274000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750056733518092000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750056930927050000: completion_optimization (high) [meta_8020_team]
+  🔧 work_1750056944250341000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750056944397149000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750057518671648000: e2e_test_fix (high) [fix_team]
+  🔧 work_1750057668577584000: e2e_verification_test (high) [verification_team]
+  🔧 work_1750057791020373000:  (medium) [real_work_team]
+  🔧 work_1750057835620661000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750057835771338000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750057840652861000: iteration_2_preparation (high) [meta_8020_team]
+  🔧 work_1750057853287821000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750057853431441000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750057858289380000: iteration_3_preparation (high) [meta_8020_team]
+  🔧 work_1750057870931603000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750057871072947000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750057885189533000:  (medium) [real_work_team]
+  🔧 work_1750057971349540000:  (medium) [real_work_team]
+  🔧 work_1750057973715468000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750057973862050000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750057978834578000: iteration_2_preparation (high) [meta_8020_team]
+  🔧 work_1750057991525426000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750057991674019000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750057996639489000: iteration_3_preparation (high) [meta_8020_team]
+  🔧 work_1750058009269099000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750058009409698000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750058082512220000:  (medium) [real_work_team]
+  🔧 work_1750058110969536000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750058111108729000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750058116025881000: iteration_2_preparation (high) [meta_8020_team]
+  🔧 work_1750058128641267000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750058128786922000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750058133803129000: iteration_3_preparation (high) [meta_8020_team]
+  🔧 work_1750058146400666000: 8020_throughput_optimization (high) [meta_8020_team]
+  🔧 work_1750058146547444000: 8020_next_cycle_preparation (medium) [meta_8020_team]
+  🔧 work_1750058147666854000:  (medium) [real_work_team]
+  🔧 work_1750058236830765000:  (medium) [real_work_team]
+  🔧 work_1750058340990001000:  (medium) [real_work_team]
+  🔧 work_1750058439156153000:  (medium) [real_work_team]
+  🔧 work_1750058513323072000:  (medium) [real_work_team]
+  🔧 work_1750058611494394000:  (medium) [real_work_team]
+  🔧 work_1750058698448285000:  (medium) [real_work_team]
+  🔧 work_1750058797282134000:  (medium) [real_work_team]
+  🔧 work_1750058816105733000: file_processing_1750058813 (high) [reality_team]
+  🔧 work_1750058819023988000: test_execution_1750058816 (high) [reality_team]
+  🔧 work_1750058821840678000: system_monitoring_1750058819 (medium) [reality_team]
+  🔧 work_1750059204837473000: e2e_verification_test (high) [verification_team]
+  🔧 work_1750059376644536000: observability_infrastructure (high) [autonomous_team]
+  🔧 work_1750060008388939000: orchestrator_test_1 (test) [round]
+  🔧 work_1750060051799072000: orchestrator_test_7 (test) [round]
+  🔧 work_1750060094081665000: orchestrator_test_13 (test) [round]
+  🔧 work_1750060137301220000: orchestrator_test_19 (test) [round]
+  🔧 work_1750060259919705000: memory_session (medium) [memory_team]
+  🔧 work_1750060724023487000: observability_infrastructure (high) [autonomous_team]
+  🔧 work_1750061113709035000: 8020_iteration_1 (medium) [8020_team]
+  🔧 work_1750741655610266000: test_optimization (low) [autonomous_team]
+  🔧 work_1750741785175713000: benchmark_baseline (low) [autonomous_team]
+  🔧 work_1750741854358952000: test_work (medium) [autonomous_team]
+  🔧 work_1750741931655944000: test_work (high) [test_team]
+  🔧 work_1750742035480960000: performance_test_baseline (medium) [test_team]
+  🔧 work_1750742151490682000: consolidation_test (high) [test_team]
+  🔧 work_1750813125937570000: slow_test (claim) [test']
+  🔧 work_1750813127433423000: ai_test (claim') [critical]
+  🔧 work_1750813128961606000: ai_test2 (claim) [alias']",
+  "executed_at": "2025-06-25T00:58:49Z"
+},
+  "metadata": {
+    "execution_time_ms": 25,
+    "agent_id": "unknown",
+    "operation": "list-work",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

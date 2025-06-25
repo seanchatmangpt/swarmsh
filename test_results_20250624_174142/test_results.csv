@@ -1,0 +1,22 @@
+Command,JSON_Status,OTEL_Status,Response_Time_MS,Notes
+claim comprehensive_test "Comprehensive test work item" high test_team,FAIL,FAIL,55,invalid_json
+progress work_test_1750812102 50 in_progress,PASS,PASS,64,
+complete work_test_1750812102 completed 8,FAIL,FAIL,29,invalid_json
+claim-slow slow_test "Slow claim test" medium,FAIL,FAIL,37,command_failed
+claim-fast fast_test "Fast claim test" medium,FAIL,FAIL,49,command_failed
+claim-intelligent ai_test "AI-enhanced claim test" high,FAIL,FAIL,36,command_failed
+claim-ai ai_test2 "AI claim alias test" high,FAIL,FAIL,37,command_failed
+list-work ,FAIL,FAIL,35,command_failed
+list-work-fast ,FAIL,FAIL,36,command_failed
+register test_agent_1750812103 test_team 10 testing,FAIL,FAIL,28,invalid_json
+dashboard ,FAIL,FAIL,37,invalid_json
+dashboard-fast ,FAIL,FAIL,38,command_failed
+pi-planning ,FAIL,FAIL,46,invalid_json
+scrum-of-scrums ,FAIL,FAIL,36,command_failed
+innovation-planning ,FAIL,FAIL,35,command_failed
+ip ,FAIL,FAIL,36,command_failed
+system-demo ,FAIL,FAIL,37,invalid_json
+inspect-adapt ,FAIL,FAIL,36,command_failed
+ia ,FAIL,FAIL,35,command_failed
+art-sync ,FAIL,FAIL,35,command_failed
+portfolio-kanban ,FAIL,FAIL,29,command_failed

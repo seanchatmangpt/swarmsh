@@ -1,0 +1,67 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:50Z",
+    "trace_id": "75490c92ad6685338aeecf5555008a5b",
+    "request_id": "req_1750813130806485000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "scrum-of-scrums",
+  "status": "completed",
+  "output": "🤝 SCRUM OF SCRUMS COORDINATION
+===============================
+
+📅 Date: 2025-06-24 | Time: 17:58 UTC
+👥 Participants: Scrum Masters + Technical Leads
+
+🔄 TEAM UPDATES:
+
+📋 COORDINATION TEAM:
+  ✅ Yesterday: Implemented atomic work claiming in YAML
+  🎯 Today: Migrating to nanosecond-based agent IDs
+  ⚠️ Impediments: None blocking
+  🤝 Dependencies: Waiting for Platform team YAML validation
+
+🔧 DEVELOPMENT TEAM:
+  ✅ Yesterday: Resolved compilation warnings, improved code quality
+  🎯 Today: Implementing AI Scrum Master agent
+  ⚠️ Impediments: None blocking
+  🤝 Dependencies: Architecture guidance from Platform team
+
+🏗️ PLATFORM TEAM:
+  ✅ Yesterday: Deployed enterprise coordination infrastructure
+  🎯 Today: YAML schema validation and migration tools
+  ⚠️ Impediments: None blocking
+  🤝 Dependencies: None
+
+🎯 CROSS-TEAM COORDINATION ACTIONS:
+  1. Platform team to provide YAML validation by EOD
+  2. Coordination team to demo new claiming system
+  3. Development team to integrate with new agent ID system
+
+📈 ART METRICS:
+  📊 Sprint Burndown: On track
+  🎯 PI Progress: 15% complete
+  ⚡ Team Velocity: Consistent with planning",
+  "executed_at": "2025-06-25T00:58:50Z"
+},
+  "metadata": {
+    "execution_time_ms": 25,
+    "agent_id": "unknown",
+    "operation": "scrum-of-scrums",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:50Z",
+    "trace_id": "e7de68e8f531161e83d103541509eb74",
+    "request_id": "req_1750813130873355000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "innovation-planning",
+  "status": "completed",
+  "output": "💡 INNOVATION AND PLANNING (IP) ITERATION
+==========================================
+
+📅 IP Iteration Week: 2025-06-24 - 2025-06-29
+🎯 ART: AI Self-Sustaining Agile Release Train
+
+🔬 INNOVATION TIME (20%):
+  💡 Technical Debt Reduction
+  🧪 Proof of Concepts and Spikes
+  📚 Learning and Development
+  🔧 Tool and Infrastructure Improvements
+
+📋 PLANNING ACTIVITIES (80%):
+  🎯 Next PI Planning Preparation
+  📊 ART Sync and Inspect & Adapt
+  🔄 System Demo Preparation
+  📈 Metrics and Retrospectives
+
+🚀 INNOVATION BACKLOG ITEMS:
+  1. [Tech Debt] Refactor coordination middleware for better performance
+  2. [Spike] Investigate distributed agent coordination patterns
+  3. [Tool] Automated ART health monitoring dashboard
+  4. [Learning] Advanced Reactor pattern optimization techniques",
+  "executed_at": "2025-06-25T00:58:50Z"
+},
+  "metadata": {
+    "execution_time_ms": 24,
+    "agent_id": "unknown",
+    "operation": "innovation-planning",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

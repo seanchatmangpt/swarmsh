@@ -1,0 +1,34 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:59:09Z",
+    "trace_id": "6009ea4731edbeee34d9adc62df31890",
+    "request_id": "req_1750813149057101000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "claude-team",
+  "status": "completed",
+  "output": "👥 Claude Intelligence: Analyzing optimal team formation...
+⚠️ Claude team analysis unavailable - using current formation",
+  "executed_at": "2025-06-25T00:59:09Z"
+},
+  "metadata": {
+    "execution_time_ms": 366,
+    "agent_id": "unknown",
+    "operation": "claude-team",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

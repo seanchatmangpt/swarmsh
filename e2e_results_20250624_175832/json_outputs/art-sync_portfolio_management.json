@@ -1,0 +1,65 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:44Z",
+    "trace_id": "89bbeb67ff09ce4fe84d3b76eb4ea2b8",
+    "request_id": "req_1750813124551687000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "art-sync",
+  "status": "completed",
+  "output": "🔄 ART SYNC - ALIGNMENT ACROSS TEAMS
+===================================
+
+📅 Date: 2025-06-24 | Time: 17:58 UTC
+👥 Attendees: RTEs, Scrum Masters, Product Owners
+
+🎯 PROGRAM RISKS AND DEPENDENCIES:
+  🔴 HIGH RISK: External API dependency for N8n integration
+     • Mitigation: Implement fallback coordination mechanism
+     • Owner: Platform Team | Due: 2025-06-27
+
+  🟡 MEDIUM RISK: Agent coordination scalability at 1000+ agents
+     • Mitigation: Implement distributed coordination layer
+     • Owner: Coordination Team | Due: Next PI
+
+🔗 CROSS-TEAM DEPENDENCIES:
+  📋 Coordination Team → Development Team
+     • Agent middleware interface specification
+     • Status: Complete ✅
+
+  🔧 Development Team → Platform Team
+     • Telemetry schema validation
+     • Status: In Progress 🔄 (80%)
+
+  🏗️ Platform Team → All Teams
+     • Infrastructure capacity planning
+     • Status: Blocked ❌ (waiting for budget approval)
+
+📈 ART HEALTH METRICS:
+  🎯 Sprint Goal Achievement: 95% (19/20 teams)
+  📊 Velocity Trend: Stable (+2% from last PI)
+  🔧 Deployment Frequency: 12 deployments/day
+  ⚡ Lead Time: 2.3 days (Target: <3 days)",
+  "executed_at": "2025-06-25T00:58:44Z"
+},
+  "metadata": {
+    "execution_time_ms": 28,
+    "agent_id": "unknown",
+    "operation": "art-sync",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

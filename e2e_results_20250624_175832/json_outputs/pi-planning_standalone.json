@@ -1,0 +1,52 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:50Z",
+    "trace_id": "0dcffd8eb3da121f0dcb4243314aaad0",
+    "request_id": "req_1750813130740470000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "pi-planning",
+  "status": "completed",
+  "output": "🎯 STARTING PI PLANNING SESSION
+===============================
+
+📋 PI PLANNING FOR: PI_2025_Q7
+🎯 ART: AI Self-Sustaining Agile Release Train
+⏱️ Duration: 8 weeks (4 sprints)
+
+🏆 PI OBJECTIVES (Business Value Prioritized):
+  1. [BV: 50] Implement Advanced Agent Coordination
+  2. [BV: 40] Deploy Continuous Quality Gates
+  3. [BV: 30] Enhance System Observability
+  4. [BV: 20] Optimize Performance & Scalability
+
+👥 TEAM CAPACITY PLANNING:
+  📋 Coordination Team: 40 pts/sprint × 4 sprints = 160 pts capacity
+  🔧 Development Team: 45 pts/sprint × 4 sprints = 180 pts capacity
+  🏗️ Platform Team: 35 pts/sprint × 4 sprints = 140 pts capacity
+  📊 TOTAL ART CAPACITY: 480 story points
+
+🎯 PI PLANNING COMPLETE - Commitments established for PI_2025_Q7",
+  "executed_at": "2025-06-25T00:58:50Z"
+},
+  "metadata": {
+    "execution_time_ms": 25,
+    "agent_id": "unknown",
+    "operation": "pi-planning",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

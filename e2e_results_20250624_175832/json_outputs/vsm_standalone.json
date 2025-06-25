@@ -1,0 +1,72 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:51Z",
+    "trace_id": "2561a9d511e697b332ec8fb30f2f797d",
+    "request_id": "req_1750813131486666000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "vsm",
+  "status": "completed",
+  "output": "🗺️ VALUE STREAM MAPPING - END-TO-END FLOW
+========================================
+
+🎯 VALUE STREAM: From Concept to Production Deployment
+📊 Mapping Session Date: 2025-06-24
+
+🔄 CURRENT STATE MAP:
+  1. 💡 Concept → Feature Request (Lead Time: 2 days)
+     • Process Time: 4 hours | Wait Time: 44 hours
+     • Quality: 85% acceptance rate
+
+  2. 📋 Feature Request → Development Ready (Lead Time: 5 days)
+     • Process Time: 8 hours | Wait Time: 112 hours
+     • Quality: 90% story acceptance criteria met
+
+  3. 🔧 Development → Testing (Lead Time: 3 days)
+     • Process Time: 16 hours | Wait Time: 56 hours
+     • Quality: 95% automated test coverage
+
+  4. ✅ Testing → Production (Lead Time: 1 day)
+     • Process Time: 2 hours | Wait Time: 22 hours
+     • Quality: 99.5% deployment success rate
+
+📊 CURRENT STATE METRICS:
+  ⏱️ Total Lead Time: 11 days
+  🔧 Total Process Time: 30 hours
+  ⏳ Total Wait Time: 234 hours (87% of total time)
+  📈 Process Efficiency: 13% (30h process / 234h total)
+
+🎯 FUTURE STATE VISION:
+  ⚡ Target Lead Time: 3 days (73% reduction)
+  🚀 Target Process Efficiency: 40%
+  🔄 Continuous Flow: Eliminate 80% of wait time
+  📊 Quality: Maintain >99% while increasing speed
+
+🔧 IMPROVEMENT OPPORTUNITIES:
+  1. 🤖 Automated feature triage and sizing
+  2. 🔄 Continuous integration and deployment
+  3. 📋 Pull-based work management
+  4. 🎯 Definition of Ready automation",
+  "executed_at": "2025-06-25T00:58:51Z"
+},
+  "metadata": {
+    "execution_time_ms": 24,
+    "agent_id": "unknown",
+    "operation": "vsm",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T01:00:09Z",
+    "trace_id": "fbbc03b34033741a85a90c9b157be08c",
+    "request_id": "req_1750813209679451000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "pipe",
+  "status": "completed",
+  "output": "🔍 Claude Pipe Analyzer (bottlenecks) - Reading from stdin...
+❌ No input data received",
+  "executed_at": "2025-06-25T01:00:09Z"
+},
+  "metadata": {
+    "execution_time_ms": 23,
+    "agent_id": "unknown",
+    "operation": "pipe",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

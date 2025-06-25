@@ -1,0 +1,37 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:44Z",
+    "trace_id": "b68bd33abd4d4e8f933e7d04de13df37",
+    "request_id": "req_1750813124865783000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "claim-fast",
+  "status": "completed",
+  "output": "⚡ Using 80/20 fast-path optimization
+🔍 Trace ID: 9f43a13ecf94d9e89d597823f51f88e1
+🤖 Agent agent_1750813124884936000 claiming work: work_1750813124887235000
+✅ SUCCESS: Fast-path claimed work item work_1750813124887235000 for team test' (20ms)
+🔧 Fast-path: Skipped agent registration for performance",
+  "executed_at": "2025-06-25T00:58:44Z"
+},
+  "metadata": {
+    "execution_time_ms": 68,
+    "agent_id": "unknown",
+    "operation": "claim-fast",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

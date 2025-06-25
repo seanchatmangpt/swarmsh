@@ -1,0 +1,37 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:41:42Z",
+    "trace_id": "cbc77472c26bfc63caa51455af7fe43a",
+    "request_id": "req_1750812102862809000"
+  },
+  "status": {
+    "code": "error",
+    "message": "Unknown command: claim-intelligent",
+    "details": "Use 'help' to see available commands"
+  },
+  "data": {
+  "error": {
+    "code": "invalid_command",
+    "message": "Unknown command: claim-intelligent",
+    "details": "Use 'help' to see available commands",
+    "timestamp": "2025-06-25T00:41:42Z",
+    "trace_id": "cbc77472c26bfc63caa51455af7fe43a"
+  }
+},
+  "metadata": {
+    "execution_time_ms": 4,
+    "agent_id": "unknown",
+    "operation": "error",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

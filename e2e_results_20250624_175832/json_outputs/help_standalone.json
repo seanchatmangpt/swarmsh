@@ -1,0 +1,131 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T01:00:10Z",
+    "trace_id": "5ecea4ec1f9b90a55f62c9d856fbce40",
+    "request_id": "req_1750813210045356000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Help information retrieved"
+  },
+  "data": {
+  "commands": {
+    "work_management": {
+      "claim": {
+        "usage": "claim <work_type> <description> [priority] [team] [--json]",
+        "description": "Claim work with optional JSON output"
+      },
+      "progress": {
+        "usage": "progress <work_id> <percent> [status] [--json]",
+        "description": "Update work progress with optional JSON output"
+      },
+      "complete": {
+        "usage": "complete <work_id> [result] [velocity_points] [--json]",
+        "description": "Complete work item with optional JSON output"
+      }
+    },
+    "agent_management": {
+      "register": {
+        "usage": "register <agent_id> [team] [capacity] [specialization] [--json]",
+        "description": "Register agent with optional JSON output"
+      }
+    },
+    "dashboard": {
+      "dashboard": {
+        "usage": "dashboard [--json]",
+        "description": "Show system dashboard with optional JSON output"
+      }
+    }
+  },
+  "json_options": {
+    "global_flags": ["--json", "--output-json"],
+    "environment_variables": {
+      "SWARMSH_OUTPUT_FORMAT": "json|text"
+    }
+  },
+  "original_output": "🤖 SCRUM AT SCALE AGENT COORDINATION HELPER
+Usage: /Users/sac/dev/swarmsh/coordination_helper.sh <command> [args...]
+
+🎯 Work Management Commands:
+  claim <work_type> <description> [priority] [team]  - Claim work with nanosecond ID
+  claim-intelligent <work_type> <description> [priority] [team] - AI-enhanced work claiming
+  progress <work_id> <percent> [status]              - Update work progress
+  complete <work_id> [result] [velocity_points]      - Complete work and update velocity
+  register <agent_id> [team] [capacity] [spec]       - Register agent in Scrum team
+
+🧠 AI Intelligence Commands:
+  claude-analyze-priorities | claude-priorities      - AI work priority analysis with structured JSON
+  claude-suggest-teams | claude-teams               - AI team formation recommendations
+  claude-analyze-health | claude-health             - AI system health analysis
+  claude-recommend-work <type> | claude-recommend   - AI work claiming advice
+  claude-dashboard | intelligence                    - Show AI analysis dashboard
+
+⚡ Enhanced AI Utilities (Unix-style):
+  claude-stream <focus> [duration] | stream         - Real-time coordination insights stream
+  claude-pipe <analysis_type> | pipe                - Pipe data through AI for analysis
+  claude-enhanced <type> <input> <output> | enhanced - Enhanced analysis with retry logic
+    Analysis types: priorities, bottlenecks, recommendations, general
+
+📊 Scrum at Scale Commands:
+  dashboard                                           - Show Scrum at Scale dashboard
+  dashboard-fast                                      - 🚀 Fast-path dashboard (80/20 optimized)
+  pi-planning                                         - Run PI Planning session
+  scrum-of-scrums                                     - Coordinate between teams
+  innovation-planning | ip                            - Innovation & Planning iteration
+  system-demo                                         - Run integrated system demo
+  inspect-adapt | ia                                  - Inspect & Adapt workshop
+  art-sync                                            - ART synchronization meeting
+  portfolio-kanban                                    - Portfolio-level epic management
+  coach-training                                      - Scrum at Scale coach development
+  value-stream | vsm                                  - Value stream mapping session
+  generate-id                                         - Generate nanosecond agent ID
+
+🔧 Utility Commands:
+  optimize                                            - 80/20 performance optimization (archive completed work)
+  help                                                - Show this help
+
+🌟 Features:
+  ✅ Nanosecond-based agent IDs for uniqueness
+  ✅ JSON-based coordination (consistent with AgentCoordinationMiddleware)
+  ✅ Atomic file locking for zero-conflict work claiming
+  ✅ Compatible with Reactor middleware telemetry
+  ✅ Team coordination and basic metrics tracking
+  ✅ jq-based JSON processing with fallback support
+  ✅ AI structured output with JSON schema validation via Ollama-Pro
+  ✅ Real-time AI analysis streaming and Unix-style piping
+
+💡 Example Usage Patterns:
+  # Real-time monitoring:
+    ./coordination_helper.sh claude-stream performance 60
+
+  # Unix-style AI analysis pipeline:
+    cat work_claims.json | ./coordination_helper.sh claude-pipe priorities
+
+  # Enhanced analysis with retry:
+    ./coordination_helper.sh claude-enhanced bottlenecks work_claims.json analysis.json
+
+  # Combined workflow:
+    ./coordination_helper.sh claude-priorities && ./coordination_helper.sh claude-stream system 30
+
+Environment Variables:
+  AGENT_ID     - Nanosecond-based unique agent identifier
+  AGENT_ROLE   - Agent role in Scrum team
+  AGENT_TEAM   - Scrum team assignment"
+},
+  "metadata": {
+    "execution_time_ms": 16,
+    "agent_id": "unknown",
+    "operation": "help",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

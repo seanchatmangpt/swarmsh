@@ -1570,3 +1570,819 @@ EOF < /dev/null{"trace_id":"cc4f5aba9208946d5d2db7a22cd9fb17","operation":"readm
     "script_path": "/Users/sac/dev/swarmsh/worktrees/auto-docs"
   }
 }
+{"trace_id":"40acd2ab590c8488e957126eb3ec5acf","span_id":"28a1590995e64a1d","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T23:30:00Z"}
+{"trace_id":"7707244863b64a53008886f42693a5a4","span_id":"7b29fe69facf7770","operation":"8020_cron_log","level":"INFO","message":"📊 Starting 80/20 metrics collection","timestamp":"2025-06-24T23:30:00Z"}
+{"trace_id":"40acd2ab590c8488e957126eb3ec5acf","span_id":"443c319b0739c9b9","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T23:30:00Z"}
+{"trace_id":"40acd2ab590c8488e957126eb3ec5acf","span_id":"d1b40bcc42246656","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 65649s old","timestamp":"2025-06-24T23:30:00Z"}
+{"trace_id":"40acd2ab590c8488e957126eb3ec5acf","span_id":"065b53e980ccdfe6","operation":"8020.health.monitoring","duration_ms":169,"health_score":90,"status":"healthy","issues_count":1}
+{"trace_id":"7707244863b64a53008886f42693a5a4","span_id":"fa4a37b0221bd357","operation":"8020.metrics.collection","duration_ms":167,"active_work":00,"active_agents":52}
+{"trace_id":"7707244863b64a53008886f42693a5a4","span_id":"ad1491ab0c1ee8f9","operation":"8020_cron_log","level":"INFO","message":"✅ Metrics collection complete (167ms) - Report: /Users/sac/dev/swarmsh/logs/metrics_20250624_163000.json","timestamp":"2025-06-24T23:30:00Z"}
+{"trace_id":"40acd2ab590c8488e957126eb3ec5acf","span_id":"45b44e37ad3861b9","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (169ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_163000.json","timestamp":"2025-06-24T23:30:00Z"}
+{"trace_id":"7707244863b64a53008886f42693a5a4","span_id":"c659f044bc1d2173","operation":"8020.cron.automation","command":"metrics","total_duration_ms":221,"status":"completed"}
+{"trace_id":"40acd2ab590c8488e957126eb3ec5acf","span_id":"98bb7c088c6718f7","operation":"8020.cron.automation","command":"health","total_duration_ms":223,"status":"completed"}
+{
+  "trace_id": "b14c9ea43b67248e15cd6daeea34d677",
+  "span_id": "f85b1bdef37e6059",
+  "operation_name": "template_engine.parse",
+  "status": "completed",
+  "start_time": "2025-06-24T23:35:07.3NZ",
+  "duration_ms": 185,
+  "service": {
+    "name": "swarmsh-template-engine",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "swarmsh-template-engine",
+    "service.version": "1.0.0",
+    "template.component": "distributed_renderer",
+    "deployment.environment": "worktree"
+  },
+  "span_attributes": {"template_file":"simple.sh","blocks":1,"lines":1}
+}
+{
+  "trace_id": "722e576e59f04b8e6b985d92f7591b3f",
+  "span_id": "5135b04e888df721",
+  "operation_name": "template_engine.parse",
+  "status": "completed",
+  "start_time": "2025-06-24T23:35:27.3NZ",
+  "duration_ms": 171,
+  "service": {
+    "name": "swarmsh-template-engine",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "swarmsh-template-engine",
+    "service.version": "1.0.0",
+    "template.component": "distributed_renderer",
+    "deployment.environment": "worktree"
+  },
+  "span_attributes": {"template_file":"test_simple.sh","blocks":2,"lines":2}
+}
+{
+  "trace_id": "722e576e59f04b8e6b985d92f7591b3f",
+  "span_id": "a6c7a39434360435",
+  "operation_name": "template_engine.render_distributed",
+  "status": "completed",
+  "start_time": "2025-06-24T23:35:27.3NZ",
+  "duration_ms": 500,
+  "service": {
+    "name": "swarmsh-template-engine",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "swarmsh-template-engine",
+    "service.version": "1.0.0",
+    "template.component": "distributed_renderer",
+    "deployment.environment": "worktree"
+  },
+  "span_attributes": {"blocks":2,"agents":3780,"output_file":"/Users/sac/dev/swarmsh/worktrees/template-engine/template_work/test_simple.sh.out"}
+}
+{
+  "trace_id": "bcede5ee4742c29a0c115ec6158e6205",
+  "span_id": "85a8f5bfbb7f810a",
+  "operation_name": "template_engine.render",
+  "status": "completed",
+  "duration_ms": 22,
+  "timestamp": "2025-06-24T23:38:12.3NZ"
+}
+{
+  "trace_id": "036bf4000dbadb664b8428fbd4000f57",
+  "span_id": "a85b823ca33c92b4",
+  "operation_name": "template_engine.render",
+  "status": "completed",
+  "duration_ms": 24,
+  "timestamp": "2025-06-24T23:39:20.3NZ"
+}
+{
+  "trace_id": "9cd27491d766873bab770688a6c96855",
+  "span_id": "735896d7f39ee780",
+  "operation_name": "template_engine.render",
+  "status": "completed",
+  "duration_ms": 21,
+  "timestamp": "2025-06-24T23:39:35.3NZ"
+}
+{
+  "trace_id": "f9a65b16c1d3cc8cda81616fd6021182",
+  "span_id": "74148cd60c74c4ce",
+  "operation_name": "template_engine.render",
+  "status": "completed",
+  "duration_ms": 22,
+  "timestamp": "2025-06-24T23:39:45.3NZ"
+}
+{
+  "trace_id": "d827140ee40d6f0dc694c2a6b9019299",
+  "span_id": "a62615f7b40fe707",
+  "operation_name": "template_engine.render",
+  "status": "completed",
+  "duration_ms": 49,
+  "timestamp": "2025-06-24T23:40:04.3NZ"
+}
+{
+  "trace_id": "fb730af9996cbba028f230675212c41d",
+  "span_id": "ee94e727393b8bbb",
+  "operation_name": "template_engine.render",
+  "status": "completed",
+  "duration_ms": 24,
+  "timestamp": "2025-06-24T23:40:20.3NZ"
+}
+{
+  "trace_id": "261ed6f55064cf419082a89d1be5a372",
+  "span_id": "fd49d006e68850a3",
+  "operation_name": "bpmn_generator.workflow_analysis",
+  "status": "completed",
+  "start_time": "2025-06-24T23:40:29.3NZ",
+  "duration_ms": 29,
+  "service": {
+    "name": "bpmn-ollama-generator",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "bpmn-ollama-generator",
+    "service.version": "1.0.0",
+    "bpmn.component": "workflow_analyzer",
+    "deployment.environment": "development"
+  },
+  "span_attributes": {"coordination_processes":46,"cron_processes":11,"telemetry_operations":10,"work_types":8}
+}
+{
+  "trace_id": "261ed6f55064cf419082a89d1be5a372",
+  "span_id": "82490bf35ce89ddc",
+  "operation_name": "bpmn_generator.bpmn_generation",
+  "status": "completed",
+  "start_time": "2025-06-24T23:40:30.3NZ",
+  "duration_ms": 2,
+  "service": {
+    "name": "bpmn-ollama-generator",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "bpmn-ollama-generator",
+    "service.version": "1.0.0",
+    "bpmn.component": "workflow_analyzer",
+    "deployment.environment": "development"
+  },
+  "span_attributes": {"diagrams_generated":0,"scope":"custom","output_dir":"/Users/sac/dev/swarmsh/docs/bpmn_diagrams"}
+}
+{"trace_id":"bafa269dd9d023c0a35de00782065ce8","span_id":"885dfba505e21905","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-24T23:45:00Z"}
+{"trace_id":"bafa269dd9d023c0a35de00782065ce8","span_id":"7ee50682d16c4cef","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 90/100 (healthy)","timestamp":"2025-06-24T23:45:00Z"}
+{"trace_id":"bafa269dd9d023c0a35de00782065ce8","span_id":"3f3faebcb100fac8","operation":"8020_cron_log","level":"WARN","message":"⚠️ Issue: Agent status file stale: 66549s old","timestamp":"2025-06-24T23:45:00Z"}
+{"trace_id":"bafa269dd9d023c0a35de00782065ce8","span_id":"f74f1666163a01c7","operation":"8020.health.monitoring","duration_ms":141,"health_score":90,"status":"healthy","issues_count":1}
+{"trace_id":"bafa269dd9d023c0a35de00782065ce8","span_id":"86053d8e7808f3f2","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (141ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_164500.json","timestamp":"2025-06-24T23:45:00Z"}
+{"trace_id":"bafa269dd9d023c0a35de00782065ce8","span_id":"ed07c2ee8cbbf315","operation":"8020.cron.automation","command":"health","total_duration_ms":190,"status":"completed"}
+{
+  "trace_id": "b9b52eb53a9e3c97eaf2307199867b47",
+  "span_id": "90d677beb9b1bd7b",
+  "operation_name": "template_engine.render",
+  "status": "completed",
+  "duration_ms": 45,
+  "timestamp": "2025-06-24T23:45:34.3NZ"
+}
+{
+    "trace_id": "2cb9d336ad01ffd4ecd715d2ad1bae6e",
+    "span_id": "044e5b24118db307",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 6,
+    "timestamp": "2025-06-24T23:56:01Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"context_sources/base_system.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "5c5fb454b72b12c8f4af68e24723f227",
+    "span_id": "d73244de444f4d50",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 6,
+    "timestamp": "2025-06-24T23:56:01Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"context_sources/agents.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "1c4c581ceae1048d8c0f563a8d942b05",
+    "span_id": "aad61d1150c3cfdc",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 6,
+    "timestamp": "2025-06-24T23:56:01Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"context_sources/dynamic_metrics.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "43324aebdf5b40560e6b340236bfce86",
+    "span_id": "0553c946fee30ed8",
+    "operation_name": "template_context.context_optimization",
+    "status": "success",
+    "duration_ms": 22,
+    "timestamp": "2025-06-24T23:56:01Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"original_size":1352,"optimized_size":1010,"compression_ratio":25}
+}
+{
+    "trace_id": "7e0e3ef92c2a8bbee6c6fb960283f995",
+    "span_id": "e85ca4aa34b669ab",
+    "operation_name": "template_context.context_composition",
+    "status": "success",
+    "duration_ms": 505,
+    "timestamp": "2025-06-24T23:56:01Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"sources":6,"output_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809361298292000.json"}
+}
+{
+    "trace_id": "fd47729a0f3604f09d2f9a8803bce4a3",
+    "span_id": "3371b50df4212c75",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 42,
+    "timestamp": "2025-06-24T23:56:01Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809361298292000.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/template_schema.json"}
+}
+{
+    "trace_id": "3fe26b0e69a6924ae52c9216a97edda3",
+    "span_id": "c8098f64199d215c",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 6,
+    "timestamp": "2025-06-24T23:56:19Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"context_sources/base_system.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "a500c2b4c7c7bd85c29e5530d76a225e",
+    "span_id": "a5bfd65d089fa28d",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 5,
+    "timestamp": "2025-06-24T23:56:19Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"context_sources/agents.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "42d1d4b56ec55838222f974b96feb67d",
+    "span_id": "8947366a6ee30647",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 6,
+    "timestamp": "2025-06-24T23:56:19Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"context_sources/dynamic_metrics.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "4474d2cd88fa43fbdae0ce9f1cb67c10",
+    "span_id": "fb340a9bbd244374",
+    "operation_name": "template_context.context_optimization",
+    "status": "success",
+    "duration_ms": 20,
+    "timestamp": "2025-06-24T23:56:19Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"original_size":1341,"optimized_size":999,"compression_ratio":25}
+}
+{
+    "trace_id": "9c1914b37c88dfcf4b142c819ec32e62",
+    "span_id": "af4abb291a0c98bd",
+    "operation_name": "template_context.context_composition",
+    "status": "success",
+    "duration_ms": 239,
+    "timestamp": "2025-06-24T23:56:19Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"sources":6,"output_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809379432871000.json"}
+}
+{
+    "trace_id": "2dde0de83124ab86cc4780a6abc8fffe",
+    "span_id": "c0ce802afcec46ed",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 42,
+    "timestamp": "2025-06-24T23:56:19Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809379432871000.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/template_schema.json"}
+}
+{
+    "trace_id": "5af948ec91004e88906b31afadeba46a",
+    "span_id": "a17e08619649eeeb",
+    "operation_name": "template_context.security_sanitization",
+    "status": "success",
+    "duration_ms": 34,
+    "timestamp": "2025-06-24T23:56:19Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"file_size":999,"depth":3}
+}
+{
+    "trace_id": "91c95fbb751e309959c199627b64f525",
+    "span_id": "de5824aa480954cc",
+    "operation_name": "template_context.template_render",
+    "status": "success",
+    "duration_ms": 726,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"template":"agi_dashboard_template.sh","context_sources":6}
+}
+{
+    "trace_id": "ced55e89c8d072215171780072afe813",
+    "span_id": "f10b8a0c5fa253f4",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 6,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"context_sources/invalid_context.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "6a6446d6bbfc75122153493c7ef8d3fd",
+    "span_id": "f0420a735750a3e9",
+    "operation_name": "template_context.context_optimization",
+    "status": "success",
+    "duration_ms": 20,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"original_size":104,"optimized_size":80,"compression_ratio":23}
+}
+{
+    "trace_id": "787fa0dca85345dbc84dc3a27af8676c",
+    "span_id": "52aac1672df26d8d",
+    "operation_name": "template_context.context_composition",
+    "status": "success",
+    "duration_ms": 81,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"sources":1,"output_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809380191455000.json"}
+}
+{
+    "trace_id": "dc74f9ae66169eb78802a88b5eebb9af",
+    "span_id": "9bc40e7937492330",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 41,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809380191455000.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/template_schema.json"}
+}
+{
+    "trace_id": "2fa07285187a617c64eccd04436eefe2",
+    "span_id": "a618497721122af3",
+    "operation_name": "template_context.security_sanitization",
+    "status": "success",
+    "duration_ms": 37,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"file_size":80,"depth":2}
+}
+{
+    "trace_id": "992c88910cbb15b972a32e9c5709a907",
+    "span_id": "167075d844b21ff2",
+    "operation_name": "template_context.template_render",
+    "status": "success",
+    "duration_ms": 591,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"template":"agi_dashboard_template.sh","context_sources":1}
+}
+{
+    "trace_id": "2d30615c5eaaabf2bfe4b0e6fa93f216",
+    "span_id": "382d5f532bbe2381",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 5,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"context_sources/dangerous_context.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "8a171c433ca4ad2406a3348e4724e1dc",
+    "span_id": "55e1326aef01759e",
+    "operation_name": "template_context.context_optimization",
+    "status": "success",
+    "duration_ms": 19,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"original_size":133,"optimized_size":105,"compression_ratio":21}
+}
+{
+    "trace_id": "6b8d8a6e6e1645ecb19c7b584f388095",
+    "span_id": "d1ffb94e758339e8",
+    "operation_name": "template_context.context_composition",
+    "status": "success",
+    "duration_ms": 79,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"sources":1,"output_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809380813490000.json"}
+}
+{
+    "trace_id": "98e2db46f4ead2767aad0e45d0e53c40",
+    "span_id": "6019904f50339c29",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 39,
+    "timestamp": "2025-06-24T23:56:20Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809380813490000.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/template_schema.json"}
+}
+{
+    "trace_id": "1e658a2da3c12eecae65dbc42884f911",
+    "span_id": "d71e1e6ee9cc7702",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 7,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"base_context.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "3f96b7c4df76b1b8032d45629f551aff",
+    "span_id": "eafe4a799319334c",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 6,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"system_info.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "82aeaec0e0b94cd7e9423f400c30089e",
+    "span_id": "90c8841b03450d0e",
+    "operation_name": "template_context.context_optimization",
+    "status": "success",
+    "duration_ms": 21,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"original_size":316,"optimized_size":247,"compression_ratio":21}
+}
+{
+    "trace_id": "f268fde844c51d7f833c6ec02f42f4c8",
+    "span_id": "9d9093c1fd0c2043",
+    "operation_name": "template_context.context_composition",
+    "status": "success",
+    "duration_ms": 308,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"sources":4,"output_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809441230568000.json"}
+}
+{
+    "trace_id": "2cef8bf9ae53af8a9bd64b4f15a1f288",
+    "span_id": "625f480a636e1bce",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 40,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809441230568000.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/template_schema.json"}
+}
+{
+    "trace_id": "c5f3452923dacda40b6607e4d8f85752",
+    "span_id": "98999ba2c6449f94",
+    "operation_name": "template_context.security_sanitization",
+    "status": "success",
+    "duration_ms": 31,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"file_size":247,"depth":2}
+}
+{
+    "trace_id": "1f67b55828b8686655154af210c94a4b",
+    "span_id": "1a55175d1a49dd0b",
+    "operation_name": "template_context.template_render",
+    "status": "success",
+    "duration_ms": 458,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"template":"/dev/null","context_sources":4}
+}
+{
+    "trace_id": "4d72568a3d3bec6d836888cb4786493e",
+    "span_id": "7de350556917e410",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 7,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"valid_context.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "c78af4ee9fdab37442014f4f4885c873",
+    "span_id": "f60ec7807752dfd5",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 11,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"invalid_context.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "a258066bd9c341131360ad02080d1c8b",
+    "span_id": "6d2d4b6a78dac12a",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 5,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"safe_context.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "ff20cf54169dff04d4b0c15d9838dc0f",
+    "span_id": "963bc9852c413e3d",
+    "operation_name": "template_context.context_optimization",
+    "status": "success",
+    "duration_ms": 25,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"original_size":115,"optimized_size":87,"compression_ratio":24}
+}
+{
+    "trace_id": "4fef96059eed3f19ba7cf1261ca17b77",
+    "span_id": "a0c0c4ee2afdf8c5",
+    "operation_name": "template_context.context_composition",
+    "status": "success",
+    "duration_ms": 86,
+    "timestamp": "2025-06-24T23:57:21Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"sources":1,"output_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809441865095000.json"}
+}
+{
+    "trace_id": "8f09e6f940ee83949a3255380a076cca",
+    "span_id": "3b35b05b45122fbe",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 43,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809441865095000.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/template_schema.json"}
+}
+{
+    "trace_id": "2a049a5a40358d772074d87d29257ff8",
+    "span_id": "4563e7ed5f94ce19",
+    "operation_name": "template_context.security_sanitization",
+    "status": "success",
+    "duration_ms": 31,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"file_size":87,"depth":2}
+}
+{
+    "trace_id": "c1f534e930b9639db2c8a8a9ae736057",
+    "span_id": "ede2096f46e1a0ed",
+    "operation_name": "template_context.template_render",
+    "status": "success",
+    "duration_ms": 239,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"template":"/dev/null","context_sources":1}
+}
+{
+    "trace_id": "370da16c0e2ab0c0893eeb4b0ff25f78",
+    "span_id": "1e8d60581b3d8b41",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 6,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"dangerous_context.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "1252f7818b84e7d0e86749c34bff7c65",
+    "span_id": "7844a61426ce50ef",
+    "operation_name": "template_context.context_optimization",
+    "status": "success",
+    "duration_ms": 20,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"original_size":121,"optimized_size":104,"compression_ratio":14}
+}
+{
+    "trace_id": "441c11b770584eefa6798b219a6482e5",
+    "span_id": "da5700370f1c560c",
+    "operation_name": "template_context.context_composition",
+    "status": "success",
+    "duration_ms": 86,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"sources":1,"output_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809442134525000.json"}
+}
+{
+    "trace_id": "35e1d58e433c142a9366c5b24d911d43",
+    "span_id": "2448fd084a378960",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 35,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809442134525000.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/template_schema.json"}
+}
+{
+    "trace_id": "2435fd0fd27ae00153412a6e01b5145e",
+    "span_id": "14446e9c67986989",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 6,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"large_context.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/base_schema.json"}
+}
+{
+    "trace_id": "c60c78f3a4c6e02c7f8a3ce8513f6559",
+    "span_id": "fba1b1a1dab947c4",
+    "operation_name": "template_context.context_optimization",
+    "status": "success",
+    "duration_ms": 21,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"original_size":365,"optimized_size":201,"compression_ratio":44}
+}
+{
+    "trace_id": "14439b44800c03ca0f6f0631a7014ae2",
+    "span_id": "2863a5255283567b",
+    "operation_name": "template_context.context_composition",
+    "status": "success",
+    "duration_ms": 88,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"sources":1,"output_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809442341056000.json"}
+}
+{
+    "trace_id": "4e59821e1bf0a1a26a9c9eaef31d2687",
+    "span_id": "c57a6349ab6f1fc1",
+    "operation_name": "template_context.schema_validation",
+    "status": "success",
+    "duration_ms": 34,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"context_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_cache/composed_1750809442341056000.json","schema_file":"/Users/sac/dev/swarmsh/worktrees/template-testing/context_schemas/template_schema.json"}
+}
+{
+    "trace_id": "fdbe88fcf05cf3107e46452da37a5fb5",
+    "span_id": "d0dc8b5b622d6bf6",
+    "operation_name": "template_context.security_sanitization",
+    "status": "success",
+    "duration_ms": 38,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"file_size":201,"depth":4}
+}
+{
+    "trace_id": "5d31aa5802d47f9d021c8353a39899e8",
+    "span_id": "effa7f104bc9b79e",
+    "operation_name": "template_context.template_render",
+    "status": "success",
+    "duration_ms": 252,
+    "timestamp": "2025-06-24T23:57:22Z",
+    "service": {
+        "name": "swarmsh-template-agi",
+        "version": "3.0.0"
+    },
+    "metadata": {"template":"/dev/null","context_sources":1}
+}
+{"trace_id":"603a4a5d52da0056e7f4945201ffd62b","span_id":"cf69ad49932d7014","operation":"8020_cron_log","level":"INFO","message":"⚡ Starting 80/20 work queue optimization","timestamp":"2025-06-25T00:00:01Z"}
+{"trace_id":"e1b2029a3029049400b4bd60a070b214","span_id":"bf4272c12658ca5e","operation":"8020_cron_log","level":"INFO","message":"📊 Starting 80/20 metrics collection","timestamp":"2025-06-25T00:00:01Z"}
+{"trace_id":"c20f9eb960ed57c36d28676a2675190d","span_id":"0d50ffa2fb626977","operation":"8020_cron_log","level":"INFO","message":"🏥 Starting 80/20 health monitoring","timestamp":"2025-06-25T00:00:01Z"}
+{"trace_id":"603a4a5d52da0056e7f4945201ffd62b","span_id":"f8d59975cba2a932","operation":"8020_cron_log","level":"INFO","message":"🧹 Cleaning completed work from main claims file","timestamp":"2025-06-25T00:00:01Z"}
+{"trace_id":"c20f9eb960ed57c36d28676a2675190d","span_id":"6874d227950bd0d4","operation":"8020_cron_log","level":"INFO","message":"🏥 Health Score: 100/100 (healthy)","timestamp":"2025-06-25T00:00:01Z"}
+{"trace_id":"603a4a5d52da0056e7f4945201ffd62b","span_id":"6362963d6cd3cd4e","operation":"8020_cron_log","level":"INFO","message":"📦 Archiving telemetry data (    2381 entries)","timestamp":"2025-06-25T00:00:01Z"}
+{"trace_id":"c20f9eb960ed57c36d28676a2675190d","span_id":"9641a9769e41aad7","operation":"8020.health.monitoring","duration_ms":329,"health_score":100,"status":"healthy","issues_count":0}
+{"trace_id":"e1b2029a3029049400b4bd60a070b214","span_id":"291a89884a437bae","operation":"8020.metrics.collection","duration_ms":342,"active_work":00,"active_agents":53}
+{"trace_id":"c20f9eb960ed57c36d28676a2675190d","span_id":"14eb67bae5171e74","operation":"8020_cron_log","level":"INFO","message":"✅ Health monitoring complete (329ms) - Report: /Users/sac/dev/swarmsh/logs/health_report_20250624_170001.json","timestamp":"2025-06-25T00:00:01Z"}
+{"trace_id":"c20f9eb960ed57c36d28676a2675190d","span_id":"8b46afe27ad42072","operation":"8020.cron.automation","command":"health","total_duration_ms":445,"status":"completed"}
+{"trace_id":"e1b2029a3029049400b4bd60a070b214","span_id":"8f54093208eab6e1","operation":"8020_cron_log","level":"INFO","message":"✅ Metrics collection complete (342ms) - Report: /Users/sac/dev/swarmsh/logs/metrics_20250624_170001.json","timestamp":"2025-06-25T00:00:01Z"}
+{"trace_id":"e1b2029a3029049400b4bd60a070b214","span_id":"93fd618c348ee968","operation":"8020.cron.automation","command":"metrics","total_duration_ms":447,"status":"completed"}

@@ -1,0 +1,51 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T01:00:10Z",
+    "trace_id": "dc1b6062e2d2216a8f25aa9a05fcb118",
+    "request_id": "req_1750813210505124000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Work item claimed successfully"
+  },
+  "data": {
+  "work_item": {
+    "id": "work_1750813210531586000",
+    "agent_id": "agent_1750813210528433000",
+    "type": "stress_test_5",
+    "description": "'Stress",
+    "priority": "test",
+    "team": "5'",
+    "status": "claimed",
+    "original_output": "⚡ Using 80/20 fast-path optimization
+🔍 Trace ID: b1c28ad44a584e1cac96d2be0557bc0f
+🤖 Agent agent_1750813210528433000 claiming work: work_1750813210531586000
+⚠️ Fast-path lock conflict - falling back to full JSON processing
+🔍 Trace ID: e0a12803f19e7e177bac33572a6f1e58
+🤖 Agent agent_1750813211672010000 claiming work: work_1750813211675182000
+✅ SUCCESS: Claimed work item work_1750813211675182000 for team 5'
+🔧 REGISTERED: Agent agent_1750813211672010000 in team 5' with 100% capacity"
+  },
+  "coordination": {
+    "conflicts_detected": 0,
+    "work_queue_depth": 5,
+    "available_agents": 8
+  }
+},
+  "metadata": {
+    "execution_time_ms": 1260,
+    "agent_id": "unknown",
+    "operation": "claim",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "swarmsh_api": {
+    "version": "1.0.0",
+    "timestamp": "2025-06-25T00:58:34Z",
+    "trace_id": "5b6f82283f8c6af6a03d26ad6325f774",
+    "request_id": "req_1750813114722451000"
+  },
+  "status": {
+    "code": "success",
+    "message": "Command executed successfully"
+  },
+  "data": {
+  "command": "inspect-adapt",
+  "status": "completed",
+  "output": "🔍 INSPECT AND ADAPT (I&A) WORKSHOP
+==================================
+
+📅 Workshop Date: 2025-06-24
+⏱️ Duration: 4 hours
+👥 Participants: Entire ART (50+ people)
+
+📊 PI RESULTS AND METRICS:
+  🎯 Business Value Delivered: 140 points (Target: 140)
+  📈 Predictability: 100% (Committed vs Delivered)
+  ⚡ Quality: 0 escaped defects
+  🔧 Technical Debt Ratio: 15% (Target: <20%)
+
+🔍 PROBLEM-SOLVING WORKSHOP:
+  1. 📋 Problem Identification (45 min)
+     • Root cause analysis using fishbone diagrams
+     • Pareto analysis of impediments
+  2. 💡 Solution Brainstorming (60 min)
+     • Cross-functional solution design
+     • SMART goal setting
+  3. 🎯 Action Planning (45 min)
+     • Commitment to specific improvements
+     • Owner assignment and timelines
+
+🎯 IMPROVEMENT BACKLOG ITEMS:
+  1. [Process] Reduce coordination overhead by 25%
+  2. [Technical] Implement predictive load balancing
+  3. [Team] Cross-training program for critical skills
+  4. [Tool] Enhanced real-time collaboration dashboard",
+  "executed_at": "2025-06-25T00:58:34Z"
+},
+  "metadata": {
+    "execution_time_ms": 23,
+    "agent_id": "unknown",
+    "operation": "inspect-adapt",
+    "performance": {
+      "cpu_time_ms": 45,
+      "memory_usage_kb": 1024,
+      "telemetry_spans":     2388
+    }
+  },
+  "telemetry": {
+    "spans_generated": 2,
+    "traces_active": 5,
+    "coordination_events": 1
+  }
+}
