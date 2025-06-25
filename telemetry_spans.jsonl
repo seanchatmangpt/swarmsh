@@ -1314,3 +1314,79 @@ EOF < /dev/null{"trace_id":"cc4f5aba9208946d5d2db7a22cd9fb17","operation":"readm
 {"trace_id":"4dcacf98c1927f333da424eb959febea","span_id":"dfad834cad225574","operation":"mermaid_generator.metrics_extracted","status":"completed","timestamp":"2025-06-24T22:10:32Z","metrics":{"total_spans":     505,"recent_spans":     100,"avg_health":90,"timeframe":"24h"}}
 {"trace_id":"4dcacf98c1927f333da424eb959febea","span_id":"a2dbf4551f1c7410","operation":"mermaid_generator.dashboard_generated","status":"completed","timestamp":"2025-06-24T22:10:32Z","metrics":{"health_score":90,"total_spans":     505}}
 {"trace_id":"4dcacf98c1927f333da424eb959febea","span_id":"fb2d635a93800594","operation":"mermaid_generator.generation_complete","status":"completed","timestamp":"2025-06-24T22:10:32Z","metrics":{"files_generated":5,"diagram_type":"all"}}
+{
+  "trace_id": "81d70756ad1b661b96a1d750c044b05c",
+  "span_id": "d908602b65eaa0a5",
+  "operation_name": "bpmn_generator.worktree_analysis",
+  "status": "completed",
+  "start_time": "2025-06-24T22:56:39.3NZ",
+  "duration_ms": 43,
+  "service": {
+    "name": "bpmn-ollama-generator",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "bpmn-ollama-generator",
+    "service.version": "1.0.0",
+    "bpmn.component": "worktree_generator",
+    "deployment.environment": "worktree"
+  },
+  "span_attributes": {"coordination_processes":46,"worktree_processes":8,"telemetry_operations":10,"work_types":8,"active_worktrees":4}
+}
+{
+  "trace_id": "a27ab57c612f5397e842e403d4755ca6",
+  "span_id": "e0f9e2a647b5a68f",
+  "operation_name": "bpmn_generator.worktree_analysis",
+  "status": "completed",
+  "start_time": "2025-06-24T22:56:50.3NZ",
+  "duration_ms": 34,
+  "service": {
+    "name": "bpmn-ollama-generator",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "bpmn-ollama-generator",
+    "service.version": "1.0.0",
+    "bpmn.component": "worktree_generator",
+    "deployment.environment": "worktree"
+  },
+  "span_attributes": {"coordination_processes":46,"worktree_processes":8,"telemetry_operations":10,"work_types":8,"active_worktrees":4}
+}
+{
+  "trace_id": "a27ab57c612f5397e842e403d4755ca6",
+  "span_id": "40d5849ed35d69b2",
+  "operation_name": "bpmn_generator.worktree_bpmn_generation",
+  "status": "completed",
+  "start_time": "2025-06-24T22:57:35.3NZ",
+  "duration_ms": 45016,
+  "service": {
+    "name": "bpmn-ollama-generator",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "bpmn-ollama-generator",
+    "service.version": "1.0.0",
+    "bpmn.component": "worktree_generator",
+    "deployment.environment": "worktree"
+  },
+  "span_attributes": {"diagrams_generated":0,"scope":"worktree","output_dir":"/Users/sac/dev/swarmsh/worktrees/bpmn-feature/docs/bpmn_diagrams","worktree":"bpmn-feature"}
+}
+{
+  "trace_id": "967f71b22572b44e43ae86222a7a5a95",
+  "span_id": "0b69ba84fbeada9b",
+  "operation_name": "bpmn_generator.worktree_analysis",
+  "status": "completed",
+  "start_time": "2025-06-24T23:02:04.3NZ",
+  "duration_ms": 54,
+  "service": {
+    "name": "bpmn-ollama-generator",
+    "version": "1.0.0"
+  },
+  "resource_attributes": {
+    "service.name": "bpmn-ollama-generator",
+    "service.version": "1.0.0",
+    "bpmn.component": "worktree_generator",
+    "deployment.environment": "worktree"
+  },
+  "span_attributes": {"coordination_processes":46,"worktree_processes":8,"telemetry_operations":10,"work_types":8,"active_worktrees":4}
+}

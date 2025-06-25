@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-06-24T23:02:04.3NZ",
+  "trace_id": "967f71b22572b44e43ae86222a7a5a95",
+  "worktree_context": "bpmn-feature",
+  "analysis_results": {
+    "coordination_processes": 46,
+    "worktree_management_processes": 8,
+    "telemetry_operations": 10,
+    "work_claim_types": 8,
+    "active_worktrees": 4,
+    "total_identifiable_workflows": 72
+  },
+  "recommended_bpmn_diagrams": [
+    "worktree_development_workflow",
+    "feature_development_process",
+    "agent_coordination_in_worktree",
+    "telemetry_collection_flow",
+    "isolated_testing_process"
+  ]
+}

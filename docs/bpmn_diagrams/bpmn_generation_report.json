@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-06-24T22:57:35.3NZ",
+  "trace_id": "a27ab57c612f5397e842e403d4755ca6",
+  "worktree_context": "bpmn-feature",
+  "scope": "worktree",
+  "diagrams_generated": 0,
+  "generation_duration_ms": 45016,
+  "output_directory": "/Users/sac/dev/swarmsh/worktrees/bpmn-feature/docs/bpmn_diagrams",
+  "generated_files": [
+"/Users/sac/dev/swarmsh/worktrees/bpmn-feature/docs/bpmn_diagrams/worktree_development.bpmn"
+  ]
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             targetNamespace="http://example.org/bpmn"
+             id="WorktreeDevelopmentDiagram">
+  
+  <process id="WorktreeDevelopment" isExecutable="false">
+    <startEvent id="start" name="Feature Request">
+      <outgoing>flow1</outgoing>
+    </startEvent>
+    
+    <task id="create_worktree" name="Create Feature Worktree">
+      <incoming>flow1</incoming>
+      <outgoing>flow2</outgoing>
+    </task>
+    
+    <task id="setup_coordination" name="Setup Isolated Coordination">
+      <incoming>flow2</incoming>
+      <outgoing>flow3</outgoing>
+    </task>
+    
+    <parallelGateway id="parallel_dev" name="Parallel Development">
+      <incoming>flow3</incoming>
+      <outgoing>flow4</outgoing>
+      <outgoing>flow5</outgoing>
+    </parallelGateway>
+    
+    <task id="implement_feature" name="Implement Feature">
+      <incoming>flow4</incoming>
+      <outgoing>flow6</outgoing>
+    </task>
+    
+    <task id="track_telemetry" name="Track Telemetry">
+      <incoming>flow5</incoming>
+      <outgoing>flow7</outgoing>
+    </task>
+    
+    <parallelGateway id="parallel_join" name="Join Development">
+      <incoming>flow6</incoming>
+      <incoming>flow7</incoming>
+      <outgoing>flow8</outgoing>
+    </parallelGateway>
+    
+    <task id="test_validation" name="Testing &amp; Validation">
+      <incoming>flow8</incoming>
+      <outgoing>flow9</outgoing>
+    </task>
+    
+    <exclusiveGateway id="tests_pass" name="Tests Pass?">
+      <incoming>flow9</incoming>
+      <outgoing>flow10</outgoing>
+      <outgoing>flow11</outgoing>
+    </exclusiveGateway>
+    
+    <task id="fix_issues" name="Fix Issues">
+      <incoming>flow11</incoming>
+      <outgoing>flow12</outgoing>
+    </task>
+    
+    <task id="merge_preparation" name="Merge Preparation">
+      <incoming>flow10</incoming>
+      <outgoing>flow13</outgoing>
+    </task>
+    
+    <task id="cleanup_worktree" name="Cleanup Worktree">
+      <incoming>flow13</incoming>
+      <outgoing>flow14</outgoing>
+    </task>
+    
+    <endEvent id="end" name="Feature Complete">
+      <incoming>flow14</incoming>
+    </endEvent>
+    
+    <sequenceFlow id="flow1" sourceRef="start" targetRef="create_worktree"/>
+    <sequenceFlow id="flow2" sourceRef="create_worktree" targetRef="setup_coordination"/>
+    <sequenceFlow id="flow3" sourceRef="setup_coordination" targetRef="parallel_dev"/>
+    <sequenceFlow id="flow4" sourceRef="parallel_dev" targetRef="implement_feature"/>
+    <sequenceFlow id="flow5" sourceRef="parallel_dev" targetRef="track_telemetry"/>
+    <sequenceFlow id="flow6" sourceRef="implement_feature" targetRef="parallel_join"/>
+    <sequenceFlow id="flow7" sourceRef="track_telemetry" targetRef="parallel_join"/>
+    <sequenceFlow id="flow8" sourceRef="parallel_join" targetRef="test_validation"/>
+    <sequenceFlow id="flow9" sourceRef="test_validation" targetRef="tests_pass"/>
+    <sequenceFlow id="flow10" sourceRef="tests_pass" targetRef="merge_preparation" name="Yes"/>
+    <sequenceFlow id="flow11" sourceRef="tests_pass" targetRef="fix_issues" name="No"/>
+    <sequenceFlow id="flow12" sourceRef="fix_issues" targetRef="test_validation"/>
+    <sequenceFlow id="flow13" sourceRef="merge_preparation" targetRef="cleanup_worktree"/>
+    <sequenceFlow id="flow14" sourceRef="cleanup_worktree" targetRef="end"/>
+  </process>
+</definitions>
