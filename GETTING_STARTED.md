@@ -1,6 +1,9 @@
 # Getting Started with SwarmSH
 
-A simple guide for installing SwarmSH on a new computer and starting your first project.
+> **Start here:** Comprehensive platform-specific installation and setup guide for SwarmSH.
+>
+> **New to SwarmSH?** Start with [README.md Tutorials](README.md#tutorials) for a quick introduction.
+> **Already familiar?** Jump to [platform-specific setup](#platform-specific-setup) below.
 
 ## 🚀 Quick Installation (New Computer)
 
@@ -51,16 +54,41 @@ If you see a generated ID, you're ready! 🎉
 
 ---
 
-## 🏗️ Starting a New Project
+## 📋 Installation Paths
 
-### Option 1: Quick Start (Recommended)
+Choose your path based on your experience level:
+
+| Path | Time | Best For |
+|------|------|----------|
+| **[Quick Install](#quick-install-automated)** | 5 min | Most users |
+| **[Step-by-Step](#step-by-step-manual-setup)** | 15 min | Understanding setup |
+| **[Custom Install](docs/ADVANCED_INSTALLATION.md)** | 30+ min | Custom deployments |
+| **[Container Setup](docs/ADVANCED_INSTALLATION.md#container-deployment)** | 10 min | Docker/Kubernetes |
+
+---
+
+## 🚀 Quick Install (Automated)
+
+The fastest way to get started:
+
 ```bash
-# One command to set everything up
-./quick_start_agent_swarm.sh
-```
-This creates a complete swarm with 3 agents and monitoring.
+# Download and run install script
+curl -fsSL https://install.swarmsh.io | bash
 
-### Option 2: Manual Setup (Step by Step)
+# Verify installation
+swarmsh --version
+
+# Start interactive setup
+swarmsh init
+```
+
+After this, jump to [Your First Project](#your-first-project) below.
+
+---
+
+## 🏗️ Step-by-Step Manual Setup
+
+For full control and understanding of your installation:
 
 #### Step 1: Initialize Your Project
 ```bash
@@ -105,83 +133,133 @@ source .env
 
 ---
 
-## 🎯 Basic Usage Patterns
+## 🎯 Your First Project
 
-### Working with Tasks
+Now that SwarmSH is installed, follow these tutorials:
+
+1. **[README Tutorial 1: Getting Started in 5 Minutes](README.md#tutorial-1-getting-started-in-5-minutes)**
+   - Basic setup and first commands
+
+2. **[README Tutorial 2: Your First Agent Coordination](README.md#tutorial-2-your-first-agent-coordination)**
+   - Register agents and claim work items
+
+3. **[README Tutorial 3: Setting Up Telemetry Monitoring](README.md#tutorial-3-setting-up-telemetry-monitoring)**
+   - Monitor your system health
+
+4. **[README Tutorial 4: Creating Your First Worktree](README.md#tutorial-4-creating-your-first-worktree)**
+   - Parallel development setup
+
+---
+
+## 🔧 Platform-Specific Setup
+
+### Platform-Specific Setup
+
+### macOS-Specific Notes
+
+**Install with Homebrew (Recommended)**
 ```bash
-# Claim work
-WORK_ID=$(./coordination_helper.sh claim "development" "Build new feature" "high")
+brew tap seanchatmangpt/swarmsh
+brew install swarmsh
 
-# Update progress
-./coordination_helper.sh progress "$WORK_ID" 50 "in_progress"
-
-# Complete work
-./coordination_helper.sh complete "$WORK_ID" "success" 8
+# Verify installation
+swarmsh --version
 ```
 
-### Monitoring Your Swarm
+**Missing flock command**
 ```bash
-# View dashboard
-./coordination_helper.sh dashboard
+brew install util-linux
 
-# Check agent status
-./coordination_helper.sh list-agents
-
-# View telemetry
-tail -f telemetry_spans.jsonl | jq '.'
+# Verify flock is available
+which flock
 ```
 
-### Real Agent Coordination
+**Using M1/M2 Mac**
 ```bash
-# Initialize agent swarm system
-./agent_swarm_orchestrator.sh init
+# Most dependencies work fine, but verify:
+arch  # Should show arm64 for M1/M2
+uname -m
 
-# Add work using coordination helper
-./coordination_helper.sh claim "optimization" "Performance test optimization" "high"
+# If issues, install universal binaries
+brew install --universal jq python3
+```
 
-# Monitor with dashboard
-./coordination_helper.sh dashboard
+### Linux-Specific Notes
+
+**Ubuntu/Debian**
+```bash
+sudo apt update
+sudo apt install -y bash jq python3 git bc util-linux
+
+# Verify versions
+bash --version     # Should be 4.0+
+jq --version
+python3 --version  # Should be 3.8+
+```
+
+**CentOS/RHEL**
+```bash
+sudo yum install bash jq python3 git util-linux
+
+# Additional tools
+sudo yum install bc openssl
+```
+
+**Alpine Linux (Container)**
+```bash
+apk add --no-cache bash jq python3 git util-linux bc
+```
+
+### Docker Setup
+
+**Pre-built Container**
+```bash
+docker pull swarmsh:latest
+
+docker run -d \
+  --name swarmsh \
+  -v swarmsh_data:/var/lib/swarmsh \
+  -p 4000:4000 \
+  swarmsh:latest
+
+docker exec swarmsh coordination_helper.sh dashboard
+```
+
+**Build Your Own**
+```bash
+docker build -t my-swarmsh:latest .
+
+docker run -d \
+  --name my-swarmsh \
+  -v $(pwd)/data:/var/lib/swarmsh \
+  -p 4000:4000 \
+  my-swarmsh:latest
 ```
 
 ---
 
-## 🔧 Common Setup Issues
+## 🆘 Troubleshooting Installation
 
-### "flock: command not found" (macOS)
+### Common Issues and Solutions
+
+For detailed troubleshooting, see **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)**
+
+**Quick Fixes:**
+
+| Issue | Solution |
+|-------|----------|
+| `command not found: flock` | `brew install util-linux` (macOS) |
+| `command not found: jq` | `brew install jq` (macOS) or `apt install jq` (Linux) |
+| `Permission denied` | `chmod +x *.sh` |
+| `bash: ./script.sh: /bin/bash: bad interpreter` | Update bash: `brew install bash` |
+| `python3 not found` | Install Python 3.8+: `brew install python3` |
+
+**Verify Installation**
 ```bash
-# Install util-linux package
-brew install util-linux
-
-# Alternative: use simple coordination mode
-export COORDINATION_MODE="simple"
+./scripts/verify_installation.sh
 ```
 
-### Permission Denied
-```bash
-# Fix script permissions
-chmod +x *.sh
-
-# Create required directories
-mkdir -p real_agents real_work_results logs metrics backups
-```
-
-### "jq: command not found"
-```bash
-# macOS
-brew install jq
-
-# Ubuntu/Linux
-sudo apt install jq
-```
-
-### Scripts won't run
-```bash
-# Ensure you're using bash 4.0+
-bash --version
-
-# macOS: update bash if needed
-brew install bash
-```
+This runs a comprehensive check of all dependencies and configurations.
 
 ---
 
@@ -235,19 +313,46 @@ watch -n 5 './coordination_helper.sh dashboard'
 
 ## 📚 Next Steps
 
-Once you're comfortable with the basics:
+After completing the tutorials and basic setup, explore:
 
-1. **[Configuration Reference](CONFIGURATION_REFERENCE.md)** - Customize your setup
-2. **[API Reference](API_REFERENCE.md)** - Learn all commands
-3. **[Deployment Guide](DEPLOYMENT_GUIDE.md)** - Production deployment
-4. **[Architecture Guide](ARCHITECTURE.md)** - Understand the system
+### Learn More
+- **[README.md](README.md)** - Full documentation roadmap
+- **[DOCUMENTATION_MAP.md](DOCUMENTATION_MAP.md)** - Complete documentation index
+- **[Architecture](ARCHITECTURE.md)** - How SwarmSH works
+
+### Configure & Customize
+- **[Configuration Reference](CONFIGURATION_REFERENCE.md)** - All settings
+- **[docs/ADVANCED_INSTALLATION.md](docs/ADVANCED_INSTALLATION.md)** - Custom installations
+- **[docs/PERFORMANCE_TUNING.md](docs/PERFORMANCE_TUNING.md)** - Optimize for your workload
+
+### Use Cases
+- **[Worktree Development](docs/WORKTREE_DEVELOPMENT_GUIDE.md)** - Parallel feature development
+- **[8020 Automation](docs/CRON_AUTOMATION_GUIDE.md)** - Automatic maintenance
+- **[Integration Patterns](docs/INTEGRATION_PATTERNS.md)** - Connect with other systems
+
+### Operations
+- **[Deployment Guide](DEPLOYMENT_GUIDE.md)** - Production deployment
+- **[Monitoring](docs/MONITORING_ADVANCED.md)** - Advanced monitoring
+- **[Scalability](docs/SCALABILITY_GUIDE.md)** - Scale to thousands of agents
 
 ---
 
 ## 🆘 Getting Help
 
-- **Quick issues**: Check [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
-- **Command help**: Run `./coordination_helper.sh help`
-- **System status**: Run `./coordination_helper.sh dashboard`
+| Need | Resource |
+|------|----------|
+| Installation issues | [Troubleshooting](TROUBLESHOOTING.md) |
+| Command reference | [API Reference](API_REFERENCE.md) |
+| Configuration help | [Configuration Reference](CONFIGURATION_REFERENCE.md) |
+| System status | `./coordination_helper.sh dashboard` |
+| Documentation map | [DOCUMENTATION_MAP.md](DOCUMENTATION_MAP.md) |
 
-Happy swarming! 🐝
+---
+
+<div align="center">
+
+**[Quick Start](README.md#tutorials)** • **[API Reference](API_REFERENCE.md)** • **[Documentation Map](DOCUMENTATION_MAP.md)** • **[Troubleshooting](TROUBLESHOOTING.md)**
+
+Ready to start? Follow [README.md Tutorials](README.md#tutorials)
+
+</div>

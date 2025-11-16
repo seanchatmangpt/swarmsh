@@ -1,8 +1,10 @@
-# CLAUDE.md
+# CLAUDE.md — Development Guidance for SwarmSH
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+> Guidance for developers and AI assistants working with the SwarmSH codebase.
+>
+> **See also:** [DOCUMENTATION_MAP.md](DOCUMENTATION_MAP.md) for complete documentation index.
 
-**Current Version:** v1.1.0 | **Release Date:** November 16, 2025
+**Current Version:** v1.1.0 | **Release Date:** November 16, 2025 | **Last Updated:** November 16, 2025
 
 ## Core Principles
 
@@ -11,6 +13,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - ✅ **Use telemetry data to validate operation success** - Every operation generates spans
 - ✅ **Zero-conflict guarantee through atomic operations** - Nanosecond precision IDs
 - ✅ **Performance targets validated** - 42.3ms avg, <100ms target, 92.6% success rate
+
+---
+
+## 📚 Documentation Resources
+
+SwarmSH documentation is organized using the **Diataxis Framework**, making it easy to find what you need:
+
+| Need | Document | Format |
+|------|----------|--------|
+| **Learning/Tutorials** | [README.md Tutorials](README.md#tutorials) | 4 step-by-step guides |
+| **How to solve problems** | [README.md How-To Guides](README.md#how-to-guides) | 6 task-oriented guides |
+| **Look up commands/APIs** | [API_REFERENCE.md](API_REFERENCE.md) | Complete reference |
+| **Understand concepts** | [README.md Explanations](README.md#explanations) | 8 deep-dive concepts |
+| **Find anything** | [DOCUMENTATION_MAP.md](DOCUMENTATION_MAP.md) | Navigation index |
+
+### Key Advanced Guides
+- **[ADVANCED_INSTALLATION.md](docs/ADVANCED_INSTALLATION.md)** — Custom, container, Kubernetes deployments
+- **[PERFORMANCE_TUNING.md](docs/PERFORMANCE_TUNING.md)** — Optimization and benchmarking
+- **[INTEGRATION_PATTERNS.md](docs/INTEGRATION_PATTERNS.md)** — External system integration
+- **[MONITORING_ADVANCED.md](docs/MONITORING_ADVANCED.md)** — Observability deep-dive
+- **[SCALABILITY_GUIDE.md](docs/SCALABILITY_GUIDE.md)** — Enterprise scaling
+
+---
 
 ## Project Overview
 
