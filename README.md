@@ -77,6 +77,21 @@ make claim WORK_TYPE=feature DESC="Your task description"
 
 ## 🛠️ Installation
 
+### ⚡ Quick Install (Homebrew - macOS)
+
+**Recommended for macOS users:**
+
+```bash
+# One-liner installation
+brew tap seanchatmangpt/swarmsh && brew install swarmsh
+
+# Verify installation
+swarmsh --version
+swarmsh help
+```
+
+For detailed Homebrew setup, see [Homebrew Installation Guide](docs/HOMEBREW_INSTALLATION.md).
+
 ### Prerequisites
 ```bash
 # Required
