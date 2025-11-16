@@ -118,7 +118,7 @@ config :opentelemetry,
   resource: [
     service: [
       name: "xavos-ash-phoenix",
-      version: "1.0.0"
+      version: "1.1.0"
     ],
     deployment: [
       environment: Mix.env() |> to_string()

@@ -43,7 +43,7 @@ log_shared_telemetry() {
   "timestamp": "$timestamp",
   "service": {
     "name": "s2s-worktree-management",
-    "version": "1.0.0"
+    "version": "1.1.0"
   }
 }
 EOF

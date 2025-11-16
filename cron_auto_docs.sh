@@ -144,7 +144,7 @@ log_cron_span() {
   "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
   "service": {
     "name": "auto-doc-cron",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "attributes": {
     "cron_operation": "$operation",

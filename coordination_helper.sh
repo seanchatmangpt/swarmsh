@@ -72,7 +72,7 @@ fast_claims_file="$COORDINATION_DIR/work_claims_fast.jsonl"
 
 # OpenTelemetry configuration for distributed tracing
 OTEL_SERVICE_NAME="${OTEL_SERVICE_NAME:-s2s-coordination}"
-OTEL_SERVICE_VERSION="${OTEL_SERVICE_VERSION:-1.0.0}"
+OTEL_SERVICE_VERSION="${OTEL_SERVICE_VERSION:-1.1.0}"
 
 # Generate OpenTelemetry trace ID (128-bit, 32 hex characters)
 generate_trace_id() {

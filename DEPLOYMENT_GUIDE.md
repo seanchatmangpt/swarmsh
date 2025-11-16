@@ -157,7 +157,7 @@ POSTGRES_DB="swarmsh_development"
 
 # OpenTelemetry Configuration
 OTEL_SERVICE_NAME="s2s-agent-swarm"
-OTEL_SERVICE_VERSION="1.0.0"
+OTEL_SERVICE_VERSION="1.1.0"
 OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318"
 
 # Claude Configuration

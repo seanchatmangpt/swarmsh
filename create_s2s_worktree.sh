@@ -12,7 +12,7 @@ SHARED_COORDINATION_DIR="$PROJECT_ROOT/shared_coordination"
 
 # OpenTelemetry configuration
 OTEL_SERVICE_NAME="${OTEL_SERVICE_NAME:-s2s-worktree-management}"
-OTEL_SERVICE_VERSION="${OTEL_SERVICE_VERSION:-1.0.0}"
+OTEL_SERVICE_VERSION="${OTEL_SERVICE_VERSION:-1.1.0}"
 
 # Generate trace ID for worktree creation
 generate_trace_id() {

@@ -196,7 +196,7 @@ generate_observability_report() {
     "trace_id": "$TRACE_ID",
     "timestamp": "$timestamp",
     "agent_id": "observability_validation_agent_$(date +%s%N)",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "infrastructure_status": {
     "grafana": {

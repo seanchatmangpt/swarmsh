@@ -121,7 +121,7 @@ configure_test_environment() {
     export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="http://localhost:4318/v1/traces"
     export OTEL_TRACE_ENABLED="true"
     export OTEL_METRICS_ENABLED="true"
-    export OTEL_RESOURCE_ATTRIBUTES="service.name=ollama-pro,service.version=1.0.0,deployment.environment=test"
+    export OTEL_RESOURCE_ATTRIBUTES="service.name=ollama-pro,service.version=1.1.0,deployment.environment=test"
     
     # Test-specific configuration
     export TEST_WITH_TELEMETRY="true"
