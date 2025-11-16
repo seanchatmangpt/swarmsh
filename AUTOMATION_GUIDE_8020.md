@@ -1,4 +1,4 @@
-# Automation Guide - 80/20 Optimized
+# v1.1.0 - # Automation Guide - 80/20 Optimized
 
 **20% of automation that provides 80% of operational value**
 

@@ -1,10 +1,22 @@
-# 🚀 Swarm.sh Quick Reference Card
+# 🚀 SwarmSH v1.1.0 Quick Reference Card
+
+> Last updated: November 16, 2025 | Version: 1.1.0
+
+## ✨ v1.1.0 Highlights
+
+- **Real Telemetry Dashboard** - Auto-generated live visualization
+- **Worktree Development** - Parallel feature branches with coordination
+- **80/20 Test Coverage** - 100% passing (69+ tests)
+- **60+ Makefile Targets** - Comprehensive automation
+- **Enhanced Documentation** - Auto-generated and maintained
+- **Zero Breaking Changes** - Fully backward compatible with v1.0.0
 
 ## 🔍 Essential Monitoring Commands
 
 ### Check System Health (Do This First\!)
 ```bash
-make telemetry-stats          # Overview of all timeframes
+make telemetry-health         # Quick health check
+make telemetry-stats          # Detailed statistics
 cat system_health_report.json | jq '.health_score'
 ```
 
@@ -82,6 +94,41 @@ make monitor-24h
 # Make changes...
 make validate
 grep "your_operation" telemetry_spans.jsonl | jq '.'
+```
+
+## 🆕 v1.1.0 New Commands
+
+### Worktree Development
+```bash
+# Create feature worktree
+make worktree-create FEATURE=my-feature
+
+# Manage worktrees
+make worktree-list              # List all active worktrees
+make worktree-status            # Show worktree status
+make worktree-dashboard         # Quick overview
+make worktree-merge FEATURE=my-feature  # Push for PR
+make worktree-cleanup FEATURE=my-feature # Remove worktree
+```
+
+### Telemetry Dashboard
+```bash
+# Generate visual dashboards (auto-generated from live data)
+make diagrams                   # All diagrams (24h default)
+make diagrams-dashboard         # Live system dashboard
+make diagrams-24h               # Last 24 hours
+make diagrams-7d                # Last 7 days
+make diagrams-flow              # System flow diagram
+make diagrams-timeline          # Timeline visualization
+```
+
+### Documentation & References
+```bash
+# Quick references
+make quick-ref                  # Show quick reference
+make telemetry-guide            # Show telemetry analysis guide
+cat CHANGELOG.md                # v1.1.0 release notes
+cat TEST_COVERAGE_REPORT_v1.1.0.md  # Comprehensive test results
 ```
 
 ### After Changes

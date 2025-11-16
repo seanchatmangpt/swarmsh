@@ -1,11 +1,21 @@
-# 📊 Telemetry-Driven Development Guide
+# 📊 Telemetry-Driven Development Guide (v1.1.0)
+
+> **Version:** 1.1.0 | **Last Updated:** November 16, 2025
 
 ## Why Telemetry Matters
 
-This system generates detailed telemetry for EVERY operation. As Claude Code, you should:
-- **Never trust assumptions** - Always verify with telemetry
-- **Make data-driven decisions** - Let metrics guide your work
-- **Monitor continuously** - Keep telemetry visible while working
+This system generates detailed telemetry for EVERY operation. With v1.1.0, telemetry is now more comprehensive with:
+- **Auto-generated dashboards** - Visual representation of live data
+- **Enhanced trace correlation** - Better distributed tracing
+- **Real-time health monitoring** - Continuous system observation
+- **Comprehensive test coverage** - 100% test pass rate with 80/20 strategy
+
+As Claude Code, you should:
+- ✅ **Never trust assumptions** - Always verify with telemetry
+- ✅ **Make data-driven decisions** - Let metrics guide your work
+- ✅ **Monitor continuously** - Keep telemetry visible while working
+- ✅ **Use auto-generated visuals** - Refer to dashboards for insights
+- ✅ **Track test coverage** - Refer to TEST_COVERAGE_REPORT_v1.1.0.md
 
 ## Quick Start Checklist
 
