@@ -8,7 +8,7 @@ set -euo pipefail
 
 # Configuration
 readonly SCRIPT_NAME="auto_doc_generator"
-readonly VERSION="1.0.0"
+readonly VERSION="1.1.0"
 readonly OUTPUT_DIR="docs/auto_generated"
 readonly TRACE_ID="$(openssl rand -hex 16)"
 readonly GENERATION_START=$(date +%s%N)

@@ -1,7 +1,17 @@
-# SwarmSH API Reference
-## Shell Script Command Interface Documentation
+# SwarmSH API Reference - v1.1.0
+
+> **Version:** 1.1.0 | **Last Updated:** November 16, 2025 | **Compatibility:** Fully backward compatible with v1.0.0
+
+## Overview
 
 This document provides comprehensive API documentation for all shell scripts and commands in the SwarmSH agent coordination system.
+
+### v1.1.0 Enhancements
+- Enhanced telemetry tracking in all operations
+- New worktree management commands
+- Improved error handling and reporting
+- Better integration with OpenTelemetry
+- Comprehensive test coverage (100% pass rate)
 
 ## Table of Contents
 

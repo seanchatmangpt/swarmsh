@@ -34,7 +34,7 @@ log_shared_telemetry() {
   "timestamp": "$(python3 -c "import datetime; print(datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-3]+'Z')")",
   "service": {
     "name": "$OTEL_SERVICE_NAME",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "attributes": $attributes
 }

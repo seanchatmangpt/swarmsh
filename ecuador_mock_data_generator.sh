@@ -476,7 +476,7 @@ generate_api_data() {
 {
     "status": "healthy",
     "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "uptime_seconds": $(random_range 3600 86400),
     "components": {
         "database": "healthy",
@@ -610,7 +610,7 @@ refresh_realtime_data() {
 {
     "status": "healthy",
     "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "uptime_seconds": $(random_range 3600 86400),
     "components": {
         "database": "healthy",

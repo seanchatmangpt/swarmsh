@@ -102,7 +102,7 @@ span_end() {
         "scopeSpans": [{
             "scope": {
                 "name": "ollama-pro-instrumentation",
-                "version": "1.0.0"
+                "version": "1.1.0"
             },
             "spans": [{
                 "traceId": "$TRACE_ID",

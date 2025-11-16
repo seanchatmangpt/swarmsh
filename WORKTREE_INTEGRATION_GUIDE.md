@@ -1,4 +1,4 @@
-# S@S Worktree Integration Guide
+# v1.1.0 - # S@S Worktree Integration Guide
 
 ## Overview
 

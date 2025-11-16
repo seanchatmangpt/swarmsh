@@ -78,7 +78,7 @@ generate_correlated_span() {
                 \"deployment.environment\": \"development\",
                 \"coordination.version\": \"v3\",
                 \"telemetry.sdk.name\": \"enhanced_correlation\",
-                \"telemetry.sdk.version\": \"1.0.0\"
+                \"telemetry.sdk.version\": \"1.1.0\"
             }
         },
         \"references\": []
@@ -206,7 +206,7 @@ generate_trace_correlation_report() {
     "correlation_trace_id": "$CORRELATION_TRACE_ID",
     "timestamp": "$timestamp",
     "session_agent": "trace_correlation_enhancer_$(date +%s%N)",
-    "enhancement_version": "1.0.0"
+    "enhancement_version": "1.1.0"
   },
   "otel_infrastructure": {
     "jaeger_status": "$(curl -s -f "$JAEGER_URL/api/services" >/dev/null 2>&1 && echo "operational" || echo "unreachable")",

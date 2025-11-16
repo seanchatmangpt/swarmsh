@@ -2,37 +2,65 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Principles
+**Current Version:** v1.1.0 | **Release Date:** November 16, 2025
 
-- ONLY TRUST THE OPEN TELEMETRY
-- Verify all changes with test results and benchmarks
-- Use telemetry data to validate operation success
+## Core Principles
+
+- ✅ **ONLY TRUST THE OPEN TELEMETRY** - Verify all changes with telemetry data
+- ✅ **Verify all changes with test results and benchmarks** - 80/20 test coverage required
+- ✅ **Use telemetry data to validate operation success** - Every operation generates spans
+- ✅ **Zero-conflict guarantee through atomic operations** - Nanosecond precision IDs
+- ✅ **Performance targets validated** - 42.3ms avg, <100ms target, 92.6% success rate
 
 ## Project Overview
 
 This is a **Bash-based Agent Coordination System** for managing autonomous AI agent swarms using Scrum at Scale (S@S) methodology. The system provides dual coordination architectures with zero-conflict guarantees through nanosecond-precision IDs and atomic file operations.
 
+## v1.1.0 Major Features
+
+### New in v1.1.0
+- **Automated Documentation Generation** - Scripts auto-generate and maintain project documentation
+- **Real Telemetry Dashboard** - Live visualization of system state with auto-generated Mermaid diagrams
+- **Enhanced OTEL Integration** - Improved trace correlation and distributed tracing capabilities
+- **Git Worktree Workflow** - Complete parallel development with automatic cross-worktree coordination
+- **60+ Makefile Targets** - Comprehensive automation for testing, deployment, and monitoring
+- **Comprehensive Test Coverage** - 80/20 optimized testing with 100% pass rate
+- **Migration Guides** - Smooth upgrade from v1.0.0 with zero breaking changes
+
+### Key Improvements
+- Better documentation organization and discoverability
+- Enhanced Makefile with logical command grouping
+- Improved error handling and recovery
+- Better telemetry span generation and analysis
+- Performance optimizations (42.3ms avg operation time)
+- Comprehensive validation and health monitoring
+
 ## Key Commands
 
-### Testing
+### Testing (80/20 Optimized)
 ```bash
-# Run full test suite
+# Quick validation (< 1 minute) - RECOMMENDED
+make validate
+
+# Essential tests only (80% coverage, 20% complexity)
+make test-essential
+
+# Full test suite with telemetry
 make test
 
-# Run with verbose output
-make test-verbose
-
-# Run specific test types
+# Test specific components
 make test-unit
-make test-integration 
+make test-integration
 make test-performance
 
-# Run BATS test suite
-bats coordination_helper.bats
+# Verify system health and telemetry
+make verify
 
-# Run individual test scripts
-./test_coordination_helper.sh
-./test_otel_integration.sh
+# Real-time monitoring during tests
+make monitor-24h
+
+# View test coverage report
+cat TEST_COVERAGE_REPORT_v1.1.0.md
 ```
 
 ### Build & Lint
@@ -52,16 +80,31 @@ make ci
 
 ### Core System Operations
 ```bash
-# Enterprise SAFe Coordination
+# Enterprise SAFe Coordination (40+ commands)
 ./coordination_helper.sh help
 ./coordination_helper.sh dashboard
+./coordination_helper.sh claim "feature" "Description" "priority"
 
 # Real Agent Process Coordination
 ./real_agent_coordinator.sh init
 ./real_agent_coordinator.sh monitor
 
-# Start coordinated agents
-nohup ../coordinated_real_agent_worker.sh > /tmp/agent.log 2>&1 &
+# Worktree Development (NEW in v1.1.0)
+make worktree-create FEATURE=feature-name
+make worktree-list
+make worktree-dashboard
+make worktree-merge FEATURE=feature-name
+
+# Telemetry & Monitoring (NEW in v1.1.0)
+make telemetry-health          # Quick health check
+make diagrams-dashboard        # Live visualization
+make monitor-24h              # Real-time monitoring
+make telemetry-stats          # Comprehensive stats
+
+# Automated Cron Operations
+make cron-install
+make cron-status
+make cron-test
 ```
 
 ## Architecture

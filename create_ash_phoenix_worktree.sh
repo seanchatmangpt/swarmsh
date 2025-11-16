@@ -110,7 +110,7 @@ create_ash_phoenix_worktree() {
     {:opentelemetry_phoenix, "~> 1.1"},
     {:opentelemetry_ecto, "~> 1.1"},
     {:opentelemetry_cowboy, "~> 0.2"},
-    {:opentelemetry_liveview, "~> 1.0.0-rc.4"},
+    {:opentelemetry_liveview, "~> 1.1.0-rc.4"},
 EOF
     
     echo "📝 Mix.exs patching instructions created"

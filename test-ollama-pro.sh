@@ -537,7 +537,7 @@ test_command_line_interface() {
     "
     
     it "should show version" bash -c "
-        $OLLAMA_PRO --version | grep -q 'v1.0.0'
+        $OLLAMA_PRO --version | grep -q 'v1.1.0'
     "
     
     it "should accept host option" bash -c "

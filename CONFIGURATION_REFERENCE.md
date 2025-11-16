@@ -291,7 +291,7 @@ AUTO_SCALING_ENABLED=true               # Enable automatic scaling
 ```bash
 # Service Identity
 OTEL_SERVICE_NAME="s2s-agent-swarm"
-OTEL_SERVICE_VERSION="1.0.0"
+OTEL_SERVICE_VERSION="1.1.0"
 OTEL_SERVICE_NAMESPACE="production"
 
 # Exporter Configuration

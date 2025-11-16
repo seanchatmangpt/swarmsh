@@ -137,7 +137,7 @@ DB_NAME_TEST=$db_test
 
 # OpenTelemetry Configuration
 OTEL_SERVICE_NAME=s2s-worktree-$worktree_name
-OTEL_SERVICE_VERSION=1.0.0
+OTEL_SERVICE_VERSION=1.1.0
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
 
 # S@S Coordination
@@ -196,7 +196,7 @@ config :opentelemetry,
   resource: [
     service: [
       name: "s2s-worktree-$worktree_name",
-      version: "1.0.0"
+      version: "1.1.0"
     ]
   ]
 

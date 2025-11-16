@@ -456,7 +456,7 @@ generate_performance_report() {
     "monitor_trace_id": "$MONITOR_TRACE_ID",
     "timestamp": "$timestamp",
     "monitoring_agent": "realtime_performance_monitor_$(date +%s%N)",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "dashboard_configuration": {
     "grafana_url": "$GRAFANA_URL",
