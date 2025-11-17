@@ -1,0 +1,539 @@
+{
+  "metadata": {
+    "title": "Concept Gaps Report: Graph Universe Thesis Evidence Mining",
+    "generated_at": "2025-11-17T00:00:00Z",
+    "version": "1.0.0",
+    "description": "Analysis of gaps and weaknesses in evidence coverage for graph universe thesis concepts"
+  },
+  "executive_summary": {
+    "total_concepts": 13,
+    "fully_covered": 9,
+    "with_gaps": 4,
+    "critical_gaps": 2,
+    "major_gaps": 2,
+    "minor_gaps": 0,
+    "overall_coverage_percentage": 82.0,
+    "action_required": true
+  },
+  "gap_details": {
+    "critical_gaps": [
+      {
+        "concept_id": "C_CNV_AGENT_CLI",
+        "name": "clap-noun-verb Agent CLI",
+        "severity": "CRITICAL",
+        "current_strength": 0.45,
+        "target_strength": 0.85,
+        "gap_size": 0.40,
+        "description": "CNV pattern not explicitly implemented or documented in codebase",
+        "missing_evidence": [
+          "No evidence of Rust clap library usage (expected for clap-noun-verb)",
+          "No explicit capability contract definitions per agent",
+          "No resource quota enforcement at CLI level",
+          "No tenant/agent identity binding in command structure"
+        ],
+        "what_exists": [
+          "Verb-based CLI structure (claim, progress, complete)",
+          "40+ command interface",
+          "Claude Code CLI integration"
+        ],
+        "root_cause": "Current implementation is bash-based shell commands rather than Rust clap library with capability contracts",
+        "impact": "CNV represents agent-grade capability surface; bash implementation lacks formal capability binding",
+        "resolution_options": [
+          "Option A: Implement explicit CNV layer on top of bash commands with capability contract specification",
+          "Option B: Migrate key coordination commands to Rust with clap library for formal capability surface",
+          "Option C: Document current bash CLI as proto-CNV with formal capability contract extensions"
+        ],
+        "estimated_effort": "MEDIUM_TO_HIGH",
+        "owner_recommendation": "Option C (documentation) immediately, followed by Option A (explicit CNV layer) in next phase"
+      },
+      {
+        "concept_id": "C_CTT_12_PHASE_VERIFICATION",
+        "name": "Chicago TDD Tools 12-Phase Verification",
+        "severity": "CRITICAL",
+        "current_strength": 0.40,
+        "target_strength": 0.90,
+        "gap_size": 0.50,
+        "description": "CTT and 12-phase verification pipeline not fully documented or implemented",
+        "missing_evidence": [
+          "No reference to 'Chicago TDD Tools' system",
+          "Only 4 verification phases documented (claim, capacity, json_validity, timing_bounds)",
+          "Full 12-phase pipeline specification missing",
+          "Phase names beyond basic guard checking not documented"
+        ],
+        "what_exists": [
+          "CTT module mentioned for formal verification",
+          "Guard checking framework with 4 guard types",
+          "Compositional verification patterns",
+          "Test suite infrastructure (BATS)"
+        ],
+        "root_cause": "CTT mentioned but not fully defined; '12-phase' pipeline referenced conceptually but not implemented",
+        "impact": "CTT is meant to be central verification engine; incomplete specification weakens thesis credibility",
+        "resolution_options": [
+          "Option A: Define full 12-phase pipeline with explicit phase descriptions and sequence",
+          "Option B: Implement CTT module explicitly in coordination_helper.sh with phase tracking",
+          "Option C: Document the 12 phases conceptually with mapping to current 4-phase guard checking"
+        ],
+        "estimated_effort": "MEDIUM",
+        "owner_recommendation": "Option C immediately (document mapping), followed by Option A (full spec) and Option B (implementation)"
+      }
+    ],
+    "major_gaps": [
+      {
+        "concept_id": "C_AHI_GOVERNANCE",
+        "name": "Autonomic Hyper Intelligence",
+        "severity": "MAJOR",
+        "current_strength": 0.55,
+        "target_strength": 0.85,
+        "gap_size": 0.30,
+        "description": "AHI concept present as patterns but not explicitly named or architecturally defined",
+        "missing_evidence": [
+          "No explicit 'AHI' module or subsystem definition",
+          "MAPE pattern present but not integrated as 'AHI'",
+          "Autonomous decision engine mentioned but not formally specified",
+          "Policy adaptation mechanisms present but not attributed to AHI",
+          "No explicit AHI→policy→ΔΣ flow documented"
+        ],
+        "what_exists": [
+          "MAPE control loop (Monitor-Analyze-Plan-Execute) in Σ_MAPE",
+          "Autonomous decision engine operational",
+          "Self-improvement loops in coordination_log.json",
+          "Policy-based governance with Σ_policy",
+          "ΔQ evolution via invariant violation analysis"
+        ],
+        "root_cause": "Autonomic intelligence patterns implemented but not consolidated under 'AHI' umbrella",
+        "impact": "AHI is meant to be governance layer managing policy evolution; unclear architecture reduces credibility",
+        "resolution_options": [
+          "Option A: Document AHI as integration of MAPE + autonomous decision engine + policy adapter",
+          "Option B: Create explicit AHI module with clear API for policy generation and evolution",
+          "Option C: Rename MAPE/autonomic components to 'AHI' throughout codebase"
+        ],
+        "estimated_effort": "MEDIUM",
+        "owner_recommendation": "Option A (documentation) immediately, followed by Option B (module definition)"
+      },
+      {
+        "concept_id": "C_CLNRM_HERMETIC_TESTING",
+        "name": "Cleanroom Hermetic Testing",
+        "severity": "MAJOR",
+        "current_strength": 0.65,
+        "target_strength": 0.85,
+        "gap_size": 0.20,
+        "description": "Hermetic testing patterns present but 'clnrm' module not explicitly implemented",
+        "missing_evidence": [
+          "No explicit 'clnrm' module or package",
+          "Weaver integration not found (expected for OTEL validation)",
+          "Hermetic test specification (OTEL TOML, span validation rules) not documented",
+          "No formal definition of hermeticity constraints",
+          "Integration with Weaver span graph validation not evident"
+        ],
+        "what_exists": [
+          "clnrm mentioned in guard checkers",
+          "Worktree isolation with separate databases, configs, ports",
+          "Docker container infrastructure",
+          "OpenTelemetry span generation and logging",
+          "Test isolation patterns"
+        ],
+        "root_cause": "Hermetic testing principles implemented via infrastructure but 'clnrm' system not explicitly defined",
+        "impact": "clnrm is meant to be central testing framework; absence of explicit module weakens architecture",
+        "resolution_options": [
+          "Option A: Document clnrm specification with hermeticity criteria and Weaver integration points",
+          "Option B: Create clnrm as explicit bash module for hermetic test management",
+          "Option C: Integrate clnrm with OTEL span validation and Weaver live-checking"
+        ],
+        "estimated_effort": "MEDIUM",
+        "owner_recommendation": "Option A (specification) immediately; parallel work on Options B and C"
+      }
+    ],
+    "concept_implementation_status": {
+      "C_GRAPH_UNIVERSE_PRIMARY": {
+        "status": "COMPLETE",
+        "gaps": "NONE",
+        "description": "Fully documented and implemented"
+      },
+      "C_CODE_AS_PROJECTION": {
+        "status": "COMPLETE",
+        "gaps": "NONE",
+        "description": "Fully documented with monoid homomorphism proof"
+      },
+      "C_RECEIPTS_AND_PROOFS": {
+        "status": "OPERATIONAL",
+        "gaps": "NONE",
+        "description": "Implemented with 1,572+ real telemetry spans"
+      },
+      "C_MU_KERNEL_PHYSICS": {
+        "status": "COMPLETE",
+        "gaps": "NONE",
+        "description": "Fully documented and implemented with 40+ commands"
+      },
+      "C_TIMING_BOUNDS_ENFORCED": {
+        "status": "OPERATIONAL",
+        "gaps": "MINOR",
+        "description": "Measured performance validates bounds; could add formal complexity proof"
+      },
+      "C_KNHK_GRAPH_PRIMARY": {
+        "status": "DEFINED",
+        "gaps": "MINOR",
+        "description": "Formally defined; needs implementation reference examples"
+      },
+      "C_DFLSS_FLOW": {
+        "status": "COMPLETE",
+        "gaps": "NONE",
+        "description": "Fully implemented with 5-phase governance"
+      },
+      "C_AHI_GOVERNANCE": {
+        "status": "PARTIAL",
+        "gaps": "MAJOR",
+        "description": "Patterns present but architecture not explicit; see critical gaps"
+      },
+      "C_CTT_12_PHASE_VERIFICATION": {
+        "status": "PARTIAL",
+        "gaps": "CRITICAL",
+        "description": "Only 4 phases documented; full 12-phase pipeline missing; see critical gaps"
+      },
+      "C_CLNRM_HERMETIC_TESTING": {
+        "status": "PARTIAL",
+        "gaps": "MAJOR",
+        "description": "Infrastructure present but module not explicit; see major gaps"
+      },
+      "C_CNV_AGENT_CLI": {
+        "status": "PARTIAL",
+        "gaps": "CRITICAL",
+        "description": "Bash CLI present but clap-style capability contracts missing; see critical gaps"
+      },
+      "C_NOMRG_GRAPH_OVERLAY": {
+        "status": "DEFINED",
+        "gaps": "NONE",
+        "description": "Fully documented with Van Kampen pushout topology"
+      },
+      "C_GGEN_PROJECTION_ENGINE": {
+        "status": "OPERATIONAL",
+        "gaps": "MINOR",
+        "description": "Implemented; could add formal projection specification for all artifact types"
+      }
+    },
+    "evidence_gaps_by_category": {
+      "missing_formal_specifications": [
+        {
+          "concept": "C_CTT_12_PHASE_VERIFICATION",
+          "missing": "Formal 12-phase pipeline specification with phase sequencing and guard criteria",
+          "impact": "Cannot verify if implementation is complete"
+        },
+        {
+          "concept": "C_CLNRM_HERMETIC_TESTING",
+          "missing": "Formal hermeticity specification with external-service bans and span validation rules",
+          "impact": "Cannot characterize what constitutes 'hermetic' in this system"
+        },
+        {
+          "concept": "C_AHI_GOVERNANCE",
+          "missing": "Formal AHI architecture with explicit policy generation rules and ΔQ evolution criteria",
+          "impact": "Cannot reason about autonomic governance properties"
+        }
+      ],
+      "missing_module_implementations": [
+        {
+          "concept": "C_CTT_12_PHASE_VERIFICATION",
+          "missing": "Explicit CTT module (ctt.sh or CTT command set)",
+          "impact": "Verification pipeline not packaged as cohesive system"
+        },
+        {
+          "concept": "C_CLNRM_HERMETIC_TESTING",
+          "missing": "Explicit clnrm module with hermeticity validation",
+          "impact": "Testing framework not unified under clnrm abstraction"
+        },
+        {
+          "concept": "C_AHI_GOVERNANCE",
+          "missing": "Explicit AHI module integrating MAPE + policy evolution",
+          "impact": "Autonomic intelligence not packaged as governance layer"
+        },
+        {
+          "concept": "C_CNV_AGENT_CLI",
+          "missing": "Explicit CNV layer with capability contract definitions",
+          "impact": "Agent CLI not formalized with security/quota semantics"
+        }
+      ],
+      "missing_cross_system_integration": [
+        {
+          "from": "C_CLNRM_HERMETIC_TESTING",
+          "to": "C_RECEIPTS_AND_PROOFS",
+          "missing": "Weaver integration with OTEL span graph validation",
+          "impact": "Cannot validate that telemetry spans satisfy hermeticity constraints"
+        },
+        {
+          "from": "C_AHI_GOVERNANCE",
+          "to": "C_DFLSS_FLOW",
+          "missing": "Explicit mapping of DFLSS phases to AHI policy evolution",
+          "impact": "Governance and optimization flows not formally integrated"
+        },
+        {
+          "from": "C_CNV_AGENT_CLI",
+          "to": "C_MU_KERNEL_PHYSICS",
+          "missing": "Formal capability contract binding agents to μ-kernel operations",
+          "impact": "Agent capabilities not formally constrained by μ-kernel rules"
+        }
+      ]
+    },
+    "evidence_quality_gaps": [
+      {
+        "issue": "Acronym mismatch",
+        "concept": "C_AHI_GOVERNANCE",
+        "description": "Papers use 'AHI' but codebase refers to components as 'MAPE', 'autonomic_engine', etc.",
+        "resolution": "Consolidate terminology; explicitly define AHI or rename components"
+      },
+      {
+        "issue": "Missing explicit reference",
+        "concept": "C_CTT_12_PHASE_VERIFICATION",
+        "description": "'Chicago TDD Tools' never mentioned; only 'CTT' used without expansion",
+        "resolution": "Add explicit reference to Chicago TDD Tools system or clarify acronym"
+      },
+      {
+        "issue": "Implementation language mismatch",
+        "concept": "C_CNV_AGENT_CLI",
+        "description": "CNV implies Rust clap library, but bash shell scripts used instead",
+        "resolution": "Either implement clap-based interface or document bash as proto-CNV"
+      }
+    ]
+  },
+  "phased_remediation_plan": {
+    "phase_1_immediate": {
+      "timeline": "Week 1",
+      "priority": "CRITICAL",
+      "actions": [
+        {
+          "task": "Document C_CTT_12_PHASE_VERIFICATION mapping",
+          "description": "Identify how 4 current guard phases map to 12-phase pipeline; document missing 8 phases",
+          "deliverable": "docs/CTT_12_PHASE_SPECIFICATION.md",
+          "owner": "Architecture team"
+        },
+        {
+          "task": "Define C_CNV capability contracts",
+          "description": "Document CNV as formal capability contract model; define what contracts should exist",
+          "deliverable": "docs/CNV_CAPABILITY_CONTRACTS.md",
+          "owner": "Agent system team"
+        },
+        {
+          "task": "Consolidate C_AHI terminology",
+          "description": "Decide: rename MAPE/autonomic components to AHI, or rename AHI to MAPE; update all references",
+          "deliverable": "Terminology consistency across codebase",
+          "owner": "Architecture team"
+        },
+        {
+          "task": "Document C_CLNRM hermeticity specification",
+          "description": "Write formal definition of 'hermetic' in SwarmSH context; list external service bans",
+          "deliverable": "docs/CLNRM_HERMETICITY_SPEC.md",
+          "owner": "Testing team"
+        }
+      ]
+    },
+    "phase_2_short_term": {
+      "timeline": "Weeks 2-4",
+      "priority": "HIGH",
+      "actions": [
+        {
+          "task": "Implement explicit CTT module",
+          "description": "Create coordination_helper.sh subcommand 'ctt' with 12-phase verification pipeline",
+          "deliverable": "ctt.sh or ctt_* functions in coordination_helper.sh",
+          "owner": "Architecture team"
+        },
+        {
+          "task": "Implement explicit AHI module",
+          "description": "Create ahi.sh or AHI subsystem integrating MAPE + policy evolution",
+          "deliverable": "ahi.sh with policy generation and evolution commands",
+          "owner": "Governance team"
+        },
+        {
+          "task": "Create CNV capability layer",
+          "description": "Add explicit capability contract enforcement on top of bash CLI",
+          "deliverable": "cnv.sh or capability_contracts.sh",
+          "owner": "Agent system team"
+        },
+        {
+          "task": "Formalize clnrm module",
+          "description": "Create clnrm.sh for hermetic test management with OTEL validation",
+          "deliverable": "clnrm.sh with hermeticity checking functions",
+          "owner": "Testing team"
+        }
+      ]
+    },
+    "phase_3_medium_term": {
+      "timeline": "Weeks 5-8",
+      "priority": "MEDIUM",
+      "actions": [
+        {
+          "task": "Integrate CTT with μ-kernel",
+          "description": "Add phase tracking to every μ-kernel operation; validate CTT phase sequencing",
+          "deliverable": "CTT phase metrics in telemetry",
+          "owner": "Architecture team"
+        },
+        {
+          "task": "Integrate AHI with DFLSS",
+          "description": "Explicitly map DFLSS phases to AHI policy generation; create joint workflow",
+          "deliverable": "AHI-DFLSS integration tests",
+          "owner": "Governance + Optimization teams"
+        },
+        {
+          "task": "Integrate clnrm with Weaver",
+          "description": "Add OTEL span validation rules; integrate with live-checking via Weaver",
+          "deliverable": "clnrm-weaver integration module",
+          "owner": "Testing team"
+        },
+        {
+          "task": "Bind CNV to μ-kernel",
+          "description": "Enforce capability contracts on μ-kernel operations; add quota checks per agent",
+          "deliverable": "CNV-μ-kernel guard enforcement",
+          "owner": "Agent system + Architecture teams"
+        }
+      ]
+    }
+  },
+  "evidence_strength_improvements": [
+    {
+      "concept": "C_CTT_12_PHASE_VERIFICATION",
+      "current_strength": 0.40,
+      "target_strength": 0.90,
+      "path_to_target": [
+        {
+          "step": 1,
+          "action": "Document 12-phase specification",
+          "strength_increase": 0.25,
+          "new_strength": 0.65
+        },
+        {
+          "step": 2,
+          "action": "Implement explicit CTT module",
+          "strength_increase": 0.15,
+          "new_strength": 0.80
+        },
+        {
+          "step": 3,
+          "action": "Integrate CTT with μ-kernel operations",
+          "strength_increase": 0.10,
+          "new_strength": 0.90
+        }
+      ]
+    },
+    {
+      "concept": "C_AHI_GOVERNANCE",
+      "current_strength": 0.55,
+      "target_strength": 0.85,
+      "path_to_target": [
+        {
+          "step": 1,
+          "action": "Consolidate terminology; define AHI explicitly",
+          "strength_increase": 0.15,
+          "new_strength": 0.70
+        },
+        {
+          "step": 2,
+          "action": "Implement explicit AHI module",
+          "strength_increase": 0.10,
+          "new_strength": 0.80
+        },
+        {
+          "step": 3,
+          "action": "Integrate AHI with DFLSS governance",
+          "strength_increase": 0.05,
+          "new_strength": 0.85
+        }
+      ]
+    },
+    {
+      "concept": "C_CLNRM_HERMETIC_TESTING",
+      "current_strength": 0.65,
+      "target_strength": 0.85,
+      "path_to_target": [
+        {
+          "step": 1,
+          "action": "Document hermeticity specification",
+          "strength_increase": 0.10,
+          "new_strength": 0.75
+        },
+        {
+          "step": 2,
+          "action": "Implement explicit clnrm module",
+          "strength_increase": 0.08,
+          "new_strength": 0.83
+        },
+        {
+          "step": 3,
+          "action": "Integrate clnrm with Weaver OTEL validation",
+          "strength_increase": 0.02,
+          "new_strength": 0.85
+        }
+      ]
+    },
+    {
+      "concept": "C_CNV_AGENT_CLI",
+      "current_strength": 0.45,
+      "target_strength": 0.85,
+      "path_to_target": [
+        {
+          "step": 1,
+          "action": "Document CNV capability contracts",
+          "strength_increase": 0.20,
+          "new_strength": 0.65
+        },
+        {
+          "step": 2,
+          "action": "Implement explicit CNV capability layer",
+          "strength_increase": 0.15,
+          "new_strength": 0.80
+        },
+        {
+          "step": 3,
+          "action": "Bind CNV to μ-kernel operations",
+          "strength_increase": 0.05,
+          "new_strength": 0.85
+        }
+      ]
+    }
+  ],
+  "risk_assessment": {
+    "gaps_vs_thesis_credibility": {
+      "current_gaps": 4,
+      "risk_level": "MEDIUM",
+      "description": "Gaps in CNV, CTT, AHI, clnrm weaken evidence for complete graph universe instantiation, but core thesis (Σ, Π, Γ, μ, τ) is fully supported"
+    },
+    "implementation_completeness": {
+      "current_percentage": 70,
+      "target_percentage": 95,
+      "gap_percentage": 25,
+      "risk": "Readers may doubt that SwarmSH is 'complete' instantiation if systems appear half-built"
+    },
+    "terminology_consistency": {
+      "inconsistencies": 4,
+      "risk_level": "MEDIUM",
+      "description": "AHI, CTT, clnrm, CNV referenced but terms not consistently defined could confuse readers"
+    }
+  },
+  "summary_recommendations": [
+    {
+      "priority": 1,
+      "action": "Create explicit 12-phase CTT specification and implement module",
+      "rationale": "CTT is central to verification claims; incomplete specification critical weakness",
+      "timeline": "Weeks 1-4"
+    },
+    {
+      "priority": 2,
+      "action": "Define and implement explicit CNV capability contract layer",
+      "rationale": "CNV represents agent-grade safety; bash-only implementation insufficient",
+      "timeline": "Weeks 1-4"
+    },
+    {
+      "priority": 3,
+      "action": "Consolidate AHI terminology and implement governance module",
+      "rationale": "Autonomic intelligence poorly defined; needs clear architecture",
+      "timeline": "Weeks 2-4"
+    },
+    {
+      "priority": 4,
+      "action": "Formalize clnrm hermeticity specification with Weaver integration",
+      "rationale": "Testing framework unclear; needs explicit definition",
+      "timeline": "Weeks 2-4"
+    },
+    {
+      "priority": 5,
+      "action": "Cross-integrate all organ systems (CTT↔μ-kernel, AHI↔DFLSS, etc.)",
+      "rationale": "Systems currently isolated; integration proves thesis of unified architecture",
+      "timeline": "Weeks 5-8"
+    }
+  ]
+}
