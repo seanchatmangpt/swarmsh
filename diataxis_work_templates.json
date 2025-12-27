@@ -1,0 +1,253 @@
+{
+  "work_templates": {
+    "tutorial": {
+      "template_type": "learning_oriented",
+      "characteristics": [
+        "Step-by-step instructions",
+        "Clear learning objectives",
+        "Practical, hands-on approach",
+        "Beginner-friendly language",
+        "Expected outcomes defined"
+      ],
+      "structure": {
+        "title": "Tutorial: [Topic Name]",
+        "sections": [
+          "Introduction - What you'll learn",
+          "Prerequisites - What you need",
+          "Step 1 - [Action]",
+          "Step 2 - [Action]",
+          "Step N - [Action]",
+          "Verification - Check your work",
+          "Next Steps - Where to go next"
+        ]
+      },
+      "example_tasks": [
+        {
+          "work_id": "tutorial_001",
+          "title": "Tutorial: Getting Started with SwarmSH in 5 Minutes",
+          "description": "Create a beginner-friendly tutorial for new users",
+          "learning_objectives": [
+            "Install SwarmSH",
+            "Register first agent",
+            "Claim and complete first work item",
+            "View telemetry data"
+          ],
+          "estimated_duration": "5 minutes",
+          "difficulty": "beginner"
+        },
+        {
+          "work_id": "tutorial_002",
+          "title": "Tutorial: Setting Up Your First Agent Swarm",
+          "description": "Guide users through creating a multi-agent system",
+          "learning_objectives": [
+            "Understand agent roles",
+            "Configure swarm parameters",
+            "Deploy agents to worktrees",
+            "Monitor swarm performance"
+          ],
+          "estimated_duration": "15 minutes",
+          "difficulty": "intermediate"
+        }
+      ]
+    },
+    "how_to": {
+      "template_type": "task_oriented",
+      "characteristics": [
+        "Problem-focused",
+        "Assumes prior knowledge",
+        "Direct instructions",
+        "Multiple approaches shown",
+        "Troubleshooting included"
+      ],
+      "structure": {
+        "title": "How-To: [Task Name]",
+        "sections": [
+          "Problem Statement",
+          "Prerequisites",
+          "Solution - Method 1",
+          "Solution - Method 2 (if applicable)",
+          "Common Issues",
+          "Verification",
+          "Related How-Tos"
+        ]
+      },
+      "example_tasks": [
+        {
+          "work_id": "howto_001",
+          "title": "How-To: Optimize Agent Work Distribution",
+          "description": "Guide for balancing work across agent teams",
+          "problem": "Uneven work distribution causing bottlenecks",
+          "solutions": [
+            "Use priority-based claiming",
+            "Implement skill-matched assignments",
+            "Configure automatic load balancing"
+          ],
+          "difficulty": "intermediate"
+        },
+        {
+          "work_id": "howto_002",
+          "title": "How-To: Integrate SwarmSH with External CI/CD",
+          "description": "Connect SwarmSH to Jenkins, GitHub Actions, GitLab CI",
+          "problem": "Need to trigger SwarmSH operations from CI/CD pipelines",
+          "solutions": [
+            "Use coordination_helper.sh CLI interface",
+            "Configure webhook triggers",
+            "Parse JSON output for pipeline decisions"
+          ],
+          "difficulty": "advanced"
+        }
+      ]
+    },
+    "reference": {
+      "template_type": "information_oriented",
+      "characteristics": [
+        "Comprehensive and accurate",
+        "Organized systematically",
+        "Neutral tone",
+        "Complete parameter lists",
+        "Example usage for each command"
+      ],
+      "structure": {
+        "title": "Reference: [Component/API Name]",
+        "sections": [
+          "Overview",
+          "Command Synopsis",
+          "Parameters",
+          "Return Values",
+          "Examples",
+          "Related Commands",
+          "Version History"
+        ]
+      },
+      "example_tasks": [
+        {
+          "work_id": "reference_001",
+          "title": "Reference: coordination_helper.sh Complete API",
+          "description": "Document all 40+ commands with parameters and examples",
+          "sections_to_cover": [
+            "Work claiming commands",
+            "Agent management commands",
+            "Scrum at Scale ceremony commands",
+            "Portfolio Kanban commands",
+            "Telemetry commands"
+          ],
+          "completeness_requirement": "100% command coverage"
+        },
+        {
+          "work_id": "reference_002",
+          "title": "Reference: Environment Variables",
+          "description": "Complete list of all configuration variables",
+          "sections_to_cover": [
+            "Core coordination variables",
+            "OpenTelemetry variables",
+            "Claude AI variables",
+            "Performance tuning variables"
+          ],
+          "format": "Table with name, default, description, example"
+        }
+      ]
+    },
+    "explanation": {
+      "template_type": "understanding_oriented",
+      "characteristics": [
+        "Conceptual and theoretical",
+        "Explains 'why' not 'how'",
+        "Provides context and background",
+        "Discusses alternatives and trade-offs",
+        "Connects concepts together"
+      ],
+      "structure": {
+        "title": "Explanation: [Concept Name]",
+        "sections": [
+          "Introduction - Why this matters",
+          "Core Concept",
+          "Design Rationale",
+          "Trade-offs and Alternatives",
+          "Real-World Applications",
+          "Further Reading"
+        ]
+      },
+      "example_tasks": [
+        {
+          "work_id": "explanation_001",
+          "title": "Explanation: Why Nanosecond-Precision IDs Prevent Conflicts",
+          "description": "Explain the mathematics behind zero-conflict guarantees",
+          "concepts_to_cover": [
+            "Distributed systems conflict resolution",
+            "Time-based unique identifiers",
+            "Mathematical proof of uniqueness",
+            "Comparison with UUIDs and Snowflake IDs"
+          ],
+          "target_audience": "Developers and architects"
+        },
+        {
+          "work_id": "explanation_002",
+          "title": "Explanation: The 8020 Principle in SwarmSH Automation",
+          "description": "Explain how Pareto principle guides system optimization",
+          "concepts_to_cover": [
+            "What is the 8020 principle",
+            "How SwarmSH applies it to automation",
+            "Tier 1 vs Tier 2 operations",
+            "Impact on system efficiency"
+          ],
+          "target_audience": "Operations and DevOps engineers"
+        }
+      ]
+    }
+  },
+  "cross_cutting_concerns": {
+    "quality_standards": {
+      "all_quadrants": [
+        "Clear and concise writing",
+        "Proper Markdown formatting",
+        "Working code examples",
+        "Cross-references to related docs",
+        "Version information included"
+      ],
+      "tutorials": [
+        "Tested step-by-step instructions",
+        "Estimated completion time",
+        "Clear success criteria"
+      ],
+      "how_to_guides": [
+        "Multiple solutions when applicable",
+        "Troubleshooting section",
+        "Assumes prerequisite knowledge"
+      ],
+      "reference": [
+        "100% accuracy requirement",
+        "Alphabetical or logical organization",
+        "Every parameter documented"
+      ],
+      "explanations": [
+        "Diagrams when helpful",
+        "Links to academic sources",
+        "Discussion of trade-offs"
+      ]
+    },
+    "collaboration_patterns": {
+      "tutorial_to_reference": "Tutorial links to command reference",
+      "howto_to_tutorial": "How-to assumes tutorial completion",
+      "explanation_to_all": "Explanations provide context for all other types",
+      "reference_to_explanation": "Reference links to concept explanations"
+    }
+  },
+  "work_priority_matrix": {
+    "high_priority": [
+      "Tutorial: Getting Started (most common entry point)",
+      "How-To: Troubleshooting (reduces support burden)",
+      "Reference: Core API (most frequently referenced)"
+    ],
+    "medium_priority": [
+      "Tutorial: Advanced topics",
+      "How-To: Integration patterns",
+      "Reference: Configuration options",
+      "Explanation: Core concepts"
+    ],
+    "low_priority": [
+      "Explanation: Design philosophy",
+      "Reference: Deprecated features",
+      "Tutorial: Edge cases"
+    ]
+  }
+}

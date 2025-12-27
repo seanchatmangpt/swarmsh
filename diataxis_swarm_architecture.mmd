@@ -1,0 +1,62 @@
+graph TB
+    subgraph "Diataxis Swarm - 10 Concurrent Agents"
+        direction TB
+
+        CO[Coordination<br/>System]
+
+        subgraph "Tutorials (3 agents)"
+            T1[Tutorial Agent 1<br/>Beginner]
+            T2[Tutorial Agent 2<br/>Intermediate]
+            T3[Tutorial Agent 3<br/>Advanced]
+        end
+
+        subgraph "How-To Guides (2 agents)"
+            H1[How-To Agent 4<br/>Operations]
+            H2[How-To Agent 5<br/>Integration]
+        end
+
+        subgraph "Reference (3 agents)"
+            R1[Reference Agent 6<br/>API]
+            R2[Reference Agent 7<br/>Architecture]
+            R3[Reference Agent 8<br/>Changelog]
+        end
+
+        subgraph "Explanations (2 agents)"
+            E1[Explanation Agent 9<br/>Concepts]
+            E2[Explanation Agent 10<br/>Architecture]
+        end
+
+        CO -->|Claim Work| T1
+        CO -->|Claim Work| T2
+        CO -->|Claim Work| T3
+        CO -->|Claim Work| H1
+        CO -->|Claim Work| H2
+        CO -->|Claim Work| R1
+        CO -->|Claim Work| R2
+        CO -->|Claim Work| R3
+        CO -->|Claim Work| E1
+        CO -->|Claim Work| E2
+
+        T1 -->|Progress Updates| CO
+        T2 -->|Progress Updates| CO
+        T3 -->|Progress Updates| CO
+        H1 -->|Progress Updates| CO
+        H2 -->|Progress Updates| CO
+        R1 -->|Progress Updates| CO
+        R2 -->|Progress Updates| CO
+        R3 -->|Progress Updates| CO
+        E1 -->|Progress Updates| CO
+        E2 -->|Progress Updates| CO
+    end
+
+    style CO fill:#4a90e2,stroke:#2e5c8a,color:#fff
+    style T1 fill:#50c878,stroke:#2d7a4a,color:#fff
+    style T2 fill:#50c878,stroke:#2d7a4a,color:#fff
+    style T3 fill:#50c878,stroke:#2d7a4a,color:#fff
+    style H1 fill:#ff9f43,stroke:#cc7f36,color:#fff
+    style H2 fill:#ff9f43,stroke:#cc7f36,color:#fff
+    style R1 fill:#a55eea,stroke:#7d45b0,color:#fff
+    style R2 fill:#a55eea,stroke:#7d45b0,color:#fff
+    style R3 fill:#a55eea,stroke:#7d45b0,color:#fff
+    style E1 fill:#fc5c65,stroke:#c94851,color:#fff
+    style E2 fill:#fc5c65,stroke:#c94851,color:#fff
