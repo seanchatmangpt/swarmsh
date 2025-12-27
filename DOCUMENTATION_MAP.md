@@ -218,12 +218,44 @@ Explanations provide conceptual knowledge and deep understanding. Read these to 
 
 ---
 
+## 🚀 10-Agent Concurrent Claude Code System (NEW)
+
+**Complete Diataxis documentation for 10-agent concurrent systems using Claude code web VM agents.**
+
+### 📚 TUTORIALS
+- **[docs/agent-systems/10-AGENT-QUICKSTART.md](docs/agent-systems/10-AGENT-QUICKSTART.md)** — Launch your first 10-agent swarm in 15 minutes
+
+### 🎯 HOW-TO GUIDES
+- **[docs/agent-systems/MULTI-AGENT-COORDINATION.md](docs/agent-systems/MULTI-AGENT-COORDINATION.md)** — Practical multi-agent scenarios (work distribution, dependencies, bottlenecks, failures)
+
+### 📖 REFERENCE
+- **[docs/agent-systems/AGENT-CONFIGURATION-REFERENCE.md](docs/agent-systems/AGENT-CONFIGURATION-REFERENCE.md)** — Complete agent configuration schema, specializations, capabilities
+- **[docs/agent-systems/AGENT-MONITORING-DASHBOARD.md](docs/agent-systems/AGENT-MONITORING-DASHBOARD.md)** — Monitoring, health scoring, alerting, historical analysis
+- **[docs/agent-systems/examples/10-agent-team-config.json](docs/agent-systems/examples/10-agent-team-config.json)** — Ready-to-use 10-agent configuration
+
+### 💡 EXPLANATIONS
+- **[docs/agent-systems/AGENT-SYSTEM-EXPLANATIONS.md](docs/agent-systems/AGENT-SYSTEM-EXPLANATIONS.md)** — Theory & design: Why 10 agents? Coordination theory, team strategies, failure handling, scalability to 1000+ agents
+
+### 📋 MASTER INDEX
+- **[docs/agent-systems/10-AGENT-SYSTEM-OVERVIEW.md](docs/agent-systems/10-AGENT-SYSTEM-OVERVIEW.md)** — Complete index and quick reference for all agent system documentation
+
+### Quick Path for 10-Agent Users
+
+1. **[10-Agent Quickstart](docs/agent-systems/10-AGENT-QUICKSTART.md)** (15 min) — Get started
+2. **[Multi-Agent Coordination](docs/agent-systems/MULTI-AGENT-COORDINATION.md)** (10 min per scenario) — Solve problems
+3. **[Agent Configuration Reference](docs/agent-systems/AGENT-CONFIGURATION-REFERENCE.md)** (lookup) — Find details
+4. **[Agent Monitoring Dashboard](docs/agent-systems/AGENT-MONITORING-DASHBOARD.md)** (5 min setup) — Monitor
+5. **[Agent System Explanations](docs/agent-systems/AGENT-SYSTEM-EXPLANATIONS.md)** (30 min) — Deep understanding
+
+---
+
 ## 🎨 Supporting Documentation
 
 ### Conceptual Guides
 - **[SYSTEM_COMPOSITION_OVERVIEW.md](SYSTEM_COMPOSITION_OVERVIEW.md)** — Component overview
 - **[AGENT_SWARM_OPERATIONS_GUIDE.md](AGENT_SWARM_OPERATIONS_GUIDE.md)** — Swarm concepts
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — System architecture
+- **[docs/agent-systems/AGENT-SYSTEM-EXPLANATIONS.md](docs/agent-systems/AGENT-SYSTEM-EXPLANATIONS.md)** — 10-agent system theory & design (NEW)
 
 ### Migration & Upgrade
 - **[docs/MIGRATION_1.0_TO_1.1.md](docs/MIGRATION_1.0_TO_1.1.md)** — Upgrading versions
@@ -239,15 +271,16 @@ Explanations provide conceptual knowledge and deep understanding. Read these to 
 
 | Aspect | Count |
 |--------|-------|
-| Total documentation files | 35+ |
-| Tutorials | 6 |
-| How-To Guides | 8+ |
-| Reference documents | 6 |
+| Total documentation files | 50+ |
+| Tutorials | 7 (includes 10-agent quickstart) |
+| How-To Guides | 9+ (includes multi-agent coordination) |
+| Reference documents | 10 (includes agent-specific refs) |
 | Advanced guides | 5+ |
 | Installation guides | 3 |
-| Total pages (estimated) | 1,500+ |
-| Code examples | 200+ |
-| Diagrams | 20+ |
+| Agent system docs (NEW) | 5 files + examples |
+| Total pages (estimated) | 2,000+ |
+| Code examples | 250+ |
+| Diagrams | 25+ |
 
 ---
 

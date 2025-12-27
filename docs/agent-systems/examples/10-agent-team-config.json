@@ -1,0 +1,262 @@
+{
+  "team_id": "concurrent_swarm_v1",
+  "description": "Standard 10-agent configuration: 3 specialist teams + 1 coordinator",
+  "created_at": "2025-12-27T00:00:00Z",
+  "environment": "web_vm_cluster",
+  "agent_count": 10,
+  "version": "1.2.0",
+
+  "agents": [
+    {
+      "agent_id": "agent_001_migration",
+      "agent_number": 1,
+      "name": "Schema Migrator",
+      "specialization": "schema_migration",
+      "team": "migration_team",
+      "port": 4001,
+      "database": "swarmsh_agent_1",
+      "capacity": 100,
+      "max_concurrent_work": 3,
+      "worktree": "ash-phoenix-migration",
+      "capabilities": ["database_analysis", "schema_conversion", "validation"],
+      "status": "pending"
+    },
+    {
+      "agent_id": "agent_002_ash_phoenix",
+      "agent_number": 2,
+      "name": "Ash Phoenix Expert",
+      "specialization": "ash_migration",
+      "team": "migration_team",
+      "port": 4002,
+      "database": "swarmsh_agent_2",
+      "capacity": 100,
+      "max_concurrent_work": 3,
+      "worktree": "ash-phoenix-migration",
+      "capabilities": ["ash_framework_knowledge", "model_conversion", "migration_orchestration"],
+      "status": "pending"
+    },
+    {
+      "agent_id": "agent_003_data_converter",
+      "agent_number": 3,
+      "name": "Data Converter",
+      "specialization": "data_transformation",
+      "team": "migration_team",
+      "port": 4003,
+      "database": "swarmsh_agent_3",
+      "capacity": 100,
+      "max_concurrent_work": 3,
+      "worktree": "ash-phoenix-migration",
+      "capabilities": ["data_migration", "transformation_logic", "validation"],
+      "status": "pending"
+    },
+    {
+      "agent_id": "agent_004_n8n_lead",
+      "agent_number": 4,
+      "name": "N8n Integration Lead",
+      "specialization": "n8n_integration",
+      "team": "integration_team",
+      "port": 4004,
+      "database": "swarmsh_agent_4",
+      "capacity": 100,
+      "max_concurrent_work": 3,
+      "worktree": "n8n-improvements",
+      "capabilities": ["workflow_design", "n8n_expertise", "team_coordination"],
+      "status": "pending"
+    },
+    {
+      "agent_id": "agent_005_automation",
+      "agent_number": 5,
+      "name": "Automation Expert",
+      "specialization": "automation_logic",
+      "team": "integration_team",
+      "port": 4005,
+      "database": "swarmsh_agent_5",
+      "capacity": 100,
+      "max_concurrent_work": 3,
+      "worktree": "n8n-improvements",
+      "capabilities": ["trigger_optimization", "action_logic", "error_handling"],
+      "status": "pending"
+    },
+    {
+      "agent_id": "agent_006_api_mapper",
+      "agent_number": 6,
+      "name": "API Mapper",
+      "specialization": "api_integration",
+      "team": "integration_team",
+      "port": 4006,
+      "database": "swarmsh_agent_6",
+      "capacity": 100,
+      "max_concurrent_work": 3,
+      "worktree": "n8n-improvements",
+      "capabilities": ["api_discovery", "integration_planning", "specification_analysis"],
+      "status": "pending"
+    },
+    {
+      "agent_id": "agent_007_testing",
+      "agent_number": 7,
+      "name": "Testing Specialist",
+      "specialization": "workflow_testing",
+      "team": "integration_team",
+      "port": 4007,
+      "database": "swarmsh_agent_7",
+      "capacity": 100,
+      "max_concurrent_work": 3,
+      "worktree": "n8n-improvements",
+      "capabilities": ["test_design", "workflow_validation", "quality_assurance"],
+      "status": "pending"
+    },
+    {
+      "agent_id": "agent_008_profiler",
+      "agent_number": 8,
+      "name": "Profiler",
+      "specialization": "performance_analysis",
+      "team": "performance_team",
+      "port": 4008,
+      "database": "swarmsh_agent_8",
+      "capacity": 100,
+      "max_concurrent_work": 3,
+      "worktree": "performance-boost",
+      "capabilities": ["profiling", "bottleneck_detection", "metrics_collection"],
+      "status": "pending"
+    },
+    {
+      "agent_id": "agent_009_optimizer",
+      "agent_number": 9,
+      "name": "Optimizer",
+      "specialization": "code_optimization",
+      "team": "performance_team",
+      "port": 4009,
+      "database": "swarmsh_agent_9",
+      "capacity": 100,
+      "max_concurrent_work": 3,
+      "worktree": "performance-boost",
+      "capabilities": ["optimization_strategy", "refactoring", "performance_verification"],
+      "status": "pending"
+    },
+    {
+      "agent_id": "agent_010_coordinator",
+      "agent_number": 10,
+      "name": "Coordinator",
+      "specialization": "orchestration",
+      "team": "coordinator_team",
+      "port": 4010,
+      "database": "swarmsh_agent_10",
+      "capacity": 150,
+      "max_concurrent_work": 5,
+      "worktree": "main",
+      "capabilities": ["work_distribution", "monitoring", "conflict_resolution", "reporting"],
+      "status": "pending"
+    }
+  ],
+
+  "teams": [
+    {
+      "team_id": "migration_team",
+      "name": "Migration Team",
+      "agent_count": 3,
+      "agents": [1, 2, 3],
+      "lead_agent": 1,
+      "priority": "high",
+      "specialization": "framework_migration",
+      "sla": {
+        "response_time_seconds": 60,
+        "availability_percent": 0.95
+      }
+    },
+    {
+      "team_id": "integration_team",
+      "name": "Integration Team",
+      "agent_count": 4,
+      "agents": [4, 5, 6, 7],
+      "lead_agent": 4,
+      "priority": "high",
+      "specialization": "api_integration",
+      "sla": {
+        "response_time_seconds": 60,
+        "availability_percent": 0.95
+      }
+    },
+    {
+      "team_id": "performance_team",
+      "name": "Performance Team",
+      "agent_count": 2,
+      "agents": [8, 9],
+      "lead_agent": 8,
+      "priority": "medium",
+      "specialization": "optimization",
+      "sla": {
+        "response_time_seconds": 120,
+        "availability_percent": 0.90
+      }
+    },
+    {
+      "team_id": "coordinator_team",
+      "name": "Coordinator",
+      "agent_count": 1,
+      "agents": [10],
+      "lead_agent": 10,
+      "priority": "critical",
+      "specialization": "orchestration",
+      "sla": {
+        "response_time_seconds": 10,
+        "availability_percent": 0.99
+      }
+    }
+  ],
+
+  "resource_allocation": {
+    "total_agents": 10,
+    "ports_used": "4001-4010",
+    "total_capacity": 1050,
+    "memory_per_agent": "512MB",
+    "cpu_per_agent": "1.0 core",
+    "total_memory": "5.5GB",
+    "total_cpu": "10 cores",
+    "max_concurrent_work": 30,
+    "storage_per_agent": "1GB",
+    "network_bandwidth": "100Mbps",
+    "database_size_per_agent": "500MB"
+  },
+
+  "coordination_settings": {
+    "strategy": "priority_based",
+    "conflict_resolution": "atomic_with_claude_mediation",
+    "health_check_interval": 30,
+    "health_check_timeout": 60,
+    "failure_threshold": 3,
+    "failure_recovery": "automatic",
+    "telemetry_aggregation": "realtime",
+    "work_claiming_strategy": "fifo_within_priority",
+    "escalation_threshold": 0.7,
+    "max_retry_attempts": 3,
+    "retry_backoff_seconds": 5
+  },
+
+  "monitoring": {
+    "enabled": true,
+    "dashboard_port": 3000,
+    "metrics_retention_days": 30,
+    "aggregation_level": "realtime",
+    "alert_thresholds": {
+      "agent_health": 0.7,
+      "team_health": 0.75,
+      "system_health": 0.8,
+      "work_queue_depth": 10,
+      "response_time_ms": 5000
+    },
+    "alert_channels": ["log", "email", "dashboard"],
+    "log_level": "INFO"
+  },
+
+  "deployment": {
+    "environment_type": "production",
+    "region": "us-east-1",
+    "auto_scaling": {
+      "enabled": false,
+      "min_agents": 10,
+      "max_agents": 10
+    },
+    "backup_coordinator": null,
+    "failover_strategy": "manual"
+  }
+}
