@@ -1,0 +1,230 @@
+{
+  "swarm_id": "diataxis_swarm_web_vm_10",
+  "swarm_type": "diataxis_documentation",
+  "coordination_strategy": "distributed_consensus",
+  "total_agents": 10,
+  "claude_code_web_vm": true,
+  "created_at": "2025-12-27T00:00:00.000Z",
+  "diataxis_quadrants": {
+    "tutorials": {
+      "agent_count": 3,
+      "description": "Learning-oriented, step-by-step guides",
+      "agents": [
+        {
+          "agent_id": "tutorial_beginner_agent",
+          "agent_number": 1,
+          "specialization": "tutorials",
+          "focus_areas": [
+            "getting_started_tutorials",
+            "installation_guides",
+            "quick_start_guides"
+          ],
+          "expertise_level": "beginner_friendly",
+          "output_style": "step_by_step",
+          "priority": "high"
+        },
+        {
+          "agent_id": "tutorial_intermediate_agent",
+          "agent_number": 2,
+          "specialization": "tutorials",
+          "focus_areas": [
+            "agent_coordination_tutorials",
+            "worktree_tutorials",
+            "telemetry_tutorials"
+          ],
+          "expertise_level": "intermediate",
+          "output_style": "hands_on_examples",
+          "priority": "high"
+        },
+        {
+          "agent_id": "tutorial_advanced_agent",
+          "agent_number": 3,
+          "specialization": "tutorials",
+          "focus_areas": [
+            "swarm_orchestration_tutorials",
+            "integration_tutorials",
+            "automation_tutorials"
+          ],
+          "expertise_level": "advanced",
+          "output_style": "comprehensive_walkthroughs",
+          "priority": "medium"
+        }
+      ]
+    },
+    "how_to_guides": {
+      "agent_count": 2,
+      "description": "Task-oriented, problem-solving guides",
+      "agents": [
+        {
+          "agent_id": "howto_operations_agent",
+          "agent_number": 4,
+          "specialization": "how_to_guides",
+          "focus_areas": [
+            "troubleshooting_guides",
+            "configuration_recipes",
+            "performance_optimization_guides"
+          ],
+          "expertise_level": "practical",
+          "output_style": "solution_focused",
+          "priority": "high"
+        },
+        {
+          "agent_id": "howto_integration_agent",
+          "agent_number": 5,
+          "specialization": "how_to_guides",
+          "focus_areas": [
+            "integration_patterns",
+            "deployment_guides",
+            "monitoring_setup_guides"
+          ],
+          "expertise_level": "practical",
+          "output_style": "task_oriented",
+          "priority": "medium"
+        }
+      ]
+    },
+    "reference": {
+      "agent_count": 3,
+      "description": "Information-oriented, comprehensive documentation",
+      "agents": [
+        {
+          "agent_id": "reference_api_agent",
+          "agent_number": 6,
+          "specialization": "reference",
+          "focus_areas": [
+            "api_reference",
+            "command_reference",
+            "configuration_reference"
+          ],
+          "expertise_level": "comprehensive",
+          "output_style": "detailed_precise",
+          "priority": "high"
+        },
+        {
+          "agent_id": "reference_architecture_agent",
+          "agent_number": 7,
+          "specialization": "reference",
+          "focus_areas": [
+            "architecture_documentation",
+            "system_composition",
+            "data_structures"
+          ],
+          "expertise_level": "comprehensive",
+          "output_style": "technical_detailed",
+          "priority": "medium"
+        },
+        {
+          "agent_id": "reference_changelog_agent",
+          "agent_number": 8,
+          "specialization": "reference",
+          "focus_areas": [
+            "changelog_maintenance",
+            "version_history",
+            "migration_guides"
+          ],
+          "expertise_level": "comprehensive",
+          "output_style": "chronological_detailed",
+          "priority": "medium"
+        }
+      ]
+    },
+    "explanations": {
+      "agent_count": 2,
+      "description": "Understanding-oriented, conceptual knowledge",
+      "agents": [
+        {
+          "agent_id": "explanation_concepts_agent",
+          "agent_number": 9,
+          "specialization": "explanations",
+          "focus_areas": [
+            "coordination_concepts",
+            "telemetry_concepts",
+            "8020_principle_explanations"
+          ],
+          "expertise_level": "conceptual",
+          "output_style": "explanatory_deep_dive",
+          "priority": "medium"
+        },
+        {
+          "agent_id": "explanation_architecture_agent",
+          "agent_number": 10,
+          "specialization": "explanations",
+          "focus_areas": [
+            "design_decisions",
+            "architectural_patterns",
+            "system_philosophy"
+          ],
+          "expertise_level": "conceptual",
+          "output_style": "why_and_how",
+          "priority": "low"
+        }
+      ]
+    }
+  },
+  "coordination_rules": {
+    "max_concurrent_work_per_agent": 2,
+    "cross_quadrant_collaboration": true,
+    "automatic_load_balancing": true,
+    "conflict_resolution": "priority_based",
+    "heartbeat_interval": 30,
+    "scaling_strategy": "demand_based",
+    "work_claim_strategy": "skill_matched"
+  },
+  "web_vm_configuration": {
+    "platform": "claude_code_web",
+    "concurrent_sessions": 10,
+    "session_isolation": true,
+    "shared_coordination_dir": "/home/user/swarmsh/diataxis_coordination",
+    "coordination_mode": "atomic_file_locking"
+  },
+  "telemetry_configuration": {
+    "enabled": true,
+    "trace_all_operations": true,
+    "service_name": "diataxis_swarm",
+    "service_version": "1.0.0",
+    "export_format": "jsonl",
+    "export_path": "telemetry_spans.jsonl"
+  },
+  "work_distribution": {
+    "tutorials": {
+      "priority": "high",
+      "allocation_percentage": 30,
+      "typical_tasks": [
+        "create_getting_started_tutorial",
+        "write_installation_tutorial",
+        "develop_quickstart_guide",
+        "create_agent_coordination_tutorial"
+      ]
+    },
+    "how_to_guides": {
+      "priority": "high",
+      "allocation_percentage": 25,
+      "typical_tasks": [
+        "write_troubleshooting_guide",
+        "create_configuration_recipe",
+        "document_deployment_process",
+        "write_integration_guide"
+      ]
+    },
+    "reference": {
+      "priority": "medium",
+      "allocation_percentage": 30,
+      "typical_tasks": [
+        "update_api_reference",
+        "document_command_parameters",
+        "maintain_changelog",
+        "update_configuration_reference"
+      ]
+    },
+    "explanations": {
+      "priority": "medium",
+      "allocation_percentage": 15,
+      "typical_tasks": [
+        "explain_coordination_concepts",
+        "document_design_decisions",
+        "write_architectural_explanations",
+        "explain_8020_principle"
+      ]
+    }
+  }
+}

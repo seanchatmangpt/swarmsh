@@ -1,0 +1,9 @@
+{
+  "swarm_id": "diataxis_swarm_web_vm_10",
+  "status": "running",
+  "initialized_at": "2025-12-27T22:51:24.452Z",
+  "total_agents": 10,
+  "active_agents": 0,
+  "configuration_file": "/home/user/swarmsh/diataxis_swarm_config.json",
+  "started_at": "2025-12-27T22:51:27.806Z"
+}
