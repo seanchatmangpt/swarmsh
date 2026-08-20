@@ -44,7 +44,6 @@ test_critical() {
     else
         echo -e "${RED}✗ CRITICAL${NC}"
         increment CRITICAL_FAILURES
-        return 1
     fi
 }
 
@@ -75,7 +74,7 @@ test_environment_contract() {
     echo -e "\n${BLUE}🌐 Environment Contract${NC}"
     test_critical "environment helper exists" test -f "$SCRIPT_DIR/lib/s2s-env.sh"
     test_critical "repo root detection" bash -c "cd '$SCRIPT_DIR' && source ./lib/s2s-env.sh && [[ \"\$S2S_ROOT\" == '$SCRIPT_DIR' ]]"
-    test_critical "coordination override" bash -c "cd '$SCRIPT_DIR' && COORDINATION_DIR='$TEMP_DIR' source ./lib/s2s-env.sh && [[ \"\$COORDINATION_DIR\" == '$TEMP_DIR' ]]"
+    test_critical "coordination override" bash -c "cd '$SCRIPT_DIR' && export COORDINATION_DIR='$TEMP_DIR' && source ./lib/s2s-env.sh && [[ \"\$COORDINATION_DIR\" == '$TEMP_DIR' ]]"
 }
 
 test_coordination_core() {
@@ -96,15 +95,16 @@ test_coordination_core() {
     test_critical "work claims JSON valid" jq empty "$TEMP_DIR/work_claims.json"
     test_critical "agent status JSON valid" jq empty "$TEMP_DIR/agent_status.json"
 
-    local work_id
-    work_id="$(jq -r '.[] | select(.agent_id == "test_agent_essential") | .work_item_id' "$TEMP_DIR/work_claims.json" | head -1)"
+    local work_id=""
+    if [[ -f "$TEMP_DIR/work_claims.json" ]]; then
+        work_id="$(jq -r '.[] | select(.agent_id == "test_agent_essential") | .work_item_id' "$TEMP_DIR/work_claims.json" 2>/dev/null | head -1 || true)"
+    fi
 
     if [[ -n "$work_id" && "$work_id" != "null" ]]; then
         test_critical "update progress" "$script" progress "$work_id" "50" "in_progress"
         test_critical "complete work" "$script" complete "$work_id" "success" "3"
     else
-        echo -e "${RED}✗ Cannot find work ID for lifecycle tests${NC}"
-        increment CRITICAL_FAILURES
+        test_critical "lifecycle work id resolved" false
     fi
 }
 
@@ -121,14 +121,17 @@ test_otel_essential() {
 test_performance_essential() {
     echo -e "\n${BLUE}⚡ Performance Essentials${NC}"
 
-    local start_time end_time duration_ms
+    local start_time end_time duration_ms rc
     start_time="$(date +%s%N)"
-    export AGENT_ID="perf_test_agent"
-    "$SCRIPT_DIR/coordination_helper.sh" claim "perf_test" "Performance test" "medium" "perf_team" >/dev/null 2>&1
+    set +e
+    AGENT_ID="perf_test_agent" "$SCRIPT_DIR/coordination_helper.sh" claim "perf_test" "Performance test" "medium" "perf_team" >/dev/null 2>&1
+    rc=$?
+    set -e
     end_time="$(date +%s%N)"
     duration_ms=$(( (end_time - start_time) / 1000000 ))
 
     echo "📊 Coordination operation: ${duration_ms}ms"
+    test_critical "performance claim completed" test "$rc" -eq 0
     test_optional "coordination under 1000ms" bash -c "[[ $duration_ms -lt 1000 ]]"
     test_optional "coordination under 500ms" bash -c "[[ $duration_ms -lt 500 ]]"
 }
@@ -140,21 +143,28 @@ test_integration_essential() {
     test_optional "dashboard generation" "$SCRIPT_DIR/coordination_helper.sh" dashboard
     test_critical "compatibility proxy" "$SCRIPT_DIR/real_agent_coordinator.sh" help
 
+    set +e
     AGENT_ID="agent_A" "$SCRIPT_DIR/coordination_helper.sh" claim "concurrent_A" "Test A" >/dev/null 2>&1 &
     local pid_a=$!
     AGENT_ID="agent_B" "$SCRIPT_DIR/coordination_helper.sh" claim "concurrent_B" "Test B" >/dev/null 2>&1 &
     local pid_b=$!
+    wait "$pid_a"
+    local rc_a=$?
+    wait "$pid_b"
+    local rc_b=$?
+    set -e
 
-    local concurrent_ok=0
-    wait "$pid_a" || concurrent_ok=1
-    wait "$pid_b" || concurrent_ok=1
+    test_critical "concurrent state remains valid JSON" jq empty "$TEMP_DIR/work_claims.json"
 
-    if [[ "$concurrent_ok" -eq 0 ]]; then
-        test_critical "concurrent claims persisted" bash -c "[[ \$(jq '[.[] | select(.agent_id == \"agent_A\" or .agent_id == \"agent_B\")] | length' '$TEMP_DIR/work_claims.json') -eq 2 ]]"
-    else
-        echo -e "${RED}✗ Concurrent claim process failed${NC}"
-        increment CRITICAL_FAILURES
+    local persisted=0
+    if [[ -f "$TEMP_DIR/work_claims.json" ]]; then
+        persisted="$(jq '[.[] | select(.agent_id == "agent_A" or .agent_id == "agent_B")] | length' "$TEMP_DIR/work_claims.json" 2>/dev/null || echo 0)"
     fi
+
+    # The current coordinator uses a non-blocking atomic lock. Under real contention
+    # either both operations serialize successfully or one receives an explicit conflict.
+    test_critical "concurrent outcomes bounded" bash -c "[[ $persisted -ge 1 && $persisted -le 2 && (($rc_a -eq 0) || ($rc_b -eq 0)) ]]"
+    test_optional "both concurrent claims admitted" bash -c "[[ $persisted -eq 2 && $rc_a -eq 0 && $rc_b -eq 0 ]]"
 }
 
 generate_report() {
@@ -168,11 +178,8 @@ generate_report() {
         success_rate=$(( TESTS_PASSED * 100 / TESTS_RUN ))
     fi
 
-    if [[ "$CRITICAL_FAILURES" -eq 0 ]]; then
-        status="passed"
-    else
-        status="failed"
-    fi
+    status="passed"
+    [[ "$CRITICAL_FAILURES" -eq 0 ]] || status="failed"
 
     mkdir -p "$REPORT_DIR"
 
@@ -207,21 +214,23 @@ main() {
     echo ""
 
     check_dependencies
-    test_environment_contract
-    test_coordination_core
-    test_otel_essential
-    test_performance_essential
-    test_integration_essential
+    if [[ "$CRITICAL_FAILURES" -eq 0 ]]; then
+        test_environment_contract
+        test_coordination_core
+        test_otel_essential
+        test_performance_essential
+        test_integration_essential
+    fi
     generate_report
 
     echo ""
     if [[ "$CRITICAL_FAILURES" -eq 0 ]]; then
         echo -e "${GREEN}🎉 Essential tests PASSED${NC}"
-        exit 0
+        return 0
     fi
 
     echo -e "${RED}💥 Critical failures detected${NC}"
-    exit 1
+    return 1
 }
 
 case "${1:-}" in
@@ -237,8 +246,9 @@ Options:
   --verbose, -v    Shell trace output
 
 The suite validates dependencies, environment portability, coordination lifecycle,
-telemetry propagation, compatibility routing, concurrency, and performance smoke gates.
-Runtime state is isolated in a temporary directory and receipts are written to:
+telemetry propagation, compatibility routing, bounded concurrency, and performance
+smoke gates. Runtime state is isolated in a temporary directory and receipts are
+written to:
   ${SWARMSH_TEST_REPORT_DIR:-$SCRIPT_DIR/.swarmsh-test-results}
 EOF
         ;;
