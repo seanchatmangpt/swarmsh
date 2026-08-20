@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+# SwarmSH command boundary.
+# SELECT/CONSTRUCT commands are read-only by default; explicit subcommands perform actuation.
+
+set -euo pipefail
+
+readonly ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly VERSION="1.1.0+v26.8.19"
+
+usage() {
+    cat <<'EOF'
+SwarmSH - telemetry-driven agent coordination
+
+Usage:
+  swarmsh doctor                         Read-only environment preflight
+  swarmsh verify                         Execute deterministic core verification
+  swarmsh receipt                        Print the latest local verification receipt
+  swarmsh dashboard                      Show coordination dashboard
+  swarmsh generate-id                    Generate an agent identifier
+  swarmsh register [args...]             Register an agent
+  swarmsh claim <type> <desc> [pri] [team]
+  swarmsh progress <work-id> <pct> [status]
+  swarmsh complete <work-id> [result] [points]
+  swarmsh coord <command> [args...]       Direct coordination-helper compatibility route
+  swarmsh cron render                    Construct cron configuration without installing it
+  swarmsh cron install                   Explicitly install tagged SwarmSH cron jobs
+  swarmsh cron remove                    Explicitly remove tagged SwarmSH cron jobs
+  swarmsh cron status|list|test|backup    Cron lifecycle operations
+  swarmsh version
+  swarmsh help
+
+Authority boundary:
+  doctor, verify, receipt, dashboard, generate-id, and cron render do not install
+  persistent automation. claim/register/progress/complete and cron install/remove
+  are explicit state-changing operations.
+EOF
+}
+
+latest_receipt() {
+    local receipt="${SWARMSH_TEST_REPORT_DIR:-$ROOT/.swarmsh-test-results}/core-verification.json"
+    if [[ ! -f "$receipt" ]]; then
+        echo "No verification receipt found. Run: $0 verify" >&2
+        return 1
+    fi
+    cat "$receipt"
+}
+
+coord() {
+    exec "$ROOT/coordination_helper.sh" "$@"
+}
+
+main() {
+    local command="${1:-help}"
+    shift || true
+
+    case "$command" in
+        doctor)
+            exec bash "$ROOT/scripts/preflight.sh" "$@"
+            ;;
+        verify)
+            exec bash "$ROOT/scripts/verify-core.sh" "$@"
+            ;;
+        receipt)
+            latest_receipt
+            ;;
+        dashboard|generate-id|register|claim|progress|complete)
+            coord "$command" "$@"
+            ;;
+        coord)
+            [[ "$#" -gt 0 ]] || { echo "coord requires a command" >&2; return 2; }
+            coord "$@"
+            ;;
+        cron)
+            exec bash "$ROOT/cron-setup.sh" "${1:-help}" "${@:2}"
+            ;;
+        version|--version|-V)
+            printf 'swarmsh %s\n' "$VERSION"
+            ;;
+        help|--help|-h)
+            usage
+            ;;
+        *)
+            echo "Unknown command: $command" >&2
+            usage >&2
+            return 2
+            ;;
+    esac
+}
+
+main "$@"
