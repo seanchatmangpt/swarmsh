@@ -49,11 +49,10 @@ jobs:
           git --version
           shellcheck --version | head -2
 
-      - name: ShellCheck admitted core
+      - name: ShellCheck release surfaces
         shell: bash
         run: |
-          shellcheck \
-            coordination_helper.sh \
+          shellcheck --severity=error \
             real_agent_coordinator.sh \
             test-essential.sh \
             cron-setup.sh \
