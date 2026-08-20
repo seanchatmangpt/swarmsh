@@ -16,6 +16,7 @@ Usage:
   swarmsh doctor                         Read-only environment preflight
   swarmsh verify                         Execute deterministic core verification
   swarmsh receipt                        Print the latest local verification receipt
+  swarmsh replay [receipt.json]          Replay receipt identity against this checkout
   swarmsh dashboard                      Show coordination dashboard
   swarmsh generate-id                    Generate an agent identifier
   swarmsh register [args...]             Register an agent
@@ -31,9 +32,9 @@ Usage:
   swarmsh help
 
 Authority boundary:
-  doctor, verify, receipt, dashboard, generate-id, and cron render do not install
-  persistent automation. claim/register/progress/complete and cron install/remove
-  are explicit state-changing operations.
+  doctor, verify, receipt, replay, dashboard, generate-id, and cron render do not
+  install persistent automation. claim/register/progress/complete and cron
+  install/remove are explicit state-changing operations.
 EOF
 }
 
@@ -63,6 +64,9 @@ main() {
             ;;
         receipt)
             latest_receipt
+            ;;
+        replay)
+            exec bash "$ROOT/scripts/replay-receipt.sh" "$@"
             ;;
         dashboard|generate-id|register|claim|progress|complete)
             coord "$command" "$@"
