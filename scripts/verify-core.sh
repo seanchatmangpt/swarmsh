@@ -52,11 +52,14 @@ require_tools() {
 
 syntax_core() {
     bash -n \
+        "$ROOT/swarmsh" \
         "$ROOT/coordination_helper.sh" \
         "$ROOT/real_agent_coordinator.sh" \
         "$ROOT/test-essential.sh" \
         "$ROOT/cron-setup.sh" \
-        "$ROOT/lib/s2s-env.sh"
+        "$ROOT/lib/s2s-env.sh" \
+        "$ROOT/scripts/preflight.sh" \
+        "$ROOT/scripts/verify-core.sh"
 }
 
 environment_contract() {
@@ -70,17 +73,29 @@ environment_contract() {
     )
 }
 
+cli_read_only_routes() {
+    local version doctor render
+    version="$(bash "$ROOT/swarmsh" version)"
+    doctor="$(bash "$ROOT/swarmsh" doctor)"
+    render="$(bash "$ROOT/swarmsh" cron render)"
+
+    grep -q '^swarmsh ' <<<"$version"
+    jq -e '.schema == "swarmsh.preflight.v1" and (.standing == "ALIVE" or .standing == "PARTIAL_ALIVE")' <<<"$doctor" >/dev/null
+    grep -q 'SWARMSH_8020' <<<"$render"
+}
+
 cron_construct_only() {
     local rendered
-    rendered="$("$ROOT/cron-setup.sh" render)"
+    rendered="$(bash "$ROOT/cron-setup.sh" render)"
     grep -q 'SWARMSH_8020' <<<"$rendered"
     grep -q 'coordination_helper.sh' <<<"$rendered"
 }
 
 source_hygiene() {
-    # Source validation scripts must remain tracked and must not be excluded by .gitignore.
-    ! git -C "$ROOT" check-ignore -q test-essential.sh
-    ! git -C "$ROOT" check-ignore -q scripts/verify-core.sh
+    local path
+    for path in swarmsh test-essential.sh scripts/preflight.sh scripts/verify-core.sh; do
+        ! git -C "$ROOT" check-ignore -q "$path"
+    done
 }
 
 working_tree_unchanged() {
@@ -92,28 +107,31 @@ main() {
     run_check tools require_tools
     run_check bash-syntax syntax_core
     run_check environment-contract environment_contract
+    run_check cli-read-only-routes cli_read_only_routes
     run_check cron-construct-only cron_construct_only
     run_check source-hygiene source_hygiene
-    run_check essential-suite env SWARMSH_TEST_REPORT_DIR="$RECEIPT_DIR" "$ROOT/test-essential.sh"
+    run_check essential-suite env SWARMSH_TEST_REPORT_DIR="$RECEIPT_DIR" bash "$ROOT/test-essential.sh"
     run_check repository-not-mutated working_tree_unchanged
 
-    local end_ns duration_ms subject_sha status
+    local end_ns duration_ms subject_sha tree_sha status
     end_ns="$(date +%s%N)"
     duration_ms=$(( (end_ns - START_NS) / 1000000 ))
     subject_sha="$(git rev-parse HEAD 2>/dev/null || echo unknown)"
+    tree_sha="$(git rev-parse HEAD^{tree} 2>/dev/null || echo unknown)"
     status=passed
     [[ "$failures" -eq 0 ]] || status=failed
 
     jq -n \
         --arg schema "swarmsh.verify-core.v1" \
         --arg subject_sha "$subject_sha" \
+        --arg tree_sha "$tree_sha" \
         --arg status "$status" \
         --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
         --argjson duration_ms "$duration_ms" \
         --argjson passes "$passes" \
         --argjson failures "$failures" \
         --argjson checks "$checks" \
-        '{schema:$schema,subject_sha:$subject_sha,status:$status,timestamp:$timestamp,duration_ms:$duration_ms,passes:$passes,failures:$failures,checks:$checks}' \
+        '{schema:$schema,subject_sha:$subject_sha,tree_sha:$tree_sha,status:$status,timestamp:$timestamp,duration_ms:$duration_ms,passes:$passes,failures:$failures,checks:$checks}' \
         > "$RECEIPT"
 
     echo "receipt=$RECEIPT"
