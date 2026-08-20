@@ -53,10 +53,12 @@ jobs:
         shell: bash
         run: |
           shellcheck --severity=error \
+            swarmsh \
             real_agent_coordinator.sh \
             test-essential.sh \
             cron-setup.sh \
             lib/s2s-env.sh \
+            scripts/preflight.sh \
             scripts/verify-core.sh
 
       - name: Execute core verifier
@@ -64,7 +66,7 @@ jobs:
         env:
           SWARMSH_TEST_REPORT_DIR: ${{ github.workspace }}/.swarmsh-test-results
         run: |
-          chmod +x scripts/verify-core.sh test-essential.sh cron-setup.sh real_agent_coordinator.sh coordination_helper.sh
+          chmod +x swarmsh scripts/preflight.sh scripts/verify-core.sh test-essential.sh cron-setup.sh real_agent_coordinator.sh coordination_helper.sh
           bash scripts/verify-core.sh
 
       - name: Upload verification receipts
