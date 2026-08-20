@@ -68,7 +68,7 @@ untagged_crontab() {
     crontab -l 2>/dev/null | grep -v "# $CRON_TAG" || true
 }
 
-install_cron_jobs() {
+install_cron_jobs() (
     require_command crontab
     validate_managed_scripts
     mkdir -p "$SCRIPT_DIR/logs"
@@ -77,7 +77,7 @@ install_cron_jobs() {
     local current_file next_file
     current_file="$(mktemp)"
     next_file="$(mktemp)"
-    trap 'rm -f "$current_file" "$next_file"' RETURN
+    trap 'rm -f "$current_file" "$next_file"' EXIT
 
     untagged_crontab > "$current_file"
     {
@@ -88,18 +88,20 @@ install_cron_jobs() {
 
     crontab "$next_file"
     log_success "Installed tagged SwarmSH cron jobs"
-}
+)
 
-remove_cron_jobs() {
+remove_cron_jobs() (
     require_command crontab
     backup_crontab >/dev/null
+
     local next_file
     next_file="$(mktemp)"
-    trap 'rm -f "$next_file"' RETURN
+    trap 'rm -f "$next_file"' EXIT
+
     untagged_crontab > "$next_file"
     crontab "$next_file"
     log_success "Removed tagged SwarmSH cron jobs"
-}
+)
 
 list_cron_jobs() {
     require_command crontab
