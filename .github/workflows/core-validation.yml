@@ -1,0 +1,78 @@
+name: Core Validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core-validation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core:
+    name: core / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout exact subject
+        uses: actions/checkout@v4
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq shellcheck python3 util-linux
+
+      - name: Install macOS dependencies
+        if: runner.os == 'macOS'
+        run: |
+          brew install bash jq shellcheck
+          echo "$(brew --prefix)/bin" >> "$GITHUB_PATH"
+
+      - name: Show toolchain identity
+        shell: bash
+        run: |
+          bash --version | head -1
+          jq --version
+          python3 --version
+          git --version
+          shellcheck --version | head -2
+
+      - name: ShellCheck admitted core
+        shell: bash
+        run: |
+          shellcheck \
+            coordination_helper.sh \
+            real_agent_coordinator.sh \
+            test-essential.sh \
+            cron-setup.sh \
+            lib/s2s-env.sh \
+            scripts/verify-core.sh
+
+      - name: Execute core verifier
+        shell: bash
+        env:
+          SWARMSH_TEST_REPORT_DIR: ${{ github.workspace }}/.swarmsh-test-results
+        run: |
+          chmod +x scripts/verify-core.sh test-essential.sh cron-setup.sh real_agent_coordinator.sh coordination_helper.sh
+          bash scripts/verify-core.sh
+
+      - name: Upload verification receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: swarmsh-core-receipt-${{ matrix.os }}
+          path: .swarmsh-test-results/
+          if-no-files-found: error
+          retention-days: 14
