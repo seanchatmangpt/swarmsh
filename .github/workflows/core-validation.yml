@@ -26,7 +26,7 @@ jobs:
 
     steps:
       - name: Checkout exact subject
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Linux dependencies
         if: runner.os == 'Linux'
@@ -59,6 +59,7 @@ jobs:
             cron-setup.sh \
             lib/s2s-env.sh \
             scripts/preflight.sh \
+            scripts/replay-receipt.sh \
             scripts/verify-core.sh
 
       - name: Execute core verifier
@@ -66,8 +67,9 @@ jobs:
         env:
           SWARMSH_TEST_REPORT_DIR: ${{ github.workspace }}/.swarmsh-test-results
         run: |
-          chmod +x swarmsh scripts/preflight.sh scripts/verify-core.sh test-essential.sh cron-setup.sh real_agent_coordinator.sh coordination_helper.sh
+          chmod +x swarmsh scripts/preflight.sh scripts/replay-receipt.sh scripts/verify-core.sh test-essential.sh cron-setup.sh real_agent_coordinator.sh coordination_helper.sh
           bash scripts/verify-core.sh
+          bash scripts/replay-receipt.sh
 
       - name: Upload verification receipts
         if: always()
