@@ -1,73 +1,68 @@
 #!/usr/bin/env bash
 
-# Essential Test Suite - 80/20 Optimized
-# Covers 80% of critical functionality with 20% of test complexity
-# Target: < 30 seconds execution time
+# Essential Test Suite - deterministic core validation for SwarmSH.
+# Exercises the admitted coordination lifecycle without mutating repository state.
 
 set -euo pipefail
 
-# Configuration
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly TEST_START_TIME=$(date +%s%N)
+readonly TEST_START_TIME="$(date +%s%N)"
 readonly TEMP_DIR="$(mktemp -d)"
-readonly TRACE_ID="$(openssl rand -hex 16 2>/dev/null || echo "$(date +%s%N)")"
+readonly REPORT_DIR="${SWARMSH_TEST_REPORT_DIR:-$SCRIPT_DIR/.swarmsh-test-results}"
+readonly TRACE_ID="$(openssl rand -hex 16 2>/dev/null || printf '%s' "$(date +%s%N)")"
 
-# Colors
 readonly GREEN='\033[0;32m'
 readonly RED='\033[0;31m'
 readonly YELLOW='\033[0;33m'
 readonly BLUE='\033[0;34m'
 readonly NC='\033[0m'
 
-# Test counters
 TESTS_RUN=0
 TESTS_PASSED=0
 CRITICAL_FAILURES=0
 
-# Cleanup
 cleanup() {
     rm -rf "$TEMP_DIR"
-    unset COORDINATION_DIR
+    unset COORDINATION_DIR AGENT_ID FORCE_TRACE_ID
 }
 trap cleanup EXIT
 
-# Test framework
+increment() {
+    local variable="$1"
+    printf -v "$variable" '%d' "$(( ${!variable} + 1 ))"
+}
+
 test_critical() {
-    local name=$1
+    local name="$1"
     shift
-    ((TESTS_RUN++))
-    
+    increment TESTS_RUN
+
     echo -n "🔧 Testing $name... "
-    
     if "$@" >/dev/null 2>&1; then
         echo -e "${GREEN}✓${NC}"
-        ((TESTS_PASSED++))
+        increment TESTS_PASSED
     else
         echo -e "${RED}✗ CRITICAL${NC}"
-        ((CRITICAL_FAILURES++))
-        return 1
+        increment CRITICAL_FAILURES
     fi
 }
 
 test_optional() {
-    local name=$1
+    local name="$1"
     shift
-    ((TESTS_RUN++))
-    
+    increment TESTS_RUN
+
     echo -n "📋 Testing $name... "
-    
     if "$@" >/dev/null 2>&1; then
         echo -e "${GREEN}✓${NC}"
-        ((TESTS_PASSED++))
+        increment TESTS_PASSED
     else
         echo -e "${YELLOW}⚠${NC}"
     fi
 }
 
-# Essential dependency checks
 check_dependencies() {
     echo -e "${BLUE}📦 Essential Dependencies${NC}"
-    
     test_critical "bash version" bash -c '[[ ${BASH_VERSION%%.*} -ge 4 ]]'
     test_critical "jq available" command -v jq
     test_critical "python3 available" command -v python3
@@ -75,104 +70,119 @@ check_dependencies() {
     test_optional "flock available" command -v flock
 }
 
-# Core coordination functionality
+test_environment_contract() {
+    echo -e "\n${BLUE}🌐 Environment Contract${NC}"
+    test_critical "environment helper exists" test -f "$SCRIPT_DIR/lib/s2s-env.sh"
+    test_critical "repo root detection" bash -c "cd '$SCRIPT_DIR' && source ./lib/s2s-env.sh && [[ \"\$S2S_ROOT\" == '$SCRIPT_DIR' ]]"
+    test_critical "coordination override" bash -c "cd '$SCRIPT_DIR' && export COORDINATION_DIR='$TEMP_DIR' && source ./lib/s2s-env.sh && [[ \"\$COORDINATION_DIR\" == '$TEMP_DIR' ]]"
+}
+
 test_coordination_core() {
     echo -e "\n${BLUE}🎯 Core Coordination${NC}"
-    
+
     export COORDINATION_DIR="$TEMP_DIR"
+    export FORCE_TRACE_ID="$TRACE_ID"
     local script="$SCRIPT_DIR/coordination_helper.sh"
-    
+
     test_critical "script exists" test -f "$script"
     test_critical "script executable" test -x "$script"
     test_critical "help command" "$script" help
     test_critical "generate-id" "$script" generate-id
-    
-    # Essential work lifecycle
+
     export AGENT_ID="test_agent_essential"
     test_critical "claim work" "$script" claim "essential_test" "Essential test work" "high" "test_team"
     test_critical "work claims file created" test -f "$TEMP_DIR/work_claims.json"
-    test_critical "JSON validity" jq empty "$TEMP_DIR/work_claims.json"
-    
-    # Get work ID for progress/completion
-    local work_id=$(jq -r '.[] | select(.agent_id == "test_agent_essential") | .work_item_id' "$TEMP_DIR/work_claims.json" 2>/dev/null)
-    
+    test_critical "work claims JSON valid" jq empty "$TEMP_DIR/work_claims.json"
+    test_critical "agent status JSON valid" jq empty "$TEMP_DIR/agent_status.json"
+
+    local work_id=""
+    if [[ -f "$TEMP_DIR/work_claims.json" ]]; then
+        work_id="$(jq -r '.[] | select(.agent_id == "test_agent_essential") | .work_item_id' "$TEMP_DIR/work_claims.json" 2>/dev/null | head -1 || true)"
+    fi
+
     if [[ -n "$work_id" && "$work_id" != "null" ]]; then
         test_critical "update progress" "$script" progress "$work_id" "50" "in_progress"
         test_critical "complete work" "$script" complete "$work_id" "success" "3"
     else
-        echo -e "${RED}✗ Cannot find work ID for progress/completion tests${NC}"
-        ((CRITICAL_FAILURES++))
+        test_critical "lifecycle work id resolved" false
     fi
 }
 
-# OpenTelemetry validation
 test_otel_essential() {
     echo -e "\n${BLUE}📡 OpenTelemetry Essentials${NC}"
-    
-    # Test OTEL bash library
+    local telemetry_file="$TEMP_DIR/telemetry_spans.jsonl"
+
     test_optional "OTEL bash library" test -f "$SCRIPT_DIR/otel-bash.sh"
-    
-    # Test span generation
-    test_optional "telemetry spans file" test -f "$SCRIPT_DIR/telemetry_spans.jsonl"
-    
-    if [[ -f "$SCRIPT_DIR/telemetry_spans.jsonl" ]]; then
-        test_optional "spans contain trace_id" grep -q "trace_id" "$SCRIPT_DIR/telemetry_spans.jsonl"
-        test_optional "spans contain operation" grep -q "operation" "$SCRIPT_DIR/telemetry_spans.jsonl"
-        test_optional "recent spans present" bash -c '[[ $(find "$SCRIPT_DIR/telemetry_spans.jsonl" -mmin -60 2>/dev/null | wc -l) -gt 0 ]]'
-    fi
-    
-    # Generate test span
-    echo "{\"trace_id\":\"$TRACE_ID\",\"operation\":\"test_essential_otel\",\"service\":\"test-essential\",\"status\":\"completed\",\"duration_ms\":100}" >> "$SCRIPT_DIR/telemetry_spans.jsonl"
-    test_critical "span generation" grep -q "$TRACE_ID" "$SCRIPT_DIR/telemetry_spans.jsonl"
+    test_critical "telemetry emitted" test -s "$telemetry_file"
+    test_critical "telemetry contains trace_id" grep -q 'trace_id' "$telemetry_file"
+    test_critical "forced trace propagated" grep -q "$TRACE_ID" "$telemetry_file"
 }
 
-# Performance validation
 test_performance_essential() {
     echo -e "\n${BLUE}⚡ Performance Essentials${NC}"
-    
-    local start_time=$(date +%s%N)
-    
-    # Quick coordination operation
-    export COORDINATION_DIR="$TEMP_DIR"
-    export AGENT_ID="perf_test_agent"
-    "$SCRIPT_DIR/coordination_helper.sh" claim "perf_test" "Performance test" "medium" "perf_team" >/dev/null 2>&1
-    
-    local end_time=$(date +%s%N)
-    local duration_ms=$(( (end_time - start_time) / 1000000 ))
-    
+
+    local start_time end_time duration_ms rc
+    start_time="$(date +%s%N)"
+    set +e
+    AGENT_ID="perf_test_agent" "$SCRIPT_DIR/coordination_helper.sh" claim "perf_test" "Performance test" "medium" "perf_team" >/dev/null 2>&1
+    rc=$?
+    set -e
+    end_time="$(date +%s%N)"
+    duration_ms=$(( (end_time - start_time) / 1000000 ))
+
     echo "📊 Coordination operation: ${duration_ms}ms"
-    
-    # Performance thresholds (relaxed for essential testing)
+    test_critical "performance claim completed" test "$rc" -eq 0
     test_optional "coordination under 1000ms" bash -c "[[ $duration_ms -lt 1000 ]]"
     test_optional "coordination under 500ms" bash -c "[[ $duration_ms -lt 500 ]]"
 }
 
-# Quick integration test
 test_integration_essential() {
     echo -e "\n${BLUE}🔗 Integration Essentials${NC}"
-    
-    export COORDINATION_DIR="$TEMP_DIR"
-    
-    # Test agent registration and dashboard
+
     test_optional "agent registration" "$SCRIPT_DIR/coordination_helper.sh" register "100" "active" "integration_team"
     test_optional "dashboard generation" "$SCRIPT_DIR/coordination_helper.sh" dashboard
-    
-    # Test concurrent operations (basic)
-    export AGENT_ID="agent_A"
-    "$SCRIPT_DIR/coordination_helper.sh" claim "concurrent_A" "Test A" >/dev/null 2>&1 &
-    export AGENT_ID="agent_B" 
-    "$SCRIPT_DIR/coordination_helper.sh" claim "concurrent_B" "Test B" >/dev/null 2>&1 &
-    wait
-    
-    test_optional "concurrent claims" bash -c '[[ $(jq "length" "$TEMP_DIR/work_claims.json" 2>/dev/null || echo "0") -ge 2 ]]'
+    test_critical "compatibility proxy" "$SCRIPT_DIR/real_agent_coordinator.sh" help
+
+    set +e
+    AGENT_ID="agent_A" "$SCRIPT_DIR/coordination_helper.sh" claim "concurrent_A" "Test A" >/dev/null 2>&1 &
+    local pid_a=$!
+    AGENT_ID="agent_B" "$SCRIPT_DIR/coordination_helper.sh" claim "concurrent_B" "Test B" >/dev/null 2>&1 &
+    local pid_b=$!
+    wait "$pid_a"
+    local rc_a=$?
+    wait "$pid_b"
+    local rc_b=$?
+    set -e
+
+    test_critical "concurrent state remains valid JSON" jq empty "$TEMP_DIR/work_claims.json"
+
+    local persisted=0
+    if [[ -f "$TEMP_DIR/work_claims.json" ]]; then
+        persisted="$(jq '[.[] | select(.agent_id == "agent_A" or .agent_id == "agent_B")] | length' "$TEMP_DIR/work_claims.json" 2>/dev/null || echo 0)"
+    fi
+
+    # The current coordinator uses a non-blocking atomic lock. Under real contention
+    # either both operations serialize successfully or one receives an explicit conflict.
+    test_critical "concurrent outcomes bounded" bash -c "[[ $persisted -ge 1 && $persisted -le 2 && (($rc_a -eq 0) || ($rc_b -eq 0)) ]]"
+    test_optional "both concurrent claims admitted" bash -c "[[ $persisted -eq 2 && $rc_a -eq 0 && $rc_b -eq 0 ]]"
 }
 
-# Generate test report
 generate_report() {
-    local test_end_time=$(date +%s%N)
-    local total_duration_ms=$(( (test_end_time - TEST_START_TIME) / 1000000 ))
-    local success_rate=$(( TESTS_PASSED * 100 / TESTS_RUN ))
-    
+    local test_end_time total_duration_ms success_rate status
+    test_end_time="$(date +%s%N)"
+    total_duration_ms=$(( (test_end_time - TEST_START_TIME) / 1000000 ))
+
+    if [[ "$TESTS_RUN" -eq 0 ]]; then
+        success_rate=0
+    else
+        success_rate=$(( TESTS_PASSED * 100 / TESTS_RUN ))
+    fi
+
+    status="passed"
+    [[ "$CRITICAL_FAILURES" -eq 0 ]] || status="failed"
+
+    mkdir -p "$REPORT_DIR"
+
     echo -e "\n${BLUE}📊 Essential Test Report${NC}"
     echo "========================="
     echo "Duration: ${total_duration_ms}ms"
@@ -180,85 +190,67 @@ generate_report() {
     echo -e "Passed: ${GREEN}$TESTS_PASSED${NC}"
     echo -e "Critical failures: ${RED}$CRITICAL_FAILURES${NC}"
     echo "Success rate: ${success_rate}%"
-    
-    # Generate JSON report
-    cat > "$SCRIPT_DIR/essential-test-report.json" <<EOF
-{
-    "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-    "trace_id": "$TRACE_ID",
-    "duration_ms": $total_duration_ms,
-    "tests_run": $TESTS_RUN,
-    "tests_passed": $TESTS_PASSED,
-    "critical_failures": $CRITICAL_FAILURES,
-    "success_rate": $success_rate,
-    "status": "$(if [[ $CRITICAL_FAILURES -eq 0 ]]; then echo "passed"; else echo "failed"; fi)",
-    "categories": {
-        "dependencies": "checked",
-        "coordination_core": "tested",
-        "otel_essentials": "validated",
-        "performance": "measured",
-        "integration": "verified"
-    }
-}
-EOF
 
-    # Log telemetry
-    echo "{\"trace_id\":\"$TRACE_ID\",\"operation\":\"test_essential_suite\",\"service\":\"test-essential\",\"duration_ms\":$total_duration_ms,\"tests_run\":$TESTS_RUN,\"tests_passed\":$TESTS_PASSED,\"critical_failures\":$CRITICAL_FAILURES,\"success_rate\":$success_rate,\"status\":\"completed\"}" >> "$SCRIPT_DIR/telemetry_spans.jsonl"
+    jq -n \
+        --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+        --arg trace_id "$TRACE_ID" \
+        --arg status "$status" \
+        --argjson duration_ms "$total_duration_ms" \
+        --argjson tests_run "$TESTS_RUN" \
+        --argjson tests_passed "$TESTS_PASSED" \
+        --argjson critical_failures "$CRITICAL_FAILURES" \
+        --argjson success_rate "$success_rate" \
+        '{timestamp:$timestamp,trace_id:$trace_id,duration_ms:$duration_ms,tests_run:$tests_run,tests_passed:$tests_passed,critical_failures:$critical_failures,success_rate:$success_rate,status:$status,categories:{dependencies:"checked",environment:"verified",coordination_core:"tested",otel_essentials:"validated",performance:"measured",integration:"verified"}}' \
+        > "$REPORT_DIR/essential-test-report.json"
+
+    cp "$TEMP_DIR/telemetry_spans.jsonl" "$REPORT_DIR/telemetry_spans.jsonl" 2>/dev/null || true
 }
 
-# Main execution
 main() {
-    echo -e "${GREEN}🚀 Essential Test Suite (80/20 Optimized)${NC}"
-    echo "=========================================="
-    echo "Target: 80% validation coverage with 20% test complexity"
-    echo "Expected: < 30 seconds execution time"
+    echo -e "${GREEN}🚀 SwarmSH Essential Test Suite${NC}"
+    echo "================================"
+    echo "Subject root: $SCRIPT_DIR"
+    echo "State sandbox: $TEMP_DIR"
     echo ""
-    
-    # Run essential test categories
+
     check_dependencies
-    test_coordination_core
-    test_otel_essential
-    test_performance_essential
-    test_integration_essential
-    
-    # Generate report
-    generate_report
-    
-    # Final status
-    echo ""
-    if [[ $CRITICAL_FAILURES -eq 0 ]]; then
-        echo -e "${GREEN}🎉 Essential tests PASSED - System ready for use${NC}"
-        exit 0
-    else
-        echo -e "${RED}💥 Critical failures detected - System needs attention${NC}"
-        echo "Use 'make test' for comprehensive testing"
-        exit 1
+    if [[ "$CRITICAL_FAILURES" -eq 0 ]]; then
+        test_environment_contract
+        test_coordination_core
+        test_otel_essential
+        test_performance_essential
+        test_integration_essential
     fi
+    generate_report
+
+    echo ""
+    if [[ "$CRITICAL_FAILURES" -eq 0 ]]; then
+        echo -e "${GREEN}🎉 Essential tests PASSED${NC}"
+        return 0
+    fi
+
+    echo -e "${RED}💥 Critical failures detected${NC}"
+    return 1
 }
 
-# Handle arguments
 case "${1:-}" in
     --help|-h)
         cat <<EOF
-Essential Test Suite - 80/20 Optimized
+SwarmSH Essential Test Suite
 
 Usage: $0 [options]
 
 Options:
   --help, -h       Show this help
   --quiet, -q      Minimal output
-  --verbose, -v    Detailed output
+  --verbose, -v    Shell trace output
 
-This script tests the 20% of functionality that provides 80% of validation value:
-  • Core dependencies (bash, jq, python3)
-  • Basic coordination (claim, progress, complete)
-  • OpenTelemetry essentials (span generation)
-  • Performance baselines
-  • Basic integration
-
-For comprehensive testing, use: make test
+The suite validates dependencies, environment portability, coordination lifecycle,
+telemetry propagation, compatibility routing, bounded concurrency, and performance
+smoke gates. Runtime state is isolated in a temporary directory and receipts are
+written to:
+  ${SWARMSH_TEST_REPORT_DIR:-$SCRIPT_DIR/.swarmsh-test-results}
 EOF
-        exit 0
         ;;
     --quiet|-q)
         exec >/dev/null 2>&1

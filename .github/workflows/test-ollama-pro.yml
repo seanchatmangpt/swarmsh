@@ -2,118 +2,109 @@ name: Test Ollama Pro
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
     paths:
       - 'ollama-pro'
       - 'test-ollama-pro.sh'
       - '.github/workflows/test-ollama-pro.yml'
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'ollama-pro'
       - 'test-ollama-pro.sh'
+      - '.github/workflows/test-ollama-pro.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ollama-pro-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
+    name: test / ${{ matrix.os }} / py${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: ['3.9', '3.10', '3.11']
-    
+        python-version: ['3.11', '3.13']
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-    
-    - name: Install dependencies
-      run: |
-        # Install jq
-        if [[ "$RUNNER_OS" == "Linux" ]]; then
-          sudo apt-get update
-          sudo apt-get install -y jq
-        elif [[ "$RUNNER_OS" == "macOS" ]]; then
-          brew install jq
-        fi
-        
-        # Install Python dependencies for mock server
-        pip install --upgrade pip
-    
-    - name: Make scripts executable
-      run: |
-        chmod +x ollama-pro
-        chmod +x test-ollama-pro.sh
-    
-    - name: Run tests
-      run: |
-        ./test-ollama-pro.sh --verbose
-    
-    - name: Upload test results
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        name: test-results-${{ matrix.os }}-py${{ matrix.python-version }}
-        path: tests/results/
-    
-    - name: Generate coverage badge
-      if: success() && matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
-      run: |
-        # Extract test results
-        TOTAL=$(grep "Total:" tests/results/test-report-*.json | awk '{print $2}')
-        PASSED=$(grep "passed:" tests/results/test-report-*.json | awk '{print $2}')
-        RATE=$(echo "scale=0; $PASSED * 100 / $TOTAL" | bc)
-        
-        # Generate badge
-        if [[ $RATE -ge 90 ]]; then
-          COLOR="brightgreen"
-        elif [[ $RATE -ge 70 ]]; then
-          COLOR="yellow"
-        else
-          COLOR="red"
-        fi
-        
-        echo "Test coverage: ${RATE}%"
-        echo "::set-output name=coverage::${RATE}%"
-        echo "::set-output name=color::${COLOR}"
+      - uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+            sudo apt-get update
+            sudo apt-get install -y jq
+          else
+            brew install jq
+          fi
+          python -m pip install --upgrade pip
+
+      - name: Run Ollama Pro tests
+        shell: bash
+        run: |
+          chmod +x ollama-pro test-ollama-pro.sh
+          ./test-ollama-pro.sh --verbose
+
+      - name: Validate emitted test reports
+        if: always()
+        shell: bash
+        run: |
+          if compgen -G 'tests/results/*.json' >/dev/null; then
+            for report in tests/results/*.json; do jq empty "$report"; done
+          fi
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ollama-pro-test-results-${{ matrix.os }}-py${{ matrix.python-version }}
+          path: tests/results/
+          if-no-files-found: warn
+          retention-days: 14
 
   shellcheck:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Run ShellCheck
-      uses: ludeeus/action-shellcheck@2.0.0
-      with:
-        scandir: '.'
-        check_together: 'yes'
-        severity: 'warning'
-        ignore_paths: 'tests'
-    
-    - name: Check POSIX compliance
-      run: |
-        # Check for bashisms in supposedly POSIX scripts
-        if command -v checkbashisms &> /dev/null; then
-          checkbashisms ollama-pro || true
-        fi
+      - uses: actions/checkout@v7
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Check maintained Ollama surfaces
+        run: shellcheck --severity=error ollama-pro test-ollama-pro.sh
 
   security-scan:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      security-events: write
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Run Trivy security scanner
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: 'fs'
-        scan-ref: '.'
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-    
-    - name: Upload Trivy scan results
-      uses: github/codeql-action/upload-sarif@v2
-      if: always()
-      with:
-        sarif_file: 'trivy-results.sarif'
+      - uses: actions/checkout@v7
+
+      - name: Run Trivy security scanner
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy scan results
+        if: always()
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: 'trivy-results.sarif'

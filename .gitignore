@@ -1,18 +1,23 @@
-# Logs and temporary files
+# Runtime logs and telemetry
 *.log
 *.jsonl
 *.lock
-telemetry_spans.jsonl
 telemetry.log
 
-# Work coordination files
+# SwarmSH validation receipts
+.swarmsh-test-results/
+.swarmsh-runtime/
+
+# Work coordination state
 work_claims.json
 work_claims.json.backup
 work_claims_backup_*.json
 work_claims_fast.jsonl.processed
 real_work_queue.json.lock
+agent_status.json
+coordination_log.json
 
-# Analysis and iteration files
+# Analysis and iteration outputs
 *_analysis_*.json
 *_feedback_*.json
 *_validation_*.json
@@ -20,21 +25,22 @@ real_work_queue.json.lock
 reality_comparison_*.json
 actual_*_reality_*.json
 
-# Reports and cleanup
+# Generated reports and cleanup outputs
 *-report.json
 cleanup_report_*.json
 final-*.json
 
-# Archived data
+# Archived runtime data
 archived_claims/
-
-# Demonstration and test files
-*_demonstration.sh
-test_*.sh
-*-test.sh
-*-validation*.sh
-*_verification.sh
 
 # Backup and processed files
 *.backup
 work_claims_backup_*.json
+
+# Local editor / OS noise
+.DS_Store
+*.swp
+*.swo
+
+# IMPORTANT: source tests and verification scripts are intentionally NOT ignored.
+# Validation code is part of the product and must remain reviewable/versioned.

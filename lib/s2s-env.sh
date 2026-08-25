@@ -1,77 +1,70 @@
-#!/bin/bash
-# S2S Dynamic Environment Detection (80/20 implementation)
-# Provides environment-agnostic path resolution
+#!/usr/bin/env bash
+# SwarmSH environment contract.
+# Resolves repository and coordination paths without workstation-specific fallbacks.
 
-# Detect S2S project root dynamically
+set -o pipefail
+
+_s2s_env_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+_s2s_repo_candidate="$(cd "$_s2s_env_dir/.." && pwd)"
+
 detect_s2s_root() {
+    if [[ -n "${SWARMSH_ROOT:-}" && -d "$SWARMSH_ROOT" ]]; then
+        (cd "$SWARMSH_ROOT" && pwd)
+        return 0
+    fi
+
+    if [[ -f "$_s2s_repo_candidate/coordination_helper.sh" && -f "$_s2s_repo_candidate/CLAUDE.md" ]]; then
+        printf '%s\n' "$_s2s_repo_candidate"
+        return 0
+    fi
+
     local current="$PWD"
-    local max_depth=10
     local depth=0
-    
-    while [[ "$current" != "/" && $depth -lt $max_depth ]]; do
-        # Look for S2S project markers
-        if [[ -f "$current/CLAUDE.md" && -d "$current/agent_coordination" ]]; then
-            echo "$current"
+    while [[ "$current" != "/" && "$depth" -lt 10 ]]; do
+        if [[ -f "$current/coordination_helper.sh" && -f "$current/CLAUDE.md" ]]; then
+            printf '%s\n' "$current"
             return 0
         fi
-        
-        # Alternative markers
-        if [[ -f "$current/beamops/v3/README.md" ]] || [[ -d "$current/beamops" ]]; then
-            echo "$current"
-            return 0
-        fi
-        
         current="$(dirname "$current")"
-        ((depth++))
+        depth=$((depth + 1))
     done
-    
-    # Fallback to common locations
-    for fallback in "/Users/sac/dev/ai-self-sustaining-system" "$HOME/ai-self-sustaining-system" "./"; do
-        if [[ -d "$fallback/agent_coordination" ]]; then
-            echo "$fallback"
-            return 0
-        fi
-    done
-    
-    # Last resort - use current directory
-    echo "$PWD"
+
+    printf '%s\n' "$PWD"
     return 1
 }
 
-# Get coordination directory dynamically
 get_coordination_dir() {
-    local root="$(detect_s2s_root)"
-    local coord_dir="$root/agent_coordination"
-    
-    # Verify coordination directory exists
-    if [[ -d "$coord_dir" ]]; then
-        echo "$coord_dir"
-    else
-        # Look for coordination directory in current path
-        local current_coord="$(dirname "${BASH_SOURCE[0]}")"
-        if [[ -f "$current_coord/coordination_helper.sh" ]]; then
-            echo "$current_coord"
-        else
-            echo "$root/agent_coordination"  # Best guess
-        fi
+    if [[ -n "${COORDINATION_DIR:-}" ]]; then
+        printf '%s\n' "$COORDINATION_DIR"
+        return 0
     fi
+
+    local root
+    root="$(detect_s2s_root)" || true
+
+    # SwarmSH stores coordination state at the repository root by default.
+    # Callers can isolate state by exporting COORDINATION_DIR before invoking scripts.
+    printf '%s\n' "$root"
 }
 
-# Get project-relative path
 get_project_path() {
-    local target_path="$1"
-    local root="$(detect_s2s_root)"
-    echo "$root/$target_path"
+    local target_path="${1:?target path required}"
+    local root
+    root="$(detect_s2s_root)" || return 1
+    printf '%s/%s\n' "$root" "$target_path"
 }
 
-# Export environment variables for use in other scripts
 export_s2s_env() {
-    export S2S_ROOT="$(detect_s2s_root)"
-    export COORDINATION_DIR="$(get_coordination_dir)"
-    export PROJECT_ROOT="$S2S_ROOT"
+    local detected_root detected_coordination
+    detected_root="$(detect_s2s_root)" || true
+    detected_coordination="$(get_coordination_dir)"
+
+    export S2S_ROOT="${S2S_ROOT:-$detected_root}"
+    export SWARMSH_ROOT="${SWARMSH_ROOT:-$S2S_ROOT}"
+    export PROJECT_ROOT="${PROJECT_ROOT:-$S2S_ROOT}"
+    export COORDINATION_DIR="${COORDINATION_DIR:-$detected_coordination}"
 }
 
-# Auto-export when sourced
-if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
     export_s2s_env
 fi
