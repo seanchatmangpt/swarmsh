@@ -39,7 +39,10 @@ run_check() {
         printf '✓ %s\n' "$name"
     else
         record "$name" failed "exit=$rc ${output}"
-        printf '✗ %s\n' "$name" >&2
+        printf '✗ %s (exit=%s)\n' "$name" "$rc" >&2
+        if [[ -n "$output" ]]; then
+            printf '%s\n' "$output" >&2
+        fi
     fi
 }
 

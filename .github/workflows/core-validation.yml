@@ -67,7 +67,8 @@ jobs:
         env:
           SWARMSH_TEST_REPORT_DIR: ${{ github.workspace }}/.swarmsh-test-results
         run: |
-          chmod +x swarmsh scripts/preflight.sh scripts/replay-receipt.sh scripts/verify-core.sh test-essential.sh cron-setup.sh real_agent_coordinator.sh coordination_helper.sh
+          # Execute through bash instead of mutating tracked executable bits before
+          # the verifier proves that qualification left the repository unchanged.
           bash scripts/verify-core.sh
           bash scripts/replay-receipt.sh
 
@@ -77,5 +78,6 @@ jobs:
         with:
           name: swarmsh-core-receipt-${{ matrix.os }}
           path: .swarmsh-test-results/
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 14
